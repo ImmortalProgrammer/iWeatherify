@@ -12,9 +12,11 @@
   background-image: url(../img/background-img-2.png);
   background-position: 50% 50%;
   background-size: cover;
-  height: 1024px;
-  position: relative;
-  width: 1440px;
+  height: 100%; 
+  position: fixed; 
+  top: 0;
+  left: 0; 
+  width: 100%;
 }
 
 .website-home-page-not-logged-in .outfit-of-the-day {
