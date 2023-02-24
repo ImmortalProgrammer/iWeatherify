@@ -1,15 +1,13 @@
 :root { 
-  --alto: #d9d9d9;
   --black: #000000;
-  --blue-secondary: #2a9d8f;
   --gray03: #bdbdbd;
   --white: #ffffff;
  
-  --font-size-m2: 16px;
+  --font-size-l: 16px;
+  --font-size-m: 12px;
   --font-size-xl: 30px;
-  --font-size-xs: 12px;
+  --font-size-xxl: 48px;
   --font-size-xxxl: 96px;
-  --font-size-xxxl2: 48px;
  
   --font-family-inter: "Inter", Helvetica;
 }
@@ -23,7 +21,7 @@
 
 .ui---16-medium {
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m2);
+  font-size: var(--font-size-l);
   font-style: normal;
   font-weight: 500;
   letter-spacing: 0;
@@ -31,7 +29,7 @@
 
 .ui---16-regular {
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m2);
+  font-size: var(--font-size-l);
   font-style: normal;
   font-weight: 400;
   letter-spacing: 0;
@@ -40,7 +38,7 @@
 .inter-normal-black-12px {
   color: var(--black);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-m);
   font-style: normal;
   font-weight: 400;
 }
@@ -48,23 +46,7 @@
 .inter-medium-black-16px {
   color: var(--black);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-m2);
+  font-size: var(--font-size-l);
   font-style: normal;
   font-weight: 500;
-}
-
-.inter-normal-black-96px {
-  color: var(--black);
-  font-family: var(--font-family-inter);
-  font-size: var(--font-size-xxxl);
-  font-style: normal;
-  font-weight: 400;
-}
-
-.inter-normal-jungle-green-16px {
-  color: var(--blue-secondary);
-  font-family: var(--font-family-inter);
-  font-size: var(--font-size-m2);
-  font-style: normal;
-  font-weight: 400;
 }
