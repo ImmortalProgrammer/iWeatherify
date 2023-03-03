@@ -1,6 +1,5 @@
 :root { 
   --black: #000000;
-  --gray03: #bdbdbd;
   --white: #ffffff;
  
   --font-size-l: 16px;
@@ -16,14 +15,6 @@
   font-size: var(--font-size-xl);
   font-style: normal;
   font-weight: 400;
-  letter-spacing: 0;
-}
-
-.ui---16-medium {
-  font-family: var(--font-family-inter);
-  font-size: var(--font-size-l);
-  font-style: normal;
-  font-weight: 500;
   letter-spacing: 0;
 }
 
