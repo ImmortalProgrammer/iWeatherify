@@ -1,0 +1,8 @@
+.weather-throughout-the-day {
+  align-items: flex-start;
+  display: flex;
+  height: 104px;
+  min-width: 216px;
+  position: relative;
+}
+

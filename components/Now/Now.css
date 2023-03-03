@@ -1,0 +1,115 @@
+.now {
+  display: flex;
+  flex-direction: column;
+  height: 104px;
+  width: 72px;
+}
+
+.now-1 {
+  height: 19px;
+  letter-spacing: -0.24px;
+  line-height: 19.2px;
+  margin-left: 18px;
+  margin-top: 8px;
+  white-space: nowrap;
+  width: 35px;
+}
+
+.fluentweather-rain-s {
+  height: 24px;
+  margin-left: 24px;
+  margin-top: 9px;
+  width: 24px;
+}
+
+.group-2 {
+  align-items: flex-start;
+  display: flex;
+  gap: 1px;
+  height: 14px;
+  margin-left: 14px;
+  margin-top: 4px;
+  min-width: 46px;
+}
+
+.overlap-group2 {
+  height: 15px;
+  margin-top: -1px;
+  position: relative;
+  width: 24px;
+}
+
+.overlap-group1-1 {
+  height: 15px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 20px;
+}
+
+.number {
+  left: 0;
+  letter-spacing: -0.24px;
+  line-height: 14.4px;
+  position: absolute;
+  top: 1px;
+  white-space: nowrap;
+}
+
+.degree {
+  border: 1px solid;
+  border-color: var(--black);
+  border-radius: 3px;
+  height: 6px;
+  left: 14px;
+  position: absolute;
+  top: 0;
+  width: 6px;
+}
+
+.text {
+  left: 19px;
+  letter-spacing: -0.24px;
+  line-height: 14.4px;
+  position: absolute;
+  top: 1px;
+  white-space: nowrap;
+}
+
+.overlap-group-1 {
+  height: 15px;
+  margin-top: -1px;
+  position: relative;
+  width: 20px;
+}
+
+.x74-rain {
+  height: 14px;
+  letter-spacing: -0.24px;
+  line-height: 14.4px;
+  margin-left: 12px;
+  margin-top: 4px;
+  white-space: nowrap;
+  width: 47px;
+}
+
+.now.now-2 .now-1,
+.now.now-8 .now-1,
+.now.now-10 .now-1 {
+  width: 43px;
+}
+
+.now.now-4 .now-1 {
+  width: 40px;
+}
+
+.now.now-6 .now-1,
+.now.now-12 .now-1,
+.now.now-14 .now-1 {
+  width: 42px;
+}
+
+.now.now-16 .now-1 {
+  width: 41px;
+}
+
