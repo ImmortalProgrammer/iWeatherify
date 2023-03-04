@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import MobileUnits from "./components/MobileUnits";
-import MobileTemperature from "./components/MobileTemperature";
-import WebsiteUnitsPage from "./components/WebsiteUnitsPage";
-import WebsiteTemperatureSettingsPage from "./components/WebsiteTemperatureSettingsPage";
+import MobileUnits from "./components//MobileUnits/MobileUnits";
+import MobileTemperature from "./components//MobileTemperatureSettings/MobileTemperature";
+import WebsiteUnitsPage from "./components/DesktopUnits/WebsiteUnitsPage";
+import WebsiteTemperatureSettingsPage from "./components/DesktopTemperatureSettings/WebsiteTemperatureSettingsPage";
 import WebsiteHomePageNotLoggedIn from "./components/DesktopHomepageNotLoggedIn/WebsiteHomePageNotLoggedIn";
 import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepage";
 import {
