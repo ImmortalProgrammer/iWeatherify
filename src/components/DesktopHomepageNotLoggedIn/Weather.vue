@@ -20,7 +20,7 @@ export default {
   height: 186px;
   left: 329px;
   position: absolute;
-  top: 368px;
+  top: 310px;
   width: 189px;
 }
 

@@ -1,7 +1,8 @@
 <template>
+  <div id="app">
   <div class="container-center-horizontal">
     <div class="website-home-page-not-logged-in screen">
-      <div class="overlap-group3" :style="{ 'background-image': 'url(' + overlapGroup3 + ')' }">
+      <div class="overlap-group3">
         <weather :text1="weatherProps.text1" :h50L40="weatherProps.h50L40" :place="weatherProps.place" />
         <input-search :inputType="inputSearchProps.inputType" :inputPlaceholder="inputSearchProps.inputPlaceholder" />
         <div class="weather-for-today">
@@ -41,6 +42,7 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -71,27 +73,33 @@ export default {
 
 <style>
 
-.website-home-page-not-logged-in {
-  align-items: flex-start;
-  background-color: var(--white);
-  border: 1px none;
-  display: flex;
-  min-height: 100vh;
-  padding: 25px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.overlap-group3 {
-  align-items: center;
-  background-position: 50% 50%;
+#app {
+  background-image: url('../../../img/background-img.png');
   background-size: cover;
-  height: 100%;
-  background-repeat: no-repeat;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-width: 1024px;
+  background-position: bottom;
+  transition: 0.4s;
 }
+
+main {
+  min-height: 100vh;
+  padding: 25px;
+
+}
+
+.website-home-page-not-logged-in {
+  align-items: flex-start;
+  display: flex;
+  margin-right: 1450px;
+  min-height: 100vh;
+  position: relative;
+}
+
 
 .weather-for-today {
   align-items: flex-start;
@@ -99,7 +107,7 @@ export default {
   height: 104px;
   left: 353px;
   position: absolute;
-  top: 663px;
+  top: 600px;
   width: 693px;
 }
 
@@ -131,10 +139,9 @@ export default {
 
 .frame-7 {
   height: 312px;
-  left: 559px;
+  left: 540px;
   position: absolute;
-  top: 312px;
-  width: 442px;
+  top: 250px;
 }
 
 .vector-5 {
