@@ -33,10 +33,11 @@ export default {
   letter-spacing: 0;
   line-height: normal;
   padding: 0;
-  width: 101px;
+  width: 160px;
+  top: 50px;
 }
 
 .search-1::placeholder {
-  color: #bdbdbd99;
+  color: rgba(57, 59, 192, 0.27);
 }
 </style>
