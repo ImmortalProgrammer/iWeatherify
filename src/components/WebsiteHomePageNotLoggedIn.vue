@@ -79,11 +79,16 @@ export default {
 }
 
 .overlap-group3 {
+  align-items: center;
   background-position: 50% 50%;
   background-size: cover;
-  height: 1024px;
-  position: relative;
-  width: 1440px;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 1024px;
 }
 
 .weather-for-today {
