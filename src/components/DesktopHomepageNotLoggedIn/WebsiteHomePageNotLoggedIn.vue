@@ -70,12 +70,14 @@ export default {
 </script>
 
 <style>
+
 .website-home-page-not-logged-in {
   align-items: flex-start;
   background-color: var(--white);
   border: 1px none;
   display: flex;
-  width: 1440px;
+  min-height: 100vh;
+  padding: 25px;
 }
 
 .overlap-group3 {

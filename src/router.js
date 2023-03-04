@@ -4,8 +4,8 @@ import MobileUnits from "./components/MobileUnits";
 import MobileTemperature from "./components/MobileTemperature";
 import WebsiteUnitsPage from "./components/WebsiteUnitsPage";
 import WebsiteTemperatureSettingsPage from "./components/WebsiteTemperatureSettingsPage";
-import WebsiteHomePageNotLoggedIn from "./components/WebsiteHomePageNotLoggedIn";
-import MobileHomepage from "./components/MobileHomepage";
+import WebsiteHomePageNotLoggedIn from "./components/DesktopHomepageNotLoggedIn/WebsiteHomePageNotLoggedIn";
+import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepage";
 import {
   mobileUnitsData,
   mobileTemperatureData,
