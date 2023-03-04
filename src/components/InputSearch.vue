@@ -25,7 +25,7 @@ export default {
 .search {
   background-color: transparent;
   border: 0;
-  color: var(--gray03);
+  color: var(--black);
   font-weight: 500;
   height: 19px;
   left: 16px;
@@ -33,10 +33,10 @@ export default {
   padding: 0;
   position: relative;
   top: 15px;
-  width: 133px;
+  width: 800px;
 }
 
 .search::placeholder {
-  color: #bdbdbd99;
+  color: rgba(189, 189, 189, 0.65);
 }
 </style>
