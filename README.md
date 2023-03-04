@@ -17,7 +17,7 @@
 * The src directory holds the bulk of the code for the project
 
 
-* The components folder in the src directory holds .vue files that have html and css components to it
+* The components folder in the src directory holds the various folders pertaining to webpages and inside those subfolders holds the vue files (html, css, javascript) for that particular page. 
 
 
 * App.vue is the root of the program, think of it as a main method, but for vue
