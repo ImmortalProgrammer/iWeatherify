@@ -54,6 +54,14 @@
 
 # Instructions
 
+* Ensure that your repository on node version 12.22.12 and npm version 6.14.6 before building your project:
+
+### To install npm version 6.14.6 on your repository:
+* npm i npm@6.14.6
+
+### To install node version 12.22.12 on your repository:
+* npm install node@12.22.12
+
 ## Localhost
 
 ```
