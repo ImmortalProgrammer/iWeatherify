@@ -167,3 +167,74 @@ export const mobileHomepageData = {
     outfitOfTheDayProps: outfitOfTheDayData,
 };
 
+export const ellipse6Data = {
+    src: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/ellipse-6-1@2x.png",
+};
+
+export const listBoxTitleData = {
+    typeOfOutfit: "Type of Outfit",
+};
+
+export const placeholderTextData = {
+    selectOutfit: "Select Outfit",
+};
+
+export const listboxComponentData = {
+    listBoxTitleProps: listBoxTitleData,
+    placeholderTextProps: placeholderTextData,
+};
+
+export const addEditDelete2Data = {
+    className: "add-edit-delete-2",
+};
+
+export const addEditDelete3Data = {
+    className: "add-edit-delete-3",
+};
+
+export const addEditDelete4Data = {
+    className: "add-edit-delete",
+};
+
+export const addEditDelete5Data = {
+    className: "add-edit-delete",
+};
+
+export const addEditDelete6Data = {
+    className: "add-edit-delete-4",
+};
+
+export const websiteMyItemsPageData = {
+    defaultLogo3: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/6403ff00aa8af8606e71b64d/img/default-logo-5@2x.png",
+    hot: "Hot",
+    warm: "Warm",
+    justRight: "Just right",
+    categorizeClothesB: "Categorize clothes based on your temperature preferences",
+    title: "My Items",
+    place: "Chilly",
+    cold: "Cold",
+    freezing: "Freezing",
+    ellipse6Props: ellipse6Data,
+    listboxComponentProps: listboxComponentData,
+    addEditDelete1Props: addEditDelete2Data,
+    addEditDelete2Props: addEditDelete3Data,
+    addEditDelete3Props: addEditDelete4Data,
+    addEditDelete4Props: addEditDelete5Data,
+    addEditDelete5Props: addEditDelete6Data,
+};
+
+export const websiteLocationSettingsData = {
+    defaultLogo5: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64040a504c9ddca04e2b1e35/img/default-logo-5@2x.png",
+    title: "Location Settings",
+    locationServices: "Location Services",
+    enableLocationToG: "Enable location to give you the best clothing options",
+    locationPreferences: "Location Preferences",
+    manuallyEnterInA: "Manually enter in a location of your choice",
+    or: "--OR--",
+    save: "Save",
+    ellipse6Props: ellipse6Data,
+};
+
+
+
+

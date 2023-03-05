@@ -89,27 +89,6 @@ export default {
 
 }
 
-@media only screen and (max-width: 595px) {
-
-}
-
-/* Small screen devices (600px and above) */
-@media only screen and (min-width: 600px) {
-
-}
-
-/* Medium screen devices (768px and above) */
-@media only screen and (min-width: 768px) {
-}
-
-/* Big screen devices (889px and above) */
-@media only screen and (min-width: 889px) {
-}
-
-/* Extra big screen devices (1200px and above) */
-@media only screen and (max-width: 1300px) {
-
-}
 
 main {
   min-height: 100vh;
@@ -121,7 +100,8 @@ main {
 .website-home-page-not-logged-in {
   align-items: flex-start;
   display: flex;
-  margin-right: 1450px;
+  top: -150px;
+  margin-right: 2000px;
   min-height: 100vh;
   position: relative;
 }

@@ -6,6 +6,9 @@ import WebsiteUnitsPage from "./components/DesktopUnits/WebsiteUnitsPage";
 import WebsiteTemperatureSettingsPage from "./components/DesktopTemperatureSettings/WebsiteTemperatureSettingsPage";
 import WebsiteHomePageNotLoggedIn from "./components/DesktopHomepageNotLoggedIn/WebsiteHomePageNotLoggedIn";
 import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepage";
+import WebsiteMyItemsPage from "./components/DesktopMyItems/WebsiteMyItemsPage";
+import WebsiteLocationSettings from "./components/DesktopLocationSettings/WebsiteLocationSettings";
+
 import {
   mobileUnitsData,
   mobileTemperatureData,
@@ -13,6 +16,8 @@ import {
   websiteTemperatureSettingsPageData,
   websiteHomePageNotLoggedInData,
   mobileHomepageData,
+  websiteMyItemsPageData,
+  websiteLocationSettingsData
 } from "./data";
 
 Vue.use(Router);
@@ -20,6 +25,16 @@ Vue.use(Router);
 export default new Router({
   mode: "hash",
   routes: [
+    {
+      path: "/website-location-settings",
+      component: WebsiteLocationSettings,
+      props: { ...websiteLocationSettingsData },
+    },
+    {
+      path: "/website-my-items",
+      component: WebsiteMyItemsPage,
+      props: { ...websiteMyItemsPageData },
+    },
     {
       path: "/mobile-units",
       component: MobileUnits,
