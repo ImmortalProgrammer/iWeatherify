@@ -169,3 +169,4 @@ export const mobileHomepageData = {
     weatherProps: weather3Data,
     outfitOfTheDayProps: outfitOfTheDayData,
 };
+

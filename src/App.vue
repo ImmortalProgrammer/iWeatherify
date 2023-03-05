@@ -1,14 +1,10 @@
-<script setup>
-// import { RouterLink, RouterView } from 'vue-router'
-// import HelloWorld from './components/HelloWorld.vue'
-  // data() {
-  //   return {
-  //     title: "My first vue app"
-  //   }
-  // }
+<template>
+  <router-view />
+</template>
+
+<script>
+export default {
+  name: "App",
+};
 </script>
 
-<template>
-  <p> Omg  - from app.vue</p>
-</template>
-  
