@@ -1,17 +1,19 @@
 <template>
   <div class="weather">
     <div class="overlap-group-4">
-      <div class="text-3 inter-normal-black-96px">{{ text1 }}</div>
-      <p class="h-50-l40 ui---16-regular" v-html="h50L40"></p>
+      <div class="text-3 inter-normal-black-96px">45°</div>
+      <p class="h-50-l40 ui---16-regular">
+        H: 50° L:40°<br />Feels like: 40°
+      </p>
     </div>
-    <div class="place ui---30-regular">{{ place }}</div>
+    <div class="place ui---30-regular">New York</div>
   </div>
 </template>
 
 <script>
 export default {
   name: "Weather",
-  props: ["text1", "h50L40", "place"],
+  props: [],
 };
 </script>
 
@@ -63,4 +65,11 @@ export default {
   top: -1px;
   width: 172px;
 }
+@media only screen and (min-width: 880px) and (max-width: 1300px) {
+  .weather {
+    left: 615px;
+    top: 250px;
+  }
+}
+
 </style>

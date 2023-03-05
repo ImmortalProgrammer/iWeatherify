@@ -29,6 +29,7 @@
             src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
             alt="Vector"
           />
+
         </div>
         <img class="home-logo-2" :src="homeLogo2" alt="Home Logo 2" />
         <div class="frame-7">
@@ -80,17 +81,42 @@ export default {
 }
 
 #app {
-  background-image: url('../../../img/background-img.png');
+  background-image: url(../../../img/background-img.png);
   background-size: cover;
   background-position: bottom;
-  transition: 0.4s;
+  overflow-x: auto;
+  background-attachment: scroll;
+
+}
+
+@media only screen and (max-width: 595px) {
+
+}
+
+/* Small screen devices (600px and above) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium screen devices (768px and above) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) {
+}
+
+/* Extra big screen devices (1200px and above) */
+@media only screen and (max-width: 1300px) {
+
 }
 
 main {
   min-height: 100vh;
   padding: 25px;
-
 }
+
+
 
 .website-home-page-not-logged-in {
   align-items: flex-start;
@@ -128,6 +154,7 @@ main {
   width: 41px;
 }
 
+
 .home-logo-2 {
   height: 51px;
   left: 68px;
@@ -137,12 +164,14 @@ main {
   width: 192px;
 }
 
+
 .frame-7 {
   height: 312px;
   left: 540px;
   position: absolute;
   top: 250px;
 }
+
 
 .vector-5 {
   height: 292px;
@@ -164,5 +193,24 @@ main {
   text-align: center;
   top: 66px;
   width: 420px;
+}
+
+@media only screen and (min-width: 880px) and (max-width: 1300px) {
+  .home-logo-2 {
+    left: 610px;
+  }
+  .flex-row-4 {
+    gap: 720px;
+    left: 315px;
+  }
+  .frame-7 {
+    left: 500px;
+    top: 630px;
+  }
+
+  .weather-for-today {
+    left: 400px;
+    top: 480px;
+  }
 }
 </style>
