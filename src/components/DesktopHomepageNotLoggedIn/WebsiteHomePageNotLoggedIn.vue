@@ -195,6 +195,9 @@ main {
 }
 
 @media only screen and (min-width: 533px) and (max-width: 879px) {
+  #app {
+    overflow: hidden;
+  }
   .home-logo-2 {
     position: relative;
     left: 630px;
@@ -210,14 +213,21 @@ main {
     top: 780px;
     scale: 1.1;
     position: relative;
+    visibility: hidden;
   }
 
   .weather-for-today {
-    scale: 1.2;
-    left: 640px;
-    top: 420px;
+    scale: 1.35;
+    left: 670px;
+    top: 410px;
     display: block;
 
+  }
+}
+
+@media only screen and (min-width: 533px) and (max-width: 879px) and (max-height: 850px) {
+  #app {
+    overflow: auto;
   }
 }
 </style>
