@@ -101,7 +101,7 @@ main {
   align-items: flex-start;
   display: flex;
   top: -150px;
-  margin-right: 2000px;
+  margin-right: 2050px;
   min-height: 100vh;
   position: relative;
 }
