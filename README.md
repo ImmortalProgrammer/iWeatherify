@@ -61,7 +61,6 @@
 ## Localhost
 
 ```
-cd package_code
 npm install
 npm start
 ```
