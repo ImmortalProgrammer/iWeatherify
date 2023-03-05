@@ -193,4 +193,31 @@ main {
     top: 480px;
   }
 }
+
+@media only screen and (min-width: 533px) and (max-width: 879px) {
+  .home-logo-2 {
+    position: relative;
+    left: 630px;
+    top: 15px;
+  }
+  .flex-row-4 {
+    gap: 380px;
+    left: 490px;
+    top: 15px;
+  }
+  .frame-7 {
+    left: 475px;
+    top: 780px;
+    scale: 1.1;
+    position: relative;
+  }
+
+  .weather-for-today {
+    scale: 1.2;
+    left: 640px;
+    top: 420px;
+    display: block;
+
+  }
+}
 </style>

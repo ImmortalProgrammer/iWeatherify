@@ -20,11 +20,6 @@ export default {
 </script>
 
 <style>
-.weather-throughout-the-day {
-  height: 104px;
-  min-width: 216px;
-  position: relative;
-}
 
 .flex-row-5 {
   align-items: flex-start;

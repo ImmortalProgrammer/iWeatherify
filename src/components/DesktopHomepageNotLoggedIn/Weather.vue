@@ -6,7 +6,7 @@
         H: 50° L:40°<br />Feels like: 40°
       </p>
     </div>
-    <div class="place ui---30-regular">New York</div>
+    <div class ="NewYork" style = "margin-left: 16px; margin-top: 0px;">New York</div>
   </div>
 </template>
 
@@ -18,6 +18,12 @@ export default {
 </script>
 
 <style>
+.NewYork {
+  font-family: var(--font-family-inter);
+  font-size: 33px;
+  font-style: normal;
+  font-weight: 400;
+}
 .weather {
   height: 186px;
   left: 329px;
@@ -69,6 +75,13 @@ export default {
   .weather {
     left: 615px;
     top: 250px;
+  }
+}
+
+@media only screen and (min-width: 533px) and (max-width: 879px) {
+  .weather {
+    left: 615px;
+    top: 180px;
   }
 }
 

@@ -72,5 +72,28 @@ export default {
   }
 }
 
+@media only screen and (min-width: 533px) and (max-width: 879px) {
+  .input-search {
+    height: 50px;
+    left: 480px;
+    position: absolute;
+    top: 95px;
+    width: 500px;
+  }
+  .search {
+    background-color: transparent;
+    border: 0;
+    color: var(--black);
+    font-weight: 500;
+    height: 16px;
+    left: 16px;
+    line-height: normal;
+    padding: 0;
+    position: relative;
+    top: 15px;
+    width: 450px;
+  }
+}
+
 
 </style>
