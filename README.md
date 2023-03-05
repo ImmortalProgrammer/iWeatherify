@@ -80,4 +80,3 @@ cd dist
 npm install
 npm run build
 ```
-
