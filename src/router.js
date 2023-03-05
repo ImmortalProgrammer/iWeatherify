@@ -6,6 +6,7 @@ import WebsiteUnitsPage from "./components/DesktopUnits/WebsiteUnitsPage";
 import WebsiteTemperatureSettingsPage from "./components/DesktopTemperatureSettings/WebsiteTemperatureSettingsPage";
 import WebsiteHomePageNotLoggedIn from "./components/DesktopHomepageNotLoggedIn/WebsiteHomePageNotLoggedIn";
 import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepage";
+import RegisterPage from "./components/RegistrationPage/RegisterPage";
 import {
   mobileUnitsData,
   mobileTemperatureData,
@@ -20,6 +21,10 @@ Vue.use(Router);
 export default new Router({
   mode: "history",
   routes: [
+    {
+      path: "/register",
+      component: RegisterPage
+    }, 
     {
       path: "/mobile-units",
       component: MobileUnits,
