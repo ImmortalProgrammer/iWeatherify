@@ -1,15 +1,15 @@
 import Vue from "vue";
 import Router from "vue-router";
-import MobileUnits from "./components//MobileUnits/MobileUnits";
+// import MobileUnits from "./components//MobileUnits/MobileUnits";
 import MobileTemperature from "./components//MobileTemperatureSettings/MobileTemperature";
-import WebsiteUnitsPage from "./components/DesktopUnits/WebsiteUnitsPage";
+// import WebsiteUnitsPage from "./components/DesktopUnits/WebsiteUnitsPage";
 import WebsiteTemperatureSettingsPage from "./components/DesktopTemperatureSettings/WebsiteTemperatureSettingsPage";
 import WebsiteHomePageNotLoggedIn from "./components/DesktopHomepageNotLoggedIn/WebsiteHomePageNotLoggedIn";
 import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepage";
 import {
-  mobileUnitsData,
+  // mobileUnitsData,
   mobileTemperatureData,
-  websiteUnitsPageData,
+  // websiteUnitsPageData,
   websiteTemperatureSettingsPageData,
   websiteHomePageNotLoggedInData,
   mobileHomepageData,
@@ -18,13 +18,13 @@ import {
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
+  mode: "hash",
   routes: [
-    {
+    /* {
       path: "/mobile-units",
       component: MobileUnits,
       props: { title: "Units", iosStatusBarBlackProps: mobileUnitsData.iosStatusBarBlackProps },
-    },
+    }, */
     {
       path: "/mobile-temperature",
       component: MobileTemperature,
@@ -32,12 +32,12 @@ export default new Router({
         title: "Temperature",
         setYourPreference: "Set your preference for each temperature range",
         text1: "100<br /><br /><br />75<br /><br /><br />50<br /><br /><br />25<br /><br /><br />0",
-        hotWarmJustRight:
-          "Hot<br /><br /><br />Warm<br /><br /><br />Just right<br /><br /><br />Chilly<br /><br />Cold<br /><br />Freezing",
+        /* hotWarmJustRight:
+          "Hot<br /><br /><br />Warm<br /><br /><br />Just right<br /><br /><br />Chilly<br /><br />Cold<br /><br />Freezing", */
         iosStatusBarBlackProps: mobileTemperatureData.iosStatusBarBlackProps,
       },
     },
-    {
+    /* {
       path: "/website-units-page",
       component: WebsiteUnitsPage,
       props: {
@@ -50,7 +50,7 @@ export default new Router({
         tableRow3Props: websiteUnitsPageData.tableRow3Props,
         tableRow4Props: websiteUnitsPageData.tableRow4Props,
       },
-    },
+    }, */
     {
       path: "/website-temperature-settings-page",
       component: WebsiteTemperatureSettingsPage,
@@ -58,10 +58,6 @@ export default new Router({
         defaultLogo3:
           "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/default-logo-3@2x.png",
         title: "Temperature Settings",
-        text1:
-          "100<br /><br /><br /><br /><br />75<br /><br /><br /><br /><br />50<br /><br /><br /><br /><br /><br />25<br /><br /><br /><br /><br /><br />0",
-        hotWarmJustRight:
-          "Hot<br /><br /><br /><br /><br />Warm<br /><br /><br />Just right<br /><br /><br /><br />Chilly<br /><br /><br /><br /><br />Cold<br /><br /><br /><br />Freezing",
         ellipse6Props: websiteTemperatureSettingsPageData.ellipse6Props,
       },
     },

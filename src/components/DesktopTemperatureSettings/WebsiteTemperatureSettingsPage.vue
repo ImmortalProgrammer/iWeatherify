@@ -1,28 +1,30 @@
 <template>
   <div class="container-center-horizontal">
     <div class="website-temperature-settings-page screen">
+      <h1 class="title-3">{{ title }}</h1>
       <img class="default-logo-3" :src="defaultLogo3" alt="Default Logo 3" />
-      <div class="flex-col">
-        <h1 class="title-3 ui---30-semi">{{ title }}</h1>
-        <div class="flex-row-3">
-          <div class="overlap-group-3">
-            <img
-              class="background"
-              src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/background-1.svg"
-              alt="Background"
-            />
-            <div class="text-2 ui---30-semi" v-html="text1"></div>
+      <div>
+          <img class="profile-img" :src="ellipse6Props.src">
+      </div>
+      <div>
+      <img
+      class="vector-3"
+      src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
+      alt="Vector"
+      />
+      </div>
+      <div>
+        <div class="entire-temp-scale">
+          <div class="green-scale"></div>
+            <div class="temperatures">
+            100 75 50 25 0
+            </div>
           </div>
-          <div class="hot-warm-just-right-1 ui---30-regular" v-html="hotWarmJustRight"></div>
+          <div class="hot-warm-just-right-1">
+          Hot Warm Just right Chilly Cold Freezing
+          </div>
         </div>
       </div>
-      <ellipse6 :src="ellipse6Props.src" :className="ellipse6Props.className" />
-      <img
-        class="vector-3"
-        src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
-        alt="Vector"
-      />
-    </div>
   </div>
 </template>
 
@@ -31,101 +33,116 @@ import Ellipse6 from "./Ellipse6";
 export default {
   name: "WebsiteTemperatureSettingsPage",
   components: {
-    Ellipse6,
+    Ellipse6
   },
-  props: ["defaultLogo3", "title", "text1", "hotWarmJustRight", "ellipse6Props"],
+  props: [
+    "defaultLogo3", 
+    "title", 
+    "text1", 
+    "hotWarmJustRight", 
+    "ellipse6Props"
+  ],
 };
 </script>
 
 <style>
+
 .website-temperature-settings-page {
-  align-items: flex-start;
-  background-color: var(--white);
-  border: 1px none;
-  display: flex;
-  height: 1024px;
-  padding: 19px 61px;
   position: relative;
-  width: 1440px;
-}
-
-.default-logo-3 {
-  height: 71px;
-  margin-left: 76px;
-  margin-top: 18px;
-  object-fit: cover;
-  width: 212px;
-}
-
-.flex-col {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-left: 25px;
-  margin-top: 74px;
-  min-height: 912px;
-  width: 706px;
+  width: 100%; 
+  height: 100vh;
+  background: #FFFFFF;
 }
 
 .title-3 {
+  position: absolute;
   color: var(--black);
-  font-weight: 600;
-  line-height: normal;
-  min-height: 41px;
+  width: 25vw;
+  height: 3.125em;
+  left: 40.2778vw;
+  top: 10.1563vh;
+  line-height: 2.5vw;
   text-align: center;
-  width: 706px;
+  font-weight: 600;
+  font-size: 2.083vw;
+  font-family: 'Inter';
+  font-style: normal;
 }
 
-.flex-row-3 {
-  align-items: center;
-  display: flex;
-  gap: 16px;
-  margin-right: 14px;
-  min-width: 470px;
-}
 
-.overlap-group-3 {
+.entire-temp-scale {
+  position: absolute;
   background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/background.svg);
   background-size: 100% 100%;
-  height: 855px;
-  position: relative;
-  width: 86px;
+  width: 5.9722vw;
+  height: 68.3594vh;
+  left: 44.0278vw;
+  top: 17.0898vh;
 }
 
-.background {
-  height: 498px;
-  left: 0;
+.green-scale {
   position: absolute;
-  top: 357px;
-  width: 86px;
+  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/background-1.svg);
+  background-size: 100% 100%;
+  width: 5.9722vw;
+  height: 42.2852vh;
+  top: 26vh;
 }
 
-.text-2 {
+.temperatures {
+  position: absolute;
   color: var(--black);
+  width: 5.7639vw;
+  height: 77.7344vh;
+  top: 17.9648vh;
+  font-family: 'Inter';
+  font-style: normal;
   font-weight: 600;
-  left: 3px;
-  line-height: normal;
-  position: absolute;
+  font-size: 1.5625vw;
+  line-height: 1.875vw;
   text-align: center;
-  top: 20px;
-  width: 83px;
 }
 
 .hot-warm-just-right-1 {
+  position: absolute;
   color: var(--black);
+  width: 9.7222vw;
+  height: 74.0234vh;
+  left: 51.1111vw;
+  top: 18.75vh;
   font-weight: 400;
-  line-height: normal;
-  margin-bottom: 2px;
-  min-height: 823px;
+  line-height: 2.5vw;
   text-align: center;
-  width: 368px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.0833vw; 
+  line-height: 2.5vw;
 }
 
 .vector-3 {
-  height: 41px;
-  margin-left: 25px;
-  margin-top: 34px;
-  width: 41px;
+  position: absolute;
+  width: 2.8472vw;
+  height: 2.8472vw;
+  left: 93.75vw;
+  top: 5.1758vh;
+}
+
+.default-logo-3 {
+  position: absolute;
+  width: 5vw;
+  height: 5vh;
+  left: 5.8333vw;
+  top: 2.6367vh;
+  object-fit: cover;
+}
+
+.profile-img {
+  position: absolute;
+  width: 3.4722vw; 
+  height: 3.4722vw; 
+  left: 87.9167vw; 
+  top: 4.6875vh;
+  object-fit: cover;
 }
 </style>
