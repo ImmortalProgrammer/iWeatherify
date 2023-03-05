@@ -1,9 +1,5 @@
 # Directory
 
-### Fonts Directory
-
-* Holds all the different fonts that the website uses
-
 ### Img Directory
 
 * Holds all the static images related to the project
