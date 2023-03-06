@@ -3,7 +3,7 @@
     <div class="website-location-settings screen">
       <div class="flex-row">
         <img class="default-logo-5" :src="defaultLogo5" alt="Default Logo 5" />
-        <h1 class="title ui---30-semi2">{{ title }}</h1>
+        <h1 class="title">{{ title }}</h1>
         <ellipse6 :src="ellipse6Props.src" />
         <img
           class="vector"
@@ -13,10 +13,10 @@
       </div>
       <div class="flex-row-1">
         <div class="flex-col">
-          <div class="location-services ui---30-semi2">{{ locationServices }}</div>
-          <p class="enable-location-to-g ui---30-medium">{{ enableLocationToG }}</p>
-          <div class="location-preferences ui---30-semi2">{{ locationPreferences }}</div>
-          <p class="manually-enter-in-a ui---30-medium">{{ manuallyEnterInA }}</p>
+          <div class="location-services">{{ locationServices }}</div>
+          <p class="enable-location-to-g">{{ enableLocationToG }}</p>
+          <div class="location-preferences">{{ locationPreferences }}</div>
+          <p class="manually-enter-in-a">{{ manuallyEnterInA }}</p>
         </div>
         <div class="flex-col-1">
           <div class="toggle-switcho-container">
@@ -25,9 +25,9 @@
           </div>
           <div class="overlap-group1"> 
            
-            <input class= "city" type="text" placeholder="Insert City..." name="search">
-            <input class= "zip-code" type="text" placeholder="Insert Zip Code..." name="search1">
-            <div class="or ui---30-semi2">{{ or }}</div>
+            <input class= "city" type="text" placeholder="Insert City" name="search">
+            <input class= "zip-code" type="text" placeholder="Insert Zip Code" name="search1">
+            <div class="or">{{ or }}</div>
           </div>
         </div>
       </div>
@@ -93,10 +93,12 @@ export default {
 .title {
   align-self: flex-end;
   color: var(--black);
+  font-family: "Inter";
+  font-size: 30px; 
   font-weight: 600;
   line-height: normal;
   margin-bottom: 1px;
-  margin-left: 101px;
+  margin-left: 250px;
   min-height: 41px;
   text-align: center;
   width: 706px;
@@ -106,7 +108,7 @@ export default {
   position: absolute;
   width: 41px;
   height: 41px;
-  left: 93vw;
+  left: 103vw;
   top: 3vh;
   object-fit: cover;
 }
@@ -133,7 +135,9 @@ export default {
 
 .location-services {
   color: var(--black);
+  font-family: "Inter";
   font-weight: 600;
+  font-size: 26px;
   line-height: normal;
   min-height: 10px;
   text-align: center;
@@ -142,8 +146,9 @@ export default {
 
 .enable-location-to-g {
   align-self: flex-end;
-  color: var(--black);
+  color: #808080;
   font-weight: 500;
+  font-size: 20px;
   line-height: normal;
   min-height: 70px;
   text-align: center;
@@ -152,7 +157,9 @@ export default {
 
 .location-preferences {
   color: var(--black);
+  font-family: "Inter";
   font-weight: 600;
+  font-size:26px;
   line-height: normal;
   margin-top: 37px;
   min-height: 41px;
@@ -162,8 +169,9 @@ export default {
 
 .manually-enter-in-a {
   align-self: center;
-  color: var(--black);
+  color: #808080;
   font-weight: 500;
+  font-size: 20px;
   line-height: normal;
   margin-left: 26px;
   min-height: 70px;
@@ -215,6 +223,8 @@ export default {
 
 .or {
   color: var(--black);
+  font-family:"Inter";
+  font-size: 26px;
   font-weight: 600;
   left: 50px;
   line-height: normal;
@@ -234,7 +244,7 @@ export default {
 .rectangle-272 {
   background-color: var(--black);
   height: 80px;
-  left: 550px;
+  left: 520px;
   position: absolute;
   top: -250px;
   width: 335px;
@@ -243,7 +253,7 @@ export default {
 .save {
   color: var(--white);
   font-weight: 300;
-  left: 360px;
+  left: 340px;
   line-height: normal;
   position: absolute;
   text-align: center;
