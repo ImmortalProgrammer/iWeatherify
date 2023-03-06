@@ -59,7 +59,7 @@ export default {
   min-width: 280px;
   padding: 0 16px;
   position: absolute;
-  top: 0;
+  top: 60px;
 }
 
 .chevron {
