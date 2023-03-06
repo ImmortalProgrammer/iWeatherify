@@ -29,19 +29,19 @@ export default {
   background-color: var(--white);
   display: flex;
   flex-direction: column;
-  /* margin-left: 1px;
+  margin-left: 1px;
   margin-top: 21px;
-  padding: 0px 0px 0px 16px; */
+  padding: 0px 0px 0px 16px;
   position: relative;
-  /* width: 338px; */
+  width: 338px;
 }
 
 .content {
   align-items: flex-start;
   align-self: stretch;
   display: flex;
-  /* gap: 8px; */
-  /* padding: 0px 16px 0px 0px; */
+  gap: 8px;
+  padding: 0px 16px 0px 0px;
   position: relative;
 }
 
@@ -49,8 +49,8 @@ export default {
   align-items: flex-start;
   display: flex;
   flex: 1;
-  /* gap: 10px; */
-  /* padding: 11px 0px; */
+  gap: 10px;
+  padding: 11px 0px;
   position: relative;
 }
 
@@ -78,7 +78,7 @@ export default {
   width: 978px;
 }
 
-.table-row.table-row-1 .separator {
+.table-row.table-row-1.separator {
   margin-bottom: unset;
   min-width: 962px;
 }

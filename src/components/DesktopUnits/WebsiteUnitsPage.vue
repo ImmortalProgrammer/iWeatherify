@@ -3,7 +3,7 @@
     <div class="website-units-page screen">
       <div>
         <img class="default-logo-4" :src="defaultLogo4" alt="Default Logo 4" />
-        <img img class="profile-img" :src="ellipse6Props.src" />
+        <img class="profile-img" :src="ellipse6Props.src" />
         <img
           class="vector-2"
           src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
@@ -13,10 +13,26 @@
       <div class="unit-container">
         <h1 class="title">{{ title }}</h1>
         <div class="row-format-container">
-          <table-row :className="tableRow1Props.className" />
+          <!-- <table-row :className="tableRow1Props.className" />
           <table-row2 :className="tableRow2Props.className" />
           <table-row3 :className="tableRow3Props.className" />
-          <table-row4 :className="tableRow4Props.className" />
+          <table-row4 :className="tableRow4Props.className" /> -->
+          <div class="row">
+            <p class="temp-font">Temperature</p>
+            <p class="unit-font">°F ❯</p>
+          </div>
+          <div class="row">
+            <p class="wind-font">Wind</p>
+            <p class="unit-font">Mph ❯</p>
+          </div>
+          <div class="row">
+            <p class="pressure-font">Pressure</p>
+            <p class="unit-font">In ❯</p>
+          </div>
+          <div class="row">
+            <p class="distance-font">Distance</p>
+            <p class="unit-font">Mi ❯</p>
+          </div>
         </div>
       </div>
     </div>
@@ -109,6 +125,54 @@ export default {
 
 .row-format-container {
   position: absolute;
-  top: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40vw;
+  top: 15vh;
+  height: 30vh;
+}
+
+.temp-font {
+  font-size: 1vw;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.unit-font {
+  font-size: 1vw;
+  color: rgb(186, 185, 185);
+  justify-content: baseline;
+}
+
+.row {
+  border-bottom: 0.1vw solid black;
+  width: 40vw;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: space-between;
+}
+
+.wind-font {
+  font-size: 1vw;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.pressure-font {
+  font-size: 1vw;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.distance-font{
+  font-size: 1vw;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
 }
 </style>

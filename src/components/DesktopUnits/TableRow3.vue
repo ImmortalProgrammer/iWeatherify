@@ -30,9 +30,9 @@ export default {
   background-color: var(--white);
   display: flex;
   flex-direction: column;
-  /* margin-left: 1px;
+  margin-left: 1px;
   padding: 0px 0px 0px 16px;
-  width: 338px; */
+  width: 338px;
 }
 
 .content-4 {
