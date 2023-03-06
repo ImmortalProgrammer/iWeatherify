@@ -68,7 +68,7 @@ export default {
 
 @media only screen and (min-width: 880px) and (max-width: 1300px) {
   .input-search {
-    top: 150px;
+    top: 120px;
   }
 }
 

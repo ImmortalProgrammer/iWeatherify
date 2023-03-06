@@ -113,8 +113,9 @@ main {
   height: 104px;
   left: 353px;
   position: absolute;
-  top: 600px;
+  top: 630px;
   width: 693px;
+  scale: 1.35;
 }
 
 .flex-row-4 {
@@ -178,10 +179,12 @@ main {
 @media only screen and (min-width: 880px) and (max-width: 1300px) {
   .home-logo-2 {
     left: 610px;
+    top: 35px;
   }
   .flex-row-4 {
     gap: 720px;
     left: 315px;
+    top: 35px;
   }
   .frame-7 {
     left: 500px;
@@ -190,7 +193,8 @@ main {
 
   .weather-for-today {
     left: 400px;
-    top: 480px;
+    top: 450px;
+    scale: 1.35;
   }
 }
 

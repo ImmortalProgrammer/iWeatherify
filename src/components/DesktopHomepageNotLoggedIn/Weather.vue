@@ -74,7 +74,7 @@ export default {
 @media only screen and (min-width: 880px) and (max-width: 1300px) {
   .weather {
     left: 615px;
-    top: 250px;
+    top: 220px;
   }
 }
 
