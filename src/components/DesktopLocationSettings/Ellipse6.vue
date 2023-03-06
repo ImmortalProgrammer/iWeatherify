@@ -15,7 +15,7 @@ export default {
   display: flex;
   height: 1px;
   justify-content: center;
-  margin-left: 970px;
+  margin-left: 1120px;
   margin-top: 1px;
   min-width: 700px;
 }
