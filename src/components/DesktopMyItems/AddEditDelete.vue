@@ -50,11 +50,11 @@ export default {
   margin-left: 209px;
 }
 
-.add-edit-delete-1.add-edit-delete {
+.add-edit-delete-1.add-edit-delete { /*Cold */
   align-self: unset;
 }
 
-.add-edit-delete-1.add-edit-delete-4 {
+.add-edit-delete-1.add-edit-delete-4 { /* Freezing */
   align-self: flex-end;
 }
 </style>
