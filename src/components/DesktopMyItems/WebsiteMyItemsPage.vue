@@ -60,7 +60,7 @@
             </div>
             <p class="categorize-clothes-b">{{ categorizeClothesB }}</p>
           </div>
-          <h1 class="title">{{ title }}</h1>
+          <h1 class="title1">My Items</h1>
         </div>
         <div class="add-edit-delete-container">
           <add-edit-delete />
@@ -150,7 +150,7 @@ export default {
     "warm",
     "justRight",
     "categorizeClothesB",
-    "title",
+    "title1",
     "place",
     "cold",
     "freezing",
@@ -194,15 +194,19 @@ export default {
 }
 
 .default-logo-3 {
-  height: 71px;
+  position: absolute;
+  max-width: 100%;
+  width: 10vw;
+  height: auto;
+  left: 5.8333vw;
+  top: 3vh;
   object-fit: cover;
-  width: 212px;
 }
 
 .vector {
   height: 41px;
   margin-bottom: 2px;
-  margin-left: 30px;
+  margin-left: -200px;
   width: 41px;
 }
 
@@ -374,12 +378,12 @@ export default {
   width: 444px;
 }
 
-.title {
+.title1 {
   color: var(--black);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-l);
+  font-size: 30px;
   font-weight: 700;
-  left: 254px;
+  left: 250px;
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
@@ -393,7 +397,7 @@ export default {
   align-self: center;
   display: flex;
   height: 20px;
-  margin-left: 64px;
+  margin-left: -464px;
   margin-top: 2px;
   min-width: 657px;
   position: relative;
@@ -421,9 +425,11 @@ export default {
 }
 
 .overlap-group5 {
-  height: 251px;
+  height: 252px;
   position: relative;
   width: 199px;
+  right: 40px;
+  top: -70px;
 }
 
 .rectangle-266 {
@@ -469,6 +475,8 @@ export default {
   gap: 94px;
   height: 26px;
   min-width: 488px;
+  left: 20px;
+  top: -70px;
 }
 
 .cold {
@@ -511,9 +519,10 @@ export default {
 .line-container {
   background-color: var(--alto);
   height: 228px;
-  margin-right: 3px;
+  margin-right: -25px;
   position: relative;
   width: 197px;
+  top: -74px;
 }
 
 .line-91 {
@@ -549,6 +558,8 @@ export default {
   height: 228px;
   position: relative;
   width: 196px;
+  margin-left: 30px;
+  top: -74px;
 }
 
 .line-93 {
