@@ -5,6 +5,7 @@ import MobileTemperature from "./components//MobileTemperatureSettings/MobileTem
 import WebsiteUnitsPage from "./components/DesktopUnits/WebsiteUnitsPage";
 import WebsiteTemperatureSettingsPage from "./components/DesktopTemperatureSettings/WebsiteTemperatureSettingsPage";
 import WebsiteHomePageNotLoggedIn from "./components/DesktopHomepageNotLoggedIn/WebsiteHomePageNotLoggedIn";
+import WebsiteHomePageLoggedIn from "./components/DesktopHomepageLoggedIn/WebsiteHomePageLoggedIn";
 import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepage";
 import WebsiteMyItemsPage from "./components/DesktopMyItems/WebsiteMyItemsPage";
 import WebsiteLocationSettings from "./components/DesktopLocationSettings/WebsiteLocationSettings";
@@ -17,7 +18,8 @@ import {
   websiteHomePageNotLoggedInData,
   mobileHomepageData,
   websiteMyItemsPageData,
-  websiteLocationSettingsData
+  websiteLocationSettingsData,
+  websiteHomePageLoggedInData,
 } from "./data";
 
 Vue.use(Router);
@@ -25,6 +27,11 @@ Vue.use(Router);
 export default new Router({
   mode: "hash",
   routes: [
+    {
+      path: "/homepage-logged-in",
+      component: WebsiteHomePageLoggedIn,
+      props: { ...websiteHomePageLoggedInData },
+    },
     {
       path: "/website-location-settings",
       component: WebsiteLocationSettings,

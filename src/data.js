@@ -138,6 +138,16 @@ export const websiteHomePageNotLoggedInData = {
     weatherThroughoutTheDay3Props: weatherThroughoutTheDay3Data,
 };
 
+export const websiteHomePageLoggedInData = {
+    overlapGroup3: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/background-img.png",
+    homeLogo2: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64060646a335b1bb4361fbe1/img/home-frame-logo-1@2x.png",
+    weatherProps: weatherData,
+    inputSearchProps: inputSearchData,
+    weatherThroughoutTheDay1Props: weatherThroughoutTheDay1Data,
+    weatherThroughoutTheDay2Props: weatherThroughoutTheDay2Data,
+    weatherThroughoutTheDay3Props: weatherThroughoutTheDay3Data,
+};
+
 export const iosStatusBarBlack3Data = {
     leftSide: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/6402857cc9953e08464983bc/img/left-side@2x.png",
     battery: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640285252652d48db0de9030/img/battery@2x.png",
