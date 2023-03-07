@@ -4,7 +4,7 @@ import MobileUnits from "./components//MobileUnits/MobileUnits";
 import MobileTemperature from "./components//MobileTemperatureSettings/MobileTemperature";
 import WebsiteUnitsPage from "./components/DesktopUnits/WebsiteUnitsPage";
 import WebsiteTemperatureSettingsPage from "./components/DesktopTemperatureSettings/WebsiteTemperatureSettingsPage";
-import WebsiteHomePageNotLoggedIn from "./components/DesktopHomepageNotLoggedIn/WebsiteHomePageNotLoggedIn";
+import WebsiteHomePageNotLoggedIn from "./components/DesktopHomepageNotLoggedIn/WebsiteHomepageNotLoggedIn";
 import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepage";
 import RegisterPage from "./components/RegistrationPage/RegisterPage";
 import {

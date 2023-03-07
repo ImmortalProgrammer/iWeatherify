@@ -18,6 +18,7 @@
 </template>
   
   <script>
+    import axios from "axios"
     export default {
       data() {
         return {
@@ -34,7 +35,7 @@
           formData.append("username", this.username);
           formData.append("password", this.password);
 
-          axios.post("http://localhost/backend/register.php?action=register", data).then(
+          axios.post("http://localhost/backend/register.php?action=register", formData).then( //This must point to the register.php on the backend
             (res) => {
               if(res.error){
                 console.log("Error with registering")
