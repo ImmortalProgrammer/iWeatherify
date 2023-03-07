@@ -43,6 +43,8 @@
 
 * README.md is the documentation for this github
 
+* .gitignore prevents the files you want from displaying from your local machine to this remote repository
+
 
 * styleguide.css holds the various fonts of the website
 
