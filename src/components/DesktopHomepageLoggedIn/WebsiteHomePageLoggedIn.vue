@@ -29,7 +29,6 @@
             src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
             alt="Vector"
           />
-          img/ellipse-6@2x.png
         </div>
         <img class="home-logo-2" :src="homeLogo2" alt="Home Logo 2" />
         <div class="frame-133">
