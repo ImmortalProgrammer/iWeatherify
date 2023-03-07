@@ -234,4 +234,41 @@ main {
     overflow: auto;
   }
 }
+
+@media only screen and (min-width: 300px) and (max-width: 533px) {
+  #app {
+    overflow: hidden;
+  }
+  .home-logo-2 {
+    visibility: hidden;
+
+  }
+  .flex-row-4 {
+    gap: 215px;
+    left: 580px;
+    top: 15px;
+  }
+  .frame-7 {
+    left: 475px;
+    top: 780px;
+    scale: 1.1;
+    position: relative;
+    visibility: hidden;
+  }
+
+  .weather-for-today {
+    scale: 0.9;
+    left: 575px;
+    top: 350px;
+    display: block;
+
+
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 533px) and (max-height: 850px) {
+  #app {
+    overflow: auto;
+  }
+}
 </style>

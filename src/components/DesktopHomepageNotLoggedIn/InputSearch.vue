@@ -39,7 +39,7 @@ export default {
 
 
 .input-search {
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/bg.svg);
+  background-image: url(../../../img/bg.svg);
   background-size: 100% 100%;
   height: 50px;
   left: 305px;
@@ -51,7 +51,7 @@ export default {
 .search {
   background-color: transparent;
   border: 0;
-  color: var(--black);
+  color: rgba(0, 0, 0);
   font-weight: 500;
   height: 19px;
   left: 16px;
@@ -63,7 +63,7 @@ export default {
 }
 
 .search::placeholder {
-  color: rgba(189, 189, 189, 0.65);
+  color: rgba(98, 69, 69, 0.51);
 }
 
 @media only screen and (min-width: 880px) and (max-width: 1300px) {
@@ -83,7 +83,7 @@ export default {
   .search {
     background-color: transparent;
     border: 0;
-    color: var(--black);
+    color: rgba(0, 0, 0);
     font-weight: 500;
     height: 16px;
     left: 16px;
@@ -92,6 +92,30 @@ export default {
     position: relative;
     top: 15px;
     width: 450px;
+  }
+}
+
+@media only screen and (min-width: 300px) and (max-width: 533px) {
+  .input-search {
+    height: 50px;
+    left: 530px;
+    position: absolute;
+    top: 75px;
+    width: 400px;
+    scale: 0.85;
+  }
+  .search {
+    background-color: transparent;
+    border: 0;
+    color: var(--black);
+    font-weight: 500;
+    height: 16px;
+    left: 16px;
+    line-height: normal;
+    padding: 0;
+    position: relative;
+    top: 15px;
+    width: 175px;
   }
 }
 

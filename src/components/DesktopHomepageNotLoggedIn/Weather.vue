@@ -85,4 +85,12 @@ export default {
   }
 }
 
+@media only screen and (min-width: 300px) and (max-width: 533px) {
+  .weather {
+    left: 615px;
+    top: 150px;
+    scale: 0.85;
+  }
+}
+
 </style>
