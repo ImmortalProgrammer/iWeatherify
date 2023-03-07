@@ -1,5 +1,4 @@
 <?php
-    //TODO - To generate random userid for security
     function random_num($length){
         $text = "";
         if($length < 5){

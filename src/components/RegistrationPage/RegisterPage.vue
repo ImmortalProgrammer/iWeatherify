@@ -35,15 +35,13 @@
           formData.append("username", this.username);
           formData.append("password", this.password);
 
-          // http://localhost/project_s23-iweatherify/backend/register.php?action=register
-          // "../../../backend/register.php?action=register" did not work?
-
-          axios.post("http://localhost/project_s23-iweatherify/backend/register.php?action=register", formData).then( //TODO - LOOK AT THIS - This must point to the register.php on the backend
+          axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/register.php?action=register", formData).then(
             (res) => {
               if(res.error){
-                console.log("Error with registering")
+                console.log("Couldnt send post request")
               } else {
-                console.log("No error with registering!")
+                console.log(res)
+                console.log("Sent post request to backend")
                 this.$router.push("/"); //TODO - redirect to the login page
               }
           }).catch((err) => {
