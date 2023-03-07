@@ -35,7 +35,10 @@
           formData.append("username", this.username);
           formData.append("password", this.password);
 
-          axios.post("http://localhost/backend/register.php?action=register", formData).then( //This must point to the register.php on the backend
+          // http://localhost/project_s23-iweatherify/backend/register.php?action=register
+          // "../../../backend/register.php?action=register" did not work?
+
+          axios.post("http://localhost/project_s23-iweatherify/backend/register.php?action=register", formData).then( //TODO - LOOK AT THIS - This must point to the register.php on the backend
             (res) => {
               if(res.error){
                 console.log("Error with registering")

@@ -24,15 +24,16 @@
     
     if($_SERVER["REQUEST_METHOD"]  == "POST"){
 
-        $user_name = $_POST["username"];
+        $username = $_POST["username"];
         $email = $_POST["email"];
         $password = $_POST["password"];
 
-        if(!empty($user_name) && !empty($password) && !is_numeric($user_name)){
+        if(!empty($username) && !empty($password) && !is_numeric($username)){
             //Generate random userid, save username and email 
             $user_id = random_num(20);
-            $query = "INSERT INTO `users` (`user_id`, `user_name`, `email`) VALUES ('$user_id','$user_name','$email')";
+            $query = "INSERT INTO `users` (`user_id`, `user_name`, `email`) VALUES ('$user_id','$username','$email')";
             $res = $conn -> query($query);
+            echo "Successful insertion";
         } else {
             echo "Please enter some valid information!";
         }
