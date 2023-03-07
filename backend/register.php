@@ -31,7 +31,7 @@
         if(!empty($user_name) && !empty($password) && !is_numeric($user_name)){
             //Generate random userid, save username and email 
             $user_id = random_num(20);
-            $query = "INSERT INTO `test` (`user_id`, `user_name`, `email`) VALUES ('$user_id','$user_name','$email')";
+            $query = "INSERT INTO `users` (`user_id`, `user_name`, `email`) VALUES ('$user_id','$user_name','$email')";
             $res = $conn -> query($query);
         } else {
             echo "Please enter some valid information!";
