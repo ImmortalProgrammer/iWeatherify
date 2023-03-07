@@ -6,7 +6,7 @@
     $dbname = "cse442_2023_spring_team_a_db";
 
     // Create connection
-    $conn = new mysqli($servername, $username, $password);
+    $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
     // Check connection
     if ($conn->connect_error) {
