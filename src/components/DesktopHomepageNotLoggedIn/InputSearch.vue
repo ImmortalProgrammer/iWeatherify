@@ -72,7 +72,7 @@ export default {
   }
 }
 
-@media only screen and (min-width: 533px) and (max-width: 879px) {
+@media only screen and (min-width: 532px) and (max-width: 879px) {
   .input-search {
     height: 50px;
     left: 480px;
@@ -95,7 +95,7 @@ export default {
   }
 }
 
-@media only screen and (min-width: 300px) and (max-width: 533px) {
+@media only screen and (min-width: 365px) and (max-width: 532px) {
   .input-search {
     height: 50px;
     left: 530px;
@@ -116,6 +116,31 @@ export default {
     position: relative;
     top: 15px;
     width: 175px;
+  }
+}
+
+@media only screen and (min-width: 260px) and (max-width: 365px) {
+
+  .input-search {
+    height: 50px;
+    left: 580px;
+    position: absolute;
+    top: 55px;
+    width: 300px;
+    scale: 0.85;
+  }
+  .search {
+    background-color: transparent;
+    border: 0;
+    color: var(--black);
+    font-weight: 500;
+    height: 16px;
+    left: 16px;
+    line-height: normal;
+    padding: 0;
+    position: relative;
+    top: 15px;
+    width: 250px;
   }
 }
 

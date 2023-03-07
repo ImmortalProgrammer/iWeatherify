@@ -78,17 +78,25 @@ export default {
   }
 }
 
-@media only screen and (min-width: 533px) and (max-width: 879px) {
+@media only screen and (min-width: 532px) and (max-width: 879px) {
   .weather {
     left: 615px;
     top: 180px;
   }
 }
 
-@media only screen and (min-width: 300px) and (max-width: 533px) {
+@media only screen and (min-width: 365px) and (max-width: 532px) {
   .weather {
     left: 615px;
     top: 150px;
+    scale: 0.85;
+  }
+}
+
+@media only screen and (min-width: 260px) and (max-width: 365px) {
+  .weather {
+    left: 625px;
+    top: 120px;
     scale: 0.85;
   }
 }
