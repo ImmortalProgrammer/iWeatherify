@@ -260,7 +260,7 @@ export default {
   width: 126px;
 }
 
-.overlap-group3 {
+.overlap-group4 {
   height: 251px;
   left: 289px;
   position: absolute;
