@@ -78,7 +78,7 @@ export default {
       if (this.weatherData.locationInput === '') {
       } else {
         const locationFormatting = this.weatherData.locationInput.replaceAll(' ', '%20');
-        const weatherAPI = await axios.get(`http://pro.openweathermap.org/data/2.5/weather?q=${locationFormatting}
+        const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/weather?q=${locationFormatting}
         &units=imperial&APPID=c984db1322335af0a97e0dd951e5cb69`);
         const geoLocationStatus = weatherAPI['statusText'];
         const geoLocationData = weatherAPI['data'];
