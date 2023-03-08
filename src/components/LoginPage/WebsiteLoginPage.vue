@@ -30,13 +30,13 @@
         formData.append("username", this.username);
         formData.append("password", this.password);
 
-        axios.post("http://localhost/project_s23-iweatherify/backend/login.php?action=login", formData).then(
+        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/login.php?action=login", formData).then(
           (res) => {
             console.log(res.data)
             if (res.data[0].status == 1) {
-              alert('Login Successfully');
+              this.$router.push("/");
             } else {
-              alert("User does not exist");
+              alert("Invalid username and password combination");
             }
         }).catch((err) => {
           console.log("Unsuccessful axios post", err)
