@@ -385,7 +385,7 @@ main {
     top: 35px;
     scale: 0.65;
   }
-  .frame-732 {
+  .frame-7 {
     scale: 0.60;
     top: 280px;
     left: 580px;
@@ -483,8 +483,14 @@ main {
 }
 
 @media only screen and (min-width: 100px) and (max-width: 532px) and (max-height: 850px) {
+  body {
+    overflow-x: hidden;
+  }
+  .container-center-horizontal {
+    overflow-x: hidden;
+  }
   #app {
-    overflow: auto;
+    overflow-x: hidden;
   }
 }
 </style>
