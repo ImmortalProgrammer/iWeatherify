@@ -346,7 +346,7 @@ main {
     padding: 0;
     position: relative;
     top: 15px;
-    width: 450px;
+    width: 410px;
   }
 }
 
@@ -417,7 +417,7 @@ main {
     padding: 0;
     position: relative;
     top: 15px;
-    width: 450px;
+    width: 410px;
   }
 }
 
@@ -485,7 +485,7 @@ main {
     padding: 0;
     position: relative;
     top: 15px;
-    width: 450px;
+    width: 250px;
   }
 }
 
