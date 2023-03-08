@@ -4,7 +4,10 @@
     <div class="website-home-page-not-logged-in screen">
       <div class="overlap-group3">
         <weather :text1="weatherProps.text1" :h50L40="weatherProps.h50L40" :place="weatherProps.place" />
-        <input-search :inputType="inputSearchProps.inputType" :inputPlaceholder="inputSearchProps.inputPlaceholder" />
+        <div class ="searching-input">
+        <input class="search-bar" type="text" name="searching" placeholder="Search up a city..."
+               v-model="weatherData.city" @keyup.enter="retrieveAPI()">
+        </div>
         <div class="weather-for-today">
           <weather-throughout-the-day
             :now1Props="weatherThroughoutTheDay1Props.now1Props"
@@ -48,14 +51,35 @@
 
 <script>
 import Weather from "./Weather";
-import InputSearch from "./InputSearch";
 import WeatherThroughoutTheDay from "./WeatherThroughoutTheDay";
 import Ellipse64 from "./Ellipse64";
+import axios from "axios";
+
 export default {
   name: "WebsiteHomePageNotLoggedIn",
+  data() {
+    return {
+      weatherData: {
+        city: ''
+      }
+    }
+  },
+  mounted: async function() {
+    await this.retrieveAPI();
+  },
+  methods: {
+    async retrieveAPI() {
+      if (this.weatherData.city === '') {
+        this.weatherData.city = 'New York'
+      }
+      //const retrieveWeatherData = await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q==${this.
+       //   weatherData.city}&appid=c984db1322335af0a97e0dd951e5cb69`)
+      console.log(this.weatherData.city);
+
+    }
+  },
   components: {
     Weather,
-    InputSearch,
     WeatherThroughoutTheDay,
     Ellipse64,
   },
@@ -89,13 +113,35 @@ export default {
 
 }
 
+.searching-input {
+  background-image: url(../../../img/bg.svg);
+  background-size: 100% 100%;
+  height: 50px;
+  left: 305px;
+  position: absolute;
+  top: 57px;
+  width: 838px;
+}
+
+.search-bar {
+  background-color: transparent;
+  border: 0;
+  color: rgba(0, 0, 0);
+  font-weight: 500;
+  height: 19px;
+  left: 16px;
+  line-height: normal;
+  padding: 0;
+  position: relative;
+  top: 15px;
+  width: 800px;
+}
+
 
 main {
   min-height: 100vh;
   padding: 25px;
 }
-
-
 
 .website-home-page-not-logged-in {
   align-items: flex-start;
@@ -190,11 +236,13 @@ main {
     left: 500px;
     top: 630px;
   }
-
   .weather-for-today {
     left: 400px;
     top: 450px;
     scale: 1.35;
+  }
+  .searching-input {
+    top: 120px;
   }
 }
 
@@ -219,13 +267,31 @@ main {
     position: relative;
     visibility: hidden;
   }
-
   .weather-for-today {
     scale: 1.35;
     left: 670px;
     top: 410px;
     display: block;
-
+  }
+  .searching-input {
+    height: 50px;
+    left: 480px;
+    position: absolute;
+    top: 95px;
+    width: 500px;
+  }
+  .search-bar {
+    background-color: transparent;
+    border: 0;
+    color: rgba(0, 0, 0);
+    font-weight: 500;
+    height: 16px;
+    left: 16px;
+    line-height: normal;
+    padding: 0;
+    position: relative;
+    top: 15px;
+    width: 450px;
   }
 }
 
@@ -254,14 +320,32 @@ main {
     position: relative;
     visibility: hidden;
   }
-
   .weather-for-today {
     scale: 0.9;
     left: 575px;
     top: 350px;
     display: block;
-
-
+  }
+  .searching-input {
+    height: 50px;
+    left: 530px;
+    position: absolute;
+    top: 75px;
+    width: 400px;
+    scale: 0.85;
+  }
+  .search-bar {
+    background-color: transparent;
+    border: 0;
+    color: var(--black);
+    font-weight: 500;
+    height: 16px;
+    left: 16px;
+    line-height: normal;
+    padding: 0;
+    position: relative;
+    top: 15px;
+    width: 175px;
   }
 }
 
@@ -286,14 +370,32 @@ main {
     position: relative;
     visibility: hidden;
   }
-
   .weather-for-today {
     scale: 0.9;
     left: 583px;
     top: 320px;
     display: block;
-
-
+  }
+  .searching-input {
+    height: 50px;
+    left: 580px;
+    position: absolute;
+    top: 55px;
+    width: 300px;
+    scale: 0.85;
+  }
+  .search-bar {
+    background-color: transparent;
+    border: 0;
+    color: var(--black);
+    font-weight: 500;
+    height: 16px;
+    left: 16px;
+    line-height: normal;
+    padding: 0;
+    position: relative;
+    top: 15px;
+    width: 250px;
   }
 }
 
