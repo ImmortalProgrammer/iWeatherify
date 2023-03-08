@@ -32,12 +32,11 @@
 
         axios.post("http://localhost/project_s23-iweatherify/backend/login.php?action=login", formData).then(
           (res) => {
-            if(res.error){
-              console.log("Couldnt send post request")
+            console.log(res.data)
+            if (res.data[0].status == 1) {
+              alert('Login Successfully');
             } else {
-              console.log(res)
-              console.log("Sent post request to backend")
-              this.$router.push("/");
+              alert("User does not exist");
             }
         }).catch((err) => {
           console.log("Unsuccessful axios post", err)

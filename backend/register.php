@@ -35,7 +35,7 @@
             //Hash password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT); 
 
-            $query = "INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES ('$user_id','$username','$email', '$password')";
+            $query = "INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES ('$user_id','$username','$email', '$hashed_password')";
             $res = $conn -> query($query);
             echo "Successful insertion";
         } else {

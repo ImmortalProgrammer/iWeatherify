@@ -1,9 +1,10 @@
-<!-- Citation: https://www.youtube.com/watch?v=ai7T1p3Xj8A&t=134s&ab_channel=DigitalFox -->
-
 <?php 
-    // session_start();
-    // include("connection.php");
-    // include("functions.php");
+
+    // Citation: https://www.youtube.com/watch?v=ai7T1p3Xj8A&t=134s&ab_channel=DigitalFox
+
+    session_start();
+    include("connection.php");
+    include("functions.php");
 
     if (isset($_SERVER["HTTP_ORIGIN"])) {
         // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is the one that you want to allow
@@ -29,25 +30,25 @@
 
         if(!empty($username) && !empty($password) && !is_numeric($username)){
             //Read username and password from database
-            $query = "select username, password from users where username = ?"; //TODO - this assumes that everyone has a unique username -> will need to be a future task
+            $query = "SELECT `user_id`, `password` FROM `users` WHERE `username` = ? limit 1"; //TODO - this assumes that everyone has a unique username -> will need to be a future task
             $query = $conn -> prepare($query);
             $query -> bind_param("s", $username);
             $query -> execute();
             $result = $query -> get_result();
             $data = $result -> fetch_assoc();
+            $hash = $data["password"];
 
             if($data == NULL){
                 return "Wrong username or password";
             }
-
-            if(password_verify($password, $data["password"]) == FALSE){
-                return "Wrong username or password";
+            if(password_verify($password, $hash) == FALSE){
+                $res[] = array("status" => 0);
             } else {
-                $_SESSION['user_id'] = $user_data["user_id"];
-                
-                // Redirect to the index page - handled in WebsiteLoginPage.vue
-                exit();
+                $_SESSION['user_id'] = $data["user_id"];
+                $res[] = array("status" => 1);
             }
+            echo json_encode($res);
+            exit;
         }
     }
 ?>
