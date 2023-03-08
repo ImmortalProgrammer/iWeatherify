@@ -7,6 +7,7 @@ import WebsiteTemperatureSettingsPage from "./components/DesktopTemperatureSetti
 import WebsiteHomePageNotLoggedIn from "./components/DesktopHomepageNotLoggedIn/WebsiteHomepageNotLoggedIn";
 import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepage";
 import RegisterPage from "./components/RegistrationPage/RegisterPage";
+import WebsiteLoginPage from "./components/LoginPage/WebsiteLoginPage";
 import {
   mobileUnitsData,
   mobileTemperatureData,
@@ -25,6 +26,10 @@ export default new Router({
       path: "/register",
       component: RegisterPage
     }, 
+    {
+      path: "/login",
+      component: WebsiteLoginPage
+    },
     {
       path: "/mobile-units",
       component: MobileUnits,

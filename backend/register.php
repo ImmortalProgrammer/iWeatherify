@@ -31,7 +31,11 @@
         if(!empty($username) && !empty($password) && !is_numeric($username)){
             //Generate random userid, save username and email 
             $user_id = random_num(20);
-            $query = "INSERT INTO `users` (`user_id`, `username`, `email`) VALUES ('$user_id','$username','$email')";
+
+            //Hash password
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT); 
+
+            $query = "INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES ('$user_id','$username','$email', '$password')";
             $res = $conn -> query($query);
             echo "Successful insertion";
         } else {

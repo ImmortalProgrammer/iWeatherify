@@ -35,14 +35,16 @@
           formData.append("username", this.username);
           formData.append("password", this.password);
 
-          axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/register.php?action=register", formData).then(
+          // "https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/register.php?action=register"
+
+          axios.post("http://localhost/project_s23-iweatherify/backend/register.php?action=register", formData).then(
             (res) => {
               if(res.error){
                 console.log("Couldnt send post request")
               } else {
                 console.log(res)
                 console.log("Sent post request to backend")
-                this.$router.push("/"); //TODO - redirect to the login page
+                this.$router.push("/login");
               }
           }).catch((err) => {
             console.log("Unsuccessful axios post", err)
