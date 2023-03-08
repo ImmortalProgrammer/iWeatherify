@@ -3,8 +3,22 @@
   <div class="container-center-horizontal">
     <div class="website-home-page-not-logged-in screen">
       <div class="overlap-group3">
-        <weather :text1="weatherProps.text1" :h50L40="weatherProps.h50L40" :place="weatherProps.place" />
-        <input-search :inputType="inputSearchProps.inputType" :inputPlaceholder="inputSearchProps.inputPlaceholder" />
+        <div class ="weather-wrapper">
+            <div class ="locationBox">
+              <div class ="location">{{this.weatherData.locationOutput.charAt(0).
+              toUpperCase() + this.weatherData.locationOutput.slice(1)}}</div>
+            </div>
+            <div class = "weather-box">
+              <div class = "CurrentTemp">{{this.weatherData.currentTemp}}°</div>
+              <div class = "HighLowTemp">H: {{this.weatherData.tempHigh}}° L: {{this.weatherData.tempLow}}°</div>
+              <div class = "FeelsLike">Feels like: {{this.weatherData.feelsLike}}° </div>
+            </div>
+        </div>
+
+        <div class ="searching-input">
+        <input class="search-bar" type="text" name="searching" placeholder="Search up a city..."
+               v-model="weatherData.locationInput" @keyup.enter="retrieveAPI()">
+        </div>
         <div class="weather-for-today">
           <weather-throughout-the-day
             :now1Props="weatherThroughoutTheDay1Props.now1Props"
@@ -47,15 +61,59 @@
 </template>
 
 <script>
-import Weather from "./Weather";
-import InputSearch from "./InputSearch";
 import WeatherThroughoutTheDay from "./WeatherThroughoutTheDay";
 import Ellipse64 from "./Ellipse64";
+import axios from "axios";
+
 export default {
   name: "WebsiteHomePageNotLoggedIn",
+  data() {
+    return {
+      weatherData: {
+        locationInput: 'Buffalo',
+        locationOutput: '',
+        currentTemp: '',
+        feelsLike: ' ',
+        tempLow: ' ',
+        tempHigh: ' ',
+      }
+    }
+  },
+  mounted: async function() {
+    await this.retrieveAPI();
+  },
+  methods: {
+    async retrieveAPI() {
+      if (this.weatherData.locationInput === '') {
+      } else {
+        function returnFahrenheit(Kelvin) {
+          return Math.floor(((Kelvin-273.15)*1.8)+32);
+        }
+        const locationFormatting = this.weatherData.locationInput.replaceAll(' ', '%20');
+        const weatherAPI = await axios.get(`https://api.openweathermap.org/data/2.5/weather?
+      units=metric&q=${locationFormatting}&appid=c984db1322335af0a97e0dd951e5cb69`);
+        const geoLocationStatus = weatherAPI['statusText'];
+        const geoLocationData = weatherAPI['data'];
+        if (geoLocationStatus === 'OK') {
+          let nameOfLocation = geoLocationData['name'];
+          let currentTemp = returnFahrenheit(geoLocationData['main']['temp']);
+          let minTemp = returnFahrenheit(geoLocationData['main']['temp_min']);
+          let maxTemp = returnFahrenheit(geoLocationData['main']['temp_max']);
+          let feelslike = returnFahrenheit(geoLocationData['main']['feels_like']);
+          console.log(nameOfLocation + " " + currentTemp + " " + minTemp + " " + maxTemp + " " + feelslike);
+          this.weatherData.locationOutput = this.weatherData.locationInput;
+          this.weatherData.feelsLike = feelslike;
+          this.weatherData.tempLow = minTemp;
+          this.weatherData.tempHigh = maxTemp;
+          this.weatherData.currentTemp = currentTemp;
+        } else {
+          alert("Error Status Request Failed!");
+        }
+        this.weatherData.locationInput = '';
+      }
+      }
+  },
   components: {
-    Weather,
-    InputSearch,
     WeatherThroughoutTheDay,
     Ellipse64,
   },
@@ -80,6 +138,50 @@ export default {
   box-sizing: border-box;
 }
 
+.weather-wrapper {
+  position: relative;
+  left: 420px;
+  top: 220px;
+  width: 600px;
+  overflow: scroll;
+  height: auto;
+  padding: 15px;
+  scale: 1.25;
+
+}
+
+.locationBox {
+  color: #000000;
+  font-size: 32px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.CurrentTemp {
+  color: #000000;
+  font-size: 60px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.HighLowTemp {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.FeelsLike {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+
 #app {
   background-image: url(../../../img/background-img.png);
   background-size: cover;
@@ -89,13 +191,35 @@ export default {
 
 }
 
+.searching-input {
+  background-image: url(../../../img/bg.svg);
+  background-size: 100% 100%;
+  height: 50px;
+  left: 305px;
+  position: absolute;
+  top: 105px;
+  width: 838px;
+}
+
+.search-bar {
+  background-color: transparent;
+  border: 0;
+  color: rgba(0, 0, 0);
+  font-weight: 500;
+  height: 19px;
+  left: 16px;
+  line-height: normal;
+  padding: 0;
+  position: relative;
+  top: 15px;
+  width: 800px;
+}
+
 
 main {
   min-height: 100vh;
   padding: 25px;
 }
-
-
 
 .website-home-page-not-logged-in {
   align-items: flex-start;
@@ -111,22 +235,23 @@ main {
   align-items: flex-start;
   display: flex;
   height: 104px;
-  left: 353px;
+  left: 380px;
   position: absolute;
-  top: 630px;
+  top: 850px;
   width: 693px;
   scale: 1.35;
+  visibility: hidden;
 }
 
 .flex-row-4 {
   align-items: center;
   display: flex;
-  gap: 38px;
+  gap: 720px;
   height: 50px;
-  left: 1181px;
+  left: 315px;
   min-width: 129px;
   position: absolute;
-  top: 58px;
+  top: 35px;
 }
 
 .vector-4 {
@@ -138,19 +263,21 @@ main {
 
 .home-logo-2 {
   height: 51px;
-  left: 80px;
+  left: 640px;
   object-fit: cover;
   position: absolute;
-  top: 57px;
+  top: 35px;
   width: 192px;
 }
 
 
 .frame-7 {
   height: 312px;
-  left: 540px;
+  left: 475px;
   position: absolute;
-  top: 250px;
+  top: 470px;
+  scale: 1.1;
+
 }
 
 
@@ -177,24 +304,9 @@ main {
 }
 
 @media only screen and (min-width: 880px) and (max-width: 1300px) {
-  .home-logo-2 {
-    left: 610px;
-    top: 35px;
-  }
-  .flex-row-4 {
-    gap: 720px;
-    left: 315px;
-    top: 35px;
-  }
-  .frame-7 {
-    left: 500px;
-    top: 630px;
-  }
-
   .weather-for-today {
-    left: 400px;
-    top: 450px;
-    scale: 1.35;
+    scale: 1.15;
+    left: 390px;
   }
 }
 
@@ -202,30 +314,40 @@ main {
   #app {
     overflow: hidden;
   }
+
   .home-logo-2 {
-    position: relative;
-    left: 630px;
-    top: 15px;
+    scale: 0.75;
   }
   .flex-row-4 {
-    gap: 380px;
-    left: 490px;
-    top: 15px;
+    left: 415px;
+    gap: 530px;
+    scale: 0.75;
   }
-  .frame-7 {
-    left: 475px;
-    top: 780px;
-    scale: 1.1;
-    position: relative;
-    visibility: hidden;
-  }
-
   .weather-for-today {
-    scale: 1.35;
-    left: 670px;
-    top: 410px;
+    top: 470px;
     display: block;
+    left: 690px;
 
+  }
+  .searching-input {
+    height: 50px;
+    left: 480px;
+    position: absolute;
+    top: 95px;
+    width: 500px;
+  }
+  .search-bar {
+    background-color: transparent;
+    border: 0;
+    color: rgba(0, 0, 0);
+    font-weight: 500;
+    height: 16px;
+    left: 16px;
+    line-height: normal;
+    padding: 0;
+    position: relative;
+    top: 15px;
+    width: 450px;
   }
 }
 
@@ -239,29 +361,62 @@ main {
   #app {
     overflow: hidden;
   }
+  .weather-wrapper {
+    scale: 1.10;
+    top: 130px;
+  }
   .home-logo-2 {
-    visibility: hidden;
+      height: 51px;
+      left: 640px;
+      object-fit: cover;
+      position: absolute;
+      top: 35px;
+      width: 192px;
+      scale: 0.65;
   }
   .flex-row-4 {
-    gap: 215px;
+    align-items: center;
+    display: flex;
+    gap: 395px;
+    height: 50px;
+    left: 485px;
+    min-width: 129px;
+    position: absolute;
+    top: 35px;
+    scale: 0.65;
+  }
+  .frame-732 {
+    scale: 0.60;
+    top: 280px;
     left: 580px;
-    top: 15px;
   }
-  .frame-7 {
-    left: 475px;
-    top: 780px;
-    scale: 1.1;
-    position: relative;
-    visibility: hidden;
-  }
-
   .weather-for-today {
-    scale: 0.9;
-    left: 575px;
-    top: 350px;
+    top: 340px;
+    left: 635px;
+    scale: 1.10;
     display: block;
 
-
+  }
+  .searching-input {
+    height: 50px;
+    left: 530px;
+    position: absolute;
+    top: 75px;
+    width: 400px;
+    scale: 0.85;
+  }
+  .search-bar {
+    background-color: transparent;
+    border: 0;
+    color: var(--black);
+    font-weight: 500;
+    height: 16px;
+    left: 16px;
+    line-height: normal;
+    padding: 0;
+    position: relative;
+    top: 15px;
+    width: 175px;
   }
 }
 
@@ -269,31 +424,61 @@ main {
   #app {
     overflow: hidden;
   }
+  .weather-wrapper {
+    top: 130px;
+    left: 430px;
+    scale: 0.85;
+  }
   .home-logo-2 {
-    visibility: hidden;
-
+    height: 51px;
+    left: 640px;
+    object-fit: cover;
+    position: absolute;
+    top: 35px;
+    width: 192px;
+    scale: 0.5;
   }
   .flex-row-4 {
-    scale: 0.75;
-    gap: 230px;
-    left: 565px;
-    top: 5px;
+    align-items: center;
+    display: flex;
+    gap: 365px;
+    height: 50px;
+    left: 510px;
+    min-width: 129px;
+    position: absolute;
+    top: 35px;
+    scale: 0.5;
   }
   .frame-7 {
-    left: 475px;
-    top: 780px;
-    scale: 1.1;
-    position: relative;
-    visibility: hidden;
+    scale: 0.5;
+    top: 245px;
+    left: 620px;
   }
-
   .weather-for-today {
-    scale: 0.9;
-    left: 583px;
-    top: 320px;
+    top: 340px;
+    left: 670px;
     display: block;
-
-
+  }
+  .searching-input {
+    height: 50px;
+    left: 590px;
+    position: absolute;
+    top: 75px;
+    width: 300px;
+    scale: 0.8;
+  }
+  .search-bar {
+    background-color: transparent;
+    border: 0;
+    color: var(--black);
+    font-weight: 500;
+    height: 16px;
+    left: 16px;
+    line-height: normal;
+    padding: 0;
+    position: relative;
+    top: 15px;
+    width: 245px;
   }
 }
 

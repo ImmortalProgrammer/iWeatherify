@@ -136,6 +136,7 @@ export const websiteHomePageNotLoggedInData = {
     weatherThroughoutTheDay1Props: weatherThroughoutTheDay1Data,
     weatherThroughoutTheDay2Props: weatherThroughoutTheDay2Data,
     weatherThroughoutTheDay3Props: weatherThroughoutTheDay3Data,
+    city: '',
 };
 
 export const websiteHomePageLoggedInData = {
