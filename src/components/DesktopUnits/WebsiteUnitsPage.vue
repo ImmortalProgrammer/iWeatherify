@@ -232,12 +232,16 @@ export default {
 }
 
 @media screen and (max-width: 375px) {
+  .logo-container {
+    transform: scale(0.7); 
+  }
+
   .menu-bar-container {
-    left: 55%;
+    left: 60%;
   }
 
   .profile-img-container {
-    left: 55%;
+    left: 60%;
   }
 
   .row {
