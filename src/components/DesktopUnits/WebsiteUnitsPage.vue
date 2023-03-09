@@ -1,178 +1,247 @@
 <template>
-  <div class="container-center-horizontal">
-    <div class="website-units-page screen">
-      <div>
-        <img class="default-logo-4" :src="defaultLogo4" alt="Default Logo 4" />
-        <img class="profile-img" :src="ellipse6Props.src" />
-        <img
-          class="vector-2"
-          src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
-          alt="Vector"
-        />
+  <div class="website-units-page screen">
+    <div class="nav-bar-container">
+      <div class="logo-container">
+        <img src="../../../img/Logo.png" alt="Default Logo 4" />
       </div>
-      <div class="unit-container">
-        <h1 class="title">{{ title }}</h1>
-        <div class="row-format-container">
-          <!-- <table-row :className="tableRow1Props.className" />
-          <table-row2 :className="tableRow2Props.className" />
-          <table-row3 :className="tableRow3Props.className" />
-          <table-row4 :className="tableRow4Props.className" /> -->
-          <div class="row">
-            <p class="temp-font">Temperature</p>
-            <p class="unit-font">°F ❯</p>
-          </div>
-          <div class="row">
-            <p class="wind-font">Wind</p>
-            <p class="unit-font">Mph ❯</p>
-          </div>
-          <div class="row">
-            <p class="pressure-font">Pressure</p>
-            <p class="unit-font">In ❯</p>
-          </div>
-          <div class="row">
-            <p class="distance-font">Distance</p>
-            <p class="unit-font">Mi ❯</p>
-          </div>
-        </div>
+      <div class="profile-img-container">
+        <img src="../../../img/Profile image.png" />
+      </div>
+      <div class="menu-bar-container"> 
+        <img src="../../../img/Vector.png" alt="Vector"/>
+      </div>
+    </div>
+    <div class="title-container">
+      <h1 class="unit-title">{{ title }}</h1>
+    </div>
+    <div class="row-format-container">
+      <div class="row">
+        <p class="unit-font">Temperature</p>
+        <select class="temp-container" id="dropdown-container-font"> 
+          <option selected>°F</option>
+          <option value="c">°C</option>
+        </select>
+      </div>
+      <div class="row">
+        <p class="unit-font">Wind</p>
+        <select class="wind-container" id="dropdown-container-font"> 
+          <option selected>mph</option>
+          <option value="kmh">km/h</option>
+        </select>
+      </div>
+      <div class="row">
+        <p class="unit-font">Pressure</p>
+        <select class="pressure-container" id="dropdown-container-font"> 
+          <option selected>in</option>
+          <option value="mm">mm</option>
+        </select>
+      </div>
+      <div class="row">
+        <p class="unit-font">Distance</p>
+        <select class="distance-container" id="dropdown-container-font"> 
+          <option selected>mi</option>
+          <option value="km">km</option>
+        </select>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Ellipse6 from "./Ellipse6";
-import TableRow from "./TableRow";
-import TableRow2 from "./TableRow2";
-import TableRow3 from "./TableRow3";
-import TableRow4 from "./TableRow4";
 export default {
   name: "WebsiteUnitsPage",
+  data() {
+    
+  },
   components: {
-    Ellipse6,
-    TableRow,
-    TableRow2,
-    TableRow3,
-    TableRow4,
   },
   props: [
     "defaultLogo4",
     "title",
     "ellipse6Props",
-    "tableRow1Props",
-    "tableRow2Props",
-    "tableRow3Props",
-    "tableRow4Props",
-  ],
+  ]
 };
 </script>
 
 <style>
 .website-units-page {
-  position: relative;
+  position: absolute;
   width: 100%; 
-  height: 100vh;
+  height: 100%;
   background: #FFFFFF;
 }
 
-.default-logo-4 {
-  position: absolute;
-  max-width: 100%;
-  width: 10vw;
-  height: auto;
-  left: 5.8333vw;
-  top: 3vh;
-  object-fit: cover;
+.nav-bar-container {
+  position: relative;
+  display: inline-flex;
+  align-items: safe center;
+  margin-top: 2%;
+  width: 100%;
+}
+  
+.logo-container {
+  position: relative;
+  width: 5%;
+  left: 5%;
 }
 
-.vector-2 {
-  position: absolute;
-  width: 4vw;
-  height: auto;
-  left: 93vw;
-  top: 3vh;
-  object-fit: cover;
+.title-container {
+  position: relative;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10%;
 }
 
-.profile-img {
-  position: absolute;
-  width: 6vw;
-  height: auto;
-  left: 87vw; 
-  top: 3vh;
-  object-fit: cover;
-}
-
-.title {
-  position: absolute;
+.unit-title {
   color: var(--black);
-  left: 6vw;
-  width: 25vw;
-  height: 3em;
-  line-height: 2.5vw;
-  text-align: center;
   font-weight: 600;
-  font-size: 2vw;
+  font-size: 3em;
   font-family: 'Inter';
   font-style: normal;
 }
 
 .unit-container {
-  position: absolute;
-  left: 35vw;
-  top: 10vh;
-  height: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  top: 10%;
 }
 
 .row-format-container {
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 40vw;
-  top: 15vh;
-  height: 30vh;
+  align-items: center;
+  top: 30%;
+  width: 100%;
+  height: 300px;
 }
 
-.temp-font {
-  font-size: 1vw;
+.temp-container {
+  position: relative;
+  width: fit-content;
+  border: none;
+}
+
+.wind-container {
+  position: relative;
+  width: fit-content;
+  border: none;
+}
+
+.pressure-container {
+  position: relative;
+  width: fit-content;
+  border: none;
+}
+
+.distance-container {
+  position: relative;
+  width: fit-content;
+  border: none;
+}
+
+#dropdown-container-font {
+  font-size: 1.5em;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-}
-
-.unit-font {
-  font-size: 1vw;
-  color: rgb(186, 185, 185);
-  justify-content: baseline;
+  opacity: 0.5;
 }
 
 .row {
-  border-bottom: 0.1vw solid black;
-  width: 40vw;
+  border-bottom: 1px solid #C6C6C8;
+  width: 30%;
   display: flex;
   flex-direction: row;
   align-items: left;
   justify-content: space-between;
 }
 
-.wind-font {
-  font-size: 1vw;
+.unit-font {
+  font-size: 1.5em;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
 }
 
-.pressure-font {
-  font-size: 1vw;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
+.menu-bar-container {
+  position: relative;
+  left: 85%;
 }
 
-.distance-font{
-  font-size: 1vw;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
+.profile-img-container {
+  position: relative;
+  top: 5px;
+  left: 85%;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1440px) {
+  .menu-bar-container {
+    position: relative;
+    left: 80%;
+  }
+
+  .profile-img-container {
+    position: relative;
+    top: 5px;
+    left: 80%;
+  }
+
+  .row {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 992px) {
+  .row-format-container {
+    height: 200px;
+  }
+
+  .menu-bar-container {
+    left: 70%;
+  }
+
+  .profile-img-container {
+    left: 70%;
+  }
+
+  .row {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 576px) {
+  .menu-bar-container {
+    left: 65%;
+  }
+
+  .profile-img-container {
+    left: 65%;
+  }
+
+  .row {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .menu-bar-container {
+    left: 55%;
+  }
+
+  .profile-img-container {
+    left: 55%;
+  }
+
+  .row {
+    width: 90%;
+  }
 }
 </style>

@@ -41,11 +41,7 @@ export default new Router({
         defaultLogo4:
           "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/default-logo-4@2x.png",
         title: "Units",
-        ellipse6Props: websiteUnitsPageData.ellipse6Props,
-        tableRow1Props: websiteUnitsPageData.tableRow1Props,
-        tableRow2Props: websiteUnitsPageData.tableRow2Props,
-        tableRow3Props: websiteUnitsPageData.tableRow3Props,
-        tableRow4Props: websiteUnitsPageData.tableRow4Props,
+        ellipse6Props: websiteUnitsPageData.ellipse6Props
       },
     },
     {

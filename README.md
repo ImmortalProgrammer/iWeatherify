@@ -62,6 +62,9 @@
 ### To install node version 12.22.12 on your repository:
 * npm install node@12.22.12
 
+### To install axios version 1.3.4 on your repository:
+* npm install axios@1.3.4
+
 ## Localhost
 
 ```

@@ -56,7 +56,7 @@ export default {
     "text1", 
     "hotWarmJustRight", 
     "ellipse6Props"
-  ],
+  ]
 };
 </script>
 
