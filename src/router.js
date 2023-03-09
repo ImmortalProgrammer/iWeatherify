@@ -10,6 +10,8 @@ import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepag
 import WebsiteMyItemsPage from "./components/DesktopMyItems/WebsiteMyItemsPage";
 import WebsiteLocationSettings from "./components/DesktopLocationSettings/WebsiteLocationSettings";
 
+import RegisterPage from "./components/RegistrationPage/RegisterPage";
+import WebsiteLoginPage from "./components/LoginPage/WebsiteLoginPage";
 import {
   mobileUnitsData,
   mobileTemperatureData,
@@ -27,6 +29,14 @@ Vue.use(Router);
 export default new Router({
   mode: "hash",
   routes: [
+    {
+      path: "/register",
+      component: RegisterPage
+    }, 
+    {
+      path: "/login",
+      component: WebsiteLoginPage
+    },
     {
       path: "/homepage-logged-in",
       component: WebsiteHomePageLoggedIn,
