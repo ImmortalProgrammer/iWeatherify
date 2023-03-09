@@ -33,10 +33,15 @@
         axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/login.php?action=login", formData).then(
           (res) => {
             console.log(res.data)
-            if (res.data[0].status == 1) {
-              this.$router.push("/");
-            } else {
-              alert("Invalid username and password combination");
+            try {
+              if(res.data[0].status == 1){
+                document.cookie = "username=" + this.username;
+                this.$router.push("/");
+              } else {
+                alert("Invalid username and password combo");
+              }
+            } catch {
+              alert("Please provide some valid information");
             }
         }).catch((err) => {
           console.log("Unsuccessful axios post", err)
