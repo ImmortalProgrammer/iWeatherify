@@ -30,6 +30,8 @@
                 $res[] = array("status" => 0);
             } else {
                 $_SESSION['user_id'] = $data["user_id"];
+                $_SESSION["username"] = $data["username"];
+                setcookie("username_server", $data["username"], time()+3600, "/");  /* expire in 1 hour */
                 $res[] = array("status" => 1);
             }
             echo json_encode($res);
