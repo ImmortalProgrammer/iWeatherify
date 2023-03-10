@@ -19,7 +19,7 @@
 * App.vue is the root of the program, think of it as a main method, but for vue
 
 
-* data.js holds all the javascript functionality and one needs to integrate with the components in .vue with the proper identifiers 
+* data.js holds javascript functionality that connects components together
 
 
 * main.js gets the app running
@@ -59,6 +59,9 @@
 
 ### To install node version 12.22.12 for your repository:
 * npm install node@12.22.12
+
+### To install axios 
+* npm install axios@1.3.4
 
 ## Localhost
 
