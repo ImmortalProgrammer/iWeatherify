@@ -1,73 +1,129 @@
 <template>
-  <div id="app2">
+  <div id="app">
   <div class="container-center-horizontal">
-    <div class="website-home-page-not-logged-in screen">
-      <div class="overlap-group3">
-        <div class ="weather-wrapper">
-            <div class ="locationBox">
-              <div class ="location">{{this.weatherData.locationOutput.charAt(0).
-              toUpperCase() + this.weatherData.locationOutput.slice(1)}}</div>
-            </div>
-            <div class = "weather-box">
-              <div class = "CurrentTemp">{{this.weatherData.currentTemp}}°</div>
-              <div class = "HighLowTemp">H: {{this.weatherData.tempHigh}}° L: {{this.weatherData.tempLow}}°</div>
-              <div class = "FeelsLike2">Feels like: {{this.weatherData.feelsLike}}° </div>
-            </div>
-        </div>
-
         <div class ="searching-bar">
         <input class="search-input" type="text" name="searching" placeholder="Search up a City..."
-               v-model="weatherData.locationInput" @keyup.enter="retrieveAPI()">
+               v-model="currentWeatherData.locationInput" @keyup.enter="retrieveAPI()">
         </div>
-        <div class="weather-for-today">
-          <weather-throughout-the-day
-            :now1Props="weatherThroughoutTheDay1Props.now1Props"
-            :now2Props="weatherThroughoutTheDay1Props.now2Props"
-            :now3Props="weatherThroughoutTheDay1Props.now3Props"
-          />
-          <weather-throughout-the-day
-            :now1Props="weatherThroughoutTheDay2Props.now1Props"
-            :now2Props="weatherThroughoutTheDay2Props.now2Props"
-            :now3Props="weatherThroughoutTheDay2Props.now3Props"
-          />
-          <weather-throughout-the-day
-            :now1Props="weatherThroughoutTheDay3Props.now1Props"
-            :now2Props="weatherThroughoutTheDay3Props.now2Props"
-            :now3Props="weatherThroughoutTheDay3Props.now3Props"
-          />
+        <div class="daily-weather">
+            <div class = "current-unit">
+              <p class ="city-display">{{this.currentWeatherData.locationOutput.charAt(0).toUpperCase() + this.currentWeatherData.locationOutput.slice(1)
+                }}</p>
+              <p class = "current-day">{{ this.currentWeatherData.currentDay }}</p>
+              <p class = "weatherDescription">{{ this.currentWeatherData.iconDescription}}</p>
+              <div class = "currentWeatherIcon">
+                <img :src = "this.currentWeatherData.iconUrl">
+              </div>
+              <p class = "HighLowTemp_2">{{this.currentWeatherData.tempLow}}°
+                / {{this.currentWeatherData.tempHigh}}°</p>
+              <p class = "feelslike_1">Feels Like: {{this.currentWeatherData.feelsLike}}°</p>
+            </div>
+          </div>
+        <div class="weekly-weather">
+          <p style="font-size: 5vh; padding-bottom: 3vh;">Seven Day Forecast: </p>
+          <div class = "day-next">
+            <p class = "next">{{ this.sevenDayForecastData.dates[0] }}</p>
+            <p class = "weatherState">{{ this.sevenDayForecastData.iconDescription[0] }}</p>
+            <div class = "sevenDayForecastImg">
+              <img :src = "this.sevenDayForecastData.iconUrlArr[0]">
+            </div>
+            <p class = "HighLowTemp_1">{{this.sevenDayForecastData.highTempArr[0]}}°
+              / {{this.sevenDayForecastData.lowTempArr[0]}}°</p>
+            <p class = "feelslike">Feels Like: {{this.sevenDayForecastData.feelsLikeArr[0]}}°</p>
+           </div>
+          <div class = "day-next">
+            <p class = "next">{{ this.sevenDayForecastData.dates[1] }}</p>
+            <p class = "weatherState">{{ this.sevenDayForecastData.iconDescription[1] }}</p>
+            <div class = "sevenDayForecastImg">
+              <img :src = "this.sevenDayForecastData.iconUrlArr[1]">
+            </div>
+            <p class = "HighLowTemp_1">{{this.sevenDayForecastData.highTempArr[1]}}°
+              / {{this.sevenDayForecastData.lowTempArr[1]}}°</p>
+            <p class = "feelslike">Feels Like: {{this.sevenDayForecastData.feelsLikeArr[1]}}°</p>
+          </div>
+          <div class = "day-next">
+            <p class = "next">{{ this.sevenDayForecastData.dates[2] }}</p>
+            <p class = "weatherState">{{ this.sevenDayForecastData.iconDescription[2] }}</p>
+            <div class = "sevenDayForecastImg">
+              <img :src = "this.sevenDayForecastData.iconUrlArr[2]">
+            </div>
+            <p class = "HighLowTemp_1">{{this.sevenDayForecastData.highTempArr[2]}}°
+              / {{this.sevenDayForecastData.lowTempArr[2]}}°</p>
+            <p class = "feelslike">Feels Like: {{this.sevenDayForecastData.feelsLikeArr[2]}}°</p>
+          </div>
+          <div class = "day-next">
+            <p class = "next">{{ this.sevenDayForecastData.dates[3] }}</p>
+            <p class = "weatherState">{{ this.sevenDayForecastData.iconDescription[3] }}</p>
+            <div class = "sevenDayForecastImg">
+              <img :src = "this.sevenDayForecastData.iconUrlArr[3]">
+            </div>
+            <p class = "HighLowTemp_1">{{this.sevenDayForecastData.highTempArr[3]}}°
+              / {{this.sevenDayForecastData.lowTempArr[3]}}°</p>
+            <p class = "feelslike">Feels Like: {{this.sevenDayForecastData.feelsLikeArr[3]}}°</p>
+          </div>
+          <div class = "day-next">
+            <p class = "next">{{ this.sevenDayForecastData.dates[4] }}</p>
+            <p class = "weatherState">{{ this.sevenDayForecastData.iconDescription[4] }}</p>
+            <div class = "sevenDayForecastImg">
+              <img :src = "this.sevenDayForecastData.iconUrlArr[4]">
+            </div>
+            <p class = "HighLowTemp_1">{{this.sevenDayForecastData.highTempArr[4]}}°
+              / {{this.sevenDayForecastData.lowTempArr[4]}}°</p>
+            <p class = "feelslike">Feels Like: {{this.sevenDayForecastData.feelsLikeArr[4]}}°</p>
+          </div>
+          <div class = "day-next">
+            <p class = "next">{{ this.sevenDayForecastData.dates[5] }}</p>
+            <p class = "weatherState">{{ this.sevenDayForecastData.iconDescription[5] }}</p>
+            <div class = "sevenDayForecastImg">
+              <img :src = "this.sevenDayForecastData.iconUrlArr[5]">
+            </div>
+            <p class = "HighLowTemp_1">{{this.sevenDayForecastData.highTempArr[5]}}°
+              / {{this.sevenDayForecastData.lowTempArr[5]}}°</p>
+            <p class = "feelslike">Feels Like: {{this.sevenDayForecastData.feelsLikeArr[5]}}°</p>
+          </div>
+          <div class = "day-next">
+            <p class = "next">{{ this.sevenDayForecastData.dates[6]}}</p>
+            <p class = "weatherState">{{ this.sevenDayForecastData.iconDescription[6] }}</p>
+            <div class = "sevenDayForecastImg">
+              <img :src = "this.sevenDayForecastData.iconUrlArr[6]">
+            </div>
+            <p class = "HighLowTemp_1">{{this.sevenDayForecastData.highTempArr[6]}}°
+              / {{this.sevenDayForecastData.lowTempArr[6]}}°</p>
+            <p class = "feelslike">Feels Like: {{this.sevenDayForecastData.feelsLikeArr[6]}}°</p>
+          </div>
+
         </div>
         <img class="home-logo-2" :src="homeLogo2" alt="Home Logo 2" />
-        <div class="frame-732">
-          <p class ="myOutfit">My Outfit:</p>
-          <img
-              class="vector-532"
-              src="../../../img/vectorNon.svg"
-              alt="My Outfit"
-          />
-          <h1 class="login-to-view-a-pers">{{ loginToViewAPers }}</h1>
-        </div>
       </div>
-    </div>
-  </div>
   </div>
 </template>
 
 <script>
-import WeatherThroughoutTheDay from "./WeatherThroughoutTheDay";
-import Ellipse64 from "./Ellipse64";
 import axios from "axios";
 
 export default {
   name: "WebsiteHomePageLoggedIn",
   data() {
     return {
-      weatherData: {
+      currentWeatherData: {
         locationInput: 'Buffalo',
+        currentDay: ' ',
         locationOutput: '',
         currentTemp: '',
         feelsLike: ' ',
         tempLow: ' ',
         tempHigh: ' ',
+        iconUrl: ' ',
+        iconDescription: ' ',
+      },
+      sevenDayForecastData: {
+        //Index 0 starts one day after the current weather)
+        dates: ['', '', '', '', '', '', ''],
+        iconDescription: ['', '', '', '', '', '', ''],
+        highTempArr: ['', '', '', '', '', '', ''],
+        lowTempArr: [' ', ' ', ' ', ' ', ' ', ' ', ' '],
+        feelsLikeArr: ['', '', '', '', '', '', ''],
+        iconUrlArr: ['', '', '', '', '', '', ''],
       }
     }
   },
@@ -76,34 +132,145 @@ export default {
   },
   methods: {
     async retrieveAPI() {
-      if (this.weatherData.locationInput === '') {
-      } else {
-        const locationFormatting = this.weatherData.locationInput.replaceAll(' ', '%20');
-        const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/weather?q=${locationFormatting}
-        &units=imperial&APPID=c984db1322335af0a97e0dd951e5cb69`);
-        const geoLocationStatus = weatherAPI['statusText'];
-        const geoLocationData = weatherAPI['data'];
-        if (geoLocationStatus === 'OK') {
-          const nameOfLocation = geoLocationData['name'];
-          const currentTemp = Math.round(geoLocationData['main']['temp']);
-          const minTemp = Math.round(geoLocationData['main']['temp_min']);
-          const maxTemp = Math.round(geoLocationData['main']['temp_max']);
-          const feelslike = Math.round(geoLocationData['main']['feels_like']);
-          this.weatherData.locationOutput = nameOfLocation;
-          this.weatherData.feelsLike = feelslike;
-          this.weatherData.tempLow = minTemp;
-          this.weatherData.tempHigh = maxTemp;
-          this.weatherData.currentTemp = currentTemp;
+      try {
+        if (this.currentWeatherData.locationInput === '') {
         } else {
-          alert("Error Status Request Failed!");
+          //Setup the dates data structure
+          this.setupDays();
+          //Sets up the current weather as of now
+          await this.currentWeather();
+          //Seven-Day Forecast
+          await this.sevenDayForecast();
+
+          console.log(this.sevenDayForecastData.iconUrlArr[0]);
+          this.currentWeatherData.locationInput = '';
+
         }
-        this.weatherData.locationInput = '';
+      } catch (Exception) {
+        alert("City unrecognized!")
       }
+    },
+    async currentWeather() {
+      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/weather?q=${locationFormatting}
+        &units=imperial&APPID=c984db1322335af0a97e0dd951e5cb69`).catch(function (error) {
+        console.log(error.toJSON());
+      });
+      const geoLocationStatus = weatherAPI['statusText'];
+      const geoLocationData = weatherAPI['data'];
+      //Get current Weather
+      if (geoLocationStatus === 'OK') {
+        const nameOfLocation = geoLocationData['name'];
+        const currentTemp = Math.round(geoLocationData['main']['temp']);
+        const minTemp = Math.round(geoLocationData['main']['temp_min']);
+        const maxTemp = Math.round(geoLocationData['main']['temp_max']);
+        const feelslike = Math.round(geoLocationData['main']['feels_like']);
+        this.currentWeatherData.locationOutput = nameOfLocation;
+        this.currentWeatherData.feelsLike = feelslike;
+        this.currentWeatherData.tempLow = minTemp;
+        this.currentWeatherData.tempHigh = maxTemp;
+        this.currentWeatherData.currentTemp = currentTemp;
+        const iconCode = geoLocationData['weather']['0']['icon'];
+        const iconUrl = 'https://openweathermap.org/img/wn/'
+            + iconCode + ".png";
+        this.currentWeatherData.iconUrl = iconUrl;
+        this.currentWeatherData.iconDescription = geoLocationData['weather']['0']['description'].split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+      } else {
+        alert("Error Status Request Failed!");
       }
+    },
+    async sevenDayForecast() {
+      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/daily?q=${locationFormatting}
+        &units=imperial&cnt=8&APPID=c984db1322335af0a97e0dd951e5cb69`).catch(function (error) {
+        console.log(error.toJSON());
+      });
+      const data = weatherAPI['data']['list'];
+      let x = 0;
+      for (let i in data) {
+        if (x !== 0) {
+          let currentData = data[i.toString()];
+          let feelsLikeData = currentData['feels_like']
+          this.sevenDayForecastData.iconDescription[i-1] = currentData['weather']['0']['description'].split(' ')
+              .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+              .join(' ');
+          //Low Temp
+          this.sevenDayForecastData.lowTempArr[i-1] = Math.round(currentData['temp']['min']).toString();
+          // High Temp
+          this.sevenDayForecastData.highTempArr[i-1] = Math.round(currentData['temp']['max']).toString();
+          //Feels Like
+          this.sevenDayForecastData.feelsLikeArr[i-1] = Math.round(
+              (feelsLikeData['day'] + feelsLikeData['night'] + feelsLikeData['eve'] + feelsLikeData['morn']) / 4);
+
+          const iconCode = currentData['weather']['0']['icon'];
+          const iconUrl = 'https://openweathermap.org/img/wn/'
+              + iconCode + ".png";
+          this.sevenDayForecastData.iconUrlArr[i-1] = iconUrl;
+        }
+        x++;
+      }
+    },
+    setupDays() {
+      const currentDate = new Date();
+      let currentDay = currentDate.getDay();
+      //too lazy to change up the code, so this was a quick solution (in the future refactor into another method)
+      switch (currentDay) {
+        case 0:
+          this.currentWeatherData.currentDay = 'Sunday';
+          break;
+        case 1:
+          this.currentWeatherData.currentDay = 'Monday';
+          break;
+        case 2:
+          this.currentWeatherData.currentDay = 'Tuesday';
+          break;
+        case 3:
+          this.currentWeatherData.currentDay = 'Wednesday';
+          break;
+        case 4:
+          this.currentWeatherData.currentDay = 'Thursday';
+          break;
+        case 5:
+          this.currentWeatherData.currentDay = 'Friday';
+          break;
+        case 6:
+          this.currentWeatherData.currentDay= 'Saturday';
+          break;
+      }
+      for (let i in this.sevenDayForecastData.dates) {
+        currentDay++;
+        if (currentDay === 7) {
+          currentDay = 0;
+        }
+        switch (currentDay) {
+          case 0:
+            this.sevenDayForecastData.dates[i] = 'Sunday';
+            break;
+          case 1:
+            this.sevenDayForecastData.dates[i] = 'Monday';
+            break;
+          case 2:
+            this.sevenDayForecastData.dates[i] = 'Tuesday';
+            break;
+          case 3:
+            this.sevenDayForecastData.dates[i] = 'Wednesday';
+            break;
+          case 4:
+            this.sevenDayForecastData.dates[i] = 'Thursday';
+            break;
+          case 5:
+            this.sevenDayForecastData.dates[i] = 'Friday';
+            break;
+          case 6:
+            this.sevenDayForecastData.dates[i] = 'Saturday';
+            break;
+        }
+      }
+    },
   },
   components: {
-    WeatherThroughoutTheDay,
-    Ellipse64,
   },
   props: [
     "overlapGroup3",
@@ -128,82 +295,149 @@ export default {
 
 
 
-#app2 {
+#app {
   background-image: url(../../../img/background-img.png);
   background-size: cover;
   background-position: bottom;
-  overflow-x: auto;
+  overflow-x: hidden;
   background-attachment: scroll;
 
 }
 
-.weather-wrapper {
-  position: relative;
-  left: 1000px;
-  top: 370px;
-  width: 1000px;
-  overflow: hidden;
+.weekly-weather {
+  border: none;
+  position: absolute;
   height: auto;
-  padding: 15px;
-  scale: 1.25;
-}
-
-
-.locationBox {
-  color: #000000;
-  font-size: 32px;
+  margin-bottom: -10vh;
+  left: 33%;
+  top: 52vh;
+  bottom: 0;
+  border-top: 0;
+  transform: translate(-50%, 0);
+  width: 100vw;
+  padding: 2.5vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
   font-weight: 500;
   text-align: center;
-  margin-bottom: 10px;
+  background-color: rgba(102, 102, 102, 0.83);
+  overflow-y: scroll;
+  overflow-x: hidden;
+
 }
 
-.CurrentTemp {
-  color: #000000;
-  font-size: 60px;
+
+.day-next {
+  padding: 1.8vw;
+  display: inline-block;
+}
+
+
+.next {
+  font-size: 4vh;
+  padding-bottom: 1.5vh;
+}
+
+.weatherState {
+  font-size: 2.3vh;
+  padding-bottom: 1.5vh;
+}
+
+
+.HighLowTemp_1 {
+  font-size: 2.5vh;
+  padding-bottom: 1.5vh;
+}
+
+.feelslike {
+  font-size: 2.5vh;
+  padding-bottom: 1.5vh;
+}
+
+.sevenDayForecastImg {
+  padding-top: 0.5vh;
+  padding-bottom: 1vh;
+  scale: 2;
+  height: auto;
+}
+
+.current-unit {
+  position: absolute;
+  border: none;
+  height: 45vh;
+  left: 45%;
+  top: 16vh;
+  bottom: 0;
+  transform: translate(-50%, 0);
+  width: 40vw;
+  scale: 0.8;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
   font-weight: 500;
   text-align: center;
-  margin-bottom: 10px;
+  background-color: rgba(102, 102, 102, 0.83);
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
-.HighLowTemp {
-  color: #000000;
-  font-size: 20px;
-  font-weight: 500;
-  text-align: center;
-  margin-bottom: 5px;
+.city-display {
+  padding-top: 2vh;
+  padding-bottom: 0.5vh;
+  font-size: 6vh;
+  border-bottom: 1vh solid #000
+}
+.current-day {
+  padding-top: 1.5vh;
+  font-size: 5vh;
 }
 
-.FeelsLike2 {
-  color: #000000;
-  font-size: 20px;
-  font-weight: 500;
-  text-align: center;
+.weatherDescription {
+  padding-top: 1.5vh;
+  padding-bottom: 1.5vh;
+  font-size: 3vh;
 }
 
+.HighLowTemp_2 {
+  padding-bottom: 1.5vh;
+  font-size: 3vh;
+}
+
+.currentWeatherIcon {
+  padding-top: 0.3vh;
+  padding-bottom: 0.8vh;
+  scale: 200%;
+}
+
+.feelslike_1 {
+  font-size: 3vh;
+}
 
 
 .searching-bar {
-  background-image: url(../../../img/bg.svg);
+  background-color: rgb(255, 255, 255);
   background-size: 100% 100%;
-  height: 50px;
-  left: 1100px;
+  height: 5vh;
   position: absolute;
-  top: 260px;
-  width: 838px;
+  top: 11vh;
+  width: 50vw;
+  border-radius: 5vh;
 }
 
 .search-input {
   background-color: transparent;
+  opacity: 1;
   border: 0;
+  font-size: 1.5vw;
+  text-align: center;
   color: rgba(0, 0, 0);
   font-weight: 500;
-  height: 19px;
-  left: 16px;
+  height: 4vh;
   line-height: normal;
   padding: 0;
-  position: relative;
-  top: 15px;
-  width: 800px;
+  position: absolute;
+  top: 0.6vh;
+  width: 93%;
 }
 
 
@@ -212,298 +446,512 @@ main {
   padding: 25px;
 }
 
-.website-home-page-not-logged-in {
+.container-center-horizontal {
   align-items: flex-start;
   display: flex;
-  top: -150px;
   margin-right: 2050px;
   min-height: 100vh;
   position: relative;
 }
 
 
-.weather-for-today {
-  align-items: flex-start;
-  display: flex;
-  height: 104px;
-  left: 380px;
-  position: absolute;
-  top: 850px;
-  width: 693px;
-  scale: 1.35;
-  visibility: hidden;
-}
-
-
 .home-logo-2 {
   position: absolute;
-  top: 180px;
-  height: 51px;
-  left: 1400px;
-  width: 192px;
-}
-
-
-.frame-732 {
-  height: 250px;
-  width: 500px;
-  left: 1250px;
-  position: absolute;
-  top: 700px;
-  scale: 1.4;
-
-}
-
-.myOutfit {
-  text-align: center;
-  font-size: 40px;
-}
-
-.vector-532 {
-  height: 292px;
-  left: 30px;
-  position: absolute;
-  top: -10px;
-  width: 431px;
-}
-
-.login-to-view-a-pers {
-  color: #000000bf;
-  font-family: var(--font-family-inter);
-  font-size: var(--font-size-xxxxl);
-  font-weight: 400;
-  left: 20px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  text-align: center;
-  top: 66px;
-  width: 420px;
-}
-
-@media only screen and (min-width: 880px) and (max-width: 1300px) {
-  .weather-for-today {
-    scale: 1.15;
-    left: 390px;
-  }
+  height: 4.5vh;
+  top: 3vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: auto;
+  scale: 1.3;
 }
 
 @media only screen and (min-width: 533px) and (max-width: 879px) {
-  #app2 {
-    overflow: hidden;
-  }
-  .container-center-horizontal {
-    padding-left: 50px;
-  }
 
-  .home-logo-2 {
+  .weekly-weather {
+    border: none;
     position: absolute;
-    height: 51px;
-    top: 165px;
-    left: 1400px;
-    width: 192px;
-    scale: 0.85;
-  }
-
-  .weather-wrapper {
-    top: 280px;
-  }
-  .frame-732 {
-    height: 250px;
-    width: 500px;
-    left: 1250px;
-    position: absolute;
-    top: 530px;
-    scale: 1.1;
-  }
-
-  .myOutfit {
-    text-align: center;
-    font-size: 40px;
-  }
-  .weather-for-today {
-    top: 470px;
-    display: block;
-    left: 690px;
-  }
-  .searching-bar {
-    background-image: url(../../../img/bg.svg);
-    background-size: 100% 100%;
-    height: 50px;
-    left: 1280px;
-    position: absolute;
-    top: 215px;
-    width: 450px;
-  }
-  .search-input {
-    background-color: transparent;
-    border: 0;
-    color: rgba(0, 0, 0);
-    font-weight: 500;
-    height: 16px;
-    left: 16px;
-    line-height: normal;
-    padding: 0;
-    position: relative;
-    top: 15px;
-    width: 410px;
-  }
-}
-
-@media only screen and (min-width: 532px) and (max-width: 879px) and (max-height: 850px) {
-  #app2 {
-    overflow: auto;
-  }
-}
-
-@media only screen and (min-width: 365px) and (max-width: 532px) {
-  #app2 {
-    overflow: hidden;
-  }
-
-  .container-center-horizontal {
-    padding-left: 50px;
-  }
-
-  .home-logo-2 {
-    position: absolute;
-    height: 51px;
-    top: 165px;
-    left: 1400px;
-    width: 192px;
-    scale: 0.75;
-  }
-
-
-  .weather-wrapper {
-    top: 280px;
-  }
-  .frame-732 {
-    height: 250px;
-    width: 500px;
-    left: 1250px;
-    position: absolute;
-    top: 490px;
-    scale: 0.8;
-  }
-
-  .myOutfit {
-    text-align: center;
-    font-size: 40px;
-  }
-  .weather-for-today {
-    top: 470px;
-    display: block;
-    left: 690px;
-  }
-  .searching-bar {
-    background-image: url(../../../img/bg.svg);
-    background-size: 100% 100%;
-    height: 50px;
-    left: 1280px;
-    position: absolute;
-    top: 210px;
-    scale: 0.65;
-    width: 450px;
-  }
-  .search-input {
-    background-color: transparent;
-    border: 0;
-    color: rgba(0, 0, 0);
-    font-weight: 500;
-    height: 16px;
-    left: 16px;
-    line-height: normal;
-    padding: 0;
-    position: relative;
-    top: 15px;
-    width: 410px;
-  }
-}
-
-@media only screen and (min-width: 260px) and (max-width: 365px) {
-  #app2 {
-    overflow: hidden;
-  }
-
-  .home-logo-2 {
-    position: absolute;
-    height: 51px;
-    top: 165px;
-    left: 1425px;
-    width: 192px;
-    scale: 0.65;
-  }
-
-  .weather-wrapper {
-    position: relative;
-    left: 1015px;
-    top: 250px;
-    width: 1000px;
-    overflow: hidden;
     height: auto;
-    padding: 15px;
-    scale: 0.9;
-  }
-  .frame-732 {
-    height: 250px;
-    width: 500px;
-    left: 1260px;
-    position: absolute;
-    top: 400px;
-    scale: 0.6;
+    margin-bottom: -10vh;
+    left: 30%;
+    top: 48vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 130vw;
+    padding: 2vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
+
   }
 
-  .myOutfit {
+  .day-next {
+    padding: 1.8vw;
+    display: inline-block;
+  }
+
+
+  .next {
+    font-size: 3.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .weatherState {
+    font-size: 2.3vh;
+    padding-bottom: 1.5vh;
+  }
+
+
+  .HighLowTemp_1 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .feelslike {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .sevenDayForecastImg {
+    padding-top: 0.5vh;
+    padding-bottom: 1vh;
+    scale: 2;
+    height: auto;
+  }
+
+  .current-unit {
+    position: absolute;
+    border: none;
+    height: 50vh;
+    left: 35%;
+    top: 12vh;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 80vw;
+    scale: 0.6;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-weight: 500;
     text-align: center;
-    font-size: 40px;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
-  .weather-for-today {
-    top: 470px;
-    display: block;
-    left: 690px;
+
+  .city-display {
+    padding-top: 2vh;
+    padding-bottom: 0.5vh;
+    font-size: 6vh;
+    border-bottom: 1vh solid #000
   }
+  .current-day {
+    padding-top: 1.5vh;
+    font-size: 5vh;
+  }
+
+  .weatherDescription {
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    font-size: 3vh;
+  }
+
+  .HighLowTemp_2 {
+    padding-bottom: 1.5vh;
+    font-size: 3vh;
+  }
+
+  .currentWeatherIcon {
+    padding-top: 0.3vh;
+    padding-bottom: 0.8vh;
+    scale: 200%;
+  }
+
+  .feelslike_1 {
+    font-size: 3vh;
+  }
+
 
   .searching-bar {
-    background-image: url(../../../img/bg.svg);
+    background-color: rgb(255, 255, 255);
     background-size: 100% 100%;
-    height: 50px;
-    left: 1320px;
+    height: 5vh;
     position: absolute;
-    top: 205px;
-    scale: 0.60;
-    width: 400px;
+    top: 11vh;
+    width: 50vw;
+    border-radius: 5vh;
   }
+
   .search-input {
     background-color: transparent;
+    opacity: 1;
     border: 0;
+    font-size: 2.5vw;
+    text-align: center;
     color: rgba(0, 0, 0);
     font-weight: 500;
-    height: 16px;
-    left: 16px;
+    height: 4vh;
     line-height: normal;
     padding: 0;
+    position: absolute;
+    top: 0.6vh;
+    width: 93%;
+  }
+
+
+  main {
+    min-height: 100vh;
+    padding: 25px;
+  }
+
+  .container-center-horizontal {
+    align-items: flex-start;
+    display: flex;
+    margin-right: 2050px;
+    min-height: 100vh;
     position: relative;
-    top: 15px;
-    width: 250px;
+  }
+
+
+  .home-logo-2 {
+    position: absolute;
+    height: 4.5vh;
+    top: 3vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: auto;
+    scale: 1.3;
+  }
+
+}
+
+@media only screen and (min-width: 359px) and (max-width: 532px) {
+
+  .weekly-weather {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 28vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+  }
+
+  .day-next {
+    padding: 1.8vw;
+    display: inline-block;
+  }
+
+
+  .next {
+    font-size: 3.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .weatherState {
+    font-size: 2.3vh;
+    padding-bottom: 1.5vh;
+  }
+
+
+  .HighLowTemp_1 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .feelslike {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .sevenDayForecastImg {
+    padding-top: 0.5vh;
+    padding-bottom: 1vh;
+    scale: 2;
+    height: auto;
+  }
+
+  .current-unit {
+    position: absolute;
+    border: none;
+    height: 45vh;
+    left: 30%;
+    top: 11vh;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 80vw;
+    scale: 0.6;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .city-display {
+    padding-top: 2vh;
+    padding-bottom: 0.5vh;
+    font-size: 6vh;
+    border-bottom: 1vh solid #000
+  }
+  .current-day {
+    padding-top: 1.5vh;
+    font-size: 5vh;
+  }
+
+  .weatherDescription {
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    font-size: 3vh;
+  }
+
+  .HighLowTemp_2 {
+    padding-bottom: 1.5vh;
+    font-size: 3vh;
+  }
+
+  .currentWeatherIcon {
+    padding-top: 0.3vh;
+    padding-bottom: 0.8vh;
+    scale: 200%;
+  }
+
+  .feelslike_1 {
+    font-size: 3vh;
+  }
+
+
+  .searching-bar {
+    background-color: rgb(255, 255, 255);
+    background-size: 100% 100%;
+    height: 5vh;
+    position: absolute;
+    top: 11vh;
+    width: 80vw;
+    border-radius: 5vh;
+  }
+
+  .search-input {
+    background-color: transparent;
+    opacity: 1;
+    border: 0;
+    font-size: 3.5vw;
+    text-align: center;
+    color: rgba(0, 0, 0);
+    font-weight: 500;
+    height: 4vh;
+    line-height: normal;
+    padding: 0;
+    position: absolute;
+    top: 0.6vh;
+    width: 93%;
+  }
+
+
+  main {
+    min-height: 100vh;
+    padding: 25px;
+  }
+
+  .container-center-horizontal {
+    align-items: flex-start;
+    display: flex;
+    margin-right: 2050px;
+    min-height: 100vh;
+    position: relative;
+  }
+
+
+  .home-logo-2 {
+    position: absolute;
+    height: 4.5vh;
+    top: 3vh;
+    left: 54%;
+    transform: translate(-50%, 0);
+    width: auto;
+    scale: 1.3;
   }
 }
 
-@media only screen and (min-width: 100px) and (max-width: 532px) and (max-height: 850px) {
-  body {
+@media only screen and (max-width: 358px) {
+  .weekly-weather {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 13%;
+    top: 30vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 130vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+  }
+
+  .day-next {
+    padding: 1.8vw;
+    display: inline-block;
+  }
+
+
+  .next {
+    font-size: 3.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .weatherState {
+    font-size: 2.3vh;
+    padding-bottom: 1.5vh;
+  }
+
+
+  .HighLowTemp_1 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .feelslike {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .sevenDayForecastImg {
+    padding-top: 0.5vh;
+    padding-bottom: 1vh;
+    scale: 1.3;
+    height: auto;
+  }
+
+  .current-unit {
+    position: absolute;
+    border: none;
+    height: 45vh;
+    left: 30%;
+    top: 11vh;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 80vw;
+    scale: 0.6;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: hidden;
     overflow-x: hidden;
   }
+
+  .city-display {
+    padding-top: 2vh;
+    padding-bottom: 0.5vh;
+    font-size: 6vh;
+    border-bottom: 1vh solid #000
+  }
+  .current-day {
+    padding-top: 1.5vh;
+    font-size: 5vh;
+  }
+
+  .weatherDescription {
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    font-size: 3vh;
+  }
+
+  .HighLowTemp_2 {
+    padding-bottom: 1.5vh;
+    font-size: 3vh;
+  }
+
+  .currentWeatherIcon {
+    padding-top: 0.3vh;
+    padding-bottom: 0.8vh;
+    scale: 130%;
+  }
+
+  .feelslike_1 {
+    font-size: 3vh;
+  }
+
+
+  .searching-bar {
+    background-color: rgb(255, 255, 255);
+    background-size: 100% 100%;
+    height: 5vh;
+    position: absolute;
+    top: 11vh;
+    width: 80vw;
+    border-radius: 5vh;
+  }
+
+  .search-input {
+    background-color: transparent;
+    opacity: 1;
+    border: 0;
+    font-size: 3.3vw;
+    text-align: center;
+    color: rgba(0, 0, 0);
+    font-weight: 500;
+    height: 4vh;
+    line-height: normal;
+    padding: 0;
+    position: absolute;
+    top: 0.6vh;
+    width: 93%;
+  }
+
+
+  main {
+    min-height: 100vh;
+    padding: 25px;
+  }
+
   .container-center-horizontal {
-    overflow-x: hidden;
+    align-items: flex-start;
+    display: flex;
+    margin-right: 2050px;
+    min-height: 100vh;
+    position: relative;
   }
-  #app2 {
-    overflow-x: hidden;
+
+
+  .home-logo-2 {
+    position: absolute;
+    height: 4.5vh;
+    top: 3vh;
+    left: 54%;
+    transform: translate(-50%, 0);
+    width: auto;
+    scale: 1.3;
   }
 }
 
-@media only screen and (min-width: 2000px) and (max-width: 3000px) {
-  .container-center-horizontal {
-    padding-top: 15px;
-  }
-}
 </style>
