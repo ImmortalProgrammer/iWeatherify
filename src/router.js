@@ -9,7 +9,6 @@ import WebsiteHomePageLoggedIn from "./components/DesktopHomepageLoggedIn/Websit
 import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepage";
 import WebsiteMyItemsPage from "./components/DesktopMyItems/WebsiteMyItemsPage";
 import WebsiteLocationSettings from "./components/DesktopLocationSettings/WebsiteLocationSettings";
-
 import RegisterPage from "./components/RegistrationPage/RegisterPage";
 import WebsiteLoginPage from "./components/LoginPage/WebsiteLoginPage";
 import {
