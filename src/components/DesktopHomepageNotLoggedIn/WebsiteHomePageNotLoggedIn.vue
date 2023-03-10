@@ -14,8 +14,8 @@
               <div class = "currentWeatherIcon">
                 <img :src = "this.currentWeatherData.iconUrl">
               </div>
-              <p class = "HighLowTemp_2">{{this.currentWeatherData.tempLow}}°
-                / {{this.currentWeatherData.tempHigh}}°</p>
+              <p class = "HighLowTemp_2">{{this.currentWeatherData.tempHigh}}°
+                / {{this.currentWeatherData.tempLow}}°</p>
               <p class = "feelslike_1">Feels Like: {{this.currentWeatherData.feelsLike}}°</p>
             </div>
           </div>
