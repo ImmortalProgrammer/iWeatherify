@@ -1,131 +1,294 @@
 <template>
-  <div class="container-center-horizontal">
-    <div class="website-temperature-settings-page screen">
-      <img class="default-logo-3" :src="defaultLogo3" alt="Default Logo 3" />
-      <div class="flex-col">
-        <h1 class="title-3 ui---30-semi">{{ title }}</h1>
-        <div class="flex-row-3">
-          <div class="overlap-group-3">
-            <img
-              class="background"
-              src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/background-1.svg"
-              alt="Background"
-            />
-            <div class="text-2 ui---30-semi" v-html="text1"></div>
-          </div>
-          <div class="hot-warm-just-right-1 ui---30-regular" v-html="hotWarmJustRight"></div>
+  <div class="website-temperature-settings-page screen">
+    <div class="nav-bar-container">
+      <div class="logo-container">
+        <img src="../../../img/Logo.png" alt="Default Logo 4" />
+      </div>
+      <div class="profile-img-container">
+        <img src="../../../img/Profile image.png" />
+      </div>
+      <div class="menu-bar-container"> 
+        <img src="../../../img/Vector.png" alt="Vector"/>
+      </div>
+    </div>
+
+    <div class="title-container">
+      <h1 class="temp-setting-title">{{ title }}</h1>
+    </div>
+
+    <div class="temp-bar-container">
+      <div class="entire-temp-scale">
+        <div class="green-scale"></div>
+        <div class="temp-rows">
+          <div class="temperatures-font">100</div>
+        </div>
+        <div class="temp-rows">
+          <div class="temperatures-font">75</div>
+        </div>
+        <div class="temp-rows">
+          <div class="temperatures-font">50</div>
+        </div>
+        <div class="temp-rows">
+          <div class="temperatures-font">25</div>
+        </div>
+        <div class="temp-rows">
+          <div class="temperatures-font">0</div>
         </div>
       </div>
-      <ellipse6 :src="ellipse6Props.src" :className="ellipse6Props.className" />
-      <img
-        class="vector-3"
-        src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
-        alt="Vector"
-      />
+
+      <div class="hot-to-freezing-container">
+        <div class="temp-rows">
+          <div class="hot-to-freezing-font">Hot</div>
+        </div>
+        <div div class="temp-rows">
+          <div class="hot-to-freezing-font">Warm</div>
+        </div>
+        <div div class="temp-rows">
+          <div class="hot-to-freezing-font">Just Right</div>
+        </div>
+        <div div class="temp-rows">
+          <div class="hot-to-freezing-font">Chilly</div>
+        </div>
+        <div div class="temp-rows">
+          <div class="hot-to-freezing-font">Cold</div>
+        </div>
+        <div div class="temp-rows">
+          <div class="hot-to-freezing-font">Freezing</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Ellipse6 from "./Ellipse6";
 export default {
   name: "WebsiteTemperatureSettingsPage",
   components: {
-    Ellipse6,
   },
-  props: ["defaultLogo3", "title", "text1", "hotWarmJustRight", "ellipse6Props"],
+  props: [
+    "defaultLogo3", 
+    "title", 
+    "text1", 
+    "hotWarmJustRight", 
+    "ellipse6Props"
+  ]
 };
 </script>
 
 <style>
+
 .website-temperature-settings-page {
-  align-items: flex-start;
-  background-color: var(--white);
-  border: 1px none;
-  display: flex;
-  height: 1024px;
-  padding: 19px 61px;
+  position: absolute;
+  width: 100%; 
+  height: 100%;
+  background: #FFFFFF;
+}
+
+.nav-bar-container {
   position: relative;
-  width: 1440px;
+  display: inline-flex;
+  align-items: safe center;
+  margin-top: 2%;
+  width: 100%;
+}
+  
+.logo-container {
+  position: relative;
+  width: 5%;
+  left: 5%;
 }
 
-.default-logo-3 {
-  height: 71px;
-  margin-left: 76px;
-  margin-top: 18px;
-  object-fit: cover;
-  width: 212px;
+.menu-bar-container {
+  position: relative;
+  left: 85%;
 }
 
-.flex-col {
+.profile-img-container {
+  position: relative;
+  top: 5px;
+  left: 85%;
+}
+
+.title-container {
+  position: relative;
+  margin: auto;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 10%;
+}
+
+.temp-setting-title {
+  color: var(--black);
+  font-weight: 600;
+  font-size: 3em;
+  font-family: 'Inter';
+  font-style: normal;
+}
+
+.temp-bar-container {
+  position: fixed;
+  display: flex;
+  justify-content: safe center;
+  align-items: center;
+  width: 100%;
+  height: 60%;
+  margin: auto;
+}
+
+.entire-temp-scale {
+  position: relative;
+  background-image: url("../../../img/GrayBar.png");
+  background-size: 100% 100%;
+  width: 75px;
+  height: 100%;
+  display: flex;
+  margin-right: 100px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.green-scale {
+  position: absolute;
+  background-image: url("../../../img/GreenBar.png");
+  background-size: 100% 100%;
+  width: 100%;
+  height: 55%;
+  top: 45%;
+}
+
+.temp-rows {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10%;
+}
+
+.temperatures-font {
+  color: var(--black);
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2.5em;
+}
+
+.hot-to-freezing-container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-left: 25px;
-  margin-top: 74px;
-  min-height: 912px;
-  width: 706px;
-}
-
-.title-3 {
-  color: var(--black);
-  font-weight: 600;
-  line-height: normal;
-  min-height: 41px;
+  justify-content: space-between;
+  line-height: 100px;
   text-align: center;
-  width: 706px;
+  height: 100%;
 }
 
-.flex-row-3 {
-  align-items: center;
-  display: flex;
-  gap: 16px;
-  margin-right: 14px;
-  min-width: 470px;
-}
-
-.overlap-group-3 {
-  background-image: url(https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/background.svg);
-  background-size: 100% 100%;
-  height: 855px;
-  position: relative;
-  width: 86px;
-}
-
-.background {
-  height: 498px;
-  left: 0;
-  position: absolute;
-  top: 357px;
-  width: 86px;
-}
-
-.text-2 {
+.hot-to-freezing-font {
   color: var(--black);
-  font-weight: 600;
-  left: 3px;
-  line-height: normal;
-  position: absolute;
-  text-align: center;
-  top: 20px;
-  width: 83px;
-}
-
-.hot-warm-just-right-1 {
-  color: var(--black);
+  font-family: 'Inter';
+  font-style: normal;
   font-weight: 400;
-  line-height: normal;
-  margin-bottom: 2px;
-  min-height: 823px;
-  text-align: center;
-  width: 368px;
+  font-size: 1.5em;
 }
 
-.vector-3 {
-  height: 41px;
-  margin-left: 25px;
-  margin-top: 34px;
-  width: 41px;
+@media screen and (min-width: 992px) and (max-width: 1440px) {
+  .title-container{
+    transform: scale(0.7);
+  }
+
+  .menu-bar-container {
+    left: 80%;
+  }
+
+  .profile-img-container {
+    left: 80%;
+  }
+
+  .entire-temp-scale {
+    margin-right: 25px;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 992px) {
+  .title-container{
+    transform: scale(0.6);
+  }
+
+  .temperatures-font {
+    font-size: 1.75em;
+  }
+
+  .menu-bar-container {
+    left: 70%;
+  }
+
+  .profile-img-container {
+    left: 70%;
+  }
+
+  .entire-temp-scale {
+    margin-right: 25px;
+  } 
+}
+
+@media screen and (min-width: 375px) and (max-width: 576px) {
+  .logo-container {
+    transform: scale(0.7); 
+  }
+
+  .title-container{
+    transform: scale(0.6);
+  }
+
+  .temp-setting-title {
+    font-size: 2em;
+  }
+
+  .temperatures-font {
+    font-size: 1.5em;
+  }
+
+  .menu-bar-container {
+    left: 60%;
+  }
+
+  .profile-img-container {
+    left: 60%;
+  }
+
+  .entire-temp-scale {
+    margin-right: 25px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .title-container{
+    transform: scale(0.5);
+  }
+
+  .temp-setting-title {
+    font-size: 2em;
+  }
+
+  .temperatures-font {
+    font-size: 1.5em;
+  }
+
+  .logo-container {
+    transform: scale(0.7); 
+  }
+
+  .menu-bar-container {
+    left: 55%;
+  }
+
+  .profile-img-container {
+    left: 55%;
+  }
+
+  .entire-temp-scale {
+    margin-right: 25px;
+  }
 }
 </style>

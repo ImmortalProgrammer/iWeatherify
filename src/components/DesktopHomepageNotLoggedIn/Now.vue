@@ -176,5 +176,4 @@ export default {
   margin-right: unset;
   min-width: 41px;
 }
-
 </style>
