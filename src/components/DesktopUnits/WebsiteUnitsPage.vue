@@ -103,15 +103,6 @@ export default {
   font-style: normal;
 }
 
-.unit-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  top: 10%;
-}
-
 .row-format-container {
   position: fixed;
   display: flex;
@@ -218,6 +209,10 @@ export default {
 }
 
 @media screen and (min-width: 375px) and (max-width: 576px) {
+  .logo-container {
+    transform: scale(0.7); 
+  }
+
   .menu-bar-container {
     left: 65%;
   }
