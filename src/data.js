@@ -128,25 +128,11 @@ export const weatherThroughoutTheDay3Data = {
 };
 
 export const websiteHomePageNotLoggedInData = {
-    overlapGroup3: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/background-img.png",
     homeLogo2: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64060646a335b1bb4361fbe1/img/home-frame-logo-1@2x.png",
-    loginToViewAPers: "Login to view a personalized outfit of the day!",
-    weatherProps: weatherData,
-    inputSearchProps: inputSearchData,
-    weatherThroughoutTheDay1Props: weatherThroughoutTheDay1Data,
-    weatherThroughoutTheDay2Props: weatherThroughoutTheDay2Data,
-    weatherThroughoutTheDay3Props: weatherThroughoutTheDay3Data,
-    city: '',
 };
 
 export const websiteHomePageLoggedInData = {
-    overlapGroup3: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/background-img.png",
     homeLogo2: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64060646a335b1bb4361fbe1/img/home-frame-logo-1@2x.png",
-    weatherProps: weatherData,
-    inputSearchProps: inputSearchData,
-    weatherThroughoutTheDay1Props: weatherThroughoutTheDay1Data,
-    weatherThroughoutTheDay2Props: weatherThroughoutTheDay2Data,
-    weatherThroughoutTheDay3Props: weatherThroughoutTheDay3Data,
 };
 
 export const iosStatusBarBlack3Data = {
