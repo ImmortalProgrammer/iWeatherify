@@ -1,90 +1,246 @@
 <template>
-  <div class="container-center-horizontal">
-    <div class="website-units-page screen">
-      <div class="flex-row-2">
-        <img class="default-logo-4" :src="defaultLogo4" alt="Default Logo 4" /><ellipse6 :src="ellipse6Props.src" />
-        <img
-          class="vector-2"
-          src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
-          alt="Vector"
-        />
+  <div class="website-units-page screen">
+    <div class="nav-bar-container">
+      <div class="logo-container">
+        <img src="../../../img/Logo.png" alt="Default Logo 4" />
       </div>
-      <h1 class="title-2 inter-bold-black-30px">{{ title }}</h1>
-      <table-row :className="tableRow1Props.className" />
-      <table-row2 :className="tableRow2Props.className" />
-      <table-row3 :className="tableRow3Props.className" />
-      <table-row4 :className="tableRow4Props.className" />
+      <div class="profile-img-container">
+        <img src="../../../img/Profile image.png" />
+      </div>
+      <div class="menu-bar-container"> 
+        <img src="../../../img/Vector.png" alt="Vector"/>
+      </div>
+    </div>
+    <div class="title-container">
+      <h1 class="unit-title">{{ title }}</h1>
+    </div>
+    <div class="row-format-container">
+      <div class="row">
+        <p class="unit-font">Temperature</p>
+        <select class="temp-container" id="dropdown-container-font"> 
+          <option selected>°F</option>
+          <option value="c">°C</option>
+        </select>
+      </div>
+      <div class="row">
+        <p class="unit-font">Wind</p>
+        <select class="wind-container" id="dropdown-container-font"> 
+          <option selected>mph</option>
+          <option value="kmh">km/h</option>
+        </select>
+      </div>
+      <div class="row">
+        <p class="unit-font">Pressure</p>
+        <select class="pressure-container" id="dropdown-container-font"> 
+          <option selected>in</option>
+          <option value="mm">mm</option>
+        </select>
+      </div>
+      <div class="row">
+        <p class="unit-font">Distance</p>
+        <select class="distance-container" id="dropdown-container-font"> 
+          <option selected>mi</option>
+          <option value="km">km</option>
+        </select>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Ellipse6 from "./Ellipse6";
-import TableRow from "./TableRow";
-import TableRow2 from "./TableRow2";
-import TableRow3 from "./TableRow3";
-import TableRow4 from "./TableRow4";
 export default {
   name: "WebsiteUnitsPage",
+  data() {
+    
+  },
   components: {
-    Ellipse6,
-    TableRow,
-    TableRow2,
-    TableRow3,
-    TableRow4,
   },
   props: [
     "defaultLogo4",
     "title",
     "ellipse6Props",
-    "tableRow1Props",
-    "tableRow2Props",
-    "tableRow3Props",
-    "tableRow4Props",
-  ],
+  ]
 };
 </script>
 
 <style>
 .website-units-page {
+  position: absolute;
+  width: 100%; 
+  height: 100%;
+  background: #FFFFFF;
+}
+
+.nav-bar-container {
+  position: relative;
+  display: inline-flex;
+  align-items: safe center;
+  margin-top: 2%;
+  width: 100%;
+}
+  
+.logo-container {
+  position: relative;
+  width: 5%;
+  left: 5%;
+}
+
+.title-container {
+  position: relative;
+  margin: auto;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: var(--white);
-  border: 1px none;
+  width: 100%;
+  height: 10%;
+}
+
+.unit-title {
+  color: var(--black);
+  font-weight: 600;
+  font-size: 3em;
+  font-family: 'Inter';
+  font-style: normal;
+}
+
+.row-format-container {
+  position: fixed;
   display: flex;
   flex-direction: column;
-  height: 1024px;
-  padding: 38px 61px;
-  position: relative;
-  width: 1440px;
-}
-
-.flex-row-2 {
+  justify-content: space-between;
   align-items: center;
-  align-self: flex-end;
-  display: flex;
-  min-width: 1303px;
+  top: 30%;
+  width: 100%;
+  height: 300px;
+}
+
+.temp-container {
   position: relative;
+  width: fit-content;
+  border: none;
 }
 
-.default-logo-4 {
-  height: 71px;
-  object-fit: cover;
-  width: 212px;
+.wind-container {
+  position: relative;
+  width: fit-content;
+  border: none;
 }
 
-.vector-2 {
-  height: 41px;
-  margin-left: 30px;
-  width: 41px;
+.pressure-container {
+  position: relative;
+  width: fit-content;
+  border: none;
 }
 
-.title-2 {
-  letter-spacing: 0;
-  line-height: normal;
-  margin-left: 3px;
-  margin-top: 67px;
-  min-height: 104px;
-  text-align: center;
-  width: 657px;
+.distance-container {
+  position: relative;
+  width: fit-content;
+  border: none;
+}
+
+#dropdown-container-font {
+  font-size: 1.5em;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+.row {
+  border-bottom: 1px solid #C6C6C8;
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: space-between;
+}
+
+.unit-font {
+  font-size: 1.5em;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.menu-bar-container {
+  position: relative;
+  left: 85%;
+}
+
+.profile-img-container {
+  position: relative;
+  top: 5px;
+  left: 85%;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1440px) {
+  .menu-bar-container {
+    position: relative;
+    left: 80%;
+  }
+
+  .profile-img-container {
+    position: relative;
+    top: 5px;
+    left: 80%;
+  }
+
+  .row {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 992px) {
+  .row-format-container {
+    height: 200px;
+  }
+
+  .menu-bar-container {
+    left: 70%;
+  }
+
+  .profile-img-container {
+    left: 70%;
+  }
+
+  .row {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 576px) {
+  .logo-container {
+    transform: scale(0.7); 
+  }
+
+  .menu-bar-container {
+    left: 65%;
+  }
+
+  .profile-img-container {
+    left: 65%;
+  }
+
+  .row {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .logo-container {
+    transform: scale(0.7); 
+  }
+
+  .menu-bar-container {
+    left: 60%;
+  }
+
+  .profile-img-container {
+    left: 60%;
+  }
+
+  .row {
+    width: 90%;
+  }
 }
 </style>

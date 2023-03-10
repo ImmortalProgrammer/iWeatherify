@@ -63,30 +63,25 @@ export default new Router({
       props: {
         title: "Temperature",
         setYourPreference: "Set your preference for each temperature range",
-        text1: "100<br /><br /><br />75<br /><br /><br />50<br /><br /><br />25<br /><br /><br />0",
-        /* hotWarmJustRight:
-          "Hot<br /><br /><br />Warm<br /><br /><br />Just right<br /><br /><br />Chilly<br /><br />Cold<br /><br />Freezing", */
         iosStatusBarBlackProps: mobileTemperatureData.iosStatusBarBlackProps,
       },
     },
-    /* {
+    {
       path: "/website-units-page",
       component: WebsiteUnitsPage,
       props: {
         defaultLogo4:
           "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/default-logo-4@2x.png",
         title: "Units",
-        ellipse6Props: websiteUnitsPageData.ellipse6Props,
-        tableRow1Props: websiteUnitsPageData.tableRow1Props,
-        tableRow2Props: websiteUnitsPageData.tableRow2Props,
-        tableRow3Props: websiteUnitsPageData.tableRow3Props,
-        tableRow4Props: websiteUnitsPageData.tableRow4Props,
+        ellipse6Props: websiteUnitsPageData.ellipse6Props
       },
-    }, */
+    },
     {
       path: "/website-temperature-settings-page",
       component: WebsiteTemperatureSettingsPage,
       props: {
+        defaultLogo3:
+          "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/default-logo-3@2x.png",
         title: "Temperature Settings",
         ellipse6Props: websiteTemperatureSettingsPageData.ellipse6Props,
       },
