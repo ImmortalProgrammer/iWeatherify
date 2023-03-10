@@ -135,18 +135,13 @@ export const weatherThroughoutTheDay3Data = {
 
 export const websiteHomePageNotLoggedInData = {
     overlapGroup3: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/background-img.png",
-<<<<<<< HEAD
     homeLogo2: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64060646a335b1bb4361fbe1/img/home-frame-logo-1@2x.png",
-=======
-    homeLogo2: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/home-logo-2@2x.png",
->>>>>>> Temperature_Setting_Page
     loginToViewAPers: "Login to view a personalized outfit of the day!",
     weatherProps: weatherData,
     inputSearchProps: inputSearchData,
     weatherThroughoutTheDay1Props: weatherThroughoutTheDay1Data,
     weatherThroughoutTheDay2Props: weatherThroughoutTheDay2Data,
     weatherThroughoutTheDay3Props: weatherThroughoutTheDay3Data,
-<<<<<<< HEAD
     city: '',
 };
 
@@ -158,8 +153,6 @@ export const websiteHomePageLoggedInData = {
     weatherThroughoutTheDay1Props: weatherThroughoutTheDay1Data,
     weatherThroughoutTheDay2Props: weatherThroughoutTheDay2Data,
     weatherThroughoutTheDay3Props: weatherThroughoutTheDay3Data,
-=======
->>>>>>> Temperature_Setting_Page
 };
 
 export const iosStatusBarBlack3Data = {
@@ -191,7 +184,6 @@ export const mobileHomepageData = {
     outfitOfTheDayProps: outfitOfTheDayData,
 };
 
-<<<<<<< HEAD
 export const ellipse6Data = {
     src: "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/ellipse-6-1@2x.png",
 };
@@ -263,5 +255,3 @@ export const websiteLocationSettingsData = {
 
 
 
-=======
->>>>>>> Temperature_Setting_Page
