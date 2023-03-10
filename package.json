@@ -1,0 +1,23 @@
+{
+  "name": "iweatherify",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "vue": "^2.7.14",
+    "vue-router": "^3.5.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "description": "This package was generated automatically with [Anima App](https://www.animaapp.com). ## Instructions ``` cd package_code npm install npm start ``` Open [http://localhost:8080](http://localhost:8080).",
+  "main": "babel.config.js",
+  "author": "",
+  "license": "ISC"
+}
