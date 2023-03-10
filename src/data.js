@@ -57,12 +57,6 @@ export const websiteTemperatureSettingsPageData = {
 };
 
 export const weatherData = {
-<<<<<<< HEAD
-=======
-    text1: "45°",
-    h50L40: "H: 50 L:40<br />Feels like: 40",
-    place: "New York",
->>>>>>> Temperature_Setting_Page
 };
 
 export const inputSearchData = {
