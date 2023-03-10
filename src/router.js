@@ -55,8 +55,6 @@ export default new Router({
       path: "/website-temperature-settings-page",
       component: WebsiteTemperatureSettingsPage,
       props: {
-        defaultLogo3:
-          "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/default-logo-3@2x.png",
         title: "Temperature Settings",
         ellipse6Props: websiteTemperatureSettingsPageData.ellipse6Props,
       },
