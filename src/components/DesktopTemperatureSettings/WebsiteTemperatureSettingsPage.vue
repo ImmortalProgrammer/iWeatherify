@@ -16,42 +16,48 @@
       <h1 class="temp-setting-title">{{ title }}</h1>
     </div>
     
-    <div class="temp-entries-container">
+    <div class="temp-container">
       <div class="hot-to-freezing-container">
         <div class="temp-rows">
-            <label for="hot" class="hot-to-freezing-font">Hot:</label>
-            <input type="text" id="hot" name="hot" placeholder="Enter Degree° Here"/>
-            <button name="hot-button">Save</button>
+          <label for="hot" class="hot-to-freezing-font">Hot:</label>
+          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="hotSliderValue" @input="updateHotInputValue"/>
+          <input class="temp-input" type="text" id="hot" name="hot" v-model="hotInputValue" @input="updateHotSliderValue"/>
+          <button name="hot-button">Save</button>
         </div>
 
         <div div class="temp-rows">
           <label for="warm" class="hot-to-freezing-font">Warm:</label>
-            <input type="text" id="warm" name="warm" placeholder="Enter Degree° Here"/>
-            <button name="warm-button">Save</button>
+          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="warmSliderValue" @input="updateWarmInputValue"/>
+          <input class="temp-input" type="text" id="warm" name="warm" v-model="warmInputValue" @input="updateWarmSliderValue"/>
+          <button name="warm-button">Save</button>
         </div>
 
         <div div class="temp-rows">
-          <label for="just-right" class="hot-to-freezing-font">Just Right:</label>
-            <input type="text" id="just-right" name="just-right" placeholder="Enter Degree° Here"/>
-            <button name="just-right-button">Save</button>
+          <label for="ideal" class="hot-to-freezing-font">Ideal:</label> 
+          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="idealSliderValue" @input="updateIdealInputValue"/>
+          <input class= "temp-input" type="text" id="ideal" name="ideal" v-model="idealInputValue" @input="updateIdealSliderValue"/>
+          <button name="ideal-button">Save</button>
         </div>
 
         <div div class="temp-rows">
-          <label for ="chilly" class="hot-to-freezing-font">Chilly:</label>
-            <input type="text" id="chilly" name="chilly" placeholder="Enter Degree° Here"/>
-            <button name="chilly-button">Save</button>
+          <label for="chilly" class="hot-to-freezing-font">Chilly:</label>
+          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="chillySliderValue" @input="updateChillyInputValue"/>
+          <input class= "temp-input" type="text" id="chilly" name="chilly" v-model="chillyInputValue" @input="updateChillySliderValue"/>
+          <button name="chilly-button">Save</button>
         </div>
 
         <div div class="temp-rows">
-          <label for ="cold" class="hot-to-freezing-font">Cold:</label>
-            <input type="text" id="cold" name="cold" placeholder="Enter Degree° Here"/>
-            <button name="cold-button">Save</button>
+          <label for="cold" class="hot-to-freezing-font">Cold:</label>
+          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="coldSliderValue" @input="updateColdInputValue"/>
+          <input class= "temp-input" type="text" id="cold" name="cold" v-model="coldInputValue" @input="updateColdSliderValue"/>
+          <button name="cold-button">Save</button>
         </div>
 
         <div div class="temp-rows">
-          <label for ="freezing" class="hot-to-freezing-font">Freezing:</label>
-            <input type="text" id="freezing" name="freezing" placeholder="Enter Degree° Here"/>
-            <button name="freezing-button">Save</button>
+          <label for="freezing" class="hot-to-freezing-font">Freezing:</label>
+          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="freezingSliderValue" @input="updateFreezingInputValue"/>
+          <input class= "temp-input" type="text" id="freezing" name="freezing" v-model="freezingInputValue" @input="updateFreezingSliderValue"/>
+          <button name="freezing-button">Save</button>
         </div>
       </div>
     </div>
@@ -63,7 +69,56 @@ export default {
   name: "WebsiteTemperatureSettingsPage",
   data() {
     return {
-      
+      hotSliderValue: 0,
+      hotInputValue: 0,
+      warmSliderValue: 0,
+      warmInputValue: 0,
+      idealSliderValue: 0,
+      idealInputValue: 0,
+      chillySliderValue: 0,
+      chillyInputValue: 0,
+      coldSliderValues: 0,
+      coldInputValue: 0,
+      freezingInputValue: 0,
+      freezingSliderValue: 0,
+    };
+  },
+  methods: {
+    updateHotInputValue(event) {
+      this.hotInputValue = event.target.value;
+    },
+    updateHotSliderValue(event) {
+      this.hotSliderValue = event.target.value;
+    },
+    updateWarmInputValue(event) {
+      this.warmInputValue = event.target.value;
+    },
+    updateWarmSliderValue(event) {
+      this.warmSliderValue = event.target.value;
+    },
+    updateIdealInputValue(event) {
+      this.idealInputValue = event.target.value;
+    },
+    updateIdealSliderValue(event) {
+      this.idealSliderValue = event.target.value;
+    },
+    updateChillyInputValue(event) {
+      this.chillyInputValue = event.target.value;
+    },
+    updateChillySliderValue(event) {
+      this.chillySliderValue = event.target.value;
+    },
+    updateColdInputValue(event) {
+      this.coldInputValue = event.target.value;
+    },
+    updateColdSliderValue(event) {
+      this.coldSliderValue = event.target.value;
+    },
+    updateFreezingInputValue(event) {
+      this.freezingInputValue = event.target.value;
+    },
+    updateFreezingSliderValue(event) {
+      this.freezingSliderValue = event.target.value;
     }
   },
   props: [
@@ -125,7 +180,7 @@ export default {
   font-style: normal;
 }
 
-.temp-entries-container {
+.temp-container {
   position: relative;
   display: flex;
   justify-content: safe center;
@@ -140,15 +195,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: end;
+  width: 100%;
   height: 10%;
-}
-
-.temperatures-font {
-  color: var(--black);
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 2.5em;
 }
 
 .hot-to-freezing-container {
@@ -169,17 +217,22 @@ export default {
   font-size: 1.5em;
 }
 
-::placeholder {
-  font-style: italic;
+.temp-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 80px 0 80px;
+  margin:0 10px 0 10px;
+  width: 350px;
 }
 
-input {
+.temp-input {
   color: var(--black);
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 1em;
-  width: 55%;
+  width: 100px;
   margin-left: 5px;
   padding-left: 5px;
   border-radius: 15px;
@@ -212,8 +265,8 @@ button {
     transform: scale(0.8);
   }
 
-  .temperatures-font {
-    font-size: 1.75em;
+  .hot-to-freezing-container {
+    transform: scale(0.8);
   }
 
   .menu-bar-container {
@@ -222,6 +275,10 @@ button {
 
   .profile-img-container {
     left: 70%;
+  }
+
+  .hot-to-freezing-font {
+
   }
 }
 
@@ -234,16 +291,16 @@ button {
     transform: scale(0.8);
   }
 
-  .temp-entries-container {
+  .temp-container {
+    transform: scale(0.8);
+  }
+
+  .hot-to-freezing-container {
     transform: scale(0.8);
   }
 
   .temp-setting-title {
     font-size: 2em;
-  }
-
-  .temperatures-font {
-    font-size: 1.5em;
   }
 
   .menu-bar-container {
@@ -262,18 +319,15 @@ button {
 
   .title-container {
     transform: scale(0.6);
+    width: 50%;
   }
 
-  .temp-entries-container {
+  .temp-container {
     transform: scale(0.7);
   }
 
-  .temp-setting-title {
-    font-size: 2em;
-  }
-
-  .temperatures-font {
-    font-size: 1.5em;
+  .hot-to-freezing-container {
+    transform: scale(0.7);
   }
 
   .menu-bar-container {
@@ -282,6 +336,10 @@ button {
 
   .profile-img-container {
     left: 55%;
+  }
+
+  .temp-setting-title {
+    font-size: 2em;
   }
 }
 </style>
