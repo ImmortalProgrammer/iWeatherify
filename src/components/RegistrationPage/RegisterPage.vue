@@ -37,12 +37,12 @@
 
           axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/register.php?action=register", formData).then(
             (res) => {
+              alert(res.data)
               if(res.error){
                 console.log("Couldnt send post request")
               } else {
-                console.log(res)
                 console.log("Sent post request to backend")
-                this.$router.push("/login");
+                // this.$router.push("/login");
               }
           }).catch((err) => {
             console.log("Unsuccessful axios post", err)
