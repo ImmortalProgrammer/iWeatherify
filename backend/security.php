@@ -1,4 +1,5 @@
 <?php
+
     function access_control(){
         if (isset($_SERVER["HTTP_ORIGIN"])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is the one that you want to allow
@@ -18,6 +19,41 @@
         }
     }
 
+    //Check whether or not an email has already been taken
+    function email_exists($sanitized_email){
+        include("connection.php");
+
+        $query = "SELECT * FROM users WHERE email = ?";
+        $query = $conn -> prepare($query);
+        $query -> bind_param("s", $sanitized_email);
+        $query -> execute();
+        $result = $query -> get_result();
+
+        if (mysqli_num_rows($result)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Check whether or not a username has already been taken
+    function username_exists($sanitized_username){
+        include("connection.php");
+        
+        $query = "SELECT * FROM users where username = ?";
+        $query = $conn -> prepare($query);
+        $query -> bind_param("s", $sanitized_username);
+        $query -> execute();
+        $result = $query -> get_result();
+
+        if (mysqli_num_rows($result)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // To make a random user_id value
     function random_num($length){
         $text = "";
         if($length < 5){

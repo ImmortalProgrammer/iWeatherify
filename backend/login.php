@@ -5,17 +5,18 @@
     session_start();
     include("connection.php");
     include("security.php");
-
     access_control();
+
+    //Data to send back to the frontend
+    $res[] = array();
     
     if($_SERVER["REQUEST_METHOD"]  == "POST"){
-        // something was posted
-        $username = $_POST["username"];
-        $password = $_POST["password"];
+        $username = htmlspecialchars(trim($_POST["username"]), ENT_QUOTES);
+        $password = htmlspecialchars(trim($_POST["password"]), ENT_QUOTES);
 
         if(!empty($username) && !empty($password) && !is_numeric($username)){
             //Read username and password from database
-            $query = "SELECT `user_id`, `password` FROM `users` WHERE `username` = ? limit 1"; //TODO - this assumes that everyone has a unique username -> will need to be a future task
+            $query = "SELECT `user_id`, `password` FROM `users` WHERE `username` = ? limit 1";
             $query = $conn -> prepare($query);
             $query -> bind_param("s", $username);
             $query -> execute();
