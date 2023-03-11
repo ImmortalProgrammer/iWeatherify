@@ -77,7 +77,7 @@ export default {
       idealInputValue: 0,
       chillySliderValue: 0,
       chillyInputValue: 0,
-      coldSliderValues: 0,
+      coldSliderValue: 0,
       coldInputValue: 0,
       freezingInputValue: 0,
       freezingSliderValue: 0,
@@ -221,7 +221,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 80px 0 80px;
   margin:0 10px 0 10px;
   width: 350px;
 }
@@ -275,10 +274,6 @@ button {
 
   .profile-img-container {
     left: 70%;
-  }
-
-  .hot-to-freezing-font {
-
   }
 }
 
