@@ -205,10 +205,6 @@ button {
   .profile-img-container {
     left: 80%;
   }
-
-  .temp-bar {
-    margin-right: 25px;
-  }
 }
 
 @media screen and (min-width: 576px) and (max-width: 992px) {
@@ -227,10 +223,6 @@ button {
   .profile-img-container {
     left: 70%;
   }
-
-  .temp-bar {
-    margin-right: 25px;
-  } 
 }
 
 @media screen and (min-width: 375px) and (max-width: 576px) {
@@ -260,10 +252,6 @@ button {
 
   .profile-img-container {
     left: 60%;
-  }
-
-  .temp-bar {
-    margin-right: 25px;
   }
 }
 
