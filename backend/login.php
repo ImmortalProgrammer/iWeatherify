@@ -6,9 +6,6 @@
     include("connection.php");
     include("security.php");
     access_control();
-
-    //Data to send back to the frontend
-    $res[] = array();
     
     if($_SERVER["REQUEST_METHOD"]  == "POST"){
         $username = htmlspecialchars(trim($_POST["username"]), ENT_QUOTES);
