@@ -134,7 +134,6 @@ export default {
   width: 100%; 
   height: 100%;
   background: #FFFFFF;
-  overflow: auto;
 }
 
 .nav-bar-container {
@@ -221,6 +220,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  accent-color: #478887;
   margin:0 10px 0 10px;
   width: 350px;
 }
