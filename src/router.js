@@ -99,7 +99,6 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.needsAuth) {
-    console.log(isUserLoggedIn());
     if (isUserLoggedIn()) {
       next();
     } else {
