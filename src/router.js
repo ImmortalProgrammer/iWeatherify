@@ -30,14 +30,23 @@ const routes = [
     path: "/",
     component: WebsiteHomePageNotLoggedIn,
     props: { ...websiteHomePageNotLoggedInData },
+    meta: {
+      needsLogOut: true
+    },
   },
   {
     path: "/register",
-    component: RegisterPage
+    component: RegisterPage,
+    meta: {
+      needsLogOut: true
+    },
   },
   {
     path: "/login",
-    component: WebsiteLoginPage
+    component: WebsiteLoginPage,
+    meta: {
+      needsLogOut: true
+    },
   },
   {
     path: "/homepage",
@@ -104,7 +113,15 @@ router.beforeEach((to, from, next) => {
       next('/login');
     }
   } else {
-    next();
+    if (to.meta.needsLogOut) {
+      if (!isUserLoggedIn()) {
+        next();
+      } else {
+        next('/homepage');
+      }
+    } else {
+      next('/');
+    }
   }
 });
 
