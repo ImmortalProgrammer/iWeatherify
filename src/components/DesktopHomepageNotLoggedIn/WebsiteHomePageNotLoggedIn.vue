@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app2">
   <div class="container-center-horizontal">
         <div class ="bar-search">
         <input class="search-input" type="text" name="searching" placeholder="Search up a City..."
@@ -299,7 +299,7 @@ export default {
 
 
 
-#app {
+#app2 {
   background-image: url(../../../img/background-img.png);
   background-size: cover;
   background-position: bottom;
@@ -675,12 +675,12 @@ main {
     position: absolute;
     height: auto;
     margin-bottom: -20vh;
-    left: 13%;
-    top: 30vh;
+    left: 11.5%;
+    top: 28vh;
     bottom: 0;
     border-top: 0;
     transform: translate(-50%, 0);
-    width: 130vw;
+    width: 140vw;
     padding: 2vh;
     scale: 0.5;
     color: rgb(255, 255, 255);
@@ -723,26 +723,26 @@ main {
   .eightDayForecastImg {
     padding-top: 0.5vh;
     padding-bottom: 1vh;
-    scale: 1.3;
+    scale: 2;
     height: auto;
   }
 
   .current-unit {
     position: absolute;
     border: none;
-    height: 49vh;
-    left: 30%;
-    top: 11vh;
+    height: 45vh;
+    left: 23.18%;
+    top: 12vh;
     bottom: 0;
     transform: translate(-50%, 0);
-    width: 80vw;
+    width: 116.5vw;
     scale: 0.6;
     color: rgb(255, 255, 255);
     font-size: 25px;
     font-weight: 500;
     text-align: center;
     background-color: rgba(102, 102, 102, 0.83);
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
   }
 
@@ -773,8 +773,18 @@ main {
     height: auto;
     position: relative;
     overflow: hidden;
-    scale: 1.3;
     border-radius: 50%;
+    scale: 1.5;
+    padding-bottom: 0.8vh;
+  }
+
+  .currentWeatherContainer {
+    width: auto;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    scale: 2.0;
     padding-bottom: 0.8vh;
   }
 
@@ -794,11 +804,11 @@ main {
     background-color: rgb(255, 255, 255);
     background-size: 100% 100%;
     height: 5vh;
-    left: 47%;
-    transform: translate(-50%, 0);
     position: absolute;
+    transform: translate(-50%, 0);
+    left: 47%;
     top: 11vh;
-    width: 40vw;
+    width: 73vw;
     border-radius: 5vh;
   }
 
@@ -806,16 +816,17 @@ main {
     background-color: transparent;
     opacity: 1;
     border: 0;
-    font-size: 2.8vw;
+    font-size: 5.5vw;
     text-align: center;
     color: rgba(0, 0, 0);
     font-weight: 500;
     height: 4vh;
+    left: 1.5vw;
     line-height: normal;
     padding: 0;
     position: absolute;
     top: 0.6vh;
-    width: 93%;
+    width: 86%;
   }
 
 
@@ -836,11 +847,11 @@ main {
   .home-logo-2 {
     position: absolute;
     height: 4.5vh;
-    top: 3.5vh;
-    left: 47.5%;
+    top: 3vh;
+    left: 50%;
     transform: translate(-50%, 0);
     width: auto;
-    scale: 1.15;
+    scale: 1;
   }
 }
 
