@@ -93,7 +93,6 @@ const routes = [
 
 const router = new Router({
   mode: "hash",
-  base: process.env.BASE_URL,
   routes,
 });
 
