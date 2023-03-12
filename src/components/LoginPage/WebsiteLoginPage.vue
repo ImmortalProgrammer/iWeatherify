@@ -34,9 +34,10 @@
           (res) => {
             console.log(res.data)
             try {
-              if(res.data[0].status == 1){
+              if(res.data[0].status === 1){
                 document.cookie = "username=" + this.username;
-                this.$router.push("/");
+                localStorage.setItem('token', 123456789);
+                this.$router.push("/homepage");
               } else {
                 alert("Invalid username and password combo");
               }
