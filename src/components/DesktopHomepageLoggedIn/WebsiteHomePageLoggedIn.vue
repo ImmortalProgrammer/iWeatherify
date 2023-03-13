@@ -4,112 +4,112 @@
 
 <template>
   <div id="app1">
-  <div class="container-center-horizontal">
-        <div class ="bar-search">
-        <input class="search-input" type="text" name="searching" placeholder="Search up a City..."
+    <div class="container-center-horizontal1">
+      <div class ="bar-search1">
+        <input class="search-input1" type="text" name="searching" placeholder="Search up a City..."
                v-model="currentWeatherData.locationInput" @keyup.enter="retrieveAPI()">
-        </div>
-        <div class="daily-weather">
-            <div class = "current-unit">
-              <p class ="city-display">{{this.currentWeatherData.locationOutput.charAt(0).toUpperCase() + this.currentWeatherData.locationOutput.slice(1)
-                }}</p>
-              <p class = "current-day">{{ this.currentWeatherData.currentDay }}</p>
-              <p class = "weatherDescription">{{ this.currentWeatherData.iconDescription}}</p>
-              <div class = "currentWeatherContainer">
-                <div class = "weather-icon-current">
-                  <img :src = "this.currentWeatherData.iconUrl">
-                </div>
-              </div>
-              <p class = "high-low-temp">{{this.currentWeatherData.tempHigh}}°
-                / {{this.currentWeatherData.tempLow}}°</p>
-              <p class = "feelslike_1">Feels Like: {{this.currentWeatherData.feelsLike}}°</p>
-            </div>
-          </div>
-        <div class="weekly-weather">
-          <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast: </p>
-          <div class = "day-next">
-            <p class = "next">{{ this.eightDayForecastData.dates[0] }}</p>
-            <p class = "weatherState">{{ this.eightDayForecastData.iconDescription[0] }}</p>
-            <div class = "eightDayForecastImg">
-              <img :src = "this.eightDayForecastData.iconUrlArr[0]">
-            </div>
-            <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[0] }}°
-              / {{ this.eightDayForecastData.lowTempArr[0] }}°</p>
-            <p class = "feelslike">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[0] }}°</p>
-           </div>
-          <div class = "day-next">
-            <p class = "next">{{ this.eightDayForecastData.dates[1] }}</p>
-            <p class = "weatherState">{{ this.eightDayForecastData.iconDescription[1] }}</p>
-            <div class = "eightDayForecastImg">
-              <img :src = "this.eightDayForecastData.iconUrlArr[1]">
-            </div>
-            <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[1] }}°
-              / {{ this.eightDayForecastData.lowTempArr[1] }}°</p>
-            <p class = "feelslike">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[1] }}°</p>
-          </div>
-          <div class = "day-next">
-            <p class = "next">{{ this.eightDayForecastData.dates[2] }}</p>
-            <p class = "weatherState">{{ this.eightDayForecastData.iconDescription[2] }}</p>
-            <div class = "eightDayForecastImg">
-              <img :src = "this.eightDayForecastData.iconUrlArr[2]">
-            </div>
-            <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[2] }}°
-              / {{ this.eightDayForecastData.lowTempArr[2] }}°</p>
-            <p class = "feelslike">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[2] }}°</p>
-          </div>
-          <div class = "day-next">
-            <p class = "next">{{ this.eightDayForecastData.dates[3] }}</p>
-            <p class = "weatherState">{{ this.eightDayForecastData.iconDescription[3] }}</p>
-            <div class = "eightDayForecastImg">
-              <img :src = "this.eightDayForecastData.iconUrlArr[3]">
-            </div>
-            <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[3] }}°
-              / {{ this.eightDayForecastData.lowTempArr[3] }}°</p>
-            <p class = "feelslike">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[3] }}°</p>
-          </div>
-          <div class = "day-next">
-            <p class = "next">{{ this.eightDayForecastData.dates[4] }}</p>
-            <p class = "weatherState">{{ this.eightDayForecastData.iconDescription[4] }}</p>
-            <div class = "eightDayForecastImg">
-              <img :src = "this.eightDayForecastData.iconUrlArr[4]">
-            </div>
-            <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[4] }}°
-              / {{ this.eightDayForecastData.lowTempArr[4] }}°</p>
-            <p class = "feelslike">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[4] }}°</p>
-          </div>
-          <div class = "day-next">
-            <p class = "next">{{ this.eightDayForecastData.dates[5] }}</p>
-            <p class = "weatherState">{{ this.eightDayForecastData.iconDescription[5] }}</p>
-            <div class = "eightDayForecastImg">
-              <img :src = "this.eightDayForecastData.iconUrlArr[5]">
-            </div>
-            <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[5] }}°
-              / {{ this.eightDayForecastData.lowTempArr[5] }}°</p>
-            <p class = "feelslike">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[5] }}°</p>
-          </div>
-          <div class = "day-next">
-            <p class = "next">{{ this.eightDayForecastData.dates[6] }}</p>
-            <p class = "weatherState">{{ this.eightDayForecastData.iconDescription[6] }}</p>
-            <div class = "eightDayForecastImg">
-              <img :src = "this.eightDayForecastData.iconUrlArr[6]">
-            </div>
-            <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[6] }}°
-              / {{ this.eightDayForecastData.lowTempArr[6] }}°</p>
-            <p class = "feelslike">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[6] }}°</p>
-          </div>
-          <div class = "day-next">
-            <p class = "next">{{ this.eightDayForecastData.dates[7] }}</p>
-            <p class = "weatherState">{{ this.eightDayForecastData.iconDescription[7] }}</p>
-            <div class = "eightDayForecastImg">
-              <img :src = "this.eightDayForecastData.iconUrlArr[7]">
-            </div>
-            <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[7] }}°
-              / {{ this.eightDayForecastData.lowTempArr[7] }}°</p>
-            <p class = "feelslike">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[7] }}°</p>
-          </div>
-        </div>
-        <img class="home-logo-2" :src="homeLogo2" alt="Home Logo 2" />
       </div>
+      <div class="daily-weather1">
+        <div class = "current-unit1">
+          <p class ="city-display1">{{this.currentWeatherData.locationOutput.charAt(0).toUpperCase() + this.currentWeatherData.locationOutput.slice(1)
+            }}</p>
+          <p class = "current-day1">{{ this.currentWeatherData.currentDay }}</p>
+          <p class = "weatherDescription1">{{ this.currentWeatherData.iconDescription}}</p>
+          <div class = "currentWeatherContainer1">
+            <div class = "weather-icon-current1">
+              <img :src = "this.currentWeatherData.iconUrl">
+            </div>
+          </div>
+          <p class = "high-low-temp1">{{this.currentWeatherData.tempHigh}}°
+            / {{this.currentWeatherData.tempLow}}°</p>
+          <p class = "feelslike_1_1">Feels Like: {{this.currentWeatherData.feelsLike}}°</p>
+        </div>
+      </div>
+      <div class="weekly-weather_1">
+        <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast: </p>
+        <div class = "day-next-1">
+          <p class = "next-1">{{ this.eightDayForecastData.dates[0] }}</p>
+          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[0] }}</p>
+          <div class = "eightDayForecastImg-1">
+            <img :src = "this.eightDayForecastData.iconUrlArr[0]">
+          </div>
+          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[0] }}°
+            / {{ this.eightDayForecastData.lowTempArr[0] }}°</p>
+          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[0] }}°</p>
+        </div>
+        <div class = "day-next-1">
+          <p class = "next-1">{{ this.eightDayForecastData.dates[1] }}</p>
+          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[1] }}</p>
+          <div class = "eightDayForecastImg-1">
+            <img :src = "this.eightDayForecastData.iconUrlArr[1]">
+          </div>
+          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[1] }}°
+            / {{ this.eightDayForecastData.lowTempArr[1] }}°</p>
+          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[1] }}°</p>
+        </div>
+        <div class = "day-next-1">
+          <p class = "next-1">{{ this.eightDayForecastData.dates[2] }}</p>
+          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[2] }}</p>
+          <div class = "eightDayForecastImg-1">
+            <img :src = "this.eightDayForecastData.iconUrlArr[2]">
+          </div>
+          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[2] }}°
+            / {{ this.eightDayForecastData.lowTempArr[2] }}°</p>
+          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[2] }}°</p>
+        </div>
+        <div class = "day-next-1">
+          <p class = "next-1">{{ this.eightDayForecastData.dates[3] }}</p>
+          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[3] }}</p>
+          <div class = "eightDayForecastImg-1">
+            <img :src = "this.eightDayForecastData.iconUrlArr[3]">
+          </div>
+          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[3] }}°
+            / {{ this.eightDayForecastData.lowTempArr[3] }}°</p>
+          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[3] }}°</p>
+        </div>
+        <div class = "day-next-1">
+          <p class = "next-1">{{ this.eightDayForecastData.dates[4] }}</p>
+          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[4] }}</p>
+          <div class = "eightDayForecastImg-1">
+            <img :src = "this.eightDayForecastData.iconUrlArr[4]">
+          </div>
+          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[4] }}°
+            / {{ this.eightDayForecastData.lowTempArr[4] }}°</p>
+          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[4] }}°</p>
+        </div>
+        <div class = "day-next-1">
+          <p class = "next-1">{{ this.eightDayForecastData.dates[5] }}</p>
+          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[5] }}</p>
+          <div class = "eightDayForecastImg-1">
+            <img :src = "this.eightDayForecastData.iconUrlArr[5]">
+          </div>
+          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[5] }}°
+            / {{ this.eightDayForecastData.lowTempArr[5] }}°</p>
+          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[5] }}°</p>
+        </div>
+        <div class = "day-next-1">
+          <p class = "next-1">{{ this.eightDayForecastData.dates[6] }}</p>
+          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[6] }}</p>
+          <div class = "eightDayForecastImg-1">
+            <img :src = "this.eightDayForecastData.iconUrlArr[6]">
+          </div>
+          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[6] }}°
+            / {{ this.eightDayForecastData.lowTempArr[6] }}°</p>
+          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[6] }}°</p>
+        </div>
+        <div class = "day-next-1">
+          <p class = "next-1">{{ this.eightDayForecastData.dates[7] }}</p>
+          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[7] }}</p>
+          <div class = "eightDayForecastImg-1">
+            <img :src = "this.eightDayForecastData.iconUrlArr[7]">
+          </div>
+          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[7] }}°
+            / {{ this.eightDayForecastData.lowTempArr[7] }}°</p>
+          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[7] }}°</p>
+        </div>
+      </div>
+      <img class="home-logo-3" :src="homeLogo2" alt="Home Logo" />
+    </div>
   </div>
 </template>
 
@@ -299,8 +299,8 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
 
+}
 
 
 #app1 {
@@ -312,7 +312,7 @@ export default {
 
 }
 
-.weekly-weather {
+.weekly-weather_1 {
   border: none;
   position: absolute;
   height: auto;
@@ -336,18 +336,18 @@ export default {
 }
 
 
-.day-next {
+.day-next-1 {
   padding: 1.8vw;
   display: inline-block;
 }
 
 
-.next {
+.next-1 {
   font-size: 4vh;
   padding-bottom: 1.5vh;
 }
 
-.weatherState {
+.weatherState-1 {
   font-size: 2.3vh;
   padding-bottom: 1.5vh;
 }
@@ -358,19 +358,19 @@ export default {
   padding-bottom: 1.5vh;
 }
 
-.feelslike {
+.feelslike-1 {
   font-size: 2.5vh;
   padding-bottom: 1.5vh;
 }
 
-.eightDayForecastImg {
+.eightDayForecastImg-1 {
   padding-top: 0.5vh;
   padding-bottom: 1vh;
   scale: 2;
   height: auto;
 }
 
-.current-unit {
+.current-unit1 {
   position: absolute;
   border: none;
   height: 45vh;
@@ -389,29 +389,29 @@ export default {
   overflow-x: hidden;
 }
 
-.city-display {
+.city-display1 {
   padding-top: 2vh;
   padding-bottom: 0.5vh;
   font-size: 6vh;
   border-bottom: 1vh solid #000
 }
-.current-day {
+.current-day1 {
   padding-top: 1.5vh;
   font-size: 5vh;
 }
 
-.weatherDescription {
+.weatherDescription1 {
   padding-top: 1.5vh;
   padding-bottom: 1.5vh;
   font-size: 3vh;
 }
 
-.high-low-temp {
+.high-low-temp1 {
   padding-bottom: 1.5vh;
   font-size: 3vh;
 }
 
-.currentWeatherContainer {
+.currentWeatherContainer1 {
   width: auto;
   height: auto;
   position: relative;
@@ -421,19 +421,19 @@ export default {
   padding-bottom: 0.8vh;
 }
 
-.weather-icon-current {
+.weather-icon-current1 {
   display: inline;
   margin: 0 auto;
   height: 100%;
   width: auto;
 }
 
-.feelslike_1 {
+.feelslike_1_1 {
   font-size: 3vh;
 }
 
 
-.bar-search {
+.bar-search1 {
   background-color: rgb(255, 255, 255);
   background-size: 100% 100%;
   height: 5vh;
@@ -444,7 +444,7 @@ export default {
   border-radius: 5vh;
 }
 
-.search-input {
+.search-input1 {
   background-color: transparent;
   opacity: 1;
   border: 0;
@@ -462,21 +462,15 @@ export default {
 }
 
 
-main {
-  min-height: 100vh;
-  padding: 25px;
-}
 
-.container-center-horizontal {
-  align-items: flex-start;
-  display: flex;
-  margin-right: 2050px;
+
+.container-center-horizontal1 {
   min-height: 100vh;
   position: relative;
 }
 
 
-.home-logo-2 {
+.home-logo-3 {
   position: absolute;
   height: 4.5vh;
   top: 3vh;
@@ -488,7 +482,7 @@ main {
 
 @media only screen and (min-width: 359px) and (max-width: 900px) {
 
-  .weekly-weather {
+  .weekly-weather_1 {
     border: none;
     position: absolute;
     height: auto;
@@ -511,18 +505,18 @@ main {
 
   }
 
-  .day-next {
+  .day-next-1 {
     padding: 1.8vw;
     display: inline-block;
   }
 
 
-  .next {
+  .next-1 {
     font-size: 3.5vh;
     padding-bottom: 1.5vh;
   }
 
-  .weatherState {
+  .weatherState-1 {
     font-size: 2.3vh;
     padding-bottom: 1.5vh;
   }
@@ -533,19 +527,19 @@ main {
     padding-bottom: 1.5vh;
   }
 
-  .feelslike {
+  .feelslike-1 {
     font-size: 2.5vh;
     padding-bottom: 1.5vh;
   }
 
-  .eightDayForecastImg {
+  .eightDayForecastImg-1 {
     padding-top: 0.5vh;
     padding-bottom: 1vh;
     scale: 2;
     height: auto;
   }
 
-  .current-unit {
+  .current-unit1 {
     position: absolute;
     border: none;
     height: 45vh;
@@ -564,29 +558,29 @@ main {
     overflow-x: hidden;
   }
 
-  .city-display {
+  .city-display1 {
     padding-top: 2vh;
     padding-bottom: 0.5vh;
     font-size: 6vh;
     border-bottom: 1vh solid #000
   }
-  .current-day {
+  .current-day1 {
     padding-top: 1.5vh;
     font-size: 5vh;
   }
 
-  .weatherDescription {
+  .weatherDescription1 {
     padding-top: 1.5vh;
     padding-bottom: 1.5vh;
     font-size: 3vh;
   }
 
-  .high-low-temp {
+  .high-low-temp1 {
     padding-bottom: 1.5vh;
     font-size: 3vh;
   }
 
-  .currentWeatherContainer {
+  .currentWeatherContainer1 {
     width: auto;
     height: auto;
     position: relative;
@@ -596,7 +590,7 @@ main {
     padding-bottom: 0.8vh;
   }
 
-  .currentWeatherContainer {
+  .currentWeatherContainer1 {
     width: auto;
     height: auto;
     position: relative;
@@ -606,19 +600,19 @@ main {
     padding-bottom: 0.8vh;
   }
 
-  .weather-icon-current {
+  .weather-icon-current1 {
     display: inline;
     margin: 0 auto;
     height: 100%;
     width: auto;
   }
 
-  .feelslike_1 {
+  .feelslike_1_1 {
     font-size: 3vh;
   }
 
 
-  .bar-search {
+  .bar-search1 {
     background-color: rgb(255, 255, 255);
     background-size: 100% 100%;
     height: 5vh;
@@ -630,7 +624,7 @@ main {
     border-radius: 5vh;
   }
 
-  .search-input {
+  .search-input1 {
     background-color: transparent;
     opacity: 1;
     border: 0;
@@ -653,7 +647,7 @@ main {
     padding: 25px;
   }
 
-  .container-center-horizontal {
+  .container-center-horizontal1 {
     align-items: flex-start;
     display: flex;
     margin-right: 2050px;
@@ -662,7 +656,7 @@ main {
   }
 
 
-  .home-logo-2 {
+  .home-logo-3 {
     position: absolute;
     height: 4.5vh;
     top: 3vh;
@@ -674,7 +668,7 @@ main {
 }
 
 @media only screen and (max-width: 358px) {
-  .weekly-weather {
+  .weekly-weather_1 {
     border: none;
     position: absolute;
     height: auto;
@@ -697,18 +691,18 @@ main {
 
   }
 
-  .day-next {
+  .day-next-1 {
     padding: 1.8vw;
     display: inline-block;
   }
 
 
-  .next {
+  .next-1 {
     font-size: 3.5vh;
     padding-bottom: 1.5vh;
   }
 
-  .weatherState {
+  .weatherState-1 {
     font-size: 2.3vh;
     padding-bottom: 1.5vh;
   }
@@ -719,19 +713,19 @@ main {
     padding-bottom: 1.5vh;
   }
 
-  .feelslike {
+  .feelslike-1 {
     font-size: 2.5vh;
     padding-bottom: 1.5vh;
   }
 
-  .eightDayForecastImg {
+  .eightDayForecastImg-1 {
     padding-top: 0.5vh;
     padding-bottom: 1vh;
     scale: 2;
     height: auto;
   }
 
-  .current-unit {
+  .current-unit1 {
     position: absolute;
     border: none;
     height: 45vh;
@@ -750,29 +744,29 @@ main {
     overflow-x: hidden;
   }
 
-  .city-display {
+  .city-display1 {
     padding-top: 2vh;
     padding-bottom: 0.5vh;
     font-size: 6vh;
     border-bottom: 1vh solid #000
   }
-  .current-day {
+  .current-day1 {
     padding-top: 1.5vh;
     font-size: 5vh;
   }
 
-  .weatherDescription {
+  .weatherDescription1 {
     padding-top: 1.5vh;
     padding-bottom: 1.5vh;
     font-size: 3vh;
   }
 
-  .high-low-temp {
+  .high-low-temp1 {
     padding-bottom: 1.5vh;
     font-size: 3vh;
   }
 
-  .currentWeatherContainer {
+  .currentWeatherContainer1 {
     width: auto;
     height: auto;
     position: relative;
@@ -782,7 +776,7 @@ main {
     padding-bottom: 0.8vh;
   }
 
-  .currentWeatherContainer {
+  .currentWeatherContainer1 {
     width: auto;
     height: auto;
     position: relative;
@@ -792,19 +786,19 @@ main {
     padding-bottom: 0.8vh;
   }
 
-  .weather-icon-current {
+  .weather-icon-current1 {
     display: inline;
     margin: 0 auto;
     height: 100%;
     width: auto;
   }
 
-  .feelslike_1 {
+  .feelslike_1_1 {
     font-size: 3vh;
   }
 
 
-  .bar-search {
+  .bar-search1 {
     background-color: rgb(255, 255, 255);
     background-size: 100% 100%;
     height: 5vh;
@@ -816,7 +810,7 @@ main {
     border-radius: 5vh;
   }
 
-  .search-input {
+  .search-input1 {
     background-color: transparent;
     opacity: 1;
     border: 0;
@@ -839,7 +833,7 @@ main {
     padding: 25px;
   }
 
-  .container-center-horizontal {
+  .container-center-horizontal1 {
     align-items: flex-start;
     display: flex;
     margin-right: 2050px;
@@ -848,7 +842,7 @@ main {
   }
 
 
-  .home-logo-2 {
+  .home-logo-3 {
     position: absolute;
     height: 4.5vh;
     top: 3vh;
