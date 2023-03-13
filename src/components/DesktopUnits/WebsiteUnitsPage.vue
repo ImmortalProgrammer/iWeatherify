@@ -1,59 +1,92 @@
 <template>
   <div class="website-units-page screen">
     <div class="nav-bar-container">
+
       <div class="logo-container">
         <img src="../../../img/Logo.png" alt="Default Logo 4" />
       </div>
+
       <div class="profile-img-container">
         <img src="../../../img/Profile image.png" />
       </div>
+
       <div class="menu-bar-container"> 
         <img src="../../../img/Vector.png" alt="Vector"/>
       </div>
     </div>
+
     <div class="title-container">
       <h1 class="unit-title">{{ title }}</h1>
     </div>
+
     <div class="row-format-container">
       <div class="row">
         <p class="unit-font">Temperature</p>
-        <select class="temp-container" id="dropdown-container-font"> 
-          <option selected>°F</option>
+        <select class="temp-container" id="dropdown-container-font" v-model="temperature"> 
+          <option value="f">°F</option>
           <option value="c">°C</option>
         </select>
       </div>
+
       <div class="row">
         <p class="unit-font">Wind</p>
-        <select class="wind-container" id="dropdown-container-font"> 
-          <option selected>mph</option>
+        <select class="wind-container" id="dropdown-container-font" v-model="wind"> 
+          <option value="mph">mph</option>
           <option value="kmh">km/h</option>
         </select>
       </div>
+
       <div class="row">
         <p class="unit-font">Pressure</p>
-        <select class="pressure-container" id="dropdown-container-font"> 
-          <option selected>in</option>
+        <select class="pressure-container" id="dropdown-container-font" v-model="pressure"> 
+          <option value="in">in</option>
           <option value="mm">mm</option>
         </select>
       </div>
+
       <div class="row">
         <p class="unit-font">Distance</p>
-        <select class="distance-container" id="dropdown-container-font"> 
-          <option selected>mi</option>
+        <select class="distance-container" id="dropdown-container-font" v-model="distance"> 
+          <option value="mi">mi</option>
           <option value="km">km</option>
         </select>
+      </div>
+
+      <div>
+        <button @click="saveUnits">Save</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "WebsiteUnitsPage",
   data() {
-    
+    return {
+      temperature: "f",
+      wind: "mph",
+      pressure: "in",
+      distance: "mi",
+    };
   },
-  components: {
+  methods: {
+    saveUnits() {
+      // Send an AJAX request to the server to save the units
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/save_units.php", {
+        temperature: this.temperature,
+        wind: this.wind,
+        pressure: this.pressure,
+        distance: this.distance
+      })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        })
+    },
   },
   props: [
     "defaultLogo4",
@@ -138,14 +171,6 @@ export default {
   border: none;
 }
 
-#dropdown-container-font {
-  font-size: 1.5em;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  opacity: 0.5;
-}
-
 .row {
   border-bottom: 1px solid #C6C6C8;
   width: 30%;
@@ -171,6 +196,23 @@ export default {
   position: relative;
   top: 5px;
   left: 85%;
+}
+
+#dropdown-container-font {
+  font-size: 1.5em;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+select {
+  cursor: pointer;
+}
+
+button {
+  font-family: 'Inter';
+  font-style: normal;
 }
 
 @media screen and (min-width: 992px) and (max-width: 1440px) {
@@ -206,6 +248,10 @@ export default {
   .row {
     width: 60%;
   }
+
+  button {
+    transform: scale(0.8);
+  }
 }
 
 @media screen and (min-width: 375px) and (max-width: 576px) {
@@ -224,6 +270,10 @@ export default {
   .row {
     width: 90%;
   }
+
+  button {
+    transform: scale(0.8);
+  }
 }
 
 @media screen and (max-width: 375px) {
@@ -241,6 +291,10 @@ export default {
 
   .row {
     width: 90%;
+  }
+
+  button {
+    transform: scale(0.7);
   }
 }
 </style>
