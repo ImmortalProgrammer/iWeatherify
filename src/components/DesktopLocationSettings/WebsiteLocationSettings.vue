@@ -1,16 +1,23 @@
 <template>
-  <div class="container-center-horizontal">
     <div class="website-location-settings screen">
-      <div class="flex-row">
-        <img class="default-logo-5" :src="defaultLogo5" alt="Default Logo 5" />
+      <div class="nav-bar-container">
+        <div class="logo-container">
+        <img src="../../../img/Logo.png" alt="Default Logo 5" />
+          </div>
+          
+          <div class="profile-img-container">
+            <img src="../../../img/Profile image.png"/>
+          </div>
+          
+          <div class="menu-bar-container">
+            <img src="../../../img/Vector.png" alt ="Vector"/>
+          </div>
+          </div>
+        
+          <div class="title-container">
         <h1 class="title">{{ title }}</h1>
-        <ellipse6 :src="ellipse6Props.src" />
-        <img
-          class="vector"
-          src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
-          alt="Vector"
-        />
-      </div>
+        </div>
+
       <div class="flex-row-1">
         <div class="flex-col">
           <div class="location-services">{{ locationServices }}</div>
@@ -20,8 +27,10 @@
         </div>
         <div class="flex-col-1">
           <div class="toggle-switcho-container">
-            
-            <toggle-switch-off />
+            <label class="switch">
+              <input type="checkbox">
+                <span class="slider round"></span>
+                </label>
           </div>
           <div class="overlap-group1"> 
            
@@ -36,7 +45,6 @@
         <div class="save ui---30-semi2">{{ save }}</div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -65,31 +73,93 @@ export default {
 </script>
 
 <style>
-.website-location-settings {
+.switch {
   position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(55px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.website-location-settings {
+  position: absolute;
   width: 100%; 
   height: 100vh;
   background: #FFFFFF;
 }
-
-.flex-row {
-  align-items: center;
-  display: flex;
-  margin-right: 4px;
-  min-width: 1260px;
+.nav-bar-container{
   position: relative;
+  display: inline-flex;
+  align-items: safe center;
+  margin-top: 2%;
+  width: 100%;
 }
-
-.default-logo-5 {
-  position: absolute;
-  max-width: 100%;
-  width: 10vw;
-  height: auto;
-  left: 5.8333vw;
-  top: 3vh;
-  object-fit: cover;
+.logo-container {
+  position:relative;
+  width: 5%;
+  left: 5%;
 }
-
+.menu-bar-container {
+  position: relative;
+  left: 75%;
+}
+.profile-img-container{
+  position: relative;
+  top: 5px;
+  left: 75%;
+}
 .title {
   align-self: flex-end;
   color: var(--black);
@@ -98,12 +168,12 @@ export default {
   font-weight: 600;
   line-height: normal;
   margin-bottom: 1px;
-  margin-left: 250px;
+  margin-left: 300px;
   min-height: 41px;
   text-align: center;
   width: 706px;
+  top: 50px;
 }
-
 .vector {
   position: absolute;
   width: 41px;
@@ -112,7 +182,6 @@ export default {
   top: 3vh;
   object-fit: cover;
 }
-
 .flex-row-1 {
   align-items: flex-start;
   align-self: flex-start;
@@ -123,7 +192,6 @@ export default {
   margin-top: 108px;
   min-width: 1491px;
 }
-
 .flex-col {
   align-items: flex-start;
   align-self: flex-end;
@@ -132,7 +200,6 @@ export default {
   min-height: 283px;
   width: 796px;
 }
-
 .location-services {
   color: var(--black);
   font-family: "Inter";
@@ -143,7 +210,6 @@ export default {
   text-align: center;
   width: 706px;
 }
-
 .enable-location-to-g {
   align-self: flex-end;
   color: #808080;
@@ -154,7 +220,6 @@ export default {
   text-align: center;
   width: 706px;
 }
-
 .location-preferences {
   color: var(--black);
   font-family: "Inter";
@@ -166,7 +231,6 @@ export default {
   text-align: center;
   width: 706px;
 }
-
 .manually-enter-in-a {
   align-self: center;
   color: #808080;
@@ -178,7 +242,6 @@ export default {
   text-align: center;
   width: 706px;
 }
-
 .flex-col-1 {
   align-items: flex-end;
   display: flex;
@@ -187,7 +250,6 @@ export default {
   min-height: 266px;
   width: 672px;
 }
-
 /* OFF ONLY */
 .toggle-switcho-container {
   align-items: flex-start;
@@ -198,13 +260,11 @@ export default {
   min-width: 431px;
   position: relative;
 }
-
 .overlap-group1 {
   height: 107px;
   position: relative;
   width: 672px;
 }
-
 .city{
   height: 50px;
   left: -200px;
@@ -212,7 +272,6 @@ export default {
   top: 0;
   width: 260px;
 }
-
 .zip-code {
   height: 50px;
   left: 290px;
@@ -220,8 +279,6 @@ export default {
   top: 0;
   width: 188px;
 }
-
-
 .or {
   color: var(--black);
   font-family:"Inter";
@@ -234,40 +291,61 @@ export default {
   top: 10px;
   width: 254px;
 }
-
 .overlap-group {
   height: 80px;
   margin-top: 345px;
   position: relative;
   width: 706px;
 }
-
 .rectangle-272 {
   background-color: var(--black);
   height: 80px;
-  left: 520px;
+  left: 600px;
   position: absolute;
   top: -250px;
   width: 335px;
 }
-
 .save {
   color: var(--white);
   font-weight: 300;
-  left: 340px;
+  left: 410px;
   line-height: normal;
   position: absolute;
   text-align: center;
   top: -230px;
   width: 706px;
 }
+@media screen and (min-width: 300px) and (max-width:800px) { /* Mobile */
+  .menu-bar-container{
+    left: 250%;
+  }
+  .profile-img-container{
+    left:250%;
+  }
+  .title{
+    left:-50%;
+    top: 100px;
+  }
+  .toggle-switcho-container{
+    left: -50%;
+  }
+  .city{
+    left: -40%;
+  }
+  .or{
+    left: -40%;
+    top: 90px;
+  }
+  .zip-code{
+    left: -34%;
+    top: 150px;
+  }
+  .overlap-group{
+    left: -80%;
+    top: 50px;
+  }
+  
+}
 
-/* For Mobile Device */
-@media screen and (max-width: 400px) {
-  
-}
-/* For Laptops and Desktops */
-@media screen and (min-width:880px)  {
-  
-}
+
 </style>
