@@ -114,7 +114,7 @@
 
 <script>
 import axios from "axios";
-import menuBar from "@/components/menuBar.vue";
+import menuBar from "@/components/menuBarNonLoggedIn.vue";
 export default {
   name: "WebsiteHomePageNotLoggedIn",
   data() {
@@ -293,7 +293,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 * {
   margin: 0;

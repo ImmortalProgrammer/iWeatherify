@@ -71,7 +71,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .website-location-settings {
   align-items: center;
   background-color: var(--white);

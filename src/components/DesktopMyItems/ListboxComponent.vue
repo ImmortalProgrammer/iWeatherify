@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .listbox-component {
   align-items: center;
   display: flex;

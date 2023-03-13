@@ -10,7 +10,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .toggle-switchoff {
   align-items: flex-start;
   background-color: var(--gray04);
