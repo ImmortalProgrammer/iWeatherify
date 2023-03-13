@@ -11,7 +11,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .placeholder-text {
   align-items: flex-start;
   display: flex;

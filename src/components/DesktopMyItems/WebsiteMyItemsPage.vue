@@ -165,7 +165,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .website-my-items-page {
   align-items: flex-end;
   background-color: var(--white);

@@ -70,7 +70,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .LoginPage {
     display: flex;
     flex-direction: row;

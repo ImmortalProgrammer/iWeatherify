@@ -9,7 +9,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .ellipse-8 {
   align-items: flex-start;
   display: flex;

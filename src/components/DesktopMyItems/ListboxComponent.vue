@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 import ListBoxTitle from "./ListBoxTitle";
 import PlaceholderText from "./PlaceholderText";
 export default {

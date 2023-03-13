@@ -11,7 +11,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .list-box-title {
   align-items: flex-start;
   display: flex;
