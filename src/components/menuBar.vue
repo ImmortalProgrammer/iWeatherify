@@ -1,7 +1,12 @@
 <template>
-  <button class ="menu-open-close" >
-
-  </button>
+  <div class = "menu">
+    <div class = "menu-container">
+      <div class = "bar" ></div>
+      <div class = "bar"></div>
+      <div class = "bar "></div>
+      <div class = "bar" ></div>
+    </div>
+  </div>
 </template>
 
 
@@ -11,9 +16,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
-.menu-open-close {
-
+.bar {
+  width: 2.05vw;
+  height: 0.4vh;
+  background-color: black;
+  margin: 0.3vw 0;
 }
+
+
 </style>

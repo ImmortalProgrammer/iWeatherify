@@ -462,6 +462,9 @@ export default {
   width: 93%;
 }
 
+.menu-location {
+}
+
 
 main {
   min-height: 100vh;
