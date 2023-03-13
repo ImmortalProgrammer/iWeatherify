@@ -12,7 +12,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .add-edit-delete-1 {
   align-items: flex-start;
   align-self: flex-start;

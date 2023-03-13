@@ -22,7 +22,7 @@
     <div class="row-format-container">
       <div class="row">
         <p class="unit-font">Temperature</p>
-        <select class="temp-container" id="dropdown-container-font" v-model="temperature"> 
+        <select class="degree-container" id="dropdown-container-font" v-model="temperature"> 
           <option value="f">°F</option>
           <option value="c">°C</option>
         </select>
@@ -96,7 +96,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .website-units-page {
   position: absolute;
   width: 100%; 
@@ -147,7 +147,7 @@ export default {
   height: 300px;
 }
 
-.temp-container {
+.degree-container {
   position: relative;
   width: fit-content;
   border: none;
@@ -204,15 +204,18 @@ export default {
   font-style: normal;
   font-weight: 400;
   opacity: 0.5;
-}
-
-select {
   cursor: pointer;
 }
 
 button {
   font-family: 'Inter';
   font-style: normal;
+  font-size: large;
+  font-weight: bold;
+  padding: 0.7em 10em;
+  color: white;
+  background-color: black;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 992px) and (max-width: 1440px) {

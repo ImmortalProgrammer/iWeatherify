@@ -10,7 +10,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .toggle-switchon {
   align-items: center;
   background-color: var(--blue-secondary);

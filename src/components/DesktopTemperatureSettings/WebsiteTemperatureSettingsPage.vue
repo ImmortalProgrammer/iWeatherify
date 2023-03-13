@@ -127,7 +127,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 
 .website-temperature-settings-page {
   position: absolute;
@@ -193,7 +193,7 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   width: 100%;
   height: 10%;
 }
@@ -243,7 +243,7 @@ button {
   font-style: normal;
   font-size: 1em;
   background-color: #478887;
-  margin-left: -38px;
+  margin-left: -51px;
   padding: 0 5px 0 5px;
   cursor: pointer;
   border-radius: 0 15px 15px 0;
