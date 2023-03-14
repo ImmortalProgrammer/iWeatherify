@@ -114,7 +114,7 @@
 
 <script>
 import axios from "axios";
-import menuBar from "@/components/menuBarNonLoggedIn.vue";
+import menuBar from "@/components/menuBars/menuBarNonLoggedIn.vue";
 export default {
   name: "WebsiteHomePageNotLoggedIn",
   data() {
@@ -156,7 +156,6 @@ export default {
           //Seven-Day Forecast
           await this.eightDayForecast();
 
-          console.log(this.eightDayForecastData.iconUrlArr[0]);
           this.currentWeatherData.locationInput = '';
 
         }

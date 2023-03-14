@@ -27,6 +27,7 @@ const isUserLoggedIn = () => {
 
 const routes = [
   {
+    name: "NHomepage",
     path: "/",
     component: WebsiteHomePageNotLoggedIn,
     props: { ...websiteHomePageNotLoggedInData },
@@ -35,6 +36,7 @@ const routes = [
     },
   },
   {
+    name: "Register",
     path: "/register",
     component: RegisterPage,
     meta: {
@@ -42,6 +44,7 @@ const routes = [
     },
   },
   {
+    name: "Login",
     path: "/login",
     component: WebsiteLoginPage,
     meta: {
@@ -49,6 +52,7 @@ const routes = [
     },
   },
   {
+    name: "Homepage",
     path: "/homepage",
     component: WebsiteHomePageLoggedIn,
     props: { ...websiteHomePageLoggedInData },
@@ -57,6 +61,7 @@ const routes = [
     },
   },
   {
+    name: "LocationSettings",
     path: "/website-location-settings",
     component: WebsiteLocationSettings,
     props: { ...websiteLocationSettingsData },
@@ -65,6 +70,7 @@ const routes = [
     },
   },
   {
+    name: "myItems",
     path: "/website-my-items",
     component: WebsiteMyItemsPage,
     props: { ...websiteMyItemsPageData },
@@ -73,6 +79,7 @@ const routes = [
     },
   },
   {
+    name: "Units",
     path: "/website-units-page",
     component: WebsiteUnitsPage,
     props: {
@@ -86,6 +93,7 @@ const routes = [
     },
   },
   {
+    name: "TemperatureSettings",
     path: "/website-temperature-settings-page",
     component: WebsiteTemperatureSettingsPage,
     props: {
