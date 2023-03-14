@@ -8,7 +8,7 @@
         <img src="../../../img/Profile image.png" />
       </div>
       <div class="menu-bar-container"> 
-        <img src="../../../img/Vector.png" alt="Vector"/>
+        <menu-bar-logged-in></menu-bar-logged-in>
       </div>
     </div>
 
@@ -65,6 +65,8 @@
 </template>
 
 <script>
+import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
+import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 export default {
   name: "WebsiteTemperatureSettingsPage",
   data() {
@@ -121,6 +123,10 @@ export default {
       this.freezingSliderValue = event.target.value;
     }
   },
+  components: {
+    MenuBarLoggedIn,
+    menuBar,
+  },
   props: [
     "title"
   ]
@@ -141,7 +147,8 @@ export default {
   display: inline-flex;
   align-items: safe center;
   margin-top: 2%;
-  width: 100%;
+  width: 88%;
+  z-index: 1;
 }
   
 .logo-container {
@@ -152,12 +159,15 @@ export default {
 
 .menu-bar-container {
   position: relative;
-  left: 85%;
+  left: 106.5%;
+  top: -6.80vh;
+  scale: 1.1;
 }
 
 .profile-img-container {
   position: relative;
-  top: 5px;
+  top: 0.1vh;
+  scale: 1.1;
   left: 85%;
 }
 
@@ -250,13 +260,33 @@ button {
 }
 
 @media screen and (min-width: 992px) and (max-width: 1440px) {
-  .menu-bar-container {
-    left: 80%;
+  .nav-bar-container {
+    position: relative;
+    display: inline-flex;
+    align-items: safe center;
+    margin-top: 2%;
+    width: 83%;
+    z-index: 1;
   }
 
-  .profile-img-container {
-    left: 80%;
+  .logo-container {
+    position: relative;
+    width: 5%;
+    left: 5%;
   }
+
+  .menu-bar-container {
+    position: relative;
+    left: 108.5%;
+    top: -6.20vh;
+    scale: 1.15;
+  }
+  .profile-img-container {
+    position: relative;
+    scale: 1;
+    left: 85%;
+  }
+
 }
 
 @media screen and (min-width: 576px) and (max-width: 992px) {
@@ -268,12 +298,32 @@ button {
     transform: scale(0.8);
   }
 
-  .menu-bar-container {
-    left: 70%;
+  .nav-bar-container {
+    position: relative;
+    display: inline-flex;
+    align-items: safe center;
+    margin-top: 2%;
+    width: 75%;
+    z-index: 1;
   }
 
+  .logo-container {
+    position: relative;
+    width: 5%;
+    left: 5%;
+  }
+
+  .menu-bar-container {
+    position: relative;
+    left: 109.5%;
+    top: -5.1vh;
+    scale: 1;
+  }
   .profile-img-container {
-    left: 70%;
+    position: relative;
+    scale: 0.90;
+    top: 0.5vh;
+    left: 85%;
   }
 }
 
@@ -298,12 +348,32 @@ button {
     font-size: 2em;
   }
 
-  .menu-bar-container {
-    left: 60%;
+  .nav-bar-container {
+    position: relative;
+    display: inline-flex;
+    align-items: safe center;
+    margin-top: 2%;
+    width: 70%;
+    z-index: 1;
   }
 
+  .logo-container {
+    position: relative;
+    width: 5%;
+    left: 5%;
+  }
+
+  .menu-bar-container {
+    position: relative;
+    left: 112.5%;
+    top: -5.1vh;
+    scale: 1;
+  }
   .profile-img-container {
-    left: 60%;
+    position: relative;
+    scale: 0.90;
+    top: 0.5vh;
+    left: 85%;
   }
 }
 
@@ -325,12 +395,32 @@ button {
     transform: scale(0.7);
   }
 
-  .menu-bar-container {
-    left: 55%;
+  .nav-bar-container {
+    position: relative;
+    display: inline-flex;
+    align-items: safe center;
+    margin-top: 2%;
+    width: 80%;
+    z-index: 1;
   }
 
+  .logo-container {
+    position: relative;
+    width: 5%;
+    left: 5%;
+  }
+
+  .menu-bar-container {
+    position: relative;
+    left: 124.5%;
+    top: -8.3vh;
+    scale: 1.55;
+  }
   .profile-img-container {
-    left: 55%;
+    position: relative;
+    scale: 0.65;
+    top: 0.5vh;
+    left: 80%;
   }
 
   .temp-setting-title {

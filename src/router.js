@@ -62,7 +62,7 @@ const routes = [
   },
   {
     name: "LocationSettings",
-    path: "/website-location-settings",
+    path: "/locationSettings",
     component: WebsiteLocationSettings,
     props: { ...websiteLocationSettingsData },
     meta: {
@@ -71,7 +71,7 @@ const routes = [
   },
   {
     name: "myItems",
-    path: "/website-my-items",
+    path: "/myItems",
     component: WebsiteMyItemsPage,
     props: { ...websiteMyItemsPageData },
     meta: {
@@ -80,7 +80,7 @@ const routes = [
   },
   {
     name: "Units",
-    path: "/website-units-page",
+    path: "/unitsSettings",
     component: WebsiteUnitsPage,
     props: {
       defaultLogo4:
@@ -94,7 +94,7 @@ const routes = [
   },
   {
     name: "TemperatureSettings",
-    path: "/website-temperature-settings-page",
+    path: "/tempSettings",
     component: WebsiteTemperatureSettingsPage,
     props: {
       defaultLogo3:

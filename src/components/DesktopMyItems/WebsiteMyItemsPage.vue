@@ -137,12 +137,14 @@
 import Ellipse6 from "./Ellipse6";
 import ListboxComponent from "./ListboxComponent";
 import AddEditDelete from "./AddEditDelete";
+import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
 export default {
   name: "WebsiteMyItemsPage",
   components: {
     Ellipse6,
     ListboxComponent,
     AddEditDelete,
+    menuBar,
   },
   props: [
     "defaultLogo3",

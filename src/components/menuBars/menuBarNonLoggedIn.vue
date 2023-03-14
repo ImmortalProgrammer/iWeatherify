@@ -46,30 +46,8 @@ export default {
     },
     menuPress() {
       this.routeDetection();
-      if (!this.$data.homepage) {
-        document.getElementById("link1_1").style.pointerEvents = "none";
-        document.getElementById("link1_1").style.textDecoration = "line-through";
-        document.getElementById("link1_1").style.textDecorationColor = "black";
-        document.getElementById("link1_1").style.textDecorationThickness = "0.35vw";
-        document.getElementById("link2_1").style.pointerEvents = "auto";
-        document.getElementById("link3_1").style.pointerEvents = "auto";
-      } else if (!this.$data.register) {
-        document.getElementById("link1_1").style.pointerEvents = "auto";
-        document.getElementById("link2_1").style.pointerEvents = "none";
-        document.getElementById("link2_1").style.textDecoration = "line-through";
-        document.getElementById("link2_1").style.textDecorationColor = "black";
-        document.getElementById("link2_1").style.textDecorationThickness = "0.35vw";
-        document.getElementById("link3_1").style.pointerEvents = "auto";
-
-      } else if (!this.$data.login) {
-        document.getElementById("link1_1").style.pointerEvents = "auto";
-        document.getElementById("link2_1").style.pointerEvents = "auto";
-        document.getElementById("link3_1").style.pointerEvents = "none";
-        document.getElementById("link3_1").style.textDecoration = "line-through";
-        document.getElementById("link3_1").style.textDecorationColor = "black";
-        document.getElementById("link3_1").style.textDecorationThickness = "0.35vw";
-      }
-
+      //The gray out effect
+      this.grayOut();
       if (this.$data.disabled) {
         document.getElementById("routes-container1").style.visibility = 'visible';
         this.$data.disabled = false;
@@ -77,7 +55,34 @@ export default {
         document.getElementById("routes-container1").style.visibility = 'hidden';
         this.$data.disabled = true;
       }
-    }
+    }, grayOut() {
+      //this.resetGrayEffects(id) aka link[id]_1
+      if (!this.$data.homepage) {
+        document.getElementById("link1_1").style.pointerEvents = "none";
+        document.getElementById("link1_1").style.opacity = "0.3";
+
+        this.resetGrayEffects(2);
+        this.resetGrayEffects(3);
+
+      } else if (!this.$data.register) {
+        document.getElementById("link2_1").style.pointerEvents = "none";
+        document.getElementById("link2_1").style.opacity = "0.3";
+
+        this.resetGrayEffects(1);
+        this.resetGrayEffects(3);
+
+      } else if (!this.$data.login) {
+        document.getElementById("link3_1").style.pointerEvents = "none";
+        document.getElementById("link3_1").style.opacity = "0.3";
+
+        this.resetGrayEffects(1);
+        this.resetGrayEffects(2);
+      }
+    },
+    resetGrayEffects(id) {
+      document.getElementById("link" + id + "_1").style.pointerEvents = "auto";
+      document.getElementById("link" + id + "_1").style.opacity = "1";
+    },
   }
 }
 </script>

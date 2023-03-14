@@ -5,6 +5,7 @@
 <template>
   <div id="app1">
     <div class="container-center-horizontal1">
+      <menu-bar-logged-in></menu-bar-logged-in>
       <div class ="bar-search1">
         <input class="search-input1" type="text" name="searching" placeholder="Search up a City..."
                v-model="currentWeatherData.locationInput" @keyup.enter="retrieveAPI()">
@@ -115,7 +116,8 @@
 
 <script>
 import axios from "axios";
-import menuBar from "@/components/menuBars/menuBarNonLoggedIn.vue";
+import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
+import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 
 export default {
   name: "WebsiteHomePageLoggedIn",
@@ -285,6 +287,7 @@ export default {
     },
   },
   components: {
+    MenuBarLoggedIn,
     menuBar
   },
   props: [
@@ -482,6 +485,7 @@ export default {
 
 @media only screen and (min-width: 359px) and (max-width: 900px) {
 
+
   .weekly-weather_1 {
     border: none;
     position: absolute;
@@ -647,13 +651,6 @@ export default {
     padding: 25px;
   }
 
-  .container-center-horizontal1 {
-    align-items: flex-start;
-    display: flex;
-    margin-right: 2050px;
-    min-height: 100vh;
-    position: relative;
-  }
 
 
   .home-logo-3 {
@@ -831,14 +828,6 @@ export default {
   main {
     min-height: 100vh;
     padding: 25px;
-  }
-
-  .container-center-horizontal1 {
-    align-items: flex-start;
-    display: flex;
-    margin-right: 2050px;
-    min-height: 100vh;
-    position: relative;
   }
 
 
