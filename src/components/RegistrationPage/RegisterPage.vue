@@ -73,7 +73,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .RegistrationPage {
   display: flex;
   flex-direction: row;
