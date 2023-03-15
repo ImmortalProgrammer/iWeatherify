@@ -2,7 +2,6 @@
 
     // Citation: https://www.youtube.com/watch?v=ai7T1p3Xj8A&t=134s&ab_channel=DigitalFox
 
-    session_start();
     include("connection.php");
     include("security.php");
     access_control();
@@ -22,15 +21,17 @@
             $hash = $data["password"];
 
             if($data == NULL){
-                return "Wrong username or password";
+                echo json_encode("There are no registered users with that username and/or password");
             }
             if(password_verify($password, $hash) == FALSE){
-                $res[] = array("status" => 0);
+                $res = array("status" => 0);
             } else {
-                $_SESSION['user_id'] = $data["user_id"];
-                $_SESSION["username"] = $data["username"];
-                setcookie("username_server", $data["username"], time()+3600, "/");  /* expire in 1 hour */
-                $res[] = array("status" => 1);
+                session_start();
+                $_SESSION['user_id'] = $data["user_id"]; //Store their user id as a user's authentication token
+                $res = array(
+                    "status" => 1,
+                    "auth_token" => $_SESSION["user_id"]
+                );
             }
             echo json_encode($res);
             exit;
