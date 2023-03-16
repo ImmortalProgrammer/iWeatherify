@@ -1,6 +1,6 @@
 <template>
   <div class = "RegistrationPage">
-    <menu-bar></menu-bar>
+    <menu-bar style = "margin-top: -25px; margin-left: -30px;"></menu-bar>"
   <div class="Rectangle">
     <img src="../../../img/figure-with-umbrella.svg"/>
     <h1 class="Header">iWeatherify</h1>

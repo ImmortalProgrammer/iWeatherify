@@ -1,16 +1,7 @@
 <template>
   <div class="container-center-horizontal">
     <div class="website-location-settings screen">
-      <div class="flex-row">
-        <img class="default-logo-5" :src="defaultLogo5" alt="Default Logo 5" />
-        <h1 class="title ui---30-semi2">{{ title }}</h1>
-        <ellipse6 :src="ellipse6Props.src" />
-        <img
-          class="vector"
-          src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
-          alt="Vector"
-        />
-      </div>
+      <nav-bar class = "locationNavPosition"></nav-bar>
       <div class="flex-row-1">
         <div class="flex-col">
           <div class="location-services ui---30-semi2">{{ locationServices }}</div>
@@ -50,9 +41,11 @@
 import Ellipse6 from "./Ellipse6";
 import ToggleSwitchOn from "./ToggleSwitchOn";
 import ToggleSwitchOff from "./ToggleSwitchOff";
+import NavBar from "@/NavBar/NavBar.vue";
 export default {
   name: "WebsiteLocationSettings",
   components: {
+    NavBar,
     Ellipse6,
     ToggleSwitchOn,
     ToggleSwitchOff,
@@ -229,6 +222,10 @@ export default {
   width: 254px;
 }
 
+
+.locationNavPosition {
+  top: -10px;
+}
 .overlap-group {
   height: 80px;
   margin-top: 345px;

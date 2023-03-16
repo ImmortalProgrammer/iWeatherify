@@ -1,16 +1,14 @@
 <template>
   <div class = "menu_2">
-    <div class = "menu-container_2" @click = "menuPress()">
-      <div class = "bar_2" ></div>
-      <div class = "bar_2"></div>
-      <div class = "bar_2 "></div>
-      <div class = "bar_2" ></div>
+    <div class="menu-container_2" @click="menuPress()">
+      <img src="../../../img/Vector.png" alt="Vector"/>
     </div>
     <div id = "routes-container1_2">
       <div class = "links_2">
         <a id ="link1_2" :href="$router.resolve('/homepage').href" style = "text-decoration:none; color: inherit;">Homepage</a>
-        <a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a>
+       <!--  <a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a>
         <a id ="link3_2" :href="$router.resolve('/locationSettings').href" style = "text-decoration:none; color: inherit;">Location Settings</a>
+        !-->
         <a id ="link4_2" :href="$router.resolve('/unitsSettings').href" style = "text-decoration:none; color: inherit;">Unit Settings</a>
         <a id ="link5_2" :href="$router.resolve('/tempSettings').href" style = "text-decoration:none; color: inherit;">Temperature Settings</a>
         <a id ="link6_2"  style = "text-decoration:none; color: inherit;" @click = "logOutAccount()" :href="$router.resolve('/').href">Log Out</a>
@@ -78,26 +76,26 @@ export default {
         document.getElementById("link1_2").style.pointerEvents = "none";
         document.getElementById("link1_2").style.opacity = "0.3";
 
-        this.resetGrayEffects(2);
-        this.resetGrayEffects(3);
-        this.resetGrayEffects(4);
-        this.resetGrayEffects(5);
-
-      } else if (!this.$data.locationSettings) {
-        document.getElementById("link2_2").style.pointerEvents = "none";
-        document.getElementById("link2_2").style.opacity = "0.3";
-
-        this.resetGrayEffects(1);
-        this.resetGrayEffects(3);
+      //  this.resetGrayEffects(2);
+       // this.resetGrayEffects(3);
         this.resetGrayEffects(4);
         this.resetGrayEffects(5);
 
       } else if (!this.$data.myItems) {
-        document.getElementById("link3_2").style.pointerEvents = "none";
-        document.getElementById("link3_2").style.opacity = "0.3";
+      //  document.getElementById("link2_2").style.pointerEvents = "none";
+    //    document.getElementById("link2_2").style.opacity = "0.3";
 
         this.resetGrayEffects(1);
-        this.resetGrayEffects(2);
+       // this.resetGrayEffects(3);
+        this.resetGrayEffects(4);
+        this.resetGrayEffects(5);
+
+      } else if (!this.$data.locationSettings) {
+   //     document.getElementById("link3_2").style.pointerEvents = "none";
+ //       document.getElementById("link3_2").style.opacity = "0.3";
+
+        this.resetGrayEffects(1);
+       // this.resetGrayEffects(2);
         this.resetGrayEffects(4);
         this.resetGrayEffects(5);
 
@@ -106,8 +104,8 @@ export default {
         document.getElementById("link4_2").style.opacity = "0.3";
 
         this.resetGrayEffects(1);
-        this.resetGrayEffects(2);
-        this.resetGrayEffects(3);
+    //    this.resetGrayEffects(2);
+      //  this.resetGrayEffects(3);
         this.resetGrayEffects(5);
 
       } else if (!this.$data.tempSettings) {
@@ -115,8 +113,8 @@ export default {
         document.getElementById("link5_2").style.opacity = "0.3";
 
         this.resetGrayEffects(1);
-        this.resetGrayEffects(2);
-        this.resetGrayEffects(3);
+    //    this.resetGrayEffects(2);
+      //  this.resetGrayEffects(3);
         this.resetGrayEffects(4);
       }
     },
@@ -131,34 +129,22 @@ export default {
 <style scoped>
 
 .menu_2 {
+  position: relative;
   z-index: 1;
-  position: absolute;
-  left: 103%;
-  top: 3.5vh;
-  height: 4.5vh;
-  transform: translate(-50%, 0);
-  width: auto;
-  scale: 1.15;
-}
 
-.bar_2 {
-  width: 2.05vw;
-  height: 0.35vh;
-  background-color: black;
-  margin: 0.3vw 0;
 }
 
 #routes-container1_2 {
   border: none;
   position: relative;
   height: auto;
-  left: -10%;
-  top: -4.5vh;
+  left: -22%;
+  top: -2.5vh;
   bottom: 0;
   border-top: 0;
-  margin-top: 1.1vh;
+  margin-top: 0.6vh;
   transform: translate(-50%, 0);
-  width: 25vw;
+  width: 20vw;
   scale: 0.7;
   color: rgb(255, 255, 255);
   font-weight: 500;
@@ -177,7 +163,7 @@ export default {
 
 
 #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2 {
-  font-size: 2.1em;
+  font-size: 1.8em;
   background-color: dimgray;
   padding: 1.6vh;
   display: block;
@@ -185,27 +171,21 @@ export default {
 
 }
 
-@media screen and (min-width: 700px) and (max-width: 1100px) {
+@media screen and (min-width: 1000px) and (max-width: 1400px) {
   .menu_2 {
-    left: 100%;
-    top: 3.6vh;
-  }
-  .bar_2 {
-    width: 3.5vw;
-    height: 0.35vh;
-    background-color: black;
-    margin: 0.5vh 0;
+    position: relative;
+    z-index: 1;
   }
 
   #routes-container1_2 {
     border: none;
     position: relative;
     height: auto;
-    left: -7%;
-    top: -4.5vh;
+    left: -17.5%;
+    top: -2.5vh;
     bottom: 0;
     border-top: 0;
-    margin-top: 1.1vh;
+    margin-top: 0.6vh;
     transform: translate(-50%, 0);
     width: 25vw;
     scale: 0.7;
@@ -218,34 +198,27 @@ export default {
     visibility: hidden;
   }
   #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2 {
-    font-size: 1.6em;
+    font-size: 1.5em;
   }
-
 }
 
-@media screen and (min-width: 200px) and (max-width: 699px) {
+@media screen and (min-width: 700px) and (max-width: 999px) {
   .menu_2 {
-    left: 97%;
-    top: 3.6vh;
-  }
-  .bar_2 {
-    width: 5.5vw;
-    height: 0.35vh;
-    background-color: black;
-    margin: 0.7vw 0;
+    position: relative;
+    z-index: 1;
   }
 
   #routes-container1_2 {
     border: none;
     position: relative;
     height: auto;
-    left: -7%;
-    top: -4.5vh;
+    left: -30.5%;
+    top: -2.5vh;
     bottom: 0;
     border-top: 0;
-    margin-top: 1.1vh;
+    margin-top: 0.6vh;
     transform: translate(-50%, 0);
-    width: 30vw;
+    width: 35vw;
     scale: 0.7;
     color: rgb(255, 255, 255);
     font-weight: 500;
@@ -255,10 +228,71 @@ export default {
     overflow-x: hidden;
     visibility: hidden;
   }
-  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2{
-    font-size: 1em;
+  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2 {
+    font-size: 1.2em;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 699px) {
+  .menu_2 {
+    z-index: 1;
+    position: fixed;
+    scale: 0.7;
   }
 
+  #routes-container1_2 {
+    border: none;
+    position: relative;
+    height: auto;
+    left: -2.5vh;
+    top: -2.5vh;
+    bottom: 0;
+    border-top: 0;
+    margin-top: 1.1vh;
+    transform: translate(-50%, 0);
+    width: 50vw;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    text-align: center;
+    background-color: gray;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    visibility: hidden;
+  }
+  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2{
+    font-size: 1.7em;
+  }
+}
+
+@media screen and (max-width: 499px) {
+  .menu_2 {
+    z-index: 1;
+    position: fixed;
+    scale: 0.7;
+  }
+
+  #routes-container1_2 {
+    border: none;
+    position: relative;
+    height: auto;
+    left: -2.5vh;
+    top: -2.5vh;
+    bottom: 0;
+    border-top: 0;
+    margin-top: 1.1vh;
+    transform: translate(-50%, 0);
+    width: 65vw;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+    text-align: center;
+    background-color: gray;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    visibility: hidden;
+  }
+  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2{
+    font-size: 1.2em;
+  }
 }
 
 

@@ -1,11 +1,7 @@
-<!--NOTE: WebsiteHomePageLoggedin.vue is a duplicate of WebsiteHomePageNotLoggedIn.vue, so make sure you change the class
- name of the classes you want to change for this page. It's also easier to write separate components for this page. Otherwise
- It would require making the same changes twice, requiring a great deal of necessary effort-->
-
 <template>
   <div id="app1">
     <div class="container-center-horizontal1">
-      <menu-bar-logged-in></menu-bar-logged-in>
+      <nav-bar class = "HomePageNavBar"></nav-bar>
       <div class ="bar-search1">
         <input class="search-input1" type="text" name="searching" placeholder="Search up a City..."
                v-model="currentWeatherData.locationInput" @keyup.enter="retrieveAPI()">
@@ -109,7 +105,6 @@
           <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[7] }}°</p>
         </div>
       </div>
-      <img class="home-logo-3" :src="homeLogo2" alt="Home Logo" />
     </div>
   </div>
 </template>
@@ -118,6 +113,7 @@
 import axios from "axios";
 import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
 import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
+import NavBar from "@/NavBar/NavBar.vue";
 
 export default {
   name: "WebsiteHomePageLoggedIn",
@@ -287,6 +283,7 @@ export default {
     },
   },
   components: {
+    NavBar,
     MenuBarLoggedIn,
     menuBar
   },
@@ -303,6 +300,10 @@ export default {
   padding: 0;
   box-sizing: border-box;
 
+}
+
+.HomePageNavBar {
+  top: -0.85%;
 }
 
 
@@ -402,7 +403,7 @@ export default {
   padding-top: 1.5vh;
   font-size: 5vh;
 }
-
+.
 .weatherDescription1 {
   padding-top: 1.5vh;
   padding-bottom: 1.5vh;
@@ -484,7 +485,11 @@ export default {
 }
 
 @media only screen and (min-width: 359px) and (max-width: 900px) {
-
+  .menu-container-homepage-logged-in {
+    z-index: 1;
+    margin-left: 75vw;
+    padding-top: 4.0vh;
+  }
 
   .weekly-weather_1 {
     border: none;

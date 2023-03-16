@@ -1,10 +1,7 @@
 <template>
   <div class = "menu">
-    <div class = "menu-container" @click = "menuPress()">
-      <div class = "bar" ></div>
-      <div class = "bar"></div>
-      <div class = "bar "></div>
-      <div class = "bar" ></div>
+    <div class="menucontainer" @click="menuPress()">
+      <img src="../../../img/Vector.png" alt="Vector"/>
     </div>
     <div id = "routes-container1">
       <div class = "links">
@@ -92,8 +89,8 @@ export default {
 .menu {
   z-index: 1;
   position: absolute;
-  left: 103%;
-  top: 3.5vh;
+  left: 101.5%;
+  top: 5.5vh;
   height: 4.5vh;
   transform: translate(-50%, 0);
   width: auto;
@@ -117,7 +114,7 @@ export default {
   border-top: 0;
   margin-top: 1.1vh;
   transform: translate(-50%, 0);
-  width: 25vw;
+  width: 15vw;
   scale: 0.7;
   color: rgb(255, 255, 255);
   font-weight: 500;
@@ -184,8 +181,9 @@ export default {
 
 @media screen and (min-width: 200px) and (max-width: 699px) {
   .menu {
-    left: 97%;
-    top: 3.6vh;
+    left: 98%;
+    top: 3.3vh;
+    scale: 0.9;
   }
   .bar {
     width: 5.5vw;
@@ -204,7 +202,7 @@ export default {
     border-top: 0;
     margin-top: 1.1vh;
     transform: translate(-50%, 0);
-    width: 30vw;
+    width: 40vw;
     scale: 0.7;
     color: rgb(255, 255, 255);
     font-weight: 500;
@@ -215,7 +213,7 @@ export default {
     visibility: hidden;
   }
   #link1_1, #link2_1, #link3_1 {
-    font-size: 1em;
+    font-size: 1.6em;
   }
 
 }

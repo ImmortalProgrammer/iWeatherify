@@ -1,16 +1,10 @@
 <template>
   <div class="website-temperature-settings-page screen">
     <div class="nav-bar-container">
-      <div class="logo-container">
-        <img src="../../../img/Logo.png" alt="Default Logo 4" />
-      </div>
-      <div class="profile-img-container">
-        <img src="../../../img/Profile image.png" />
-      </div>
-      <div class="menu-bar-container"> 
-        <menu-bar-logged-in></menu-bar-logged-in>
-      </div>
+      <nav-bar style = "margin-top: 3.4vh;"></nav-bar>
     </div>
+
+    <div class = "pushDowTempDisplay">
 
     <div class="title-container">
       <h1 class="temp-setting-title">{{ title }}</h1>
@@ -61,12 +55,15 @@
         </div>
       </div>
     </div>
+      </div>
   </div>
+
 </template>
 
 <script>
 import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
 import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
+import NavBar from "@/NavBar/NavBar.vue";
 export default {
   name: "WebsiteTemperatureSettingsPage",
   data() {
@@ -124,6 +121,7 @@ export default {
     }
   },
   components: {
+    NavBar,
     MenuBarLoggedIn,
     menuBar,
   },
@@ -142,10 +140,15 @@ export default {
   background: #FFFFFF;
 }
 
+.pushDowTempDisplay {
+  margin-top: 5.5%;
+}
+
 .nav-bar-container {
   position: relative;
   display: inline-flex;
   align-items: safe center;
+  top: -0.2%;
   margin-top: 2%;
   width: 88%;
   z-index: 1;
@@ -179,6 +182,8 @@ export default {
   align-items: center;
   width: 100%;
   height: 10%;
+  padding-top: 15px;
+  padding-bottom: 25px;
 }
 
 .temp-setting-title {
@@ -334,6 +339,8 @@ button {
 
   .title-container{
     transform: scale(0.8);
+    padding-top: 55px;
+    margin-bottom: -120px;
   }
 
   .temp-container {
@@ -385,6 +392,7 @@ button {
   .title-container {
     transform: scale(0.6);
     width: 50%;
+    margin-bottom: -150px;
   }
 
   .temp-container {
