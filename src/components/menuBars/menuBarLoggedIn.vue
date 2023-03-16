@@ -138,7 +138,7 @@ export default {
   border: none;
   position: relative;
   height: auto;
-  left: -22%;
+  left: -60%;
   top: -2.5vh;
   bottom: 0;
   border-top: 0;
