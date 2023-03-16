@@ -3,6 +3,12 @@
     <div class="menucontainer" @click="menuPress()">
       <img src="../../../img/Vector.png" alt="Vector"/>
     </div>
+
+    <div class = "profile_image_notloggedin">
+      <a id ="login page" :href="$router.resolve('/login').href" style = "text-decoration:none; color: inherit;">
+      <img src="../../../img/Profile image.png" alt="ProfileImage"/> </a>
+    </div>
+
     <div id = "routes-container1">
       <div class = "links">
         <a id ="link1_1" :href="$router.resolve('/').href" style = "text-decoration:none; color: inherit;">Homepage</a>
@@ -80,6 +86,7 @@ export default {
       document.getElementById("link" + id + "_1").style.pointerEvents = "auto";
       document.getElementById("link" + id + "_1").style.opacity = "1";
     },
+   
   }
 }
 </script>
@@ -96,6 +103,18 @@ export default {
   width: auto;
   scale: 1.15;
 }
+
+.profile_image_notloggedin{
+  z-index: 1;
+  position: absolute;
+  left: 101.5%;
+  top: 5.5vh;
+  height: 4.5vh;
+  transform: translate(-50%, 0);
+  width: auto;
+  scale: 1.15;
+}
+
 
 .bar {
   width: 2.05vw;
