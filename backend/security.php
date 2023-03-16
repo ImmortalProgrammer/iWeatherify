@@ -67,10 +67,20 @@
         return $text;
     }
 
+    // To make an alphanumeric cookie of default length 20
     function create_token($length = 20){
         $bytes = random_bytes($length);
         $token = bin2hex($bytes);
         return $token;
+    }
+
+    //When the user logs in, create an auth_token, hash it, store in data base with their username as an authenticated user
+    function add_auth_user($username, $hashed_cookie){
+        include("connection.php");
+        $query = "INSERT INTO `auth_users` (`username`, `auth_token`) VALUES (?, ?)";
+        $query = $conn -> prepare($query);
+        $query -> bind_param("ss", $username, $hashed_cookie);
+        $query -> execute();
     }
 
     // When a user tries to access any restricted page, if they have an authenticated cookie associated with them, let them in
