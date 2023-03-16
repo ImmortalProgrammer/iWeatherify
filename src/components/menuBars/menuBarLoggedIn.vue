@@ -3,12 +3,15 @@
     <div class="menu-container_2" @click="menuPress()">
       <img src="../../../img/Vector.png" alt="Vector"/>
     </div>
+    <div class = "profile_image_loggedin">
+      <a id ="myItems" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">
+      <img src="../../../img/Profile image.png" alt="ProfileImage"/> </a>
+    </div>
     <div id = "routes-container1_2">
       <div class = "links_2">
         <a id ="link1_2" :href="$router.resolve('/homepage').href" style = "text-decoration:none; color: inherit;">Homepage</a>
-       <!--  <a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a>
+       <a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a>
         <a id ="link3_2" :href="$router.resolve('/locationSettings').href" style = "text-decoration:none; color: inherit;">Location Settings</a>
-        !-->
         <a id ="link4_2" :href="$router.resolve('/unitsSettings').href" style = "text-decoration:none; color: inherit;">Unit Settings</a>
         <a id ="link5_2" :href="$router.resolve('/tempSettings').href" style = "text-decoration:none; color: inherit;">Temperature Settings</a>
         <a id ="link6_2"  style = "text-decoration:none; color: inherit;" @click = "logOutAccount()" :href="$router.resolve('/').href">Log Out</a>
@@ -121,7 +124,8 @@ export default {
     resetGrayEffects(id) {
       document.getElementById("link" + id + "_2").style.pointerEvents = "auto";
       document.getElementById("link" + id + "_2").style.opacity = "1";
-    }
+    },
+   
   }
 }
 </script>
@@ -133,6 +137,8 @@ export default {
   z-index: 1;
 
 }
+
+
 
 #routes-container1_2 {
   border: none;
