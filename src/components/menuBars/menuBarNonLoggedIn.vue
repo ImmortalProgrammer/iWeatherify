@@ -4,9 +4,9 @@
       <img src="../../../img/Vector.png" alt="Vector"/>
     </div>
 
-    <div class = "profile_image_notloggedin">
-      <a id ="login page" :href="$router.resolve('/login').href" style = "text-decoration:none; color: inherit;">
-      <img src="../../../img/Profile image.png" alt="ProfileImage"/> </a>
+    <div class = "profile_image_nonloggedin">
+      <a id ="loginpage" :href="$router.resolve('/login').href" style = "text-decoration:none; color: inherit;">
+      <img src="../../../img/default-profile-icon.png" alt="ProfileImage0"/> </a>
     </div>
 
     <div id = "routes-container1">
@@ -104,15 +104,10 @@ export default {
   scale: 1.15;
 }
 
-.profile_image_notloggedin{
-  z-index: 1;
+.profile_image_nonloggedin{
   position: absolute;
-  left: 101.5%;
-  top: 5.5vh;
-  height: 4.5vh;
-  transform: translate(-50%, 0);
-  width: auto;
-  scale: 1.15;
+  margin-left: -60px; 
+  top: -3px;
 }
 
 
