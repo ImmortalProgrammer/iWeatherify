@@ -52,17 +52,11 @@
 
         axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/login.php?action=login", formData).then(
           (res) => {
-            console.log(res.data)
-            try {
-              if(res.data[0].status === 1){
-                document.cookie = "username=" + this.username;
-                localStorage.setItem('token', 123456789);
-                this.$router.push("/homepage");
-              } else {
-                alert("Invalid username and password combo");
-              }
-            } catch {
-              alert("Please provide some valid information");
+            if(res.data.status === 1){
+              document.cookie = "auth_token=" + res.data.auth_token; //Retrieve the auth token from the server and store it as a cookie
+              this.$router.push("/homepage");
+            } else {
+              alert("Invalid username and password combo");
             }
         }).catch((err) => {
           console.log("Unsuccessful axios post", err)
@@ -75,7 +69,7 @@
   }
 </script>
 
-<style scoped>
+<style>
 .LoginPage {
     display: flex;
     flex-direction: row;

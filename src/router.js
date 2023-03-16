@@ -20,8 +20,8 @@ import {
 Vue.use(Router);
 
 const isUserLoggedIn = () => {
-  const token = localStorage.getItem('token');
-  if (token) return true;
+  const authToken = document.cookie;
+  if (authToken) return true;
   return false;
 };
 
@@ -31,25 +31,16 @@ const routes = [
     path: "/",
     component: WebsiteHomePageNotLoggedIn,
     props: { ...websiteHomePageNotLoggedInData },
-    meta: {
-      needsLogOut: true
-    },
   },
   {
     name: "Register",
     path: "/register",
-    component: RegisterPage,
-    meta: {
-      needsLogOut: true
-    },
+    component: RegisterPage
   },
   {
     name: "Login",
     path: "/login",
-    component: WebsiteLoginPage,
-    meta: {
-      needsLogOut: true
-    },
+    component: WebsiteLoginPage
   },
   {
     name: "Homepage",
@@ -121,15 +112,7 @@ router.beforeEach((to, from, next) => {
       next('/login');
     }
   } else {
-    if (to.meta.needsLogOut) {
-      if (!isUserLoggedIn()) {
-        next();
-      } else {
-        next('/homepage');
-      }
-    } else {
-      next('/');
-    }
+    next();
   }
 });
 

@@ -1,12 +1,10 @@
 <?php 
 
     // Citation: https://www.youtube.com/watch?v=ai7T1p3Xj8A&t=134s&ab_channel=DigitalFox
-
-    session_start();
     include("connection.php");
     include("security.php");
     access_control();
-    
+
     if($_SERVER["REQUEST_METHOD"]  == "POST"){
         $username = htmlspecialchars(trim($_POST["username"]), ENT_QUOTES);
         $password = htmlspecialchars(trim($_POST["password"]), ENT_QUOTES);
@@ -21,16 +19,28 @@
             $data = $result -> fetch_assoc();
             $hash = $data["password"];
 
+            //Create the cookie and the hashed version of the cookie
+            $cookie = create_token();
+            $hashed_cookie = hash("sha256", $cookie);
+
+            // Store username with hashed cookie into database
+            add_auth_user($username, $hashed_cookie);
+
+            // Input validation before actually logging in user
             if($data == NULL){
-                return "Wrong username or password";
+                echo json_encode("There are no registered users with that username and/or password");
             }
             if(password_verify($password, $hash) == FALSE){
-                $res[] = array("status" => 0);
+                $res = array("status" => 0);
             } else {
+                session_start();
+                $_SESSION["loggedin"] = true;
                 $_SESSION['user_id'] = $data["user_id"];
-                $_SESSION["username"] = $data["username"];
-                setcookie("username_server", $data["username"], time()+3600, "/");  /* expire in 1 hour */
-                $res[] = array("status" => 1);
+                $_SESSION["auth_token"] = $cookie;
+                $res = array(
+                    "status" => 1,
+                    "auth_token" => $cookie,
+                );
             }
             echo json_encode($res);
             exit;
