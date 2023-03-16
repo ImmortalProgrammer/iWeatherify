@@ -1,6 +1,9 @@
 <template>
   <div id="app2">
   <div class="container-center-horizontal">
+        <div class = "menu-location">
+          <menu-bar></menu-bar>
+        </div>
         <div class ="bar-search">
         <input class="search-input" type="text" name="searching" placeholder="Search up a City..."
                v-model="currentWeatherData.locationInput" @keyup.enter="retrieveAPI()">
@@ -111,7 +114,7 @@
 
 <script>
 import axios from "axios";
-
+import menuBar from "@/components/menuBars/menuBarNonLoggedIn.vue";
 export default {
   name: "WebsiteHomePageNotLoggedIn",
   data() {
@@ -153,7 +156,6 @@ export default {
           //Seven-Day Forecast
           await this.eightDayForecast();
 
-          console.log(this.eightDayForecastData.iconUrlArr[0]);
           this.currentWeatherData.locationInput = '';
 
         }
@@ -282,6 +284,7 @@ export default {
     },
   },
   components: {
+    menuBar
   },
   props: [
     "homeLogo2",
@@ -365,6 +368,7 @@ export default {
   scale: 2;
   height: auto;
 }
+
 
 .current-unit {
   position: absolute;
@@ -455,6 +459,9 @@ export default {
   position: absolute;
   top: 0.6vh;
   width: 93%;
+}
+
+.menu-location {
 }
 
 

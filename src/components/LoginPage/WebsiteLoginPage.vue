@@ -1,5 +1,6 @@
 <template>
   <div class = "LoginPage">
+    <menu-bar style = "margin-top: -25px; margin-left: -5px;"></menu-bar>
     <div class="Rectangle">
       <img src="../../../img/figure-with-umbrella.svg"/>
       <h1 class="Header">iWeatherify</h1>
@@ -34,6 +35,7 @@
 
 <script>
   import axios from "axios"
+  import menuBar from "@/components/menuBars/menuBarNonLoggedIn.vue";
   export default {
     data() {
       return {
@@ -66,6 +68,9 @@
           console.log("Unsuccessful axios post", err)
         })
       }
+    },
+    components: {
+      menuBar
     }
   }
 </script>
