@@ -60,11 +60,45 @@
             $length = 5;
         }
 
-        $len = rand(4, $length);
-        for ($i=0; $i < $len; $i++) { 
+        for ($i=0; $i < $length; $i++) { 
             $text .= rand(0, 9);
         }
 
         return $text;
+    }
+
+    function create_token($length = 20){
+        $bytes = random_bytes($length);
+        $token = bin2hex($bytes);
+        return $token;
+    }
+
+    // When a user tries to access any restricted page, if they have an authenticated cookie associated with them, let them in
+    function is_valid_auth_token($username, $auth_token){
+        include("connection.php");
+        
+        $query = "SELECT `username`, `auth_token` FROM auth_users where `username` = ?";
+        $query = $conn -> prepare($query);
+        $query -> bind_param("s", $username);
+        $query -> execute();
+        $result = $query -> get_result();
+        $data = $result -> fetch_assoc();
+        $hashed_auth_token = $data["auth_token"]; // Get the stored hashed authentication token for this user from the database
+
+        if(hash("sha256", $auth_token) === $hashed_auth_token){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // TODO: When implementing logout functionality, would need to delete the instance of the auth_token from the database
+    function delete_auth_token($username){
+        include("connection.php");
+        
+        $query = "DELETE FROM auth_users where `username` = ?";
+        $query = $conn -> prepare($query);
+        $query -> bind_param("s", $username);
+        $query -> execute();
     }
 ?>
