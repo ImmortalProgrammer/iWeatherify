@@ -2,18 +2,25 @@
 
     session_start();
     include("connection.php");
+    include("security.php");
     access_control();
 
-    // Get the POST data sent from the client
-    $hot = $_POST['hotInputValue'];
-    $warm = $_POST['warmInputValue'];
-    $ideal = $_POST['idealInputValue'];
-    $chilly = $_POST['chillyInputValue'];
-    $cold = $_POST['coldInputValue'];
-    $freezing = $_POST['freezingSliderValue'];
+    // Get the input data
+    $input = json_decode(file_get_contents("php://input"), true);
+    $userid = $input["userid"];
+    $label = $input["label"];
+    $value = $input["value"];
 
-    // Save the data to the database using SQL queries
+    // Use prepared statements to prevent SQL injection
+    $stmt = $conn->prepare("INSERT INTO saved_temperatures (userid, label, value) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE value=?");
+    $stmt->bind_param("ssss", $userid, $label, $value, $value);
 
-    // Return a response to the client to indicate that the data was saved
-    echo 'Temperatures saved successfully';
+    if ($stmt->execute()) {
+        echo json_encode(array("result" => "success"));
+    } else {
+        echo json_encode(array("result" => "error"));
+    }
+
+    $stmt->close();
+    $conn->close();
 ?>

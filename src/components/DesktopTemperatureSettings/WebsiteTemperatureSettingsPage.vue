@@ -1,12 +1,14 @@
 <template>
-  <div class="website-temperature-settings-page screen">
+  <div class="website-temperature-settings-page">
     <div class="nav-bar-container">
       <div class="logo-container">
         <img src="../../../img/Logo.png" alt="Default Logo 4" />
       </div>
+
       <div class="profile-img-container">
         <img src="../../../img/Profile image.png" />
       </div>
+
       <div class="menu-bar-container"> 
         <img src="../../../img/Vector.png" alt="Vector"/>
       </div>
@@ -18,46 +20,15 @@
     
     <div class="temp-container">
       <div class="hot-to-freezing-container">
-        <div class="temp-rows">
-          <label for="hot" class="hot-to-freezing-font">Hot:</label>
-          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="hotSliderValue" @input="updateHotInputValue"/>
-          <input class="temp-input" type="text" id="hot" name="hot" v-model="hotInputValue" @input="updateHotSliderValue"/>
-          <button name="hot-button">Save</button>
-        </div>
 
-        <div div class="temp-rows">
-          <label for="warm" class="hot-to-freezing-font">Warm:</label>
-          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="warmSliderValue" @input="updateWarmInputValue"/>
-          <input class="temp-input" type="text" id="warm" name="warm" v-model="warmInputValue" @input="updateWarmSliderValue"/>
-          <button name="warm-button">Save</button>
-        </div>
+        <div v-for="(label, index) in labels" :key="index" class="temp-rows">
+          <label :for="label" class="hot-to-freezing-font">{{ label }}:</label>
 
-        <div div class="temp-rows">
-          <label for="ideal" class="hot-to-freezing-font">Ideal:</label> 
-          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="idealSliderValue" @input="updateIdealInputValue"/>
-          <input class= "temp-input" type="text" id="ideal" name="ideal" v-model="idealInputValue" @input="updateIdealSliderValue"/>
-          <button name="ideal-button">Save</button>
-        </div>
+          <input class="temp-slider" type="range" min="-100" max="100" v-model="tempValues[label]" @input="updateInputValue(label, $event)"/>
 
-        <div div class="temp-rows">
-          <label for="chilly" class="hot-to-freezing-font">Chilly:</label>
-          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="chillySliderValue" @input="updateChillyInputValue"/>
-          <input class= "temp-input" type="text" id="chilly" name="chilly" v-model="chillyInputValue" @input="updateChillySliderValue"/>
-          <button name="chilly-button">Save</button>
-        </div>
+          <input class= "temp-input" :type="text" :id="label" :name="label" v-model="tempValues[label]" @input="updateSliderValue(label, $event)"/>
 
-        <div div class="temp-rows">
-          <label for="cold" class="hot-to-freezing-font">Cold:</label>
-          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="coldSliderValue" @input="updateColdInputValue"/>
-          <input class= "temp-input" type="text" id="cold" name="cold" v-model="coldInputValue" @input="updateColdSliderValue"/>
-          <button name="cold-button">Save</button>
-        </div>
-
-        <div div class="temp-rows">
-          <label for="freezing" class="hot-to-freezing-font">Freezing:</label>
-          <input class="temp-slider" type="range" min="-100" max="100" value="0" v-model="freezingSliderValue" @input="updateFreezingInputValue"/>
-          <input class= "temp-input" type="text" id="freezing" name="freezing" v-model="freezingInputValue" @input="updateFreezingSliderValue"/>
-          <button name="freezing-button">Save</button>
+          <button :name="label + '-button'" @click="saveSettings(label)">Save</button>
         </div>
       </div>
     </div>
@@ -65,61 +36,68 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "WebsiteTemperatureSettingsPage",
   data() {
     return {
-      hotSliderValue: 0,
-      hotInputValue: 0,
-      warmSliderValue: 0,
-      warmInputValue: 0,
-      idealSliderValue: 0,
-      idealInputValue: 0,
-      chillySliderValue: 0,
-      chillyInputValue: 0,
-      coldSliderValue: 0,
-      coldInputValue: 0,
-      freezingInputValue: 0,
-      freezingSliderValue: 0,
+      labels: ["hot", "warm", "ideal", "chilly", "cold", "freezing"],
+      tempValues: {
+        hot: 0,
+        warm: 0,
+        ideal: 0,
+        chilly: 0,
+        cold: 0,
+        freezing: 0
+      },
     };
   },
+  created() {
+    this.loadTempSettings();
+  },
   methods: {
-    updateHotInputValue(event) {
-      this.hotInputValue = event.target.value;
+    loadSettings() {
+      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_temperatures.php")
+        .then(response => {
+          this.tempValues = response.data;
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
-    updateHotSliderValue(event) {
-      this.hotSliderValue = event.target.value;
+    saveSettings(label) {
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_temperatures.php", {
+        userid: 29,
+        label: label,
+        value: this.tempValues[label]
+      })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
-    updateWarmInputValue(event) {
-      this.warmInputValue = event.target.value;
+    updateInputValue(label, event) {
+      this.tempValues[label] = event.target.value;
     },
-    updateWarmSliderValue(event) {
-      this.warmSliderValue = event.target.value;
+    updateSliderValue(label, event) {
+      this.tempValues[label] = event.target.value;  
     },
-    updateIdealInputValue(event) {
-      this.idealInputValue = event.target.value;
+  },
+  watch: {
+    tempValues: {
+      handler: function(newVal) {
+        for (let key in newVal) {
+          if (newVal[key] > 100) {
+            this.tempValues[key] = 100;
+          } else if (newVal[key] < -100) {
+            this.tempValues[key] = -100;
+          }
+        }
+      },
+      deep: true,
     },
-    updateIdealSliderValue(event) {
-      this.idealSliderValue = event.target.value;
-    },
-    updateChillyInputValue(event) {
-      this.chillyInputValue = event.target.value;
-    },
-    updateChillySliderValue(event) {
-      this.chillySliderValue = event.target.value;
-    },
-    updateColdInputValue(event) {
-      this.coldInputValue = event.target.value;
-    },
-    updateColdSliderValue(event) {
-      this.coldSliderValue = event.target.value;
-    },
-    updateFreezingInputValue(event) {
-      this.freezingInputValue = event.target.value;
-    },
-    updateFreezingSliderValue(event) {
-      this.freezingSliderValue = event.target.value;
-    }
   },
   props: [
     "title"
@@ -128,7 +106,6 @@ export default {
 </script>
 
 <style scoped>
-
 .website-temperature-settings-page {
   position: absolute;
   width: 100%; 

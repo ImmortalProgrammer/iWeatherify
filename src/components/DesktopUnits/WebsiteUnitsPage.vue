@@ -71,21 +71,36 @@ export default {
       distance: "mi",
     };
   },
+  created() {
+    this.loadUnits();  
+  },
   methods: {
     saveUnits() {
-      // Send an AJAX request to the server to save the units
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/save_units.php", {
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_units.php", {
+        userid: 29,
         temperature: this.temperature,
         wind: this.wind,
         pressure: this.pressure,
         distance: this.distance
       })
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error("Unsuccessful axios post in saveUnits().",error);
+      });
+    },
+    loadUnits() {
+      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php")
+      .then(response => {
+        this.temperature = response.data.temperature;
+        this.wind = response.data.wind;
+        this.pressure = response.data.pressure;
+        this.distance = response.data.distance;
+      })
+      .catch(error => {
+        console.error("Unsuccessful axios get in loadUnits().",error);
+      });
     },
   },
   props: [
