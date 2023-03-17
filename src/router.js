@@ -1,99 +1,141 @@
 import Vue from "vue";
 import Router from "vue-router";
-import MobileUnits from "./components//MobileUnits/MobileUnits";
-import MobileTemperature from "./components//MobileTemperatureSettings/MobileTemperature";
 import WebsiteUnitsPage from "./components/DesktopUnits/WebsiteUnitsPage";
 import WebsiteTemperatureSettingsPage from "./components/DesktopTemperatureSettings/WebsiteTemperatureSettingsPage";
 import WebsiteHomePageNotLoggedIn from "./components/DesktopHomepageNotLoggedIn/WebsiteHomePageNotLoggedIn";
-import MobileHomepage from "./components/MobileHomepageNotLoggedIn/MobileHomepage";
+import WebsiteHomePageLoggedIn from "./components/DesktopHomepageLoggedIn/WebsiteHomePageLoggedIn";
 import WebsiteMyItemsPage from "./components/DesktopMyItems/WebsiteMyItemsPage";
 import WebsiteLocationSettings from "./components/DesktopLocationSettings/WebsiteLocationSettings";
-
+import RegisterPage from "./components/RegistrationPage/RegisterPage";
+import WebsiteLoginPage from "./components/LoginPage/WebsiteLoginPage";
 import {
-  mobileUnitsData,
-  mobileTemperatureData,
   websiteUnitsPageData,
   websiteTemperatureSettingsPageData,
   websiteHomePageNotLoggedInData,
-  mobileHomepageData,
   websiteMyItemsPageData,
-  websiteLocationSettingsData
+  websiteLocationSettingsData,
+  websiteHomePageLoggedInData,
 } from "./data";
 
 Vue.use(Router);
 
-export default new Router({
-  mode: "hash",
-  routes: [
-    {
-      path: "/website-location-settings",
-      component: WebsiteLocationSettings,
-      props: { ...websiteLocationSettingsData },
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+const isUserLoggedIn = () => {
+  const authToken = getCookie('auth_token');
+  if (authToken) return true;
+  return false;
+};
+
+const routes = [
+  {
+    name: "NHomepage",
+    path: "/",
+    component: WebsiteHomePageNotLoggedIn,
+    props: { ...websiteHomePageNotLoggedInData },
+    meta: {
+      needsLogout: true
+    }
+  },
+  {
+    name: "Register",
+    path: "/register",
+    component: RegisterPage,
+    meta: {
+      needsLogout: true
+    }
+  },
+  {
+    name: "Login",
+    path: "/login",
+    component: WebsiteLoginPage,
+    meta: {
+      needsLogout: true
+    }
+  },
+  {
+    name: "Homepage",
+    path: "/homepage",
+    component: WebsiteHomePageLoggedIn,
+    props: { ...websiteHomePageLoggedInData },
+    meta: {
+      needsAuth: true
     },
-    {
-      path: "/website-my-items",
-      component: WebsiteMyItemsPage,
-      props: { ...websiteMyItemsPageData },
+  },
+  {
+    name: "LocationSettings",
+    path: "/locationSettings",
+    component: WebsiteLocationSettings,
+    props: { ...websiteLocationSettingsData },
+    meta: {
+      needsAuth: true
     },
-    {
-      path: "/mobile-units",
-      component: MobileUnits,
-      props: { title: "Units", iosStatusBarBlackProps: mobileUnitsData.iosStatusBarBlackProps },
+  },
+  {
+    name: "myItems",
+    path: "/myItems",
+    component: WebsiteMyItemsPage,
+    props: { ...websiteMyItemsPageData },
+    meta: {
+      needsAuth: true
     },
-    {
-      path: "/mobile-temperature",
-      component: MobileTemperature,
-      props: {
-        title: "Temperature",
-        setYourPreference: "Set your preference for each temperature range",
-        text1: "100<br /><br /><br />75<br /><br /><br />50<br /><br /><br />25<br /><br /><br />0",
-        hotWarmJustRight:
-          "Hot<br /><br /><br />Warm<br /><br /><br />Just right<br /><br /><br />Chilly<br /><br />Cold<br /><br />Freezing",
-        iosStatusBarBlackProps: mobileTemperatureData.iosStatusBarBlackProps,
-      },
-    },
-    {
-      path: "/website-units-page",
-      component: WebsiteUnitsPage,
-      props: {
-        defaultLogo4:
+  },
+  {
+    name: "Units",
+    path: "/unitsSettings",
+    component: WebsiteUnitsPage,
+    props: {
+      defaultLogo4:
           "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/default-logo-4@2x.png",
-        title: "Units",
-        ellipse6Props: websiteUnitsPageData.ellipse6Props,
-        tableRow1Props: websiteUnitsPageData.tableRow1Props,
-        tableRow2Props: websiteUnitsPageData.tableRow2Props,
-        tableRow3Props: websiteUnitsPageData.tableRow3Props,
-        tableRow4Props: websiteUnitsPageData.tableRow4Props,
-      },
+      title: "Units",
+      ellipse6Props: websiteUnitsPageData.ellipse6Props
     },
-    {
-      path: "/website-temperature-settings-page",
-      component: WebsiteTemperatureSettingsPage,
-      props: {
-        defaultLogo3:
+    meta: {
+      needsAuth: true
+    },
+  },
+  {
+    name: "TemperatureSettings",
+    path: "/tempSettings",
+    component: WebsiteTemperatureSettingsPage,
+    props: {
+      defaultLogo3:
           "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/default-logo-3@2x.png",
-        title: "Temperature Settings",
-        text1:
-          "100<br /><br /><br /><br /><br />75<br /><br /><br /><br /><br />50<br /><br /><br /><br /><br /><br />25<br /><br /><br /><br /><br /><br />0",
-        hotWarmJustRight:
-          "Hot<br /><br /><br /><br /><br />Warm<br /><br /><br />Just right<br /><br /><br /><br />Chilly<br /><br /><br /><br /><br />Cold<br /><br /><br /><br />Freezing",
-        ellipse6Props: websiteTemperatureSettingsPageData.ellipse6Props,
-      },
+      title: "Temperature Settings",
+      ellipse6Props: websiteTemperatureSettingsPageData.ellipse6Props,
     },
-    {
-      path: "/mobile-homepage-not-logged-in",
-      component: MobileHomepage,
-      props: {
-        iOSStatusBarBlackProps: mobileHomepageData.iOSStatusBarBlackProps,
-        inputSearchProps: mobileHomepageData.inputSearchProps,
-        weatherProps: mobileHomepageData.weatherProps,
-        outfitOfTheDayProps: mobileHomepageData.outfitOfTheDayProps,
-      },
+    meta: {
+      needsAuth: true
     },
-    {
-      path: "*",
-      component: WebsiteHomePageNotLoggedIn,
-      props: { ...websiteHomePageNotLoggedInData },
-    },
-  ],
+  }
+];
+
+const router = new Router({
+  mode: "hash",
+  routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.needsAuth) {
+    if (isUserLoggedIn()) {
+      next();
+    } else {
+      next('/login');
+    }
+  } else {
+    if (to.meta.needsLogout) {
+      if (!isUserLoggedIn()) {
+        next();
+      } else {
+        next('/homepage')
+      }
+    }
+    next();
+  }
+});
+
+export default router;

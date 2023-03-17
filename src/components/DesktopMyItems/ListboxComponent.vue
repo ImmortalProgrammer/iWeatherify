@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 import ListBoxTitle from "./ListBoxTitle";
 import PlaceholderText from "./PlaceholderText";
 export default {
@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .listbox-component {
   align-items: center;
   display: flex;

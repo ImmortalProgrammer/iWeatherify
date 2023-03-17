@@ -3,12 +3,7 @@
     <div class="website-my-items-page screen">
       <div class="flex-col">
         <div class="flex-row">
-          <img class="default-logo-3" :src="defaultLogo3" alt="Default Logo 3" /><ellipse6 :src="ellipse6Props.src" />
-          <img
-            class="vector"
-            src="https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/64028608c9953e08464983be/img/vector-1.svg"
-            alt="Vector"
-          />
+          <nav-bar></nav-bar>
         </div>
         <div class="overlap-group7">
           <div class="overlap-group4">
@@ -137,12 +132,16 @@
 import Ellipse6 from "./Ellipse6";
 import ListboxComponent from "./ListboxComponent";
 import AddEditDelete from "./AddEditDelete";
+import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
+import NavBar from "@/NavBar/NavBar.vue";
 export default {
   name: "WebsiteMyItemsPage",
   components: {
+    NavBar,
     Ellipse6,
     ListboxComponent,
     AddEditDelete,
+    menuBar,
   },
   props: [
     "defaultLogo3",
@@ -165,7 +164,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .website-my-items-page {
   align-items: flex-end;
   background-color: var(--white);
@@ -209,7 +208,7 @@ export default {
 .overlap-group7 {
   align-self: flex-end;
   height: 422px;
-  margin-top: 4px;
+  margin-top: 2%;
   position: relative;
   width: 1084px;
 }
@@ -260,7 +259,7 @@ export default {
   width: 126px;
 }
 
-.overlap-group3 {
+.overlap-group4 {
   height: 251px;
   left: 289px;
   position: absolute;
@@ -269,11 +268,10 @@ export default {
 }
 
 .rectangle-264 {
-  background-color: var(--alto);
   height: 228px;
   left: 2px;
   position: absolute;
-  top: 23px;
+  top: 50px;
   width: 196px;
 }
 
