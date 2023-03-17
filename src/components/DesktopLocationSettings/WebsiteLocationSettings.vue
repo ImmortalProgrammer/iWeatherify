@@ -139,14 +139,18 @@ input:checked + .slider:before {
   padding: 43px 0;
   width: 1440px;
 }
-.flex-row {
-  align-items: center;
-  display: flex;
-  margin-right: 4px;
-  min-width: 1260px;
-  position: relative;
-}
 
+
+.location-title{
+  position: relative;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10%; 
+  margin-top: -10px; 
+}
 
 .location-settings-title{
  color: var(--black);
@@ -161,18 +165,20 @@ input:checked + .slider:before {
   align-self: flex-start;
   display: flex;
   gap: 23px;
-  height: 289px;
+  height: 389px;
   margin-left: -123px;
-  margin-top: 108px;
+  margin-top: 10px;
   min-width: 1491px;
+  
 }
 .text-column1 {
   align-items: flex-start;
   align-self: flex-end;
   display: flex;
   flex-direction: column;
-  min-height: 283px;
+  min-height: 389px;
   width: 796px;
+  
 }
 .location-services {
   color: var(--black);
@@ -265,11 +271,18 @@ input:checked + .slider:before {
   width: 254px;
 }
 .locationNavPosition {
-  top: -10px;
+  position: relative;
+  display: inline-flex;
+  align-items: safe center;
+  top: -0.2%;
+  margin-top: 2%;
+  width: 88%;
+  z-index: 1;
+ 
 }
 .save-button {
   height: 80px;
-  margin-top: 280px;
+  margin-top: 250px;
   position: relative;
   width: 706px;
   margin-left: -770px; 
@@ -280,7 +293,7 @@ input:checked + .slider:before {
   height: 80px;
   left: 600px;
   position: absolute;
-  top: -250px;
+  top: -340px;
   width: 335px;
 }
 .save {
@@ -290,7 +303,54 @@ input:checked + .slider:before {
   line-height: normal;
   position: absolute;
   text-align: center;
-  top: -230px;
+  top: -320px;
   width: 706px;
+}
+
+@media screen and (min-width: 992px) and (max-width: 1440px){
+  .locationNavPosition {
+    position: relative;
+    display: inline-flex;
+    align-items: safe center;
+    margin-top: 2%;
+    width: 83%;
+    z-index: 1;
+  }
+
+}
+@media screen and (min-width: 576px) and (max-width: 992px){
+  .locationNavPosition {
+    position: relative;
+    display: inline-flex;
+    align-items: safe center;
+    margin-top: 2%;
+    width: 75%;
+    z-index: 1;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 576px){
+  .locationNavPosition {
+    position: relative;
+    display: inline-flex;
+    align-items: safe center;
+    margin-top: 2%;
+    width: 70%;
+    z-index: 1;
+  }
+
+}
+
+@media screen and (max-width: 375px){
+
+  .locationNavPosition{
+    position: relative;
+    display: inline-flex;
+    align-items: safe center;
+    margin-top: 2%;
+    width: 80%;
+    z-index: 1;
+  }
+  
 }
 </style>
