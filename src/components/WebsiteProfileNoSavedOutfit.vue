@@ -29,7 +29,95 @@
       </div>
     </div>
   </div>
+
 </template>
+
+<script>
+ShowOverlay = function (overlayName, animationName) {
+  overlayName = "overlay-" + overlayName;
+  var cssClasses = document.getElementById(overlayName).className.split(" ");
+  var last = cssClasses.slice(-1)[0];
+  if (last.lastIndexOf("animate") == -1) {
+    document.getElementById(overlayName).className =
+      document.getElementById(overlayName).className + " " + animationName;
+  }
+  if (window.loadAsyncSrc != undefined) {
+    loadAsyncSrc();
+  }
+};
+
+HideOverlay = function (overlayName, animationName) {
+  overlayName = "overlay-" + overlayName;
+  var cssClasses = document.getElementById(overlayName).className.split(" ");
+  var last = cssClasses.slice(-1)[0];
+  if (last.lastIndexOf("animate") != -1) {
+    cssClasses.splice(-1);
+    cssClasses.push(animationName);
+    document.getElementById(overlayName).className = cssClasses.join(" ");
+
+    cssClasses.splice(-1);
+    setTimeout(function () {
+      document.getElementById(overlayName).className = cssClasses.join(" ");
+    }, 1100);
+  }
+  var vids = document.getElementsByTagName("video");
+  if (vids) {
+    for (var i = 0; i < vids.length; i++) {
+      var video = vids.item(i);
+      video.pause();
+    }
+  }
+};
+
+closeOutsideOverlay = function (overlay_slug) {
+  var overlay_id = `overlay-${overlay_slug}`;
+  const overlayElement = document.getElementById(overlay_id);
+  overlayElement.addEventListener(
+    `click`,
+    function (event) {
+      var overlay_id = `overlay-${overlay_slug}`;
+      var e = event || window.event;
+      var overlayContainer = overlayElement.getElementsByClassName(`${overlay_slug}`);
+      if (e.target === overlayElement) {
+        HideOverlay(`${overlay_slug}`, "animate-disappear");
+      }
+    },
+    false
+  );
+};
+
+CloseOnOverlayClick = function (overlay_slug) {
+  var overlay_id = `overlay-${overlay_slug}`;
+  document.getElementById(overlay_id).addEventListener(
+    `click`,
+    function (event) {
+      {
+        var overlay_id = `overlay-${overlay_slug}`;
+        var e = event || window.event;
+        var overlayElement = document.getElementById(overlay_id);
+        var overlayContainer = overlayElement.getElementsByClassName(`${overlay_slug}`);
+        var clickedDiv = e.toElement || e.target;
+        var dismissButton = clickedDiv.parentElement.id == overlay_id;
+        var clickOutsideOverlay = false;
+        if (overlayContainer.length > 0) {
+          {
+            clickOutsideOverlay = !overlayContainer[0].contains(clickedDiv) || overlayContainer[0] == clickedDiv;
+          }
+        }
+        if (dismissButton || clickOutsideOverlay) {
+          {
+            HideOverlay(`${overlay_slug}`, "animate-disappear");
+          }
+        }
+      }
+    },
+    false
+  );
+};
+</script>
+<script>
+  closeOutsideOverlay("website-menu-bar");
+</script>
 
 <script>
 import ListboxComponent from "./ListboxComponent";
@@ -47,6 +135,7 @@ export default {
 </script>
 
 <style>
+
 .website-profile-no-saved-outfit {
   align-items: flex-end;
   background-color: var(--white);
@@ -166,7 +255,95 @@ export default {
   width: 747px;
 }
 
-@media only screen and (max-width: 420px) {
+@media screen and (min-width: 700px) and (max-width: 1100px) {
+  .title {
+  color: var(--black);
+  font-weight: 1000;
+  left: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 706px;
+}
+
+.overlap-group2 {
+  height: 1000px;
+  left: 450px;
+  position: absolute;
+  top: 370px;
+  width: 1000px;
+}
+
+
+.no-saved-outfits-try-saving-one {
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: normal;
+  min-height: 61px;
+  text-align: center;
+  width: 747px;
+}
+
+/* Text under Illustration */
+.group-41 {
+  align-items: flex-start;
+  align-self: center;
+  display: flex;
+  height: 81px;
+  margin-top: 624px;
+  margin-left: 550px;
+  min-width: 747px;
+}
+
+/* Hamburger Menu */
+.vector {
+  cursor: pointer;
+  height: 115px;
+  left: 351px;
+  position: absolute;
+  top: 135px;
+  width: 115px;
+}
+
+/* Illustration */
+.undraw_weather_app_re_kcb1-1 {
+  height: 740px;
+  left: 500px;
+  position: absolute;
+  top: 555px;
+  width: 740px;
+}
+
+/* Add Outfits Box  */
+.overlap-group1 {
+ display: none;
+}
+
+/* Add Outfits Entirety */
+.plus-math {
+  display: none;
+}
+
+/* Add text under the Add Outfits Box */
+.add {
+  display: none;
+}
+
+/* Logo */
+.default-frame-logo-3 {
+  height: 85px;
+  left: 700px;
+  object-fit: cover;
+  position: absolute;
+  top: 150px;
+  width: 320px;
+}  
+}
+
+
+@media screen and (min-width: 200px) and (max-width: 699px) {
 .title {
   color: var(--black);
   font-weight: 1000;
@@ -204,7 +381,7 @@ export default {
   display: flex;
   height: 61px;
   margin-top: 724px;
-  margin-left: 625px;
+  margin-left: 700px;
   min-width: 747px;
 }
 
@@ -221,7 +398,7 @@ export default {
 /* Illustration */
 .undraw_weather_app_re_kcb1-1 {
   height: 740px;
-  left: 555px;
+  left: 605px;
   position: absolute;
   top: 555px;
   width: 740px;
@@ -245,7 +422,7 @@ export default {
 /* Logo */
 .default-frame-logo-3 {
   height: 85px;
-  left: 770px;
+  left: 825px;
   object-fit: cover;
   position: absolute;
   top: 150px;

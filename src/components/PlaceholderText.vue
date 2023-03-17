@@ -27,7 +27,7 @@ export default {
   min-height: 20px;
 }
 
-@media only screen and (max-width: 420px) {
+@media screen and (min-width: 200px) and (max-width: 699px) {
 .placeholder-text {
   display: none;
 }

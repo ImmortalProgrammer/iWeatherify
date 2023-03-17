@@ -75,7 +75,29 @@ export default {
   width: 308px;
 }
 
-@media only screen and (max-width: 420px) {
+@media screen and (min-width: 700px) and (max-width: 1100px) {
+  .listbox-component {
+  display: none;
+}
+
+.list-container {
+  display: none;
+}
+
+.list-box-main {
+  display: none;
+}
+
+.chevron {
+  display: none;
+}
+
+.clip-list {
+  display: none;
+} 
+}
+
+@media screen and (min-width: 200px) and (max-width: 699px) {
 .listbox-component {
   display: none;
 }

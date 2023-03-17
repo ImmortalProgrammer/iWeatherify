@@ -28,14 +28,36 @@ export default {
   width: 90px;
 }
 
-@media only screen and (max-width: 420px) {
+@media screen and (min-width: 700px) and (max-width: 1100px) {
+/* Profile Picture Position */
+.ellipse-8 {
+  align-items: flex-start;
+  display: flex;
+  height: 15px;
+  justify-content: center;
+  left: 1260px;
+  min-width: 50px;
+  position: absolute;
+  top: 70px;
+}
+
+/* Profile Picture Size */
+.ellipse-6 {
+  height: 300px;
+  margin-top: -16px;
+  object-fit: cover;
+  width: 300px;
+}
+}
+
+@media screen and (min-width: 200px) and (max-width: 699px) {
 /* Profile Picture Position */
 .ellipse-8 {
   align-items: flex-start;
   display: flex;
   height: 5px;
   justify-content: center;
-  left: 1150px;
+  left: 1260px;
   min-width: 50px;
   position: absolute;
   top: 70px;

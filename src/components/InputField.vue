@@ -32,7 +32,13 @@ export default {
   opacity: 0.8;
 }
 
-@media only screen and (max-width: 420px) {
+@media screen and (min-width: 700px) and (max-width: 1100px) {
+  .input-field {
+  display: none;
+}
+}
+
+@media screen and (min-width: 200px) and (max-width: 699px) {
 .input-field {
   display: none;
 }

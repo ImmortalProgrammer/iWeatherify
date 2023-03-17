@@ -26,6 +26,17 @@ export default {
   margin-top: -1px;
   min-height: 20px;
 }
+
+@media screen and (min-width: 700px) and (max-width: 1100px) {
+.list-box-title {
+  display: none;
+}
+
+.type-of-outfit {
+  display: none;
+}
+}
+
 @media only screen and (max-width: 420px) {
 .list-box-title {
   display: none;
