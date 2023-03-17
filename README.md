@@ -1,8 +1,6 @@
-# Anima App exported vue code
-This package was generated automatically with [Anima App](https://www.animaapp.com).
-## Instructions
+# Instructions
+## Localhost
 ```
-cd package_code
 npm install
 npm start
 ```
