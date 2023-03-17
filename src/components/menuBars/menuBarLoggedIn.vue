@@ -55,7 +55,7 @@ export default {
       }
     },
     logOutAccount() {
-      localStorage.removeItem('token');
+      document.cookie = "auth_token" + "=; Max-Age=-999999999;";
     },
     menuPress() {
       this.routeDetection();
