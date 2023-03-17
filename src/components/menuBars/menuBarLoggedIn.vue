@@ -20,6 +20,7 @@
 
 <script>
 import router from "@/router";
+import axios from "axios";
 
 export default {
   name: "menuBarLoggedIn",
@@ -55,7 +56,8 @@ export default {
       }
     },
     logOutAccount() {
-      localStorage.removeItem('token');
+      document.cookie = "auth_token" + "=; Max-Age=-999999999;";
+      //You need to delete the auth_token from the database, currently not working, so it was left out for now
     },
     menuPress() {
       this.routeDetection();

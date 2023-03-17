@@ -395,6 +395,7 @@ export default {
   font-size: 6vh;
   border-bottom: 1vh solid #000
 }
+
 .current-day {
   padding-top: 1.5vh;
   font-size: 5vh;
