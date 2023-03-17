@@ -19,8 +19,14 @@ import {
 
 Vue.use(Router);
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 const isUserLoggedIn = () => {
-  const authToken = document.cookie;
+  const authToken = getCookie('auth_token');
   if (authToken) return true;
   return false;
 };
