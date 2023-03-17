@@ -19,36 +19,46 @@ import {
 
 Vue.use(Router);
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 const isUserLoggedIn = () => {
-  const token = localStorage.getItem('token');
-  if (token) return true;
+  const authToken = getCookie('auth_token');
+  if (authToken) return true;
   return false;
 };
 
 const routes = [
   {
+    name: "NHomepage",
     path: "/",
     component: WebsiteHomePageNotLoggedIn,
     props: { ...websiteHomePageNotLoggedInData },
     meta: {
-      needsLogOut: true
-    },
+      needsLogout: true
+    }
   },
   {
+    name: "Register",
     path: "/register",
     component: RegisterPage,
     meta: {
-      needsLogOut: true
-    },
+      needsLogout: true
+    }
   },
   {
+    name: "Login",
     path: "/login",
     component: WebsiteLoginPage,
     meta: {
-      needsLogOut: true
-    },
+      needsLogout: true
+    }
   },
   {
+    name: "Homepage",
     path: "/homepage",
     component: WebsiteHomePageLoggedIn,
     props: { ...websiteHomePageLoggedInData },
@@ -57,7 +67,8 @@ const routes = [
     },
   },
   {
-    path: "/website-location-settings",
+    name: "LocationSettings",
+    path: "/locationSettings",
     component: WebsiteLocationSettings,
     props: { ...websiteLocationSettingsData },
     meta: {
@@ -65,7 +76,8 @@ const routes = [
     },
   },
   {
-    path: "/website-my-items",
+    name: "myItems",
+    path: "/myItems",
     component: WebsiteMyItemsPage,
     props: { ...websiteMyItemsPageData },
     meta: {
@@ -73,7 +85,8 @@ const routes = [
     },
   },
   {
-    path: "/website-units-page",
+    name: "Units",
+    path: "/unitsSettings",
     component: WebsiteUnitsPage,
     props: {
       defaultLogo4:
@@ -86,7 +99,8 @@ const routes = [
     },
   },
   {
-    path: "/website-temperature-settings-page",
+    name: "TemperatureSettings",
+    path: "/tempSettings",
     component: WebsiteTemperatureSettingsPage,
     props: {
       defaultLogo3:
@@ -113,15 +127,14 @@ router.beforeEach((to, from, next) => {
       next('/login');
     }
   } else {
-    if (to.meta.needsLogOut) {
+    if (to.meta.needsLogout) {
       if (!isUserLoggedIn()) {
         next();
       } else {
-        next('/homepage');
+        next('/homepage')
       }
-    } else {
-      next('/');
     }
+    next();
   }
 });
 

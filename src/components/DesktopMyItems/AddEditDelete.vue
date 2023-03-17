@@ -12,7 +12,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .add-edit-delete-1 {
   align-items: flex-start;
   align-self: flex-start;
@@ -50,11 +50,11 @@ export default {
   margin-left: 209px;
 }
 
-.add-edit-delete-1.add-edit-delete {
+.add-edit-delete-1.add-edit-delete { /*Cold */
   align-self: unset;
 }
 
-.add-edit-delete-1.add-edit-delete-4 {
+.add-edit-delete-1.add-edit-delete-4 { /* Freezing */
   align-self: flex-end;
 }
 </style>

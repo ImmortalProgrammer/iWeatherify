@@ -11,7 +11,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .list-box-title {
   align-items: flex-start;
   display: flex;
@@ -26,7 +26,7 @@ export default {
   font-weight: 500;
   letter-spacing: 0;
   line-height: normal;
-  margin-top: -1px;
+  margin-top: 60px;
   min-height: 20px;
 }
 </style>
