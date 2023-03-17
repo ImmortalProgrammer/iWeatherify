@@ -1,59 +1,54 @@
 <template>
+  <div class="container-center-horizontal">
     <div class="website-location-settings screen">
-      <div class="nav-bar-container">
-        <div class="logo-container">
-        <img src="../../../img/Logo.png" alt="Default Logo 5" />
-          </div>
-          
-          <div class="profile-img-container">
-            <img src="../../../img/Profile image.png"/>
-          </div>
-          
-          <div class="menu-bar-container">
-            <img src="../../../img/Vector.png" alt ="Vector"/>
-          </div>
-          </div>
-        
-          <div class="title-container">
-        <h1 class="title">{{ title }}</h1>
+      <nav-bar class = "locationNavPosition"></nav-bar>
+      
+      
+      <div class="location-title">
+        <h1 class="location-settings-title">{{ title }}</h1>
+      </div>
+
+      <div class="location-text-container">
+
+        <div class="text-column1">
+          <div class="location-services ui---30-semi2">{{ locationServices }}</div>
+          <p class="enable-location-to-g ui---30-medium">{{ enableLocationToG }}</p>
+          <div class="location-preferences ui---30-semi2">{{ locationPreferences }}</div>
+          <p class="manually-enter-in-a ui---30-medium">{{ manuallyEnterInA }}</p>
         </div>
 
-      <div class="flex-row-1">
-        <div class="flex-col">
-          <div class="location-services">{{ locationServices }}</div>
-          <p class="enable-location-to-g">{{ enableLocationToG }}</p>
-          <div class="location-preferences">{{ locationPreferences }}</div>
-          <p class="manually-enter-in-a">{{ manuallyEnterInA }}</p>
-        </div>
-        <div class="flex-col-1">
+        <div class="text-column2">
           <div class="toggle-switcho-container">
             <label class="switch">
               <input type="checkbox">
                 <span class="slider round"></span>
                 </label>
           </div>
-          <div class="overlap-group1"> 
-           
+          <div class="city-or-zip">
             <input class= "city" type="text" placeholder="Insert City" name="search">
             <input class= "zip-code" type="text" placeholder="Insert Zip Code" name="search1">
-            <div class="or">{{ or }}</div>
+            <div class="or ui---30-semi2">{{ or }}</div>
           </div>
+
         </div>
       </div>
-      <div class="overlap-group">
+      <div class="save-button">
         <div class="rectangle-272"></div>
         <div class="save ui---30-semi2">{{ save }}</div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 import Ellipse6 from "./Ellipse6";
 import ToggleSwitchOn from "./ToggleSwitchOn";
 import ToggleSwitchOff from "./ToggleSwitchOff";
+import NavBar from "@/NavBar/NavBar.vue";
 export default {
   name: "WebsiteLocationSettings",
   components: {
+    NavBar,
     Ellipse6,
     ToggleSwitchOn,
     ToggleSwitchOff,
@@ -72,7 +67,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .switch {
   position: relative;
   display: inline-block;
@@ -132,57 +128,35 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
 .website-location-settings {
-  position: absolute;
-  width: 100%; 
-  height: 100vh;
-  background: #FFFFFF;
+  align-items: center;
+  background-color: var(--white);
+  border: 1px none;
+  display: flex;
+  flex-direction: column;
+  height: 1024px;
+  overflow: hidden;
+  padding: 43px 0;
+  width: 1440px;
 }
-.nav-bar-container{
+.flex-row {
+  align-items: center;
+  display: flex;
+  margin-right: 4px;
+  min-width: 1260px;
   position: relative;
-  display: inline-flex;
-  align-items: safe center;
-  margin-top: 2%;
-  width: 100%;
 }
-.logo-container {
-  position:relative;
-  width: 5%;
-  left: 5%;
+
+
+.location-settings-title{
+ color: var(--black);
+ font-weight: 600;
+ font-size: 1.5em;
+ font-family: 'Inter';
+ font-style: normal; 
 }
-.menu-bar-container {
-  position: relative;
-  left: 75%;
-}
-.profile-img-container{
-  position: relative;
-  top: 5px;
-  left: 75%;
-}
-.title {
-  align-self: flex-end;
-  color: var(--black);
-  font-family: "Inter";
-  font-size: 30px; 
-  font-weight: 600;
-  line-height: normal;
-  margin-bottom: 1px;
-  margin-left: 300px;
-  min-height: 41px;
-  text-align: center;
-  width: 706px;
-  top: 50px;
-}
-.vector {
-  position: absolute;
-  width: 41px;
-  height: 41px;
-  left: 103vw;
-  top: 3vh;
-  object-fit: cover;
-}
-.flex-row-1 {
+
+.location-text-container {
   align-items: flex-start;
   align-self: flex-start;
   display: flex;
@@ -192,7 +166,7 @@ input:checked + .slider:before {
   margin-top: 108px;
   min-width: 1491px;
 }
-.flex-col {
+.text-column1 {
   align-items: flex-start;
   align-self: flex-end;
   display: flex;
@@ -202,29 +176,27 @@ input:checked + .slider:before {
 }
 .location-services {
   color: var(--black);
-  font-family: "Inter";
-  font-weight: 600;
-  font-size: 26px;
+  font-weight: 550;
+  font-size: 1.5em; 
   line-height: normal;
-  min-height: 10px;
+  min-height: 41px;
   text-align: center;
   width: 706px;
 }
 .enable-location-to-g {
   align-self: flex-end;
   color: #808080;
+  font-size: 20px; 
   font-weight: 500;
-  font-size: 20px;
   line-height: normal;
-  min-height: 70px;
+  min-height: 82px;
   text-align: center;
   width: 706px;
 }
 .location-preferences {
   color: var(--black);
-  font-family: "Inter";
-  font-weight: 600;
-  font-size:26px;
+  font-weight: 550;
+  font-size: 1.5em; 
   line-height: normal;
   margin-top: 37px;
   min-height: 41px;
@@ -234,15 +206,15 @@ input:checked + .slider:before {
 .manually-enter-in-a {
   align-self: center;
   color: #808080;
+  font-size: 20px; 
   font-weight: 500;
-  font-size: 20px;
   line-height: normal;
   margin-left: 26px;
-  min-height: 70px;
+  min-height: 82px;
   text-align: center;
   width: 706px;
 }
-.flex-col-1 {
+.text-column2 {
   align-items: flex-end;
   display: flex;
   flex-direction: column;
@@ -250,20 +222,21 @@ input:checked + .slider:before {
   min-height: 266px;
   width: 672px;
 }
-/* OFF ONLY */
 .toggle-switcho-container {
   align-items: flex-start;
   display: flex;
   gap: 111px;
   height: 55px;
-  margin-right: -200px;
+  margin-right: -150px;
+  margin-top: 20px; 
   min-width: 431px;
   position: relative;
 }
-.overlap-group1 {
+.city-or-zip {
   height: 107px;
   position: relative;
   width: 672px;
+  left: 200px; 
 }
 .city{
   height: 50px;
@@ -291,11 +264,16 @@ input:checked + .slider:before {
   top: 10px;
   width: 254px;
 }
-.overlap-group {
+.locationNavPosition {
+  top: -10px;
+}
+.save-button {
   height: 80px;
-  margin-top: 345px;
+  margin-top: 280px;
   position: relative;
   width: 706px;
+  margin-left: -770px; 
+
 }
 .rectangle-272 {
   background-color: var(--black);
@@ -307,7 +285,7 @@ input:checked + .slider:before {
 }
 .save {
   color: var(--white);
-  font-weight: 300;
+  font-weight: 600;
   left: 410px;
   line-height: normal;
   position: absolute;
@@ -315,37 +293,4 @@ input:checked + .slider:before {
   top: -230px;
   width: 706px;
 }
-@media screen and (min-width: 300px) and (max-width:800px) { /* Mobile */
-  .menu-bar-container{
-    left: 250%;
-  }
-  .profile-img-container{
-    left:250%;
-  }
-  .title{
-    left:-50%;
-    top: 100px;
-  }
-  .toggle-switcho-container{
-    left: -50%;
-  }
-  .city{
-    left: -40%;
-  }
-  .or{
-    left: -40%;
-    top: 90px;
-  }
-  .zip-code{
-    left: -34%;
-    top: 150px;
-  }
-  .overlap-group{
-    left: -80%;
-    top: 50px;
-  }
-  
-}
-
-
 </style>
