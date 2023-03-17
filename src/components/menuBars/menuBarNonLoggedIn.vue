@@ -106,7 +106,7 @@ export default {
 
 .profile_image_nonloggedin{
   position: absolute;
-  margin-left: -60px; 
+  margin-left: -85px; 
   top: -3px;
 }
 
