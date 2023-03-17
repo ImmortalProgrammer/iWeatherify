@@ -7,8 +7,8 @@
       <div class = "links_2">
         <a id ="link1_2" :href="$router.resolve('/homepage').href" style = "text-decoration:none; color: inherit;">Homepage</a>
        <!--  <a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a>
-        <a id ="link3_2" :href="$router.resolve('/locationSettings').href" style = "text-decoration:none; color: inherit;">Location Settings</a>
         !-->
+        <a id ="link3_2" :href="$router.resolve('/locationSettings').href" style = "text-decoration:none; color: inherit;">Location Settings</a>
         <a id ="link4_2" :href="$router.resolve('/unitsSettings').href" style = "text-decoration:none; color: inherit;">Unit Settings</a>
         <a id ="link5_2" :href="$router.resolve('/tempSettings').href" style = "text-decoration:none; color: inherit;">Temperature Settings</a>
         <a id ="link6_2"  style = "text-decoration:none; color: inherit;" @click = "logOutAccount()" :href="$router.resolve('/').href">Log Out</a>
@@ -79,7 +79,7 @@ export default {
         document.getElementById("link1_2").style.opacity = "0.3";
 
       //  this.resetGrayEffects(2);
-       // this.resetGrayEffects(3);
+        this.resetGrayEffects(3);
         this.resetGrayEffects(4);
         this.resetGrayEffects(5);
 
@@ -88,13 +88,13 @@ export default {
     //    document.getElementById("link2_2").style.opacity = "0.3";
 
         this.resetGrayEffects(1);
-       // this.resetGrayEffects(3);
+        this.resetGrayEffects(3);
         this.resetGrayEffects(4);
         this.resetGrayEffects(5);
 
       } else if (!this.$data.locationSettings) {
-   //     document.getElementById("link3_2").style.pointerEvents = "none";
- //       document.getElementById("link3_2").style.opacity = "0.3";
+       document.getElementById("link3_2").style.pointerEvents = "none";
+        document.getElementById("link3_2").style.opacity = "0.3";
 
         this.resetGrayEffects(1);
        // this.resetGrayEffects(2);
@@ -107,7 +107,7 @@ export default {
 
         this.resetGrayEffects(1);
     //    this.resetGrayEffects(2);
-      //  this.resetGrayEffects(3);
+        this.resetGrayEffects(3);
         this.resetGrayEffects(5);
 
       } else if (!this.$data.tempSettings) {
@@ -116,7 +116,7 @@ export default {
 
         this.resetGrayEffects(1);
     //    this.resetGrayEffects(2);
-      //  this.resetGrayEffects(3);
+        this.resetGrayEffects(3);
         this.resetGrayEffects(4);
       }
     },

@@ -13,11 +13,11 @@ export default {
 .ellipse-8 {
   align-items: flex-start;
   display: flex;
-  height: 50px;
+  height: 1px;
   justify-content: center;
-  margin-bottom: 9px;
-  margin-left: 192px;
-  min-width: 50px;
+  margin-left: 1120px;
+  margin-top: 1px;
+  min-width: 700px;
 }
 
 .ellipse-6 {
@@ -25,5 +25,10 @@ export default {
   margin-top: -16px;
   object-fit: cover;
   width: 90px;
+}
+
+.ellipse-8.profile-image {
+  margin-left: 183px;
+  margin-top: 29px;
 }
 </style>
