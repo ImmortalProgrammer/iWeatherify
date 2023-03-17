@@ -6,8 +6,7 @@
     <div id = "routes-container1_2">
       <div class = "links_2">
         <a id ="link1_2" :href="$router.resolve('/homepage').href" style = "text-decoration:none; color: inherit;">Homepage</a>
-       <!--  <a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a>
-        !-->
+         <a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a>
         <a id ="link3_2" :href="$router.resolve('/locationSettings').href" style = "text-decoration:none; color: inherit;">Location Settings</a>
         <a id ="link4_2" :href="$router.resolve('/unitsSettings').href" style = "text-decoration:none; color: inherit;">Unit Settings</a>
         <a id ="link5_2" :href="$router.resolve('/tempSettings').href" style = "text-decoration:none; color: inherit;">Temperature Settings</a>
@@ -73,19 +72,19 @@ export default {
       }
     },
     grayOut() {
-      //this.resetGrayEffects(id) aka link[id]_2
+     // this.resetGrayEffects(id) aka link[id]_2
       if (!this.$data.homepage) {
         document.getElementById("link1_2").style.pointerEvents = "none";
         document.getElementById("link1_2").style.opacity = "0.3";
 
-      //  this.resetGrayEffects(2);
+        this.resetGrayEffects(2);
         this.resetGrayEffects(3);
         this.resetGrayEffects(4);
         this.resetGrayEffects(5);
 
       } else if (!this.$data.myItems) {
-      //  document.getElementById("link2_2").style.pointerEvents = "none";
-    //    document.getElementById("link2_2").style.opacity = "0.3";
+        document.getElementById("link2_2").style.pointerEvents = "none";
+        document.getElementById("link2_2").style.opacity = "0.3";
 
         this.resetGrayEffects(1);
         this.resetGrayEffects(3);
@@ -97,7 +96,7 @@ export default {
         document.getElementById("link3_2").style.opacity = "0.3";
 
         this.resetGrayEffects(1);
-       // this.resetGrayEffects(2);
+        this.resetGrayEffects(2);
         this.resetGrayEffects(4);
         this.resetGrayEffects(5);
 
@@ -106,7 +105,7 @@ export default {
         document.getElementById("link4_2").style.opacity = "0.3";
 
         this.resetGrayEffects(1);
-    //    this.resetGrayEffects(2);
+        this.resetGrayEffects(2);
         this.resetGrayEffects(3);
         this.resetGrayEffects(5);
 
@@ -115,7 +114,7 @@ export default {
         document.getElementById("link5_2").style.opacity = "0.3";
 
         this.resetGrayEffects(1);
-    //    this.resetGrayEffects(2);
+        this.resetGrayEffects(2);
         this.resetGrayEffects(3);
         this.resetGrayEffects(4);
       }
@@ -141,7 +140,7 @@ export default {
   position: relative;
   height: auto;
   left: -60%;
-  top: -2.5vh;
+  top: -4.0vh;
   bottom: 0;
   border-top: 0;
   margin-top: 0.6vh;
@@ -183,8 +182,8 @@ export default {
     border: none;
     position: relative;
     height: auto;
-    left: -17.5%;
-    top: -2.5vh;
+    left: -40.5%;
+    top: -3.5vh;
     bottom: 0;
     border-top: 0;
     margin-top: 0.6vh;
@@ -246,8 +245,8 @@ export default {
     border: none;
     position: relative;
     height: auto;
-    left: -2.5vh;
-    top: -2.5vh;
+    left: -1.5vh;
+    top: -4.5vh;
     bottom: 0;
     border-top: 0;
     margin-top: 1.1vh;

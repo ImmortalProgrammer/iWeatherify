@@ -89,12 +89,11 @@ export default {
 .menu {
   z-index: 1;
   position: absolute;
-  left: 101.5%;
+  left: 99.5%;
   top: 5.5vh;
   height: 4.5vh;
   transform: translate(-50%, 0);
   width: auto;
-  scale: 1.15;
 }
 
 .bar {
