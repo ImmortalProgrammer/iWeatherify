@@ -10,12 +10,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .toggle-switchoff {
   align-items: flex-start;
   background-color: var(--gray04);
   border: 1px solid;
-  border-color: var(--gray03);
+  border-color: var(--gray04);
   border-radius: 40px;
   display: flex;
   height: 55px;
@@ -30,3 +30,4 @@ export default {
   width: 59px;
 }
 </style>
+
