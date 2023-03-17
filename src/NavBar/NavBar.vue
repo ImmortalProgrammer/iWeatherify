@@ -64,7 +64,7 @@ export default {
   position: absolute;
   margin: 0;
   top: -10%;
-  left: 80%;
+  left: 79%;
   object-fit: scale-down;
   height: 100%;
   width: 7%;
