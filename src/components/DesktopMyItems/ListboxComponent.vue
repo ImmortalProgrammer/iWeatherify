@@ -15,7 +15,7 @@
   </div>
 </template>
 
-<script>
+<script scoped>
 import ListBoxTitle from "./ListBoxTitle";
 import PlaceholderText from "./PlaceholderText";
 export default {
@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .listbox-component {
   align-items: center;
   display: flex;
@@ -37,7 +37,7 @@ export default {
   left: 195px;
   min-height: 289px;
   position: absolute;
-  top: 0;
+  top: 50px;
   width: 308px;
 }
 
@@ -59,7 +59,7 @@ export default {
   min-width: 280px;
   padding: 0 16px;
   position: absolute;
-  top: 60px;
+  top: 0;
 }
 
 .chevron {
