@@ -40,7 +40,7 @@
       </div>
 
       <div>
-        <button @click="saveUnits">Save</button>
+        <button @click="saveUnits()">Save</button>
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@ export default {
   methods: {
     saveUnits() {
       axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_units.php", {
-        userid: 29,
+        userid: 1,
         temperature: this.temperature,
         wind: this.wind,
         pressure: this.pressure,

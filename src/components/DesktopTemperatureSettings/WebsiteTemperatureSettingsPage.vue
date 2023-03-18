@@ -18,9 +18,9 @@
 
           <input class="temp-slider" type="range" min="-100" max="100" v-model="tempValues[label]" @input="updateInputValue(label, $event)"/>
 
-          <input class= "temp-input" :type="text" :id="label" :name="label" v-model="tempValues[label]" @input="updateSliderValue(label, $event)"/>
+          <input class= "temp-input" type="text" :id="label" :name="label" v-model="tempValues[label]" @input="updateSliderValue(label, $event)"/>
 
-          <button :name="label + '-button'" @click="saveSettings(label)">Save</button>
+          <button :name="label + '-button'" @click="saveTempSettings()">Save</button>
         </div>
       </div>
     </div>
@@ -53,27 +53,35 @@ export default {
     this.loadTempSettings();
   },
   methods: {
-    loadSettings() {
+    loadTempSettings() {
       axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_temperatures.php")
-        .then(response => {
+      .then(response => {
+        if (typeof response.data === 'object') {
           this.tempValues = response.data;
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
-    saveSettings(label) {
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_temperatures.php", {
-        userid: 29,
-        label: label,
-        value: this.tempValues[label]
+        } else {
+          console.error('Invalid response data:', response.data);
+        }
       })
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      .catch(error => {
+        console.error(error);
+      });
+    },
+    saveTempSettings() {
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_temperatures.php", {
+        userid: 1,
+        hot: this.tempValues.hot,
+        warm: this.tempValues.warm,
+        ideal: this.tempValues.ideal,
+        cold: this.tempValues.cold,
+        chilly: this.tempValues.chilly,
+        freezing: this.tempValues.freezing
+      })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
     },
     updateInputValue(label, event) {
       this.tempValues[label] = event.target.value;

@@ -49,7 +49,7 @@
        
         formData.append("username", this.username);
         formData.append("password", this.password);
-
+        
         axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/login.php?action=login", formData).then(
           (res) => {
             if(res.data.status === 1){
@@ -69,7 +69,7 @@
   }
 </script>
 
-<style>
+<style scoped>
 .LoginPage {
     display: flex;
     flex-direction: row;
