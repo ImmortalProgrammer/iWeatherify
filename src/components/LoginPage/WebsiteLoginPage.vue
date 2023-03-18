@@ -14,7 +14,7 @@
       <form action="" method="POST">
         <label for="username">Username:</label>
         <br/>
-        <input type="text" id="username" required v-model="username">
+        <input type="text" id="username" required v-model="username"> <!-- Dont know why required attribute isnt working -->
         <br/>
         <br/>
 
@@ -24,11 +24,11 @@
         <br/>
 
         <br/>
-        <button type="submit" @click.prevent="loginUser">Login</button>
+        <button type="submit" @click.prevent="validateForm">Login</button>
       </form>
 
       <br/>
-      <p> <a href="#/register">Create an account</a></p> <!-- TODO: Need to look at this closer -->                
+      <p> <a href="#/register">Create an account</a></p>            
     </div>
   </div>
 </template>
@@ -44,6 +44,13 @@
       }
     },
     methods: {
+      validateForm(){
+        if(!this.username || !this.password){
+          alert("Make sure you fill both username and password")
+        } else {
+          this.loginUser()
+        }     
+      },
       loginUser() {
         let formData = new FormData();
        
@@ -52,6 +59,8 @@
 
         axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/login.php?action=login", formData).then(
           (res) => {
+            console.log(res)
+            console.log(res.data)
             if(res.data.status === 1){
               document.cookie = "auth_token=" + res.data.auth_token; //Retrieve the auth token from the server and store it as a cookie
               this.$router.push("/homepage");
