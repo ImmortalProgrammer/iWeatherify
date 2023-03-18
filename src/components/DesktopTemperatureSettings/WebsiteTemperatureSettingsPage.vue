@@ -4,7 +4,7 @@
       <nav-bar style = "margin-top: 3.4vh;"></nav-bar>
     </div>
 
-    <div class = "pushDowTempDisplay">
+    <div class = "pushDowTempDisplay"></div>
 
     <div class="title-container">
       <h1 class="temp-setting-title">{{ title }}</h1>
@@ -24,9 +24,7 @@
         </div>
       </div>
     </div>
-      </div>
   </div>
-
 </template>
 
 <script>

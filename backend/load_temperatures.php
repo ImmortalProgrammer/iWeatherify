@@ -12,7 +12,7 @@
     // Create a connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    $userid = 29;
+    $userid = 1;
 
     // Check connection
     if ($conn->connect_error) {

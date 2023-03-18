@@ -17,7 +17,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $userid = 29;
+    $userid = 1;
 
     $sql = "SELECT temperature, wind, pressure, distance FROM saved_units WHERE userid = ?";
     $stmt = $conn->prepare($sql);
