@@ -61,7 +61,7 @@ export default {
         }
       })
       .catch(error => {
-        console.error(error);
+        console.error("Unsuccessful axios post in loadTempSettings().", error);
       });
     },
     saveTempSettings() {
@@ -76,9 +76,10 @@ export default {
       })
       .then(response => {
         console.log(response.data);
+        alert("Temperatures Saved Successfully!");
       })
       .catch(error => {
-        console.error(error);
+        console.error("Unsuccessful axios post in saveTempSettings().", error);
       });
     },
     updateInputValue(label, event) {

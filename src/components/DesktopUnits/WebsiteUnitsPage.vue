@@ -74,9 +74,10 @@ export default {
       })
       .then(response => {
         console.log(response.data);
+        alert("Units saved successfully.");
       })
       .catch(error => {
-        console.error("Unsuccessful axios post in saveUnits().",error);
+        console.error("Unsuccessful axios post in saveUnits().", error);
       });
     },
     loadUnits() {
@@ -88,7 +89,7 @@ export default {
         this.distance = response.data.distance;
       })
       .catch(error => {
-        console.error("Unsuccessful axios get in loadUnits().",error);
+        console.error("Unsuccessful axios get in loadUnits().", error);
       });
     },
   },
