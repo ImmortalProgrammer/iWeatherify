@@ -30,11 +30,11 @@
       <br/>
 
       <br/>
-      <button type="submit" @click.prevent="registerUser">Register</button>
+      <button type="submit" @click.prevent="validateForm">Register</button>
     </form>
 
     <br/>
-    <p> <a href="#/login">Login</a></p> <!-- TODO: Need to look at this closer -->                
+    <p> <a href="#/login">Login</a></p>        
   </div>
 </div>
 </template>
@@ -51,7 +51,13 @@
       }
     },
     methods: {
-      registerUser() { //TODO: Registration validation
+      validateForm(){
+        if(!this.email || !this.username || !this.password){
+          alert("Please fill all required information")
+        }
+        this.registerUser()
+      }, 
+      registerUser() {
         let formData = new FormData();
        
         formData.append("email", this.email);

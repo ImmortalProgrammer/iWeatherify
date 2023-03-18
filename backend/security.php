@@ -53,6 +53,15 @@
         }
     }
 
+    // Returns true if the string has both characters and numbers
+    function contains_char_and_num($string){
+        return (preg_match('/[A-Za-z]/', $string) && preg_match('/[0-9]/', $string));
+    }
+
+    function is_long_password($password){
+        return strlen($password) > 8;
+    }
+
     // To make a random user_id value
     function random_num($length){
         $text = "";
