@@ -354,6 +354,7 @@ export default {
   width: 706px;
 }
 
+/* Saved Outfits Text */
 .overlap-group2 {
   height: 1000px;
   left: 625px;
@@ -361,7 +362,6 @@ export default {
   top: 400px;
   width: 1000px;
 }
-
 
 .no-saved-outfits-try-saving-one {
   color: var(--black);
