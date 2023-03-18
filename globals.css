@@ -1,7 +1,5 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500|Inter:400,700,500,600|PT+Mono:400");
-/* The following line is used to measure usage of this code in production. For more info see our usage billing page */
-@import url("https://px.animaapp.com/6405ee99331c8a40850ac606.6405ee9ad144788be20d5c18.NXDGJzF.vcp.png");
+@import url("https://fonts.googleapis.com/css?family=Inter:400,700");
 
 
 
@@ -21,6 +19,10 @@
 .container-center-horizontal > * {
   flex-shrink: 0;
   pointer-events: auto;
+}
+
+input:focus {
+  outline: none;
 }
 
 * {

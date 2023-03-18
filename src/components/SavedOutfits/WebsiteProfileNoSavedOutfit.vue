@@ -1,17 +1,13 @@
 <template>
   <div class="container-center-horizontal">
+    <nav-bar></nav-bar>
     <div class="website-profile-no-saved-outfit screen">
       <div class="overlap-group3">
         <div class="overlap-group4">
           <div class="overlap-group2">
-            <h1 class="title ui---30-semi">{{ title }}</h1>
+            <h1 class="title ui---30-semi">Saved Outfits</h1>
             <listbox-component />
           </div>
-          <img
-            class="vector"
-            src="https://anima-uploads.s3.amazonaws.com/projects/6405ee9a4548b3806a50e138/releases/6405ef8c246cb8c2cd3b302a/img/vector.svg"
-            alt="Vector"
-          />
           <img
             class="undraw_weather_app_re_kcb1-1"
             src="https://anima-uploads.s3.amazonaws.com/projects/6405ee9a4548b3806a50e138/releases/6405ef8c246cb8c2cd3b302a/img/undraw-weather-app-re-kcb1-1.svg"
@@ -21,11 +17,9 @@
           <div class="overlap-group1"><img class="plus-math" :src="plusMath" alt="Plus Math" /></div>
           <input-field />
         </div>
-        <div class="add ui---14-regular">{{ add }}</div>
-        <img class="default-frame-logo-3" :src="defaultFrameLogo3" alt="Default Frame Logo 3" />
       </div>
       <div class="group-41">
-        <p class="no-saved-outfits-try-saving-one ui---16-regular">{{ noSavedOutfitsTrySavingOne }}</p>
+        <p class="no-saved-outfits-try-saving-one ui---16-regular">No saved outfits, try saving one!</p>
       </div>
     </div>
   </div>
@@ -34,16 +28,16 @@
 
 <script>
 import ListboxComponent from "./ListboxComponent";
-import Ellipse6 from "./Ellipse6";
 import InputField from "./InputField";
+import NavBar from "@/NavBar/NavBar.vue";
 export default {
   name: "WebsiteProfileNoSavedOutfit",
   components: {
+    NavBar,
     ListboxComponent,
-    Ellipse6,
     InputField,
   },
-  props: ["title", "plusMath", "add", "defaultFrameLogo3", "noSavedOutfitsTrySavingOne", "ellipse6Props"],
+  props: ["plusMath", "defaultFrameLogo3", "ellipse6Props"],
 };
 </script>
 
@@ -134,11 +128,11 @@ export default {
   color: var(--blue-secondary);
   cursor: pointer;
   font-weight: 400;
-  left: 316px;
+  left: 230px;
   line-height: normal;
   position: absolute;
   text-align: right;
-  top: 469px;
+  top: 430px;
 }
 
 .default-frame-logo-3 {
