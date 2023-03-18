@@ -18,7 +18,7 @@
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         //Generate random userid, save username and email 
-        $user_id = random_num(20); 
+        $user_id = random_num(10); 
 
         //Invalidate if the email is already registered
         if(email_exists($email) && username_exists($username)){
