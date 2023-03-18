@@ -313,12 +313,19 @@ input:checked + .slider:before {
   .location-text-container{
     transform: scale(0.6);
     margin-left: -410px; 
+    margin-top: 10px; 
     
   }
 
-  
+  .text-column2{
+    margin-left: -230px;
+  }
 
-  
+  .save-button{
+    transform: scale(0.8);
+    margin-left: -350px; 
+    margin-top: 160px;
+  }
 }
 
 @media only screen and (min-width: 375px) and (max-width: 576px) {
@@ -371,9 +378,9 @@ input:checked + .slider:before {
   }
 
   .location-text-container{
-    transform: scale(0.55);
-    margin-left: -430px; 
-    margin-top: -40px; 
+    transform: scale(0.4);
+    margin-left: -520px; 
+    margin-top: -70px; 
   }
 
   .text-column2{
@@ -383,8 +390,9 @@ input:checked + .slider:before {
 
   .save-button{
     transform: scale(0.6);
-    margin-left: -380px;
-    margin-top: 100px;
+    margin-left: -430px;
+    margin-top: 60px;
   }
 
 }
+</style>
