@@ -29,9 +29,14 @@
             echo "This username is already in use";
         } elseif(!empty($username) && !empty($password) && !is_numeric($username)){
             $query = "INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES (?, ?, ?, ?)";
-            $query = $conn -> prepare($query);
-            $query -> bind_param("isss", $user_id, $username, $email, $hashed_password);
-            $query -> execute();
+            $stmt = $conn->prepare($query);
+            if (!$stmt) {
+            die('Error: ' . htmlspecialchars($conn->error));
+            }
+            $stmt->bind_param("isss", $user_id, $username, $email, $hashed_password);
+            if (!$stmt->execute()) {
+                    die('Error: ' . htmlspecialchars($stmt->error));
+            }
             echo "Successful insertion";
         } else {
             echo "Please enter some valid information!";
