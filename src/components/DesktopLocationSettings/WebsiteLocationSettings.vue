@@ -1,7 +1,7 @@
 <template>
   <div class="container-center-horizontal">
     <div class="website-location-settings screen">
-      <nav-bar class = "locationNavPosition"></nav-bar>
+      <nav-bar class = "locationNav"></nav-bar>
       
       
       <div class="location-title">
@@ -24,10 +24,8 @@
                 <span class="slider round"></span>
                 </label>
           </div>
-          <div class="city-or-zip">
+          <div class="city-container">
             <input class= "city" type="text" placeholder="Insert City" name="search">
-            <input class= "zip-code" type="text" placeholder="Insert Zip Code" name="search1">
-            <div class="or ui---30-semi2">{{ or }}</div>
           </div>
 
         </div>
@@ -129,15 +127,11 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 .website-location-settings {
-  align-items: center;
-  background-color: var(--white);
-  border: 1px none;
-  display: flex;
-  flex-direction: column;
-  height: 1024px;
-  overflow: hidden;
-  padding: 43px 0;
-  width: 1440px;
+  position: absolute;
+  width: 100%; 
+  height: 100%;
+  background: #FFFFFF;
+ 
 }
 
 
@@ -167,7 +161,7 @@ input:checked + .slider:before {
   gap: 23px;
   height: 389px;
   margin-left: -123px;
-  margin-top: 10px;
+  margin-top: 100px;
   min-width: 1491px;
   
 }
@@ -226,7 +220,7 @@ input:checked + .slider:before {
   flex-direction: column;
   gap: 104px;
   min-height: 266px;
-  width: 672px;
+  width: 640px;
 }
 .toggle-switcho-container {
   align-items: flex-start;
@@ -238,10 +232,10 @@ input:checked + .slider:before {
   min-width: 431px;
   position: relative;
 }
-.city-or-zip {
+.city-container {
   height: 107px;
   position: relative;
-  width: 672px;
+  width: 400px;
   left: 200px; 
 }
 .city{
@@ -251,26 +245,9 @@ input:checked + .slider:before {
   top: 0;
   width: 260px;
 }
-.zip-code {
-  height: 50px;
-  left: 290px;
-  position: absolute;
-  top: 0;
-  width: 188px;
-}
-.or {
-  color: var(--black);
-  font-family:"Inter";
-  font-size: 26px;
-  font-weight: 600;
-  left: 50px;
-  line-height: normal;
-  position: absolute;
-  text-align: center;
-  top: 10px;
-  width: 254px;
-}
-.locationNavPosition {
+
+
+.locationNav {
   position: relative;
   display: inline-flex;
   align-items: safe center;
@@ -282,10 +259,10 @@ input:checked + .slider:before {
 }
 .save-button {
   height: 80px;
-  margin-top: 250px;
+  margin-top: 320px;
   position: relative;
   width: 706px;
-  margin-left: -770px; 
+  margin-left: -60px; 
 
 }
 .rectangle-272 {
@@ -307,50 +284,107 @@ input:checked + .slider:before {
   width: 706px;
 }
 
-@media screen and (min-width: 992px) and (max-width: 1440px){
-  .locationNavPosition {
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 2%;
-    width: 83%;
-    z-index: 1;
-  }
+@media only screen and (min-width: 992px) and (max-width: 1440px) {
 
-}
-@media screen and (min-width: 576px) and (max-width: 992px){
-  .locationNavPosition {
+  .locationNav{
     position: relative;
     display: inline-flex;
     align-items: safe center;
     margin-top: 2%;
-    width: 75%;
+    width: 100%;
     z-index: 1;
   }
-}
+ 
 
-@media screen and (min-width: 375px) and (max-width: 576px){
-  .locationNavPosition {
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 2%;
-    width: 70%;
-    z-index: 1;
-  }
 
 }
 
-@media screen and (max-width: 375px){
+@media only screen and (min-width: 576px) and (max-width: 900px) {
 
-  .locationNavPosition{
+  .locationNav {
     position: relative;
     display: inline-flex;
     align-items: safe center;
     margin-top: 2%;
-    width: 80%;
+    width: 110%;
     z-index: 1;
   }
+
+  .location-text-container{
+    transform: scale(0.6);
+    margin-left: -410px; 
+    
+  }
+
+  
+
   
 }
-</style>
+
+@media only screen and (min-width: 375px) and (max-width: 576px) {
+
+  .locationNav{
+    position: relative;
+    display: inline-flex;
+    align-items: safe center;
+    margin-top: 3%;
+    width: 110%;
+    z-index: 1;
+    transform: scale(1);
+    
+  }
+
+  .location-text-container{
+    transform: scale(0.55);
+    margin-left: -430px; 
+    margin-top: -40px; 
+  }
+
+  .text-column2{
+    margin-left: -410px;
+    margin-top: -20px; 
+  }
+
+  .save-button{
+    transform: scale(0.6);
+    margin-left: -380px;
+    margin-top: 100px;
+  }
+
+ 
+
+
+
+}
+
+@media only screen and (max-width: 375px) {
+
+  .locationNav{
+    position: relative;
+    display: inline-flex;
+    align-items: safe center;
+    margin-top: 3%;
+    width: 110%;
+    z-index: 1;
+    transform: scale(1);
+    
+  }
+
+  .location-text-container{
+    transform: scale(0.55);
+    margin-left: -430px; 
+    margin-top: -40px; 
+  }
+
+  .text-column2{
+    margin-left: -410px;
+    margin-top: -20px; 
+  }
+
+  .save-button{
+    transform: scale(0.6);
+    margin-left: -380px;
+    margin-top: 100px;
+  }
+
+}
