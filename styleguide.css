@@ -37,7 +37,7 @@
   letter-spacing: 0;
 }
 
-
+/* Small Screen */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   :root { 
     --black: #000000;
@@ -56,7 +56,7 @@
   }
 }
 
-
+/* Tablet */
 @media screen and (min-width: 481px) and (max-width: 768px) {
   :root { 
     --black: #000000;
@@ -75,6 +75,7 @@
   }
 }
 
+/* Smart Phone */
 @media screen and (min-width: 200px) and (max-width: 480px) {
   :root { 
     --black: #000000;
