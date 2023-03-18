@@ -14,8 +14,8 @@
         $password = htmlspecialchars(trim($_POST["password"]), ENT_QUOTES);
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        //Generate random userid, save username and email
-        $user_id = random_num(20); 
+        //Generate random userid, save username and email 
+        $user_id = random_num(10);
 
         //Invalidate if the email is already registered, as well as password requirements
         if(email_exists($email) && username_exists($username)){
@@ -43,4 +43,4 @@
             echo "Please enter some valid information!";
         }
     }
-?>  
+?>
