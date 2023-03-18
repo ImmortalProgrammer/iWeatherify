@@ -5,9 +5,12 @@
     </div>
     <div id = "routes-container1">
       <div class = "links">
-        <a id ="link1_1" :href="$router.resolve('/').href" style = "text-decoration:none; color: inherit;">Homepage</a>
-        <a id ="link2_1" :href="$router.resolve('/register').href" style = "text-decoration:none; color: inherit;">Register</a>
-        <a id ="link3_1" :href="$router.resolve('/login').href" style = "text-decoration:none; color: inherit;">Login</a>
+          <ul class = "slide">
+            <li><a id ="link1_1" :href="$router.resolve('/').href" style = "text-decoration:none; color: inherit;">Homepage</a></li>
+            <li><a id ="link2_1" :href="$router.resolve('/register').href" style = "text-decoration:none; color: inherit;">Register</a></li>
+            <li><a id ="link3_1" :href="$router.resolve('/login').href" style = "text-decoration:none; color: inherit;">Login</a></li>
+          </ul>
+        
       </div>
     </div>
   </div>
@@ -86,6 +89,11 @@ export default {
 
 <style scoped>
 
+
+.menucontainer {
+  cursor: pointer;
+}
+
 .menu {
   z-index: 1;
   position: absolute;
@@ -105,6 +113,7 @@ export default {
 
 #routes-container1 {
   border: none;
+  border-radius: 20px;
   position: relative;
   height: auto;
   left: -10%;
@@ -118,8 +127,8 @@ export default {
   color: rgb(255, 255, 255);
   font-weight: 500;
   text-align: center;
-  background-color: gray;
-  overflow-y: scroll;
+  background-color: #14565C;
+  overflow-y: hidden;
   overflow-x: hidden;
   visibility: hidden;
 }
@@ -133,7 +142,7 @@ export default {
 
 #link1_1, #link2_1, #link3_1 {
   font-size: 2.1em;
-  background-color: dimgray;
+  background-color: #1e7c85;
   padding: 1.6vh;
   display: block;
   border-bottom: solid black 0.3vh;
