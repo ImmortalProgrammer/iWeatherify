@@ -22,7 +22,6 @@
 
 <script>
 import router from "@/router";
-
 export default {
   name: "menuBar",
   data() {
@@ -63,21 +62,16 @@ export default {
       if (!this.$data.homepage) {
         document.getElementById("link1_1").style.pointerEvents = "none";
         document.getElementById("link1_1").style.opacity = "0.3";
-
         this.resetGrayEffects(2);
         this.resetGrayEffects(3);
-
       } else if (!this.$data.register) {
         document.getElementById("link2_1").style.pointerEvents = "none";
         document.getElementById("link2_1").style.opacity = "0.3";
-
         this.resetGrayEffects(1);
         this.resetGrayEffects(3);
-
       } else if (!this.$data.login) {
         document.getElementById("link3_1").style.pointerEvents = "none";
         document.getElementById("link3_1").style.opacity = "0.3";
-
         this.resetGrayEffects(1);
         this.resetGrayEffects(2);
       }
@@ -86,22 +80,19 @@ export default {
       document.getElementById("link" + id + "_1").style.pointerEvents = "auto";
       document.getElementById("link" + id + "_1").style.opacity = "1";
     },
-   
   }
 }
 </script>
 
 <style scoped>
-
 .menu {
   z-index: 1;
   position: absolute;
-  left: 101.5%;
+  left: 99.5%;
   top: 5.5vh;
   height: 4.5vh;
   transform: translate(-50%, 0);
   width: auto;
-  scale: 1.15;
 }
 
 .profile_image_nonloggedin{
@@ -109,15 +100,12 @@ export default {
   margin-left: -85px; 
   top: -3px;
 }
-
-
 .bar {
   width: 2.05vw;
   height: 0.35vh;
   background-color: black;
   margin: 0.3vw 0;
 }
-
 #routes-container1 {
   border: none;
   position: relative;
@@ -138,23 +126,17 @@ export default {
   overflow-x: hidden;
   visibility: hidden;
 }
-
-
 .links {
   border: solid black 0.3vh;
   border-bottom: none;
 }
-
-
 #link1_1, #link2_1, #link3_1 {
   font-size: 2.1em;
   background-color: dimgray;
   padding: 1.6vh;
   display: block;
   border-bottom: solid black 0.3vh;
-
 }
-
 @media screen and (min-width: 700px) and (max-width: 1100px) {
   .menu {
     left: 100%;
@@ -166,7 +148,6 @@ export default {
     background-color: black;
     margin: 0.5vh 0;
   }
-
   #routes-container1 {
     border: none;
     position: relative;
@@ -190,14 +171,17 @@ export default {
   #link1_1, #link2_1, #link3_1 {
     font-size: 1.6em;
   }
-
 }
-
 @media screen and (min-width: 200px) and (max-width: 699px) {
   .menu {
     left: 98%;
     top: 3.3vh;
     scale: 0.9;
+  }
+
+  .profile_image_nonloggedin{
+    left: 20%; 
+    scale: 0.8; 
   }
   .bar {
     width: 5.5vw;
@@ -205,7 +189,6 @@ export default {
     background-color: black;
     margin: 0.7vw 0;
   }
-
   #routes-container1 {
     border: none;
     position: relative;
@@ -229,8 +212,5 @@ export default {
   #link1_1, #link2_1, #link3_1 {
     font-size: 1.6em;
   }
-
 }
-
-
 </style>
