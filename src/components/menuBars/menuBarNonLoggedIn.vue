@@ -5,12 +5,9 @@
     </div>
     <div id = "routes-container1">
       <div class = "links">
-          <ul class = "slide">
-            <li><a id ="link1_1" :href="$router.resolve('/').href" style = "text-decoration:none; color: inherit;">Homepage</a></li>
-            <li><a id ="link2_1" :href="$router.resolve('/register').href" style = "text-decoration:none; color: inherit;">Register</a></li>
-            <li><a id ="link3_1" :href="$router.resolve('/login').href" style = "text-decoration:none; color: inherit;">Login</a></li>
-          </ul>
-        
+        <a id ="link1_1" :href="$router.resolve('/').href" style = "text-decoration:none; color: inherit;">Homepage</a>
+        <a id ="link2_1" :href="$router.resolve('/register').href" style = "text-decoration:none; color: inherit;">Register</a>
+        <a id ="link3_1" :href="$router.resolve('/login').href" style = "text-decoration:none; color: inherit;">Login</a>
       </div>
     </div>
   </div>
