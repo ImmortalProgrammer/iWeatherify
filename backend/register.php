@@ -1,13 +1,10 @@
 <?php 
     // Citation: Adapted from https://www.youtube.com/watch?v=Zn4Xa406lJo&list=PLUoIt0OrSPCsrvjwFjrhKBbgvhA5W8Iwi&index=4&ab_channel=TheMaker
     
-    session_start();
+    // session_start();
     include("connection.php");
     include("security.php");
     access_control();
-
-    //Data to send back to the frontend
-    $res[] = array();
     
     if($_SERVER["REQUEST_METHOD"]  == "POST"){
 
@@ -17,16 +14,20 @@
         $password = htmlspecialchars(trim($_POST["password"]), ENT_QUOTES);
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        //Generate random userid, save username and email 
+        //Generate random userid, save username and email
         $user_id = random_num(20); 
 
-        //Invalidate if the email is already registered
+        //Invalidate if the email is already registered, as well as password requirements
         if(email_exists($email) && username_exists($username)){
             echo "Both the email and username are taken. Try logging in";
         } elseif(email_exists($email)){
             echo "This email is already in use";
         } elseif(username_exists($username)){
             echo "This username is already in use";
+        } elseif(!contains_char_and_num($password)){
+            echo "Your password should be a mix between characters and numbers";
+        } else if(!is_long_password($password)){
+            echo "Your password needs to be at least 8 characters long";
         } elseif(!empty($username) && !empty($password) && !is_numeric($username)){
             $query = "INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES (?, ?, ?, ?)";
             $query = $conn -> prepare($query);
@@ -37,4 +38,4 @@
             echo "Please enter some valid information!";
         }
     }
-?>
+?>  
