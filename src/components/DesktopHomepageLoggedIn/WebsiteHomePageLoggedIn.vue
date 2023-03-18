@@ -403,7 +403,6 @@ export default {
   padding-top: 1.5vh;
   font-size: 5vh;
 }
-.
 .weatherDescription1 {
   padding-top: 1.5vh;
   padding-bottom: 1.5vh;

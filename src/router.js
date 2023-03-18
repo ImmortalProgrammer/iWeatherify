@@ -19,9 +19,15 @@ import {
 
 Vue.use(Router);
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 const isUserLoggedIn = () => {
-  const token = localStorage.getItem('token');
-  if (token) return true;
+  const authToken = getCookie('auth_token');
+  if (authToken) return true;
   return false;
 };
 
@@ -32,24 +38,24 @@ const routes = [
     component: WebsiteHomePageNotLoggedIn,
     props: { ...websiteHomePageNotLoggedInData },
     meta: {
-      needsLogOut: true
-    },
+      needsLogout: true
+    }
   },
   {
     name: "Register",
     path: "/register",
     component: RegisterPage,
     meta: {
-      needsLogOut: true
-    },
+      needsLogout: true
+    }
   },
   {
     name: "Login",
     path: "/login",
     component: WebsiteLoginPage,
     meta: {
-      needsLogOut: true
-    },
+      needsLogout: true
+    }
   },
   {
     name: "Homepage",
@@ -121,15 +127,14 @@ router.beforeEach((to, from, next) => {
       next('/login');
     }
   } else {
-    if (to.meta.needsLogOut) {
+    if (to.meta.needsLogout) {
       if (!isUserLoggedIn()) {
         next();
       } else {
-        next('/homepage');
+        next('/homepage')
       }
-    } else {
-      next('/');
     }
+    next();
   }
 });
 

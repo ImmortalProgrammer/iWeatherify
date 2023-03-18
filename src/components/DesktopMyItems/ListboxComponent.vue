@@ -37,7 +37,7 @@ export default {
   left: 195px;
   min-height: 289px;
   position: absolute;
-  top: 0;
+  top: 50px;
   width: 308px;
 }
 
