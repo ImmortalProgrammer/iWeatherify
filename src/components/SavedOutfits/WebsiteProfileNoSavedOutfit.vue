@@ -41,7 +41,135 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500|Inter:400,700,500,600|PT+Mono:400");
+/* The following line is used to measure usage of this code in production. For more info see our usage billing page */
+@import url("https://px.animaapp.com/6405ee99331c8a40850ac606.6405ee9ad144788be20d5c18.NXDGJzF.vcp.png");
+
+
+
+.screen a {
+  display: contents;
+  text-decoration: none;
+}
+
+.container-center-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  pointer-events: none;
+  width: 100%;
+}
+
+.container-center-horizontal > * {
+  flex-shrink: 0;
+  pointer-events: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+:root { 
+  --black: #000000;
+  --blue-secondary: #2a9d8f;
+  --gray01: #f6f6f6;
+  --gray04: #666666;
+  --white: #ffffff;
+ 
+  --font-size-l: 30px;
+  --font-size-m: 16px;
+  --font-size-s: 14px;
+ 
+  --font-family-inter: "Inter", Helvetica;
+  --font-family-montserrat: "Montserrat", Helvetica;
+  --font-family-pt_mono: "PT Mono", Helvetica;
+}
+.ui---30-semi {
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-l);
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.ui---16-regular {
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-m);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.ui---14-regular {
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-s);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Small Screen */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  :root { 
+    --black: #000000;
+    --blue-secondary: #2a9d8f;
+    --gray01: #f6f6f6;
+    --gray04: #666666;
+    --white: #ffffff;
+   
+    --font-size-l: 55px;
+    --font-size-m: 36px;
+    --font-size-s: 14px;
+   
+    --font-family-inter: "Inter", Helvetica;
+    --font-family-montserrat: "Montserrat", Helvetica;
+    --font-family-pt_mono: "PT Mono", Helvetica;
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  :root { 
+    --black: #000000;
+    --blue-secondary: #2a9d8f;
+    --gray01: #f6f6f6;
+    --gray04: #666666;
+    --white: #ffffff;
+   
+    --font-size-l: 55px;
+    --font-size-m: 36px;
+    --font-size-s: 14px;
+   
+    --font-family-inter: "Inter", Helvetica;
+    --font-family-montserrat: "Montserrat", Helvetica;
+    --font-family-pt_mono: "PT Mono", Helvetica;
+  }
+}
+
+/* Smart Phone */
+@media screen and (min-width: 200px) and (max-width: 480px) {
+  :root { 
+    --black: #000000;
+    --blue-secondary: #2a9d8f;
+    --gray01: #f6f6f6;
+    --gray04: #666666;
+    --white: #ffffff;
+   
+    --font-size-l: 70px;
+    --font-size-m: 46px;
+    --font-size-s: 14px;
+   
+    --font-family-inter: "Inter", Helvetica;
+    --font-family-montserrat: "Montserrat", Helvetica;
+    --font-family-pt_mono: "PT Mono", Helvetica;
+  }
+}
+
+
 
 .website-profile-no-saved-outfit {
   align-items: flex-end;
@@ -176,9 +304,9 @@ export default {
 
 .overlap-group2 {
   height: 1000px;
-  left: 545px;
+  left: 235px;
   position: absolute;
-  top: 400px;
+  top: 100px;
   width: 1000px;
 }
 
@@ -199,8 +327,8 @@ export default {
   align-self: center;
   display: flex;
   height: 81px;
-  margin-top: 624px;
-  margin-left: 575px;
+  margin-top: -45px;
+  margin-left: -35px;
   min-width: 747px;
 }
 
@@ -216,11 +344,11 @@ export default {
 
 /* Illustration */
 .undraw_weather_app_re_kcb1-1 {
-  height: 740px;
-  left: 540px;
+  height: 440px;
+  left: 390px;
   position: absolute;
-  top: 555px;
-  width: 740px;
+  top: 155px;
+  width: 440px;
 }
 
 /* Add Outfits Box  */
@@ -263,9 +391,9 @@ export default {
 
 .overlap-group2 {
   height: 1000px;
-  left: 620px;
+  left: 235px;
   position: absolute;
-  top: 470px;
+  top: 110px;
   width: 1000px;
 }
 
@@ -286,8 +414,8 @@ export default {
   align-self: center;
   display: flex;
   height: 61px;
-  margin-top: 1300px;
-  margin-left: 700px;
+  margin-top: -45px;
+  margin-left: -25px;
   min-width: 747px;
 }
 
@@ -303,11 +431,11 @@ export default {
 
 /* Illustration */
 .undraw_weather_app_re_kcb1-1 {
-  height: 740px;
-  left: 605px;
+  height: 440px;
+  left: 385px;
   position: absolute;
-  top: 655px;
-  width: 740px;
+  top: 155px;
+  width: 440px;
 }
 
 /* Add Outfits Box  */
