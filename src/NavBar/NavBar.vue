@@ -8,7 +8,7 @@
     </div>
     
     <div class = "profile_image_loggedin">
-      <a id ="myitemspage" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">
+      <a id ="savedoutfits" :href="$router.resolve('/savedOutfits').href" style = "text-decoration:none; color: inherit;">
       <img src="../../img/Profile image.png" alt="ProfileImage"/> </a>
     </div>
    
