@@ -3,6 +3,12 @@
     <div class="menucontainer" @click="menuPress()">
       <img src="../../../img/Vector.png" alt="Vector"/>
     </div>
+
+    <div class = "profile_image_nonloggedin">
+      <a id ="loginpage" :href="$router.resolve('/login').href" style = "text-decoration:none; color: inherit;">
+      <img src="../../../img/default-profile-icon.png" alt="ProfileImage0"/> </a>
+    </div>
+
     <div id = "routes-container1">
       <div class = "links">
         <a id ="link1_1" :href="$router.resolve('/').href" style = "text-decoration:none; color: inherit;">Homepage</a>
@@ -16,7 +22,6 @@
 
 <script>
 import router from "@/router";
-
 export default {
   name: "menuBar",
   data() {
@@ -57,21 +62,16 @@ export default {
       if (!this.$data.homepage) {
         document.getElementById("link1_1").style.pointerEvents = "none";
         document.getElementById("link1_1").style.opacity = "0.3";
-
         this.resetGrayEffects(2);
         this.resetGrayEffects(3);
-
       } else if (!this.$data.register) {
         document.getElementById("link2_1").style.pointerEvents = "none";
         document.getElementById("link2_1").style.opacity = "0.3";
-
         this.resetGrayEffects(1);
         this.resetGrayEffects(3);
-
       } else if (!this.$data.login) {
         document.getElementById("link3_1").style.pointerEvents = "none";
         document.getElementById("link3_1").style.opacity = "0.3";
-
         this.resetGrayEffects(1);
         this.resetGrayEffects(2);
       }
@@ -86,11 +86,6 @@ export default {
 
 <style scoped>
 
-
-.menucontainer {
-  cursor: pointer;
-}
-
 .menu {
   z-index: 1;
   position: absolute;
@@ -101,13 +96,17 @@ export default {
   width: auto;
 }
 
+.profile_image_nonloggedin{
+  position: absolute;
+  margin-left: -85px;
+  top: -3px;
+}
 .bar {
   width: 2.05vw;
   height: 0.35vh;
   background-color: black;
   margin: 0.3vw 0;
 }
-
 #routes-container1 {
   border: none;
   border-radius: 20px;
@@ -129,23 +128,17 @@ export default {
   overflow-x: hidden;
   visibility: hidden;
 }
-
-
 .links {
   border: solid black 0.3vh;
   border-bottom: none;
 }
-
-
 #link1_1, #link2_1, #link3_1 {
   font-size: 2.1em;
   background-color: #1e7c85;
   padding: 1.6vh;
   display: block;
   border-bottom: solid black 0.3vh;
-
 }
-
 @media screen and (min-width: 700px) and (max-width: 1100px) {
   .menu {
     left: 100%;
@@ -157,7 +150,6 @@ export default {
     background-color: black;
     margin: 0.5vh 0;
   }
-
   #routes-container1 {
     border: none;
     position: relative;
@@ -181,14 +173,17 @@ export default {
   #link1_1, #link2_1, #link3_1 {
     font-size: 1.6em;
   }
-
 }
-
 @media screen and (min-width: 200px) and (max-width: 699px) {
   .menu {
     left: 98%;
     top: 3.3vh;
     scale: 0.9;
+  }
+
+  .profile_image_nonloggedin{
+    left: 20%;
+    scale: 0.8;
   }
   .bar {
     width: 5.5vw;
@@ -196,7 +191,6 @@ export default {
     background-color: black;
     margin: 0.7vw 0;
   }
-
   #routes-container1 {
     border: none;
     position: relative;
@@ -220,8 +214,5 @@ export default {
   #link1_1, #link2_1, #link3_1 {
     font-size: 1.6em;
   }
-
 }
-
-
 </style>
