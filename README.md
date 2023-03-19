@@ -12,6 +12,7 @@
 
 * The src directory holds the bulk of the code for the project
 
+* The NavBar Folder holds navbar.vue, which is the main navigation for logged in users
 
 * The components folder in the src directory holds the various folders pertaining to webpages and inside those subfolders holds the vue files (html, css, javascript) for that particular page. 
 
@@ -31,20 +32,15 @@
 
 * Don't touch babel.config.js unless necessary
 
-
 * globals.css is a css file that applies to the entire website
-
 
 * package.json allows for collaboration as a build tool, lists dependency versions (don't touch unless necessary)
 
-
 * package-lock.json package-lock.json is "written to when a numerical value in a property such as the "version" property, or a dependency property is changed in package.json."
-
 
 * README.md is the documentation for this github
 
 * .gitignore prevents the files you want from displaying from your local machine to this remote repository
-
 
 * styleguide.css holds the various fonts of the website
 
