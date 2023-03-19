@@ -7,20 +7,21 @@
       <div class = "links_2">
         <a id ="link1_2" :href="$router.resolve('/homepage').href" style = "text-decoration:none; color: inherit;">Homepage</a>
         <a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a>
-        <a id ="link3_2" :href="$router.resolve('/locationSettings').href" style = "text-decoration:none; color: inherit;">Location Settings</a>
-        <a id ="link4_2" :href="$router.resolve('/unitsSettings').href" style = "text-decoration:none; color: inherit;">Unit Settings</a>
-        <a id ="link5_2" :href="$router.resolve('/tempSettings').href" style = "text-decoration:none; color: inherit;">Temperature Settings</a>
-        <a id ="link6_2"  style = "text-decoration:none; color: inherit;" @click = "logOutAccount()" :href="$router.resolve('/').href">Log Out</a>
+        <a id ="link3_2" :href="$router.resolve('/savedOutfits').href" style = "text-decoration:none; color: inherit;">Saved Outfit</a>
+        <a id ="link4_2" :href="$router.resolve('/locationSettings').href" style = "text-decoration:none; color: inherit;">Location Settings</a>
+        <a id ="link5_2" :href="$router.resolve('/unitsSettings').href" style = "text-decoration:none; color: inherit;">Unit Settings</a>
+        <a id ="link6_2" :href="$router.resolve('/tempSettings').href" style = "text-decoration:none; color: inherit;">Temperature Settings</a>
+        <a id ="link7_2"  style = "text-decoration:none; color: inherit;" @click = "logOutAccount()" :href="$router.resolve('/').href">Log Out</a>
       </div>
     </div>
   </div>
 </template>
-
-
+ 
+ 
 <script>
 import router from "@/router";
 import axios from "axios";
-
+ 
 export default {
   name: "menuBarLoggedIn",
   data() {
@@ -28,9 +29,10 @@ export default {
       disabled: true,
       homepage: true,
       locationSettings: true,
+      savedOutfits: true,
       myItems: true,
       units: true,
-      tempSettings: false,
+      tempSettings: true,
       logOut: false,
     }
   }, methods: {
@@ -52,6 +54,9 @@ export default {
         case 'TemperatureSettings':
           this.$data.tempSettings = false;
           break;
+        case 'SavedOutfits':
+          this.$data.savedOutfits = false;
+          break;
       }
     },
     logOutAccount() {
@@ -62,7 +67,7 @@ export default {
       this.routeDetection();
       //The gray out effect
       this.grayOut();
-
+ 
       if (this.$data.disabled) {
         document.getElementById("routes-container1_2").style.visibility = 'visible';
         this.$data.disabled = false;
@@ -72,74 +77,43 @@ export default {
       }
     },
     grayOut() {
-     // this.resetGrayEffects(id) aka link[id]_2
-      if (!this.$data.homepage) {
-        document.getElementById("link1_2").style.pointerEvents = "none";
-        document.getElementById("link1_2").style.opacity = "0.3";
-
-        this.resetGrayEffects(2);
-        this.resetGrayEffects(3);
-        this.resetGrayEffects(4);
-        this.resetGrayEffects(5);
-
-      } else if (!this.$data.myItems) {
-        document.getElementById("link2_2").style.pointerEvents = "none";
-        document.getElementById("link2_2").style.opacity = "0.3";
-
-        this.resetGrayEffects(1);
-        this.resetGrayEffects(3);
-        this.resetGrayEffects(4);
-        this.resetGrayEffects(5);
-
-      } else if (!this.$data.locationSettings) {
-       document.getElementById("link3_2").style.pointerEvents = "none";
-        document.getElementById("link3_2").style.opacity = "0.3";
-
-        this.resetGrayEffects(1);
-        this.resetGrayEffects(2);
-        this.resetGrayEffects(4);
-        this.resetGrayEffects(5);
-
-      } else if (!this.$data.units) {
-        document.getElementById("link4_2").style.pointerEvents = "none";
-        document.getElementById("link4_2").style.opacity = "0.3";
-
-        this.resetGrayEffects(1);
-        this.resetGrayEffects(2);
-        this.resetGrayEffects(3);
-        this.resetGrayEffects(5);
-
-      } else if (!this.$data.tempSettings) {
-        document.getElementById("link5_2").style.pointerEvents = "none";
-        document.getElementById("link5_2").style.opacity = "0.3";
-
-        this.resetGrayEffects(1);
-        this.resetGrayEffects(2);
-        this.resetGrayEffects(3);
-        this.resetGrayEffects(4);
-      }
+      const links = [
+        { id: 'link1_2', data: 'homepage'},
+        { id: 'link2_2', data: 'myItems'},
+        { id: 'link3_2', data: 'savedOutfits'},
+        { id: 'link4_2', data: 'locationSettings'},
+        { id: 'link5_2', data: 'units'},
+        { id: 'link6_2', data: 'tempSettings'},
+      ];
+ 
+      links.forEach((link) => {
+        const element = document.getElementById(link.id);
+        if (!this.$data[link.data]) {
+          element.style.pointerEvents = 'none';
+          element.style.opacity = '0.3';
+        } else {
+          element.style.pointerEvents = 'auto';
+          element.style.opacity = '1';
+        }
+      });
     },
-    resetGrayEffects(id) {
-      document.getElementById("link" + id + "_2").style.pointerEvents = "auto";
-      document.getElementById("link" + id + "_2").style.opacity = "1";
-    }
   }
 }
 </script>
-
+ 
 <style scoped>
-
+ 
 .menu-container_2 {
   cursor: pointer;
 }
-
-
+ 
+ 
 .menu_2 {
   position: relative;
   z-index: 1;
-
+ 
 }
-
+ 
 #routes-container1_2 {
   border: none;
   border-radius: 20px;
@@ -161,29 +135,29 @@ export default {
   overflow-x: hidden;
   visibility: hidden;
 }
-
-
+ 
+ 
 .links_2 {
   border: solid black 0.3vh;
   border-bottom: none;
 }
-
-
-#link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2 {
+ 
+ 
+#link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2, #link7_2 {
   font-size: 1.8em;
   background-color: #1e7c85;
   padding: 1.6vh;
   display: block;
   border-bottom: solid black 0.3vh;
-
+ 
 }
-
+ 
 @media screen and (min-width: 1000px) and (max-width: 1400px) {
   .menu_2 {
     position: relative;
     z-index: 1;
   }
-
+ 
   #routes-container1_2 {
     border: none;
     position: relative;
@@ -204,17 +178,17 @@ export default {
     overflow-x: hidden;
     visibility: hidden;
   }
-  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2 {
+  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2, #link7_2 {
     font-size: 1.5em;
   }
 }
-
+ 
 @media screen and (min-width: 700px) and (max-width: 999px) {
   .menu_2 {
     position: relative;
     z-index: 1;
   }
-
+ 
   #routes-container1_2 {
     border: none;
     position: relative;
@@ -235,18 +209,18 @@ export default {
     overflow-x: hidden;
     visibility: hidden;
   }
-  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2 {
+  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2, #link7_2 {
     font-size: 1.2em;
   }
 }
-
+ 
 @media screen and (min-width: 500px) and (max-width: 699px) {
   .menu_2 {
     z-index: 1;
     position: fixed;
     scale: 0.7;
   }
-
+ 
   #routes-container1_2 {
     border: none;
     position: relative;
@@ -266,18 +240,18 @@ export default {
     overflow-x: hidden;
     visibility: hidden;
   }
-  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2{
+  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2, #link7_2{
     font-size: 1.7em;
   }
 }
-
+ 
 @media screen and (max-width: 499px) {
   .menu_2 {
     z-index: 1;
     position: fixed;
     scale: 0.7;
   }
-
+ 
   #routes-container1_2 {
     border: none;
     position: relative;
@@ -297,10 +271,10 @@ export default {
     overflow-x: hidden;
     visibility: hidden;
   }
-  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2{
+  #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2,#link7_2{
     font-size: 1.2em;
   }
 }
-
-
+ 
+ 
 </style>
