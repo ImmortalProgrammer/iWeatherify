@@ -6,7 +6,7 @@
         <div class="overlap-group4">
           <div class="overlap-group2">
             <h1 class="title ui---30-semi">Saved Outfits</h1>
-            <listbox-component />
+            <!-- <listbox-component /> #63 deciding that we dont need the dropdown for the saved outfits --> 
           </div>
           <img
             class="undraw_weather_app_re_kcb1-1"
@@ -14,7 +14,9 @@
             alt="undraw_weather_app_re_kcb1 1"
           />
           <ellipse6 :src="ellipse6Props.src" />
-          <div class="overlap-group1"><img class="plus-math" :src="plusMath" alt="Plus Math" /></div>
+          <div class="plusButton" @click.self="showOutfitModal()">
+            <img class="plus-math" :src="plusMath" alt="Plus Math" />
+          </div>
           <input-field />
         </div>
       </div>
@@ -32,6 +34,17 @@ import InputField from "./InputField";
 import NavBar from "@/NavBar/NavBar.vue";
 export default {
   name: "WebsiteProfileNoSavedOutfit",
+  data() {
+    return {
+      showModal: false,
+    }
+  },
+  methods: {
+    showOutfitModal(){
+      this.showModal = !this.showModal
+      console.log("The state of showModal is: " + this.showModal)
+    }
+  },
   components: {
     NavBar,
     ListboxComponent,
@@ -233,7 +246,7 @@ export default {
   width: 490px;
 }
 
-.overlap-group1 {
+.plusButton {
   align-items: flex-end;
   background-color: var(--gray01);
   display: flex;
@@ -352,7 +365,7 @@ export default {
 }
 
 /* Add Outfits Box  */
-.overlap-group1 {
+.plusButton {
  display: none;
 }
 

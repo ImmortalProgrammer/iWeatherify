@@ -9,6 +9,7 @@ import WebsiteLocationSettings from "./components/DesktopLocationSettings/Websit
 import RegisterPage from "./components/RegistrationPage/RegisterPage";
 import WebsiteLoginPage from "./components/LoginPage/WebsiteLoginPage";
 import WebsiteProfileNoSavedOutfit from "./components/SavedOutfits/WebsiteProfileNoSavedOutfit";
+import AddClothing from "./components/SavedOutfits/AddClothing";
 
 import {
   websiteUnitsPageData,
@@ -50,6 +51,17 @@ const routes = [
     meta: {
       needsAuth: true
     },
+  },
+  {
+    name: "OutfitModal",
+    path: "/addClothing",
+    component: AddClothing,
+    props: {
+      defaultLogo4:
+          "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/default-logo-4@2x.png",
+      title: "Add a new outfit",
+      ellipse6Props: websiteUnitsPageData.ellipse6Props
+    }
   },
   {
     name: "NHomepage",
