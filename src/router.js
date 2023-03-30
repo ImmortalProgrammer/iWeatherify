@@ -10,6 +10,7 @@ import RegisterPage from "./components/RegistrationPage/RegisterPage";
 import WebsiteLoginPage from "./components/LoginPage/WebsiteLoginPage";
 import WebsiteProfileNoSavedOutfit from "./components/SavedOutfits/WebsiteProfileNoSavedOutfit";
 import AddClothing from "./components/SavedOutfits/AddClothing";
+import AddClothingModal from "./components/SavedOutfits/AddClothingModal";
 
 import {
   websiteUnitsPageData,
@@ -36,6 +37,11 @@ const isUserLoggedIn = () => {
 };
 
 const routes = [
+  {
+    name: "AddClothingModal",
+    path: "/addClothingModal",
+    component: AddClothingModal
+  },
   {
     name: "SavedOutfits",
     path: "/savedOutfits",

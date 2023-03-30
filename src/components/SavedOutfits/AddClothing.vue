@@ -6,112 +6,114 @@
         <h1 class="title">{{ title }}</h1>
       </div>
 
-      <div class="back-button">
-        <img src="../../../img/back-button.svg" height="100px">
-      </div>
+      <div class="selection">
+        <div class="back-button">
+          <img src="../../../img/back-button.svg">
+        </div>
+    
+        <div class="row-format-container">
+          <div class="row">
+            <p class="clothing-label">Outer wear</p>
+            <select id="outer-container" class="dropdown-container-font" v-model="outer_wear">
+              <option value="Puffer jacket">Puffer jacket</option>
+              <option value="Jean jacket">Jean jacket</option>
+              <option value="Leather jacket">Leather jacket</option>
+              <option value="Parka">Parka</option>
+              <option value="Raincoat">Raincoat</option>
+              <option value="Windbreaker">Windbreaker</option>
+              <option value="Trench coat">Trench coat</option>
+              <option value="">N/A</option>
+            </select>
+          </div>
+    
+          <div class="row">
+            <p class="clothing-label">Middle wear</p>
+            <select id="middle-container" class="dropdown-container-font" v-model="middle_wear">
+              <option value="Fleece sweater">Fleece sweater</option>
+              <option value="Crewneck">Crewneck</option>
+              <option value="Hoodie">Hoodie</option>
+              <option value="Blazer">Blazer</option>
+              <option value="Sweatshirt">Sweatshirt</option>
+              <option value="">N/A</option>
+            </select>
+          </div>
+    
+          <div class="row">
+            <p class="clothing-label">Inner wear</p>
+            <select id="inner-container" class="dropdown-container-font" v-model="inner_wear">
+              <option value="Summer dress">Summer dress</option>
+              <option value="T-shirt">T-shirt</option>
+              <option value="Tank top">Tank top</option>
+              <option value="Long sleeve">Long sleeve</option>
+              <option value="Turtleneck">Turtleneck</option>
+              <option value="Crop top">Crop top</option>
+              <option value="">N/A</option>
+            </select>
+          </div>
+    
+          <div class="row">
+            <p class="clothing-label">Pants</p>
+            <select id="pants-container" class="dropdown-container-font" v-model="pants">
+              <option value="Jeans">Jeans</option>
+              <option value="Sweatpants">Sweatpants</option>
+              <option value="Trousers">Trousers</option>
+              <option value="Shorts">Shorts</option>
+              <option value="Leggings">Leggings</option>
+              <option value="Long johns">Long johns</option>
+              <option value="Skirt">Skirt</option>
+              <option value="Cargos">Cargos</option>
+              <option value="Culottes">Culottes</option>
+              <option value="">N/A</option>
+            </select>
+          </div>
   
-      <div class="row-format-container">
-        <div class="row">
-          <p class="clothing-label">Outer wear</p>
-          <select id="outer-container" class="dropdown-container-font" v-model="outer_wear">
-            <option value="Puffer jacket">Puffer jacket</option>
-            <option value="Jean jacket">Jean jacket</option>
-            <option value="Leather jacket">Leather jacket</option>
-            <option value="Parka">Parka</option>
-            <option value="Raincoat">Raincoat</option>
-            <option value="Windbreaker">Windbreaker</option>
-            <option value="Trench coat">Trench coat</option>
-            <option value="">N/A</option>
-          </select>
-        </div>
+          <div class="row">
+            <p class="clothing-label">Shoes</p>
+            <select id="shoes-container" class="dropdown-container-font" v-model="shoes">
+              <option value="Rain boots">Rain boots</option>
+              <option value="Sneakers">Sneakers</option>
+              <option value="Sandals">Sandals</option>
+              <option value="Heels">Heels</option>
+              <option value="Flats">Flats</option>
+              <option value="Dress shoes">Dress shoes</option>
+              <option value="Flip flops">Flip flops</option>
+              <option value="Snow boots">Snow boots</option>
+              <option value="Loafers">Loafers</option>
+              <option value="Slides">Slides</option>
+              <option value="">N/A</option>
+            </select>
+          </div>
   
-        <div class="row">
-          <p class="clothing-label">Middle wear</p>
-          <select id="middle-container" class="dropdown-container-font" v-model="middle_wear">
-            <option value="Fleece sweater">Fleece sweater</option>
-            <option value="Crewneck">Crewneck</option>
-            <option value="Hoodie">Hoodie</option>
-            <option value="Blazer">Blazer</option>
-            <option value="Sweatshirt">Sweatshirt</option>
-            <option value="">N/A</option>
-          </select>
-        </div>
+          <div class="row">
+            <p class="clothing-label">Hats</p>
+            <select id="hats-container" class="dropdown-container-font" v-model="hats">
+              <option value="Baseball cap">Baseball cap</option>
+              <option value="Sun hat">Sun hat</option>
+              <option value="Beanie">Beanie</option>
+              <option value="Dad hat">Dad hat</option>
+              <option value="Trucker hat">Trucker hat</option>
+              <option value="Bucket hat">Bucket hat</option>
+              <option value="">N/A</option>
+            </select>
+          </div>
   
-        <div class="row">
-          <p class="clothing-label">Inner wear</p>
-          <select id="inner-container" class="dropdown-container-font" v-model="inner_wear">
-            <option value="Summer dress">Summer dress</option>
-            <option value="T-shirt">T-shirt</option>
-            <option value="Tank top">Tank top</option>
-            <option value="Long sleeve">Long sleeve</option>
-            <option value="Turtleneck">Turtleneck</option>
-            <option value="Crop top">Crop top</option>
-            <option value="">N/A</option>
-          </select>
-        </div>
-  
-        <div class="row">
-          <p class="clothing-label">Pants</p>
-          <select id="pants-container" class="dropdown-container-font" v-model="pants">
-            <option value="Jeans">Jeans</option>
-            <option value="Sweatpants">Sweatpants</option>
-            <option value="Trousers">Trousers</option>
-            <option value="Shorts">Shorts</option>
-            <option value="Leggings">Leggings</option>
-            <option value="Long johns">Long johns</option>
-            <option value="Skirt">Skirt</option>
-            <option value="Cargos">Cargos</option>
-            <option value="Culottes">Culottes</option>
-            <option value="">N/A</option>
-          </select>
-        </div>
-
-        <div class="row">
-          <p class="clothing-label">Shoes</p>
-          <select id="shoes-container" class="dropdown-container-font" v-model="shoes">
-            <option value="Rain boots">Rain boots</option>
-            <option value="Sneakers">Sneakers</option>
-            <option value="Sandals">Sandals</option>
-            <option value="Heels">Heels</option>
-            <option value="Flats">Flats</option>
-            <option value="Dress shoes">Dress shoes</option>
-            <option value="Flip flops">Flip flops</option>
-            <option value="Snow boots">Snow boots</option>
-            <option value="Loafers">Loafers</option>
-            <option value="Slides">Slides</option>
-            <option value="">N/A</option>
-          </select>
-        </div>
-
-        <div class="row">
-          <p class="clothing-label">Hats</p>
-          <select id="hats-container" class="dropdown-container-font" v-model="hats">
-            <option value="Baseball cap">Baseball cap</option>
-            <option value="Sun hat">Sun hat</option>
-            <option value="Beanie">Beanie</option>
-            <option value="Dad hat">Dad hat</option>
-            <option value="Trucker hat">Trucker hat</option>
-            <option value="Bucket hat">Bucket hat</option>
-            <option value="">N/A</option>
-          </select>
-        </div>
-
-        <div class="row">
-          <p class="clothing-label">Accessories</p>
-          <select id="accessories-container" class="dropdown-container-font" v-model="accessories">
-            <option value="Scarf">Scarf</option>
-            <option value="Sunglasses">Sunglasses</option>
-            <option value="Scarf">Scarf</option>
-            <option value="Gloves">Gloves</option>
-            <option value="Mittens">Mittens</option>
-            <option value="Belt">Belt</option>
-            <option value="Umbrella">Umbrella</option>
-            <option value="">N/A</option>
-          </select>
-        </div>
-  
-        <div>
-          <button @click="saveOutfit()">Save</button>
+          <div class="row">
+            <p class="clothing-label">Accessories</p>
+            <select id="accessories-container" class="dropdown-container-font" v-model="accessories">
+              <option value="Scarf">Scarf</option>
+              <option value="Sunglasses">Sunglasses</option>
+              <option value="Scarf">Scarf</option>
+              <option value="Gloves">Gloves</option>
+              <option value="Mittens">Mittens</option>
+              <option value="Belt">Belt</option>
+              <option value="Umbrella">Umbrella</option>
+              <option value="">N/A</option>
+            </select>
+          </div>
+    
+          <div>
+            <button @click="saveOutfit()">Save</button>
+          </div>
         </div>
       </div>
     </div>
@@ -202,7 +204,7 @@
     align-items: center;
     top: 30%;
     width: 100%;
-    height: 300px;
+    /* height: 300px; */
   }
   
   .row {
@@ -245,8 +247,6 @@
   }
   
   @media screen and (min-width: 992px) and (max-width: 1440px) {
-  
-  
     .row {
       width: 50%;
     }
@@ -256,7 +256,6 @@
     .row-format-container {
       height: 200px;
     }
-  
   
     .row {
       width: 60%;
@@ -279,8 +278,6 @@
   }
   
   @media screen and (max-width: 375px) {
-  
-  
     .row {
       width: 90%;
     }
