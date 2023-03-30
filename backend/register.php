@@ -19,15 +19,15 @@
 
         //Invalidate if the email is already registered, as well as password requirements
         if(email_exists($email) && username_exists($username)){
-            echo "Both the email and username are taken. Try logging in";
+            // echo "Both the email and username are taken. Try logging in";
         } elseif(email_exists($email)){
-            echo "This email is already in use";
+            // echo "This email is already in use";
         } elseif(username_exists($username)){
-            echo "This username is already in use";
+            // echo "This username is already in use";
         } elseif(!contains_char_and_num($password)){
-            echo "Your password should be a mix between characters and numbers";
+            // echo "Your password should be a mix between characters and numbers";
         } else if(!is_long_password($password)){
-            echo "Your password needs to be at least 8 characters long";
+            // echo "Your password needs to be at least 8 characters long";
         } elseif(!empty($username) && !empty($password) && !is_numeric($username)){
             $query = "INSERT INTO `users` (`user_id`, `username`, `email`, `password`) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
@@ -38,7 +38,7 @@
             if (!$stmt->execute()) {
                     die('Error: ' . htmlspecialchars($stmt->error));
             }
-            echo "Successful insertion";
+            // echo "Successful insertion";
         } else {
             echo "Please enter some valid information!";
         }

@@ -14,23 +14,50 @@
     <form action="" method="POST">
       <label for="email">Email:</label>
       <br />
-      <input type="email" id="email" required v-model="email">
+      <input 
+        type="email" 
+        id="email" 
+        required 
+        v-model="email"
+        :class="{ 'input-error': emailError }"
+        @focus="emailError = false"
+      >
       <br/>
       <br/>
 
       <label for="username">Username:</label>
       <br/>
-      <input type="text" id="username" required v-model="username">
+      <input 
+        type="text" 
+        id="username" 
+        required 
+        v-model="username"
+        :class="{ 'input-error': usernameError }"
+        @focus="usernameError = false"
+      >
       <br/>
       <br/>
 
       <label for="password">Password:</label>
       <br/>
-      <input type="password" id="password" required v-model="password">
+      <input 
+        type="password" 
+        id="password" 
+        required 
+        v-model="password"
+        :class="{ 'input-error': passwordError }"
+        @focus="passwordError = false"
+      >
       <br/>
 
       <br/>
       <button type="submit" @click.prevent="validateForm">Register</button>
+
+      <error-modal
+        :show-modal="showErrorModal"
+        :title="errorTitle"
+        :message="errorMessage"
+        @close-modal="showErrorModal = false"></error-modal>
     </form>
 
     <br/>
@@ -42,13 +69,20 @@
 <script>
   import axios from "axios"
   import menuBar from "@/components/menuBars/menuBarNonLoggedIn.vue";
+  import ErrorModal from "@/components/RegistrationPage/ErrorModal.vue";
   export default {
     data() {
       return {
-          email: null,
-          username: null,
-          password: null
-      }
+        email: null,
+        username: null,
+        password: null,
+        showErrorModal: false,
+        errorTitle: "",
+        errorMessage: "",
+        emailError: false,
+        usernameError: false,
+        passwordError: false,
+      };
     },
     methods: {
       validateForm(){
@@ -76,10 +110,54 @@
         }).catch((err) => {
           console.log("Unsuccessful axios post", err)
         })
+      },
+      handleResponse(response) {
+        switch (response) {
+          case "Both the email and username are taken. Try logging in":
+            this.emailError = true;
+            this.usernameError = true;
+            this.showErrorModal = true;
+            this.errorTitle = "Registration Error";
+            this.errorMessage = response;
+            break;
+          case "This email is already in use":
+            this.emailError = true;
+            this.showErrorModal = true;
+            this.errorTitle = "Registration Error";
+            this.errorMessage = response;
+            break;
+          case "This username is already in use":
+            this.usernameError = true;
+            this.showErrorModal = true;
+            this.errorTitle = "Registration Error";
+            this.errorMessage = response;
+            break;
+          case "Your password should be a mix between characters and numbers":
+            this.passwordError = true;
+            this.showErrorModal = true;
+            this.errorTitle = "Registration Error";
+            this.errorMessage = response;
+          case "Your password needs to be at least 8 characters long":
+            this.passwordError = true;
+            this.showErrorModal = true;
+            this.errorTitle = "Registration Error";
+            this.errorMessage = response;
+          case "Please enter some valid information!":
+            this.showErrorModal = true;
+            this.errorTitle = "Registration Error";
+            this.errorMessage = response;
+            break;
+          case "Successful insertion":
+            this.$router.push("#/login");
+            break;
+          default:
+            console.log("Unexpected response:", response);
+        }
       }
     },
     components: {
-      menuBar
+      menuBar,
+      ErrorModal,
     }
   }
 </script>
@@ -111,6 +189,10 @@ margin: auto;
 
 .Header {
 font-size: xx-large;
+}
+
+.input-error {
+  border: 2px solid red;
 }
 
 input {
