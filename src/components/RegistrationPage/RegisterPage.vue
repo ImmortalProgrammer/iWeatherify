@@ -13,75 +13,69 @@
       <menu-bar style = "margin-top: -25px; margin-left: -30px;"></menu-bar>
     </div>
 
-  <div class="Rectangle">
-    <img src="../../../img/figure-with-umbrella.svg"/>
-    <h1 class="Header">iWeatherify</h1>
-    <p class="Slogan"> Curated outfits for everyday weather </p>
+    <div class="Rectangle">
+      <img src="../../../img/figure-with-umbrella.svg"/>
+      <h1 class="Header">iWeatherify</h1>
+      <p class="Slogan"> Curated outfits for everyday weather </p>
+    </div>
+
+    <div class="RegisterForm">
+      <h1 class="Header">Register</h1>
+      <br/>
+
+      <form action="" method="POST">
+        <label for="email">Email:</label>
+        <br/>
+        <input 
+          type="email" 
+          id="email" 
+          required 
+          v-model="email"
+          :class="{ 'input-error': emailError }"
+          @focus="emailError = false"
+        >
+        <br/>
+        <br/>
+
+        <label for="username">Username:</label>
+        <br/>
+        <input 
+          type="text" 
+          id="username" 
+          required 
+          v-model="username"
+          :class="{ 'input-error': usernameError }"
+          @focus="usernameError = false"
+        >
+        <br/>
+        <br/>
+
+        <label for="password">Password:</label>
+        <br/>
+        <input 
+          type="password" 
+          id="password" 
+          required 
+          v-model="password"
+          :class="{ 'input-error': passwordError }"
+          @focus="passwordError = false"
+        >
+        <br/>
+
+        <br/>
+        <button type="submit" @click.prevent="validateForm">Register</button>
+      </form>
+
+      <br/>
+      <p> <a href="#/login">Login</a></p>        
+    </div>
   </div>
-
-  <div class="RegisterForm">
-    <h1 class="Header">Register</h1>
-    <br/>
-
-    <form action="" method="POST">
-      <label for="email">Email:</label>
-      <br />
-      <input 
-        type="email" 
-        id="email" 
-        required 
-        v-model="email"
-        :class="{ 'input-error': emailError }"
-        @focus="emailError = false"
-      >
-      <br/>
-      <br/>
-
-      <label for="username">Username:</label>
-      <br/>
-      <input 
-        type="text" 
-        id="username" 
-        required 
-        v-model="username"
-        :class="{ 'input-error': usernameError }"
-        @focus="usernameError = false"
-      >
-      <br/>
-      <br/>
-
-      <label for="password">Password:</label>
-      <br/>
-      <input 
-        type="password" 
-        id="password" 
-        required 
-        v-model="password"
-        :class="{ 'input-error': passwordError }"
-        @focus="passwordError = false"
-      >
-      <br/>
-
-      <br/>
-      <button type="submit" @click.prevent="validateForm">Register</button>
-
-      <error-modal
-        :show-modal="showErrorModal"
-        :title="errorTitle"
-        :message="errorMessage"
-        @close-modal="showErrorModal = false"></error-modal>
-    </form>
-
-    <br/>
-    <p> <a href="#/login">Login</a></p>        
-  </div>
-</div>
 </template>
 
 <script>
-  import axios from "axios"
+  import axios from "axios";
   import menuBar from "@/components/menuBars/menuBarNonLoggedIn.vue";
-  import ErrorModal from "@/components/RegistrationPage/ErrorModal.vue";
+  import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
   export default {
     data() {
       return {
@@ -115,6 +109,8 @@
           this.errorTitle = "Registration Error";
           this.errorMessage = "Please enter an email address";
           this.emailError = true;
+          this.usernameError = false;
+          this.passwordError = false;
         }
         else if (!this.isValidEmail(this.email)) {
           this.showErrorModal = true;
@@ -129,12 +125,16 @@
           this.errorTitle = "Registration Error";
           this.errorMessage = "Please enter an username";
           this.usernameError = true;
+          this.emailError = false;
+          this.passwordError = false;
         } 
         else if (!this.password) {
           this.showErrorModal = true;
           this.errorTitle = "Registration Error";
           this.errorMessage = "Please enter a password";
           this.passwordError = true;
+          this.emailError = false;
+          this.usernameError = false;
         } 
         else {
           this.registerUser();
@@ -187,11 +187,13 @@
             this.showErrorModal = true;
             this.errorTitle = "Registration Error";
             this.errorMessage = response;
+            break;
           case "Your password needs to be at least 9 characters long":
             this.passwordError = true;
             this.showErrorModal = true;
             this.errorTitle = "Registration Error";
             this.errorMessage = response;
+            break;
           case "Please enter some valid information!":
             this.showErrorModal = true;
             this.errorTitle = "Registration Error";

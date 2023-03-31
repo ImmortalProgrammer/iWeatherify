@@ -1,12 +1,11 @@
 <?php 
     // Citation: Adapted from https://www.youtube.com/watch?v=Zn4Xa406lJo&list=PLUoIt0OrSPCsrvjwFjrhKBbgvhA5W8Iwi&index=4&ab_channel=TheMaker
-    // session_start();
     include("connection.php");
     include("security.php");
     access_control();
     
+    
     if($_SERVER["REQUEST_METHOD"]  == "POST"){
-
         //Sanitize inputs
         $username = htmlspecialchars(trim($_POST["username"]), ENT_QUOTES);
         $email = filter_var(trim($_POST["email"], FILTER_SANITIZE_EMAIL));
@@ -18,23 +17,18 @@
 
         //Invalidate if the email is already registered, as well as password requirements
         if (email_exists($email) && username_exists($username)){
-            // echo "Both the email and username are taken. Try logging in";
             $response["status"] = "error";
             $response["message"] = "Both the email and username are taken. Try logging in";
         } else if (email_exists($email)){
-            // echo "This email is already in use";
             $response["status"] = "error";
             $response["message"] = "This email is already in use";
         } else if (username_exists($username)){
-            // echo "This username is already in use";
             $response["status"] = "error";
             $response["message"] = "This username is already in use";
         } else if (!contains_char_and_num($password)){
-            // echo "Your password should be a mix between characters and numbers";
             $response["status"] = "error";
             $response["message"] = "Your password should be a mix between characters and numbers";
         } else if (!is_long_password($password)){
-            // echo "Your password needs to be at least 8 characters long";
             $response["status"] = "error";
             $response["message"] = "Your password needs to be at least 9 characters long";
         } else if (!empty($username) && !empty($password) && !is_numeric($username)){
