@@ -16,7 +16,11 @@
       </div>
 
       <div id = "outfit-of-the-day_1">
-        <p style="font-size: 5vh; padding-bottom: 3vh;">Outfit of the Day</p>
+        <p style="font-size: 6vh; padding-bottom: 3vh;">Outfit of the Day</p>
+        <p style="font-size: 4vh; padding-top: 3vh;">{{this.$data.currentWeatherData.suggestedDescription}}</p>
+        <div class = "weather-icon-current1">
+          <img src = "">
+        </div>
       </div>
 
       <div class ="bar-search1">
@@ -145,7 +149,10 @@ export default {
         tempLow: ' ',
         tempHigh: ' ',
         iconUrl: ' ',
+        mainDescription: ' ',
         iconDescription: ' ',
+        suggestedDescription: ' ',
+        suggestedOutfit: '',
       },
       eightDayForecastData: {
         //Index 0 starts one day after the current weather)
@@ -170,34 +177,68 @@ export default {
   methods: {
     //Refactor pressOutfitOfTheDay and pressEightDayForecast when there is enough time to do so
     pressEightDayForecast() {
-      if (document.getElementById("menu_option_1_1").style.opacity !== "0.3") {
-        document.getElementById("menu_option_1_1").style.opacity = 0.3;
-        document.getElementById("menu_option_1_2").style.opacity = 1;
-        document.getElementById("weekly-weather_1").style.visibility = "visible";
-        document.getElementById("outfit-of-the-day_1").style.visibility = "hidden";
-        this.pressOptions();
+      const menuOpt1_1 = document.getElementById("menu_option_1_1");
+      const menuOpt1_2 = document.getElementById("menu_option_1_2");
+      const weeklyWeather1 = document.getElementById("weekly-weather_1");
+      const outfitOfDay1 = document.getElementById("outfit-of-the-day_1");
 
+      if (menuOpt1_1.style.opacity !== "0.3") {
+        menuOpt1_1.style.opacity = 0.3;
+        menuOpt1_2.style.opacity = 1;
+        weeklyWeather1.style.visibility = "visible";
+        outfitOfDay1.style.visibility = "hidden";
+        this.pressOptions();
       }
     },
     pressOutfitOfTheDay() {
-      if (document.getElementById("menu_option_1_2").style.opacity !== "0.3") {
-        document.getElementById("menu_option_1_1").style.opacity = 1;
-        document.getElementById("menu_option_1_2").style.opacity = 0.3;
-        document.getElementById("weekly-weather_1").style.visibility = "hidden";
-        document.getElementById("outfit-of-the-day_1").style.visibility = "visible";
+      const menuOpt1_1 = document.getElementById("menu_option_1_1");
+      const menuOpt1_2 = document.getElementById("menu_option_1_2");
+      const weeklyWeather1 = document.getElementById("weekly-weather_1");
+      const outfitOfDay1 = document.getElementById("outfit-of-the-day_1");
+
+      if (menuOpt1_2.style.opacity !== "0.3") {
+        menuOpt1_1.style.opacity = 1;
+        menuOpt1_2.style.opacity = 0.3;
+        weeklyWeather1.style.visibility = "hidden";
+        outfitOfDay1.style.visibility = "visible";
         this.pressOptions();
       }
     },
+    outfitSuggestions() {
+      const DESCRIPTIONS = {
+        "Drizzle": "When it's raining outside, it is important to wear clothing that will keep you dry and comfortable. So, wear a waterproof jacket and footwear to keep yourself dry when it's raining or drizzling outside!",
+        "Rain": "When it's raining outside, it is important to wear clothing that will keep you dry and comfortable. So, wear a waterproof jacket and footwear to keep yourself dry when it's raining or drizzling outside!",
+        "Thunderstorm": "There is a thunderstorm! Seek shelter immediately! Do not go outside. But, if you must go outside then avoid electronics and wear protective rain gear!",
+        "Snow": "When it is snowing outside, it is important to wear clothing that will keep you warm and dry. So, wear warm clothing, including a coat, hat, gloves, and boots, to protect yourself from the cold when there's snow outside!",
+        "Tornado": "Tornado Warning! Please seek shelter immediately. Wear sturdy shoes and clothing to protect yourself from debris in case of a tornado outside!",
+        "Mist": "Wear waterproof clothing or bring an umbrella to protect yourself from the mist when it's misty outside!",
+        "Smoke": "When it's smoky outside, it is important to protect yourself from the harmful effects of smoke inhalation. So, wear an N95 mask or respirator to filter out small smoke particles outside!",
+        "Haze": "Wear long-sleeved shirts and pants that cover your skin to protect yourself from pollutants in the hazy air!",
+        "Dust": "Wear a mask or a cloth over your mouth and nose to protect yourself from the dust when it's dusty outside!",
+        "Fog": "Wear reflective clothing if you need to be outside to increase visibility when it's foggy outside!",
+        "Sand": "Wear protective eye-wear and a mask or cloth over your mouth and nose to protect yourself from sand particles when it's sandy outside!",
+        "Ash": "Wear a mask or a cloth over your mouth and nose and cover your skin with long-sleeved shirts and pants to protect yourself from ash!",
+        "Squall": "Stay indoors and avoid going outside during a squall as it could be dangerous, but if necessary, wear sturdy shoes and clothing to protect yourself from flying debris!",
+        "Clear": "Wear clothing appropriate for the weather and your activities when it's clear outside!",
+        "Clouds": "Wear layers of clothing in case it gets cooler or starts to rain when it's cloudy outside!"
+      };
+      const DESCRIPTION = this.$data.currentWeatherData.mainDescription;
+      if (DESCRIPTION in DESCRIPTIONS) {
+        this.$data.currentWeatherData.suggestedDescription = DESCRIPTIONS[DESCRIPTION];
+        this.$data.currentWeatherData.suggestedOutfit = "";
+      }
+    },
     pressOptions() {
-       if (this.$data.data.optionsVisibility) {
-         document.getElementById("menu-container_2").style.visibility = 'visible';
-         this.$data.data.optionsVisibility = false;
-         document.getElementById("optionsText").textContent = "Close Options";
-       } else {
-         document.getElementById("menu-container_2").style.visibility = 'hidden';
-         this.$data.data.optionsVisibility = true;
-         document.getElementById("optionsText").textContent = "Open Options";
-       }
+      const menuContainer = document.getElementById("menu-container_2");
+      const optionsText = document.getElementById("optionsText");
+      if (this.$data.data.optionsVisibility) {
+        menuContainer.style.visibility = 'visible';
+        optionsText.textContent = "Close Options";
+      } else {
+        menuContainer.style.visibility = 'hidden';
+        optionsText.textContent = "Open Options";
+      }
+      this.$data.data.optionsVisibility = !this.$data.data.optionsVisibility;
     },
     async retrieveAPI() {
       try {
@@ -210,10 +251,9 @@ export default {
           //Seven-Day Forecast
           await this.eightDayForecast();
           this.currentWeatherData.locationInput = '';
-
         }
       } catch (Exception) {
-        alert("City unrecognized!")
+        alert("City not found by the API!")
       }
     },
     async currentWeather() {
@@ -243,6 +283,11 @@ export default {
         this.currentWeatherData.iconDescription = geoLocationData['weather']['0']['description'].split(' ')
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
+        this.currentWeatherData.mainDescription = geoLocationData['weather']['0']['main'].split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+
+        this.outfitSuggestions();
       } else {
         alert("Error Status Request Failed!");
       }
@@ -866,7 +911,7 @@ export default {
     bottom: 0;
     transform: translate(-50%, 0);
     width: 50vw;
-    padding: 1vh;
+    padding: 1.6vh;
     scale: 0.7;
     color: rgb(255, 255, 255);
     font-size: 2.5vh;
