@@ -1,6 +1,17 @@
 <template>
   <div id="app1">
     <div class="container-center-horizontal1">
+      <div class = "options_logged_in">
+        <div class ="menu_homepage_logged_in" @click="pressOptions()">
+          <p id = "optionsText">Open Options</p>
+        </div>
+        <div id="menu-container_2">
+          <div class = "diff_options">
+            <a id = "menu_option_1_1" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
+            <a id = "menu_option_1_2" style = "text-decoration:none; color: inherit;">Outfit of the Day</a>
+            </div>
+        </div>
+      </div>
       <nav-bar class = "HomePageNavBar"></nav-bar>
       <div class ="bar-search1">
         <input class="search-input1" type="text" name="searching" placeholder="Search up a City..."
@@ -138,6 +149,10 @@ export default {
         lowTempArr: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ''],
         feelsLikeArr: ['', '', '', '', '', '', '', ''],
         iconUrlArr: ['', '', '', '', '', '', '', ''],
+      },
+      data: {
+        APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
+        optionsVisibility: false,
       }
     }
   },
@@ -145,6 +160,18 @@ export default {
     await this.retrieveAPI();
   },
   methods: {
+     pressOptions() {
+       if (this.$data.data.optionsVisibility) {
+         document.getElementById("menu-container_2").style.visibility = 'visible';
+         this.$data.data.optionsVisibility = false;
+         document.getElementById("optionsText").textContent = "Close Options";
+       } else {
+         document.getElementById("menu-container_2").style.visibility = 'hidden';
+         this.$data.data.optionsVisibility = true;
+         document.getElementById("optionsText").textContent = "Open Options";
+
+       }
+     },
     async retrieveAPI() {
       try {
         if (this.currentWeatherData.locationInput === '') {
@@ -165,7 +192,7 @@ export default {
     async currentWeather() {
       const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/weather?q=${locationFormatting}
-        &units=imperial&APPID=c984db1322335af0a97e0dd951e5cb69`).catch(function (error) {
+        &units=imperial&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
       });
       const geoLocationStatus = weatherAPI['statusText'];
@@ -196,7 +223,7 @@ export default {
     async eightDayForecast() {
       const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/daily?q=${locationFormatting}
-        &units=imperial&cnt=9&APPID=c984db1322335af0a97e0dd951e5cb69`).catch(function (error) {
+        &units=imperial&cnt=9&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
       });
       const data = weatherAPI['data']['list'];
@@ -225,60 +252,13 @@ export default {
       }
     },
     setupDays() {
+      const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       const currentDate = new Date();
       let currentDay = currentDate.getDay();
-      //too lazy to change up the code, so this was a quick solution (in the future refactor into another method)
-      switch (currentDay) {
-        case 0:
-          this.currentWeatherData.currentDay = 'Sunday';
-          break;
-        case 1:
-          this.currentWeatherData.currentDay = 'Monday';
-          break;
-        case 2:
-          this.currentWeatherData.currentDay = 'Tuesday';
-          break;
-        case 3:
-          this.currentWeatherData.currentDay = 'Wednesday';
-          break;
-        case 4:
-          this.currentWeatherData.currentDay = 'Thursday';
-          break;
-        case 5:
-          this.currentWeatherData.currentDay = 'Friday';
-          break;
-        case 6:
-          this.currentWeatherData.currentDay= 'Saturday';
-          break;
-      }
+      this.currentWeatherData.currentDay = weekdays[currentDay];
       for (let i in this.eightDayForecastData.dates) {
-        currentDay++;
-        if (currentDay === 7) {
-          currentDay = 0;
-        }
-        switch (currentDay) {
-          case 0:
-            this.eightDayForecastData.dates[i] = 'Sunday';
-            break;
-          case 1:
-            this.eightDayForecastData.dates[i] = 'Monday';
-            break;
-          case 2:
-            this.eightDayForecastData.dates[i] = 'Tuesday';
-            break;
-          case 3:
-            this.eightDayForecastData.dates[i] = 'Wednesday';
-            break;
-          case 4:
-            this.eightDayForecastData.dates[i] = 'Thursday';
-            break;
-          case 5:
-            this.eightDayForecastData.dates[i] = 'Friday';
-            break;
-          case 6:
-            this.eightDayForecastData.dates[i] = 'Saturday';
-            break;
-        }
+        currentDay = (currentDay + 1) % 7;
+        this.eightDayForecastData.dates[i] = weekdays[currentDay];
       }
     },
   },
@@ -316,13 +296,90 @@ export default {
 
 }
 
+.menu_homepage_logged_in {
+  z-index: 1;
+  position: absolute;
+  height: 7.5vh;
+  margin-bottom: -15vh;
+  left: 45%;
+  top: 58vh;
+  border: black solid 6px;
+  bottom: 0;
+  transform: translate(-50%, 0);
+  width: 30vw;
+  padding: 1.3vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 3.2vh;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgba(102, 102, 102, 0.83);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#menu-container_2 {
+  z-index: 1;
+  position: absolute;
+  height: 25.5vh;
+  margin-bottom: -15vh;
+  left: 45%;
+  top: 60.1vh;
+  border-top: black solid 3.5px;
+  border-left: black solid 6px;
+  border-right: black solid 6px;
+  border-bottom: black solid 6px;
+  bottom: 0;
+  transform: translate(-50%, 0);
+  width: 30vw;
+  padding: 1.3vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 3.5vh;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgb(124, 124, 124);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  visibility: hidden;
+}
+
+.diff_options {
+  border: none;
+  position: relative;
+  height: auto;
+  display: block;
+  width: 130%;
+  top: -15px;
+  margin-left: -14%;
+  background-color: #14565C;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+}
+
+#menu_option_1_1, #menu_option_1_2 {
+  font-size: 2.5vh;
+  background-color: #1e7c85;
+  padding: 2.1vh;
+  display: block;
+  border-bottom: solid black 0.5vh;
+}
+
+
 .weekly-weather_1 {
   border: none;
   position: absolute;
   height: auto;
   margin-bottom: -15vh;
   left: 33%;
-  top: 52vh;
+  top: 55.4vh;
   bottom: 0;
   border-top: 0;
   transform: translate(-50%, 0);
@@ -473,22 +530,68 @@ export default {
 }
 
 
-.home-logo-3 {
-  position: absolute;
-  height: 4.5vh;
-  top: 3vh;
-  left: 52.5%;
-  transform: translate(-50%, 0);
-  width: auto;
-  scale: 1.3;
-}
-
 @media only screen and (min-width: 359px) and (max-width: 900px) {
-  .menu-container-homepage-logged-in {
+  .menu_homepage_logged_in {
     z-index: 1;
-    margin-left: 75vw;
-    padding-top: 4.0vh;
+    position: absolute;
+    height: 7.5vh;
+    margin-bottom: -15vh;
+    left: 40%;
+    top: 50vh;
+    border: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50vw;
+    padding: 1.3vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 3vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
+
+  #menu-container_2 {
+    z-index: 1;
+    position: absolute;
+    height: 25.5vh;
+    margin-bottom: -15vh;
+    left: 40.0%;
+    top: 52.1vh;
+    border-top: black solid 3.5px;
+    border-left: black solid 6px;
+    border-right: black solid 6px;
+    border-bottom: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50.1vw;
+    padding: 1.3vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 3.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgb(124, 124, 124);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .diff_options {
+    border: none;
+    position: relative;
+    height: auto;
+    display: block;
+    width: 130%;
+    top: -15px;
+    margin-left: -14%;
+    background-color: #14565C;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+  }
+
+
 
   .weekly-weather_1 {
     border: none;
@@ -496,7 +599,7 @@ export default {
     height: auto;
     margin-bottom: -20vh;
     left: 11.5%;
-    top: 28vh;
+    top: 35vh;
     bottom: 0;
     border-top: 0;
     transform: translate(-50%, 0);
@@ -669,13 +772,73 @@ export default {
 }
 
 @media only screen and (max-width: 358px) {
+  .menu_homepage_logged_in {
+    z-index: 1;
+    position: absolute;
+    height: 7.5vh;
+    margin-bottom: -15vh;
+    left: 40%;
+    top: 50vh;
+    border: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50vw;
+    padding: 1.3vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 3.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  #menu-container_2 {
+    z-index: 1;
+    position: absolute;
+    height: 25.5vh;
+    margin-bottom: -15vh;
+    left: 40.0%;
+    top: 52.1vh;
+    border-top: black solid 3.5px;
+    border-left: black solid 6px;
+    border-right: black solid 6px;
+    border-bottom: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50.1vw;
+    padding: 1.3vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 3.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgb(124, 124, 124);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .diff_options {
+    border: none;
+    position: relative;
+    height: auto;
+    display: block;
+    width: 130%;
+    top: -15px;
+    margin-left: -14%;
+    background-color: #14565C;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+  }
+
   .weekly-weather_1 {
     border: none;
     position: absolute;
     height: auto;
     margin-bottom: -20vh;
     left: 11.5%;
-    top: 28vh;
+    top: 35vh;
     bottom: 0;
     border-top: 0;
     transform: translate(-50%, 0);
@@ -834,16 +997,6 @@ export default {
     padding: 25px;
   }
 
-
-  .home-logo-3 {
-    position: absolute;
-    height: 4.5vh;
-    top: 3vh;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: auto;
-    scale: 1;
-  }
 }
 
 </style>

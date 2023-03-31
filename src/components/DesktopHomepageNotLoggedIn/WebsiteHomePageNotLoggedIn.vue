@@ -138,6 +138,9 @@ export default {
         lowTempArr: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ''],
         feelsLikeArr: ['', '', '', '', '', '', '', ''],
         iconUrlArr: ['', '', '', '', '', '', '', ''],
+      },
+      data: {
+        APIKEY: 'c984db1322335af0a97e0dd951e5cb69'
       }
     }
   },
@@ -166,7 +169,7 @@ export default {
     async currentWeather() {
       const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/weather?q=${locationFormatting}
-        &units=imperial&APPID=c984db1322335af0a97e0dd951e5cb69`).catch(function (error) {
+        &units=imperial&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
       });
       const geoLocationStatus = weatherAPI['statusText'];
@@ -197,7 +200,7 @@ export default {
     async eightDayForecast() {
       const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/daily?q=${locationFormatting}
-        &units=imperial&cnt=9&APPID=c984db1322335af0a97e0dd951e5cb69`).catch(function (error) {
+        &units=imperial&cnt=9&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
       });
       const data = weatherAPI['data']['list'];
@@ -226,60 +229,13 @@ export default {
       }
     },
     setupDays() {
+      const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       const currentDate = new Date();
       let currentDay = currentDate.getDay();
-      //too lazy to change up the code, so this was a quick solution (in the future refactor into another method)
-      switch (currentDay) {
-        case 0:
-          this.currentWeatherData.currentDay = 'Sunday';
-          break;
-        case 1:
-          this.currentWeatherData.currentDay = 'Monday';
-          break;
-        case 2:
-          this.currentWeatherData.currentDay = 'Tuesday';
-          break;
-        case 3:
-          this.currentWeatherData.currentDay = 'Wednesday';
-          break;
-        case 4:
-          this.currentWeatherData.currentDay = 'Thursday';
-          break;
-        case 5:
-          this.currentWeatherData.currentDay = 'Friday';
-          break;
-        case 6:
-          this.currentWeatherData.currentDay= 'Saturday';
-          break;
-      }
+      this.currentWeatherData.currentDay = weekdays[currentDay];
       for (let i in this.eightDayForecastData.dates) {
-        currentDay++;
-        if (currentDay === 7) {
-          currentDay = 0;
-        }
-        switch (currentDay) {
-          case 0:
-            this.eightDayForecastData.dates[i] = 'Sunday';
-            break;
-          case 1:
-            this.eightDayForecastData.dates[i] = 'Monday';
-            break;
-          case 2:
-            this.eightDayForecastData.dates[i] = 'Tuesday';
-            break;
-          case 3:
-            this.eightDayForecastData.dates[i] = 'Wednesday';
-            break;
-          case 4:
-            this.eightDayForecastData.dates[i] = 'Thursday';
-            break;
-          case 5:
-            this.eightDayForecastData.dates[i] = 'Friday';
-            break;
-          case 6:
-            this.eightDayForecastData.dates[i] = 'Saturday';
-            break;
-        }
+        currentDay = (currentDay + 1) % 7;
+        this.eightDayForecastData.dates[i] = weekdays[currentDay];
       }
     },
   },
