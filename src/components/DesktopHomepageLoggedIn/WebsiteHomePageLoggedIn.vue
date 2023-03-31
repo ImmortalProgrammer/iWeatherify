@@ -1,5 +1,7 @@
 <template>
   <div id="app1">
+    <nav-bar class = "HomePageNavBar"></nav-bar>
+
     <div class="container-center-horizontal1">
       <div class = "options_logged_in">
         <div class ="menu_homepage_logged_in" @click="pressOptions()">
@@ -7,12 +9,16 @@
         </div>
         <div id="menu-container_2">
           <div class = "diff_options">
-            <a id = "menu_option_1_1" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
-            <a id = "menu_option_1_2" style = "text-decoration:none; color: inherit;">Outfit of the Day</a>
+            <a  id = "menu_option_1_1"  @click ="pressEightDayForecast()" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
+            <a id = "menu_option_1_2" @click = "pressOutfitOfTheDay()" style = "text-decoration:none; color: inherit;">Outfit of the Day</a>
             </div>
         </div>
       </div>
-      <nav-bar class = "HomePageNavBar"></nav-bar>
+
+      <div id = "outfit-of-the-day_1">
+        <p style="font-size: 5vh; padding-bottom: 3vh;">Outfit of the Day</p>
+      </div>
+
       <div class ="bar-search1">
         <input class="search-input1" type="text" name="searching" placeholder="Search up a City..."
                v-model="currentWeatherData.locationInput" @keyup.enter="retrieveAPI()">
@@ -33,8 +39,8 @@
           <p class = "feelslike_1_1">Feels Like: {{this.currentWeatherData.feelsLike}}°</p>
         </div>
       </div>
-      <div class="weekly-weather_1">
-        <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast: </p>
+      <div id="weekly-weather_1">
+        <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast </p>
         <div class = "day-next-1">
           <p class = "next-1">{{ this.eightDayForecastData.dates[0] }}</p>
           <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[0] }}</p>
@@ -153,6 +159,8 @@ export default {
       data: {
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
         optionsVisibility: false,
+        eightDayForecastGrayOut: true,
+        outfitOfTheDayGrayOut: false,
       }
     }
   },
@@ -160,7 +168,27 @@ export default {
     await this.retrieveAPI();
   },
   methods: {
-     pressOptions() {
+    //Refactor pressOutfitOfTheDay and pressEightDayForecast when there is enough time to do so
+    pressEightDayForecast() {
+      if (document.getElementById("menu_option_1_1").style.opacity !== "0.3") {
+        document.getElementById("menu_option_1_1").style.opacity = 0.3;
+        document.getElementById("menu_option_1_2").style.opacity = 1;
+        document.getElementById("weekly-weather_1").style.visibility = "visible";
+        document.getElementById("outfit-of-the-day_1").style.visibility = "hidden";
+        this.pressOptions();
+
+      }
+    },
+    pressOutfitOfTheDay() {
+      if (document.getElementById("menu_option_1_2").style.opacity !== "0.3") {
+        document.getElementById("menu_option_1_1").style.opacity = 1;
+        document.getElementById("menu_option_1_2").style.opacity = 0.3;
+        document.getElementById("weekly-weather_1").style.visibility = "hidden";
+        document.getElementById("outfit-of-the-day_1").style.visibility = "visible";
+        this.pressOptions();
+      }
+    },
+    pressOptions() {
        if (this.$data.data.optionsVisibility) {
          document.getElementById("menu-container_2").style.visibility = 'visible';
          this.$data.data.optionsVisibility = false;
@@ -169,9 +197,8 @@ export default {
          document.getElementById("menu-container_2").style.visibility = 'hidden';
          this.$data.data.optionsVisibility = true;
          document.getElementById("optionsText").textContent = "Open Options";
-
        }
-     },
+    },
     async retrieveAPI() {
       try {
         if (this.currentWeatherData.locationInput === '') {
@@ -370,10 +397,21 @@ export default {
   padding: 2.1vh;
   display: block;
   border-bottom: solid black 0.5vh;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#menu_option_1_1 {
+  opacity: 0.3;
 }
 
 
-.weekly-weather_1 {
+#weekly-weather_1 {
   border: none;
   position: absolute;
   height: auto;
@@ -393,7 +431,29 @@ export default {
   background-color: rgba(102, 102, 102, 0.83);
   overflow-y: scroll;
   overflow-x: hidden;
+}
 
+#outfit-of-the-day_1 {
+  visibility: hidden;
+  border: none;
+  position: absolute;
+  height: auto;
+  margin-bottom: -15vh;
+  left: 33%;
+  top: 55.4vh;
+  bottom: 0;
+  border-top: 0;
+  transform: translate(-50%, 0);
+  width: 110vw;
+  padding: 2.5vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgba(102, 102, 102, 0.83);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 
@@ -530,7 +590,7 @@ export default {
 }
 
 
-@media only screen and (min-width: 359px) and (max-width: 900px) {
+@media only screen and (min-width: 428px) and (max-width: 900px) {
   .menu_homepage_logged_in {
     z-index: 1;
     position: absolute;
@@ -593,7 +653,8 @@ export default {
 
 
 
-  .weekly-weather_1 {
+
+  #weekly-weather_1 {
     border: none;
     position: absolute;
     height: auto;
@@ -613,7 +674,29 @@ export default {
     background-color: rgba(102, 102, 102, 0.83);
     overflow-y: scroll;
     overflow-x: hidden;
+  }
 
+
+  #outfit-of-the-day_1 {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 35vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .day-next-1 {
@@ -771,7 +854,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: 358px) {
+@media only screen and (max-width: 427px) {
   .menu_homepage_logged_in {
     z-index: 1;
     position: absolute;
@@ -783,10 +866,10 @@ export default {
     bottom: 0;
     transform: translate(-50%, 0);
     width: 50vw;
-    padding: 1.3vh;
+    padding: 1vh;
     scale: 0.7;
     color: rgb(255, 255, 255);
-    font-size: 3.5vh;
+    font-size: 2.5vh;
     font-weight: 500;
     text-align: center;
     background-color: rgba(102, 102, 102, 0.83);
@@ -832,7 +915,7 @@ export default {
     font-weight: 500;
   }
 
-  .weekly-weather_1 {
+  #weekly-weather_1 {
     border: none;
     position: absolute;
     height: auto;
@@ -853,6 +936,29 @@ export default {
     overflow-y: scroll;
     overflow-x: hidden;
 
+
+  }
+
+  #outfit-of-the-day_1 {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 35vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .day-next-1 {
