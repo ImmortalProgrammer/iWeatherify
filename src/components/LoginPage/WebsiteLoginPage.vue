@@ -57,8 +57,9 @@
         formData.append("username", this.username);
         formData.append("password", this.password);
         
-        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/login.php?action=login", formData).then(
-          (res) => {
+        // axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/login.php?action=login", formData)
+        axios.post("http://localhost/project_s23-iweatherify/backend/login.php", formData)
+        .then((res) => {
             console.log(res)
             console.log(res.data)
             if(res.data.status === 1){

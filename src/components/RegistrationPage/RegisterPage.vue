@@ -1,6 +1,18 @@
 <template>
   <div class = "RegistrationPage">
-    <menu-bar style = "margin-top: -25px; margin-left: -30px;"></menu-bar>
+    <div v-if="showErrorModal" class="overlay">
+      <error-modal
+        :show-modal="showErrorModal"
+        :title="errorTitle"
+        :message="errorMessage"
+        @close-modal="showErrorModal = false"
+      ></error-modal>
+    </div>
+
+    <div>
+      <menu-bar style = "margin-top: -25px; margin-left: -30px;"></menu-bar>
+    </div>
+
   <div class="Rectangle">
     <img src="../../../img/figure-with-umbrella.svg"/>
     <h1 class="Header">iWeatherify</h1>
@@ -85,11 +97,48 @@
       };
     },
     methods: {
+      isValidEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+      },
       validateForm(){
-        if(!this.email || !this.username || !this.password){
-          alert("Please fill all required information")
+        if(!this.email && !this.username && !this.password) {
+          this.showErrorModal = true;
+          this.errorTitle = "Registration Error";
+          this.errorMessage = "Please fill all required information";
+          this.emailError = true;
+          this.usernameError = true;
+          this.passwordError = true;
         }
-        this.registerUser()
+        else if (!this.email) {
+          this.showErrorModal = true;
+          this.errorTitle = "Registration Error";
+          this.errorMessage = "Please enter an email address";
+          this.emailError = true;
+        }
+        else if (!this.isValidEmail(this.email)) {
+          this.showErrorModal = true;
+          this.errorTitle = "Registration Error";
+          this.errorMessage = "Please enter a valid email address";
+          this.emailError = true;
+          this.usernameError = false;
+          this.passwordError = false;
+        } 
+        else if (!this.username) {
+          this.showErrorModal = true;
+          this.errorTitle = "Registration Error";
+          this.errorMessage = "Please enter an username";
+          this.usernameError = true;
+        } 
+        else if (!this.password) {
+          this.showErrorModal = true;
+          this.errorTitle = "Registration Error";
+          this.errorMessage = "Please enter a password";
+          this.passwordError = true;
+        } 
+        else {
+          this.registerUser();
+        }
       }, 
       registerUser() {
         let formData = new FormData();
@@ -98,14 +147,15 @@
         formData.append("username", this.username);
         formData.append("password", this.password);
 
-        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/register.php?action=register", formData).then(
-          (res) => {
-            alert(res.data)
-            if(res.error){
+        // axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/register.php?action=register", formData)
+        axios.post("http://localhost/project_s23-iweatherify/backend/register.php", formData)
+        .then((res) => {
+            if(res.data.status === "error"){
               console.log("Couldnt send post request")
+              this.handleResponse(res.data.message);
             } else {
               console.log("Sent post request to backend")
-              // this.$router.push("/login");
+              this.handleResponse(res.data.message);
             }
         }).catch((err) => {
           console.log("Unsuccessful axios post", err)
@@ -137,7 +187,7 @@
             this.showErrorModal = true;
             this.errorTitle = "Registration Error";
             this.errorMessage = response;
-          case "Your password needs to be at least 8 characters long":
+          case "Your password needs to be at least 9 characters long":
             this.passwordError = true;
             this.showErrorModal = true;
             this.errorTitle = "Registration Error";
@@ -148,7 +198,9 @@
             this.errorMessage = response;
             break;
           case "Successful insertion":
-            this.$router.push("#/login");
+            this.showErrorModal = true;
+            this.errorTitle = "Registration Successful";
+            this.errorMessage = "You are now registered. Please login now";
             break;
           default:
             console.log("Unexpected response:", response);
@@ -193,6 +245,16 @@ font-size: xx-large;
 
 .input-error {
   border: 2px solid red;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 input {
