@@ -31,7 +31,8 @@
           id="username" 
           required 
           v-model="username" 
-          :class="{ error: showErrorModal && !username }"
+          :class="{ error: usernameError }"
+          @focus="usernameError = false"
         > <!-- Dont know why required attribute isnt working -->
         <br/>
         <br/>
@@ -43,7 +44,8 @@
           id="password" 
           required 
           v-model="password"
-          :class="{ error: showErrorModal && !password }"
+          :class="{ error: passwordError }"
+          @focus="passwordError = false"
         >
         <br/>
 
@@ -69,15 +71,34 @@
         errorTitle: "",
         errorMessage: "",
         showErrorModal: false,
+        usernameError: false,
+        passwordError: false,
       };
     },
     methods: {
       validateForm(){
-        if(!this.username || !this.password){
-          this.errorTitle = "Error";
+        if(!this.username && !this.password){
+          this.errorTitle = "Login Error";
           this.errorMessage = "Make sure you fill both username and password";
           this.showErrorModal = true;
-        } else {
+          this.usernameError = true;
+          this.passwordError = true;
+        } 
+        else if (!this.username) {
+          this.errorTitle = "Login Error";
+          this.errorMessage = "Please enter an username";
+          this.showErrorModal = true;
+          this.usernameError = true;
+          this.passwordError = false;
+        } 
+        else if (!this.password) {
+          this.errorTitle = "Login Error";
+          this.errorMessage = "Please enter a password";
+          this.showErrorModal = true;
+          this.usernameError = false;
+          this.passwordError = true;
+        }
+        else {
           this.loginUser()
         }     
       },
@@ -96,7 +117,11 @@
               document.cookie = "auth_token=" + res.data.auth_token; //Retrieve the auth token from the server and store it as a cookie
               this.$router.push("/homepage");
             } else {
-              alert("Invalid username and password combo");
+              this.errorTitle = "Login Error";
+              this.errorMessage = "Invalid username and/or password";
+              this.showErrorModal = true;
+              this.usernameError = true;
+              this.passwordError = true;
             }
         }).catch((err) => {
           console.log("Unsuccessful axios post", err)

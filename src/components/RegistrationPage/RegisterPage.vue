@@ -104,6 +104,30 @@
           this.usernameError = true;
           this.passwordError = true;
         }
+        else if (!this.email && !this.username) {
+          this.showErrorModal = true;
+          this.errorTitle = "Registration Error";
+          this.errorMessage = "Email address and username are empty";
+          this.emailError = true;
+          this.usernameError = true;
+          this.passwordError = false;
+        }
+        else if (!this.email && !this.password) {
+          this.showErrorModal = true;
+          this.errorTitle = "Registration Error";
+          this.errorMessage = "Email address and password are empty";
+          this.emailError = true;
+          this.usernameError = false;
+          this.passwordError = true;
+        }
+        else if (!this.username && !this.password) {
+          this.showErrorModal = true;
+          this.errorTitle = "Registration Error";
+          this.errorMessage = "Username and password are empty";
+          this.usernameError = true;
+          this.emailError = false;
+          this.passwordError = true;
+        } 
         else if (!this.email) {
           this.showErrorModal = true;
           this.errorTitle = "Registration Error";
@@ -119,7 +143,7 @@
           this.emailError = true;
           this.usernameError = false;
           this.passwordError = false;
-        } 
+        }
         else if (!this.username) {
           this.showErrorModal = true;
           this.errorTitle = "Registration Error";
@@ -127,7 +151,7 @@
           this.usernameError = true;
           this.emailError = false;
           this.passwordError = false;
-        } 
+        }
         else if (!this.password) {
           this.showErrorModal = true;
           this.errorTitle = "Registration Error";
@@ -135,7 +159,7 @@
           this.passwordError = true;
           this.emailError = false;
           this.usernameError = false;
-        } 
+        }
         else {
           this.registerUser();
         }
@@ -182,6 +206,12 @@
             this.errorTitle = "Registration Error";
             this.errorMessage = response;
             break;
+          case "Your username must contain at least one character":
+            this.usernameError = true;
+            this.showErrorModal = true;
+            this.errorTitle = "Registration Error";
+            this.errorMessage = response;
+            break;
           case "Your password should be a mix between characters and numbers":
             this.passwordError = true;
             this.showErrorModal = true;
@@ -202,7 +232,7 @@
           case "Successful insertion":
             this.showErrorModal = true;
             this.errorTitle = "Registration Successful";
-            this.errorMessage = "You are now registered. Please login now";
+            this.errorMessage = "You are now registered. Please login";
             break;
           default:
             console.log("Unexpected response:", response);
@@ -236,13 +266,13 @@
 }
 
 .RegisterForm{
-display: flex;
-flex-direction: column;
-margin: auto;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .Header {
-font-size: xx-large;
+  font-size: xx-large;
 }
 
 .input-error {
@@ -274,7 +304,7 @@ button {
 }
 
 a {
-color: #2a9d8f;
+  color: #2a9d8f;
 }
 
 @media screen and (max-width: 800px) {

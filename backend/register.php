@@ -25,6 +25,9 @@
         } else if (username_exists($username)){
             $response["status"] = "error";
             $response["message"] = "This username is already in use";
+        } else if (preg_match('/^[0-9]+$/', $username)){
+            $response["status"] = "error";
+            $response["message"] = "Your username must contain at least one character";
         } else if (!contains_char_and_num($password)){
             $response["status"] = "error";
             $response["message"] = "Your password should be a mix between characters and numbers";
