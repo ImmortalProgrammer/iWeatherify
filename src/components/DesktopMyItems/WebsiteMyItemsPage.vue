@@ -1,29 +1,30 @@
 <template>
-  <div class="container-center-horizontal">
     <div class="website-my-items-page screen">
       
+      <!-- Nav bar -->
+      <div class="flex-row">
+        <nav-bar></nav-bar>
+      </div>
+
+      <!-- The top row -->
       <div class="flex-col">
-        
-        <div class="flex-row">
-          <nav-bar></nav-bar>
-        </div>
-        
         <div class="overlap-group7">
-          
-          <div class="overlap-group4">
+
+          <div class="hot-container">
             <div class="hot ui---16-regular2">{{ hot }}</div>
             <img
               src="../../../img/my_items_icons/hot.svg"
-              alt="Line 83"
+              alt="Image of a sun with heat waves"
               style="width:200px; margin-top: 20px;"
             />
           </div>
 
-          <div class="overlap-group3">
+          <div class="warm-container" @click.self = "showModal">
             <img
               src="../../../img/my_items_icons/warm.svg"
-              alt="Line 83"
+              alt="image of a sun"
               style="width:200px; margin-top: 20px;"
+              @click.self="showModal"
             />
             <div class="warm ui---16-regular2">{{ warm }}</div>
           </div>
@@ -32,7 +33,7 @@
             <div class="overlap-group2">
               <img
               src="../../../img/my_items_icons/just_right.svg"
-              alt="Line 83"
+              alt="Image of a sun behind a cloud"
               style="width:200px; margin-top: 190px;"
             />
               <div class="just-right ui---16-regular2">{{ justRight }}</div>
@@ -48,18 +49,19 @@
         </div>
       </div>
 
+      <!-- The bottom row -->
       <div class="flex-row-1">
         <div class="flex-col-1">
           <div class="overlap-group5">
             <img
               src="../../../img/my_items_icons/chilly.svg"
-              alt="Line 83"
+              alt="Image of a cloud"
               style="width:200px; margin-top: 20px;"
             />
-            <div class="place ui---16-regular2">{{ place }}</div> 
+            <div class="chilly ui---16-regular2">{{ chilly }}</div> 
           </div>
 
-          <div class="edit-delete4">
+          <div>
         </div>
 
         </div>
@@ -73,7 +75,7 @@
               <div class="line-container">
                 <img
               src="../../../img/my_items_icons/cold.svg"
-              alt="Line 83"
+              alt="Image of a cloud with a gust of wind"
               style="width:200px; margin-top: -5px;"
             />
               </div>
@@ -83,12 +85,9 @@
               <div class="line-container-1">
                 <img
               src="../../../img/my_items_icons/freezing.svg"
-              alt="Line 83"
+              alt="Image of a snowflake"
               style="width:200px; margin-top: -5px;"
             />
-              </div>
-
-              <div class="edit-delete6">
               </div>
 
             </div>
@@ -96,7 +95,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -105,6 +103,8 @@ import ListboxComponent from "./ListboxComponent";
 import AddEditDelete from "./AddEditDelete";
 import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
 import NavBar from "@/NavBar/NavBar.vue";
+import Modal from "../Modal/Modal.vue";
+
 export default {
   name: "WebsiteMyItemsPage",
   components: {
@@ -113,6 +113,7 @@ export default {
     ListboxComponent,
     AddEditDelete,
     menuBar,
+    Modal
   },
   props: [
     "defaultLogo3",
@@ -121,7 +122,7 @@ export default {
     "justRight",
     "categorizeClothesB",
     "title",
-    "place",
+    "chilly",
     "cold",
     "freezing",
     "ellipse6Props",
@@ -163,12 +164,12 @@ export default {
   position: relative;
 }
 
-.overlap-group3{
-  align-self: flex-end;
-  height: 422px;
-  margin-top: 15.6%;
-  position: relative;
-  width: 1084px;
+.warm-container{
+  height: 252px;
+  left: 0;
+  position: absolute;
+  top: 170px;
+  width: 200px;
 }
 
 
@@ -180,14 +181,14 @@ export default {
   width: 1084px;
 }
 
-.overlap-group4 {
+.hot-container {
   height: 252px;
   left: 0;
   position: absolute;
   top: 170px;
   width: 200px;
+  background: grey;
 }
-
 
 
 .hot {
@@ -203,7 +204,7 @@ export default {
 
 
 
-.overlap-group4 {
+.hot-container {
   height: 251px;
   left: 289px;
   position: absolute;
@@ -352,7 +353,7 @@ export default {
 }
 
 
-.place {
+.chilly {
   color: var(--black);
   font-weight: 400;
   left: 0;

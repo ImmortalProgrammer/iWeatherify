@@ -93,7 +93,7 @@ export const websiteMyItemsPageData = {
     justRight: "Just right",
     categorizeClothesB: "Categorize clothes based on your temperature preferences",
     title: "My Items",
-    place: "Chilly",
+    chilly: "Chilly",
     cold: "Cold",
     freezing: "Freezing",
     ellipse6Props: ellipse6Data,

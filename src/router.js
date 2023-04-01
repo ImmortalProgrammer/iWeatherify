@@ -11,6 +11,7 @@ import WebsiteLoginPage from "./components/LoginPage/WebsiteLoginPage";
 import WebsiteProfileNoSavedOutfit from "./components/SavedOutfits/WebsiteProfileNoSavedOutfit";
 import AddClothing from "./components/SavedOutfits/AddClothing";
 import AddClothingModal from "./components/SavedOutfits/AddClothingModal";
+import MakeOutfit from "./components/DesktopMyItems/MakeOutfit";
 
 import {
   websiteUnitsPageData,
@@ -37,6 +38,14 @@ const isUserLoggedIn = () => {
 };
 
 const routes = [
+  {
+    name: "makeOutfit",
+    path: "/makeOutfit",
+    component: MakeOutfit,
+    props: {
+      title: "Make a new outfit"
+    }
+  },
   {
     name: "AddClothingModal",
     path: "/addClothingModal",

@@ -32,10 +32,6 @@
                             <label>Location: </label>
                             <input>
                             <br>
-                            
-                            <label>Degrees: </label>
-                            <input>
-                            <br>
                             <br>
 
                             <label>Clothes: </label>
@@ -76,6 +72,7 @@
 
   <style scoped>
   .modal-backdrop {
+    z-index: 1;
     position: fixed;
     top: 0;
     bottom: 0;
