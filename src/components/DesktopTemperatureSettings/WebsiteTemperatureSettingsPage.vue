@@ -4,23 +4,23 @@
       <nav-bar style = "margin-top: 3.4vh;"></nav-bar>
     </div>
 
-    <div class = "pushDowTempDisplay"></div>
+    <div class = "pushDowTempDisplay">
+      <div class="title-container">
+        <h1 class="temp-setting-title">{{ title }}</h1>
+      </div>
+      
+      <div class="temp-container">
+        <div class="hot-to-freezing-container">
 
-    <div class="title-container">
-      <h1 class="temp-setting-title">{{ title }}</h1>
-    </div>
-    
-    <div class="temp-container">
-      <div class="hot-to-freezing-container">
+          <div v-for="(label, index) in labels" :key="index" class="temp-rows">
+            <label :for="label" class="hot-to-freezing-font">{{ label }}:</label>
 
-        <div v-for="(label, index) in labels" :key="index" class="temp-rows">
-          <label :for="label" class="hot-to-freezing-font">{{ label }}:</label>
+            <input class="temp-slider" type="range" min="-100" max="100" v-model="tempValues[label]" @input="updateInputValue(label, $event)"/>
 
-          <input class="temp-slider" type="range" min="-100" max="100" v-model="tempValues[label]" @input="updateInputValue(label, $event)"/>
+            <input class= "temp-input" type="text" :id="label" :name="label" v-model="tempValues[label]" @input="updateSliderValue(label, $event)"/>
 
-          <input class= "temp-input" type="text" :id="label" :name="label" v-model="tempValues[label]" @input="updateSliderValue(label, $event)"/>
-
-          <button :name="label + '-button'" @click="saveTempSettings()">Save</button>
+            <button :name="label + '-button'" @click="saveTempSettings()">Save</button>
+          </div>
         </div>
       </div>
     </div>
