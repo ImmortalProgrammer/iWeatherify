@@ -40,18 +40,18 @@ const routes = [
   {
     name: "AddClothingModal",
     path: "/addClothingModal",
-    component: AddClothingModal
+    component: AddClothingModal,
+    props: {
+      title: "Add a new saved outfit"
+    }
   },
   {
     name: "SavedOutfits",
     path: "/savedOutfits",
     component: WebsiteProfileNoSavedOutfit,
     props: {
-      plusMath:
-          "https://anima-uploads.s3.amazonaws.com/projects/6405ee9a4548b3806a50e138/releases/6405ef8c246cb8c2cd3b302a/img/plus-math@2x.png",
       defaultFrameLogo3:
           "https://anima-uploads.s3.amazonaws.com/projects/6405ee9a4548b3806a50e138/releases/6405ef8c246cb8c2cd3b302a/img/default-frame-logo-2@2x.png",
-      noSavedOutfitsTrySavingOne: "No saved outfits, try saving one!",
       ellipse6Props: websiteProfileNoSavedOutfitData.ellipse6Props,
     },
     meta: {
@@ -65,7 +65,7 @@ const routes = [
     props: {
       defaultLogo4:
           "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/default-logo-4@2x.png",
-      title: "Add a new outfit",
+      title: "Add clothes",
       ellipse6Props: websiteUnitsPageData.ellipse6Props
     }
   },

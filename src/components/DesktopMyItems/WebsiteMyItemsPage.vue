@@ -11,18 +11,17 @@
         <div class="overlap-group7">
           
           <div class="overlap-group4">
-            
-           
             <div class="hot ui---16-regular2">{{ hot }}</div>
             <img
-              src="../../../img/lines.jpg"
+              src="../../../img/my_items_icons/hot.svg"
               alt="Line 83"
               style="width:200px; margin-top: 20px;"
             />
           </div>
+
           <div class="overlap-group3">
             <img
-              src="../../../img/lines.jpg"
+              src="../../../img/my_items_icons/warm.svg"
               alt="Line 83"
               style="width:200px; margin-top: 20px;"
             />
@@ -32,7 +31,7 @@
           <div class="overlap-group1">
             <div class="overlap-group2">
               <img
-              src="../../../img/lines.jpg"
+              src="../../../img/my_items_icons/just_right.svg"
               alt="Line 83"
               style="width:200px; margin-top: 190px;"
             />
@@ -44,23 +43,26 @@
             </div>
             <p class="categorize-clothes-b">{{ categorizeClothesB }}</p>
           </div>
+
           <h1 class="title">{{ title }}</h1>
         </div>
+
         <div class="add-edit-delete-container">
           <add-edit-delete />
           <add-edit-delete :className="addEditDelete1Props.className" />
           <add-edit-delete :className="addEditDelete2Props.className" />
         </div>
       </div>
+
       <div class="flex-row-1">
         <div class="flex-col-1">
           <div class="overlap-group5">
             <img
-              src="../../../img/lines.jpg"
+              src="../../../img/my_items_icons/chilly.svg"
               alt="Line 83"
               style="width:200px; margin-top: 20px;"
             />
-            <div class="place ui---16-regular2">{{ place }}</div>
+            <div class="place ui---16-regular2">{{ place }}</div> 
           </div>
 
           <div class="edit-delete4">
@@ -77,7 +79,7 @@
             <div class="flex-col-3">
               <div class="line-container">
                 <img
-              src="../../../img/lines.jpg"
+              src="../../../img/my_items_icons/cold.svg"
               alt="Line 83"
               style="width:200px; margin-top: -5px;"
             />
@@ -91,7 +93,7 @@
             <div class="flex-col-4">
               <div class="line-container-1">
                 <img
-              src="../../../img/lines.jpg"
+              src="../../../img/my_items_icons/freezing.svg"
               alt="Line 83"
               style="width:200px; margin-top: -5px;"
             />

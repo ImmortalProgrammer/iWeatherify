@@ -10,14 +10,15 @@
           </div>
           <img
             class="undraw_weather_app_re_kcb1-1"
-            src="https://anima-uploads.s3.amazonaws.com/projects/6405ee9a4548b3806a50e138/releases/6405ef8c246cb8c2cd3b302a/img/undraw-weather-app-re-kcb1-1.svg"
-            alt="undraw_weather_app_re_kcb1 1"
+            src="../../../img/girl-on-cloud.svg"
+            alt="girl on cloud icon"
           />
-          <ellipse6 :src="ellipse6Props.src" />
-          <div class="plusButton" @click.self="showOutfitModal()">
-            <img class="plus-math" :src="plusMath" alt="Plus Math" />
-          </div>
-          <input-field />
+          <!-- <ellipse6 :src="ellipse6Props.src" /> -->
+          <!-- <div class="plusButton" @click.self="showModal">
+            <img class="plus-math" :src="plusMath" @click.self="showModal" alt="Plus Math" />
+          </div> -->
+
+          <!-- <input-field /> -->
         </div>
       </div>
       <div class="group-41">
@@ -35,22 +36,13 @@ import NavBar from "@/NavBar/NavBar.vue";
 export default {
   name: "WebsiteProfileNoSavedOutfit",
   data() {
-    return {
-      showModal: false,
-    }
-  },
-  methods: {
-    showOutfitModal(){
-      this.showModal = !this.showModal
-      console.log("The state of showModal is: " + this.showModal)
-    }
   },
   components: {
     NavBar,
     ListboxComponent,
     InputField,
   },
-  props: ["plusMath", "defaultFrameLogo3", "ellipse6Props"],
+  props: ["defaultFrameLogo3", "ellipse6Props"],
 };
 </script>
 
