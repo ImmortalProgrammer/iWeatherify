@@ -46,12 +46,6 @@
 
           <h1 class="title">{{ title }}</h1>
         </div>
-
-        <div class="add-edit-delete-container">
-          <add-edit-delete />
-          <add-edit-delete :className="addEditDelete1Props.className" />
-          <add-edit-delete :className="addEditDelete2Props.className" />
-        </div>
       </div>
 
       <div class="flex-row-1">
@@ -66,7 +60,6 @@
           </div>
 
           <div class="edit-delete4">
-          <add-edit-delete :className="addEditDelete3Props.className" />
         </div>
 
         </div>
@@ -85,10 +78,6 @@
             />
               </div>
 
-              <div class="edit-delete5">
-              <add-edit-delete :className="addEditDelete4Props.className" />
-              </div>
-
             </div>
             <div class="flex-col-4">
               <div class="line-container-1">
@@ -100,7 +89,6 @@
               </div>
 
               <div class="edit-delete6">
-              <add-edit-delete :className="addEditDelete5Props.className" />
               </div>
 
             </div>
