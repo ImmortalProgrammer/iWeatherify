@@ -1,16 +1,16 @@
 <?php 
 
-    // $dbhost = "oceanus";
-    // $dbuser = "vwong27";
-    // $dbpass = "50342607";
-    // $dbname = "cse442_2023_spring_team_a_db";
+    $dbhost = "oceanus";
+    $dbuser = "vwong27";
+    $dbpass = "50342607";
+    $dbname = "cse442_2023_spring_team_a_db";
 
-    //Local stuff
-    $dbhost = "localhost";
-    $dbuser = "root";
-    $dbpass = "";
+    // Local stuff
+    // $dbhost = "localhost";
+    // $dbuser = "root";
+    // $dbpass = "";
     // $dbname = "vue_php_cdn_db";
-    $dbname = "cse442";
+    // $dbname = "cse442";
 
 
     // Create connection

@@ -171,8 +171,7 @@
         formData.append("username", this.username);
         formData.append("password", this.password);
 
-        // axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/register.php?action=register", formData)
-        axios.post("http://localhost/project_s23-iweatherify/backend/register.php", formData)
+        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/register.php?action=register", formData)
         .then((res) => {
             if(res.data.status === "error"){
               console.log("Couldnt send post request")
