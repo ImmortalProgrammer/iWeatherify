@@ -17,8 +17,8 @@
       </div>
 
       <div id = "outfit-of-the-day_1">
-        <p style="font-size: 6vh; padding-bottom: 3vh;">Outfit Recommendations for Today</p>
-        <p style="font-size: 4vh; padding-top: 3vh;">{{this.$data.currentWeatherData.suggestedDescription}}</p>
+        <p style="font-size: 5.5vh; padding-bottom: 3vh;">Outfit Recommendations for Today</p>
+        <p style="font-size: 3.5vh; padding-top: 3vh;">{{this.$data.currentWeatherData.suggestedDescription}}</p>
         <div class = "weather-icon-current1">
           <img src = "">
         </div>
