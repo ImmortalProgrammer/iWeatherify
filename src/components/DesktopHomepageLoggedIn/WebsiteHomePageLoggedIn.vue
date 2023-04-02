@@ -1,7 +1,29 @@
 <template>
   <div id="app1">
+    <nav-bar class = "HomePageNavBar"></nav-bar>
+
     <div class="container-center-horizontal1">
-      <nav-bar class = "HomePageNavBar"></nav-bar>
+      <div class = "options_logged_in">
+        <div class ="menu_homepage_logged_in" @click="pressOptions()">
+          <p id = "optionsText">Open Options</p>
+        </div>
+        <div id="menu-container_2">
+          <div class = "diff_options">
+            <a  id = "menu_option_1_1"  @click ="pressEightDayForecast()" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
+            <a id = "menu_option_1_2" @click = "pressOutfitOfTheDay()"
+               style = "text-decoration:none; color: inherit;">Outfit of The Day</a>
+            </div>
+        </div>
+      </div>
+
+      <div id = "outfit-of-the-day_1">
+        <p style="font-size: 5.5vh; padding-bottom: 3vh;">Outfit Recommendations for Today</p>
+        <p style="font-size: 3.5vh; padding-top: 3vh;">{{this.$data.currentWeatherData.suggestedDescription}}</p>
+        <div class = "weather-icon-current1">
+          <img src = "">
+        </div>
+      </div>
+
       <div class ="bar-search1">
         <input class="search-input1" type="text" name="searching" placeholder="Search up a City..."
                v-model="currentWeatherData.locationInput" @keyup.enter="retrieveAPI()">
@@ -22,8 +44,8 @@
           <p class = "feelslike_1_1">Feels Like: {{this.currentWeatherData.feelsLike}}°</p>
         </div>
       </div>
-      <div class="weekly-weather_1">
-        <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast: </p>
+      <div id="weekly-weather_1">
+        <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast </p>
         <div class = "day-next-1">
           <p class = "next-1">{{ this.eightDayForecastData.dates[0] }}</p>
           <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[0] }}</p>
@@ -128,7 +150,10 @@ export default {
         tempLow: ' ',
         tempHigh: ' ',
         iconUrl: ' ',
+        mainDescription: ' ',
         iconDescription: ' ',
+        suggestedDescription: ' ',
+        suggestedOutfit: '',
       },
       eightDayForecastData: {
         //Index 0 starts one day after the current weather)
@@ -138,6 +163,12 @@ export default {
         lowTempArr: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ''],
         feelsLikeArr: ['', '', '', '', '', '', '', ''],
         iconUrlArr: ['', '', '', '', '', '', '', ''],
+      },
+      data: {
+        APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
+        optionsVisibility: false,
+        eightDayForecastGrayOut: true,
+        outfitOfTheDayGrayOut: false,
       }
     }
   },
@@ -145,6 +176,71 @@ export default {
     await this.retrieveAPI();
   },
   methods: {
+    //Refactor pressOutfitOfTheDay and pressEightDayForecast when there is enough time to do so
+    pressEightDayForecast() {
+      const menuOpt1_1 = document.getElementById("menu_option_1_1");
+      const menuOpt1_2 = document.getElementById("menu_option_1_2");
+      const weeklyWeather1 = document.getElementById("weekly-weather_1");
+      const outfitOfDay1 = document.getElementById("outfit-of-the-day_1");
+
+      if (menuOpt1_1.style.opacity !== "0.3") {
+        menuOpt1_1.style.opacity = 0.3;
+        menuOpt1_2.style.opacity = 1;
+        weeklyWeather1.style.visibility = "visible";
+        outfitOfDay1.style.visibility = "hidden";
+        this.pressOptions();
+      }
+    },
+    pressOutfitOfTheDay() {
+      const menuOpt1_1 = document.getElementById("menu_option_1_1");
+      const menuOpt1_2 = document.getElementById("menu_option_1_2");
+      const weeklyWeather1 = document.getElementById("weekly-weather_1");
+      const outfitOfDay1 = document.getElementById("outfit-of-the-day_1");
+
+      if (menuOpt1_2.style.opacity !== "0.3") {
+        menuOpt1_1.style.opacity = 1;
+        menuOpt1_2.style.opacity = 0.3;
+        weeklyWeather1.style.visibility = "hidden";
+        outfitOfDay1.style.visibility = "visible";
+        this.pressOptions();
+      }
+    },
+    outfitSuggestions() {
+      const DESCRIPTIONS = {
+        "Drizzle": "When it's raining outside, it is important to wear clothing that will keep you dry and comfortable. So, wear a waterproof jacket and footwear to keep yourself dry when it's raining or drizzling outside!",
+        "Rain": "When it's raining outside, it is important to wear clothing that will keep you dry and comfortable. So, wear a waterproof jacket and footwear to keep yourself dry when it's raining or drizzling outside!",
+        "Thunderstorm": "There is a thunderstorm! Seek shelter immediately! Do not go outside. But, if you must go outside then avoid electronics and wear protective rain gear!",
+        "Snow": "When it is snowing outside, it is important to wear clothing that will keep you warm and dry. So, wear a coat, hat, gloves, and boots, to protect yourself from the cold when there's snow outside!",
+        "Tornado": "Tornado Warning! Please seek shelter immediately. Wear sturdy shoes and clothing to protect yourself from debris in case of a tornado outside!",
+        "Mist": "Wear waterproof clothing or bring an umbrella to protect yourself from the mist!",
+        "Smoke": "When it's smoky outside, it is important to protect yourself from the harmful effects of smoke inhalation. So, wear an N95 mask or respirator to filter out small smoke particles outside!",
+        "Haze": "Wear long-sleeved shirts and pants that cover your skin to protect yourself from pollutants in the hazy air!",
+        "Dust": "Wear a mask or a cloth over your mouth and nose to protect yourself from the dust when it's dusty outside!",
+        "Fog": "Wear reflective clothing if you need to be outside to increase visibility when it's foggy outside!",
+        "Sand": "Wear protective eye-wear and a mask or cloth over your mouth and nose to protect yourself from sand particles when it's sandy outside!",
+        "Ash": "Wear a mask or a cloth over your mouth and nose and cover your skin with long-sleeved shirts and pants to protect yourself from ash!",
+        "Squall": "Stay indoors and avoid going outside during a squall as it could be dangerous, but if necessary, wear sturdy shoes and clothing to protect yourself from flying debris!",
+        "Clear": "Wear clothing appropriate for the weather and your activities when it's clear outside!",
+        "Clouds": "Wear layers of clothing in case it gets cooler or starts to rain when it's cloudy outside!"
+      };
+      const DESCRIPTION = this.$data.currentWeatherData.mainDescription;
+      if (DESCRIPTION in DESCRIPTIONS) {
+        this.$data.currentWeatherData.suggestedDescription = DESCRIPTIONS[DESCRIPTION];
+        this.$data.currentWeatherData.suggestedOutfit = "";
+      }
+    },
+    pressOptions() {
+      const menuContainer = document.getElementById("menu-container_2");
+      const optionsText = document.getElementById("optionsText");
+      if (this.$data.data.optionsVisibility) {
+        menuContainer.style.visibility = 'visible';
+        optionsText.textContent = "Close Options";
+      } else {
+        menuContainer.style.visibility = 'hidden';
+        optionsText.textContent = "Open Options";
+      }
+      this.$data.data.optionsVisibility = !this.$data.data.optionsVisibility;
+    },
     async retrieveAPI() {
       try {
         if (this.currentWeatherData.locationInput === '') {
@@ -156,16 +252,15 @@ export default {
           //Seven-Day Forecast
           await this.eightDayForecast();
           this.currentWeatherData.locationInput = '';
-
         }
       } catch (Exception) {
-        alert("City unrecognized!")
+        alert("City not found by the API!")
       }
     },
     async currentWeather() {
       const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/weather?q=${locationFormatting}
-        &units=imperial&APPID=c984db1322335af0a97e0dd951e5cb69`).catch(function (error) {
+        &units=imperial&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
       });
       const geoLocationStatus = weatherAPI['statusText'];
@@ -189,6 +284,11 @@ export default {
         this.currentWeatherData.iconDescription = geoLocationData['weather']['0']['description'].split(' ')
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
+        this.currentWeatherData.mainDescription = geoLocationData['weather']['0']['main'].split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+
+        this.outfitSuggestions();
       } else {
         alert("Error Status Request Failed!");
       }
@@ -196,7 +296,7 @@ export default {
     async eightDayForecast() {
       const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/daily?q=${locationFormatting}
-        &units=imperial&cnt=9&APPID=c984db1322335af0a97e0dd951e5cb69`).catch(function (error) {
+        &units=imperial&cnt=9&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
       });
       const data = weatherAPI['data']['list'];
@@ -225,60 +325,13 @@ export default {
       }
     },
     setupDays() {
+      const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       const currentDate = new Date();
       let currentDay = currentDate.getDay();
-      //too lazy to change up the code, so this was a quick solution (in the future refactor into another method)
-      switch (currentDay) {
-        case 0:
-          this.currentWeatherData.currentDay = 'Sunday';
-          break;
-        case 1:
-          this.currentWeatherData.currentDay = 'Monday';
-          break;
-        case 2:
-          this.currentWeatherData.currentDay = 'Tuesday';
-          break;
-        case 3:
-          this.currentWeatherData.currentDay = 'Wednesday';
-          break;
-        case 4:
-          this.currentWeatherData.currentDay = 'Thursday';
-          break;
-        case 5:
-          this.currentWeatherData.currentDay = 'Friday';
-          break;
-        case 6:
-          this.currentWeatherData.currentDay= 'Saturday';
-          break;
-      }
+      this.currentWeatherData.currentDay = weekdays[currentDay];
       for (let i in this.eightDayForecastData.dates) {
-        currentDay++;
-        if (currentDay === 7) {
-          currentDay = 0;
-        }
-        switch (currentDay) {
-          case 0:
-            this.eightDayForecastData.dates[i] = 'Sunday';
-            break;
-          case 1:
-            this.eightDayForecastData.dates[i] = 'Monday';
-            break;
-          case 2:
-            this.eightDayForecastData.dates[i] = 'Tuesday';
-            break;
-          case 3:
-            this.eightDayForecastData.dates[i] = 'Wednesday';
-            break;
-          case 4:
-            this.eightDayForecastData.dates[i] = 'Thursday';
-            break;
-          case 5:
-            this.eightDayForecastData.dates[i] = 'Friday';
-            break;
-          case 6:
-            this.eightDayForecastData.dates[i] = 'Saturday';
-            break;
-        }
+        currentDay = (currentDay + 1) % 7;
+        this.eightDayForecastData.dates[i] = weekdays[currentDay];
       }
     },
   },
@@ -316,13 +369,101 @@ export default {
 
 }
 
-.weekly-weather_1 {
+.menu_homepage_logged_in {
+  z-index: 1;
+  position: absolute;
+  height: 7.5vh;
+  margin-bottom: -15vh;
+  left: 45%;
+  top: 58vh;
+  border: black solid 6px;
+  bottom: 0;
+  transform: translate(-50%, 0);
+  width: 30vw;
+  padding: 1.3vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 3.2vh;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgba(102, 102, 102, 0.83);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#menu-container_2 {
+  z-index: 1;
+  position: absolute;
+  height: 25.5vh;
+  margin-bottom: -15vh;
+  left: 45%;
+  top: 60.1vh;
+  border-top: black solid 3.5px;
+  border-left: black solid 6px;
+  border-right: black solid 6px;
+  border-bottom: black solid 6px;
+  bottom: 0;
+  transform: translate(-50%, 0);
+  width: 30vw;
+  padding: 1.3vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 3.5vh;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgb(124, 124, 124);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  visibility: hidden;
+}
+
+.diff_options {
+  border: none;
+  position: relative;
+  height: auto;
+  display: block;
+  width: 130%;
+  top: -15px;
+  margin-left: -14%;
+  background-color: #14565C;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+}
+
+#menu_option_1_1, #menu_option_1_2 {
+  font-size: 2.5vh;
+  background-color: #1e7c85;
+  padding: 2.1vh;
+  display: block;
+  border-bottom: solid black 0.5vh;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#menu_option_1_1 {
+  opacity: 0.3;
+}
+
+
+#weekly-weather_1 {
   border: none;
   position: absolute;
   height: auto;
   margin-bottom: -15vh;
   left: 33%;
-  top: 52vh;
+  top: 55.4vh;
   bottom: 0;
   border-top: 0;
   transform: translate(-50%, 0);
@@ -336,7 +477,29 @@ export default {
   background-color: rgba(102, 102, 102, 0.83);
   overflow-y: scroll;
   overflow-x: hidden;
+}
 
+#outfit-of-the-day_1 {
+  visibility: hidden;
+  border: none;
+  position: absolute;
+  height: auto;
+  margin-bottom: -15vh;
+  left: 33%;
+  top: 55.4vh;
+  bottom: 0;
+  border-top: 0;
+  transform: translate(-50%, 0);
+  width: 110vw;
+  padding: 2.5vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgba(102, 102, 102, 0.83);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 
@@ -473,30 +636,77 @@ export default {
 }
 
 
-.home-logo-3 {
-  position: absolute;
-  height: 4.5vh;
-  top: 3vh;
-  left: 52.5%;
-  transform: translate(-50%, 0);
-  width: auto;
-  scale: 1.3;
-}
-
-@media only screen and (min-width: 359px) and (max-width: 900px) {
-  .menu-container-homepage-logged-in {
+@media only screen and (min-width: 428px) and (max-width: 900px) {
+  .menu_homepage_logged_in {
     z-index: 1;
-    margin-left: 75vw;
-    padding-top: 4.0vh;
+    position: absolute;
+    height: 7.5vh;
+    margin-bottom: -15vh;
+    left: 40%;
+    top: 50vh;
+    border: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50vw;
+    padding: 1.3vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 3vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
 
-  .weekly-weather_1 {
+  #menu-container_2 {
+    z-index: 1;
+    position: absolute;
+    height: 25.5vh;
+    margin-bottom: -15vh;
+    left: 40.0%;
+    top: 52.1vh;
+    border-top: black solid 3.5px;
+    border-left: black solid 6px;
+    border-right: black solid 6px;
+    border-bottom: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50.1vw;
+    padding: 1.3vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 3.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgb(124, 124, 124);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .diff_options {
+    border: none;
+    position: relative;
+    height: auto;
+    display: block;
+    width: 130%;
+    top: -15px;
+    margin-left: -14%;
+    background-color: #14565C;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+  }
+
+
+
+
+  #weekly-weather_1 {
     border: none;
     position: absolute;
     height: auto;
     margin-bottom: -20vh;
     left: 11.5%;
-    top: 28vh;
+    top: 35vh;
     bottom: 0;
     border-top: 0;
     transform: translate(-50%, 0);
@@ -510,7 +720,29 @@ export default {
     background-color: rgba(102, 102, 102, 0.83);
     overflow-y: scroll;
     overflow-x: hidden;
+  }
 
+
+  #outfit-of-the-day_1 {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 35vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .day-next-1 {
@@ -654,28 +886,76 @@ export default {
     min-height: 100vh;
     padding: 25px;
   }
-
-
-
-  .home-logo-3 {
-    position: absolute;
-    height: 4.5vh;
-    top: 3vh;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: auto;
-    scale: 1.3;
-  }
 }
 
-@media only screen and (max-width: 358px) {
-  .weekly-weather_1 {
+@media only screen and (max-width: 427px) {
+  .menu_homepage_logged_in {
+    z-index: 1;
+    position: absolute;
+    height: 7.5vh;
+    margin-bottom: -15vh;
+    left: 40%;
+    top: 50vh;
+    border: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50vw;
+    padding: 1.6vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 2.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  #menu-container_2 {
+    z-index: 1;
+    position: absolute;
+    height: 25.5vh;
+    margin-bottom: -15vh;
+    left: 40.0%;
+    top: 52.1vh;
+    border-top: black solid 3.5px;
+    border-left: black solid 6px;
+    border-right: black solid 6px;
+    border-bottom: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50.1vw;
+    padding: 1.3vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 3.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgb(124, 124, 124);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .diff_options {
+    border: none;
+    position: relative;
+    height: auto;
+    display: block;
+    width: 130%;
+    top: -15px;
+    margin-left: -14%;
+    background-color: #14565C;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+  }
+
+  #weekly-weather_1 {
     border: none;
     position: absolute;
     height: auto;
     margin-bottom: -20vh;
     left: 11.5%;
-    top: 28vh;
+    top: 35vh;
     bottom: 0;
     border-top: 0;
     transform: translate(-50%, 0);
@@ -690,6 +970,28 @@ export default {
     overflow-y: scroll;
     overflow-x: hidden;
 
+  }
+
+  #outfit-of-the-day_1 {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 35vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .day-next-1 {
@@ -834,16 +1136,6 @@ export default {
     padding: 25px;
   }
 
-
-  .home-logo-3 {
-    position: absolute;
-    height: 4.5vh;
-    top: 3vh;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: auto;
-    scale: 1;
-  }
 }
 
 </style>
