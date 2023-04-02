@@ -10,13 +10,14 @@
         <div id="menu-container_2">
           <div class = "diff_options">
             <a  id = "menu_option_1_1"  @click ="pressEightDayForecast()" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
-            <a id = "menu_option_1_2" @click = "pressOutfitOfTheDay()" style = "text-decoration:none; color: inherit;">Outfit of the Day</a>
+            <a id = "menu_option_1_2" @click = "pressOutfitOfTheDay()"
+               style = "text-decoration:none; color: inherit;">Outfit of The Day</a>
             </div>
         </div>
       </div>
 
       <div id = "outfit-of-the-day_1">
-        <p style="font-size: 6vh; padding-bottom: 3vh;">Outfit of the Day</p>
+        <p style="font-size: 6vh; padding-bottom: 3vh;">Outfit Recommendations for Today</p>
         <p style="font-size: 4vh; padding-top: 3vh;">{{this.$data.currentWeatherData.suggestedDescription}}</p>
         <div class = "weather-icon-current1">
           <img src = "">
@@ -209,9 +210,9 @@ export default {
         "Drizzle": "When it's raining outside, it is important to wear clothing that will keep you dry and comfortable. So, wear a waterproof jacket and footwear to keep yourself dry when it's raining or drizzling outside!",
         "Rain": "When it's raining outside, it is important to wear clothing that will keep you dry and comfortable. So, wear a waterproof jacket and footwear to keep yourself dry when it's raining or drizzling outside!",
         "Thunderstorm": "There is a thunderstorm! Seek shelter immediately! Do not go outside. But, if you must go outside then avoid electronics and wear protective rain gear!",
-        "Snow": "When it is snowing outside, it is important to wear clothing that will keep you warm and dry. So, wear warm clothing, including a coat, hat, gloves, and boots, to protect yourself from the cold when there's snow outside!",
+        "Snow": "When it is snowing outside, it is important to wear clothing that will keep you warm and dry. So, wear a coat, hat, gloves, and boots, to protect yourself from the cold when there's snow outside!",
         "Tornado": "Tornado Warning! Please seek shelter immediately. Wear sturdy shoes and clothing to protect yourself from debris in case of a tornado outside!",
-        "Mist": "Wear waterproof clothing or bring an umbrella to protect yourself from the mist when it's misty outside!",
+        "Mist": "Wear waterproof clothing or bring an umbrella to protect yourself from the mist!",
         "Smoke": "When it's smoky outside, it is important to protect yourself from the harmful effects of smoke inhalation. So, wear an N95 mask or respirator to filter out small smoke particles outside!",
         "Haze": "Wear long-sleeved shirts and pants that cover your skin to protect yourself from pollutants in the hazy air!",
         "Dust": "Wear a mask or a cloth over your mouth and nose to protect yourself from the dust when it's dusty outside!",
@@ -885,18 +886,6 @@ export default {
     min-height: 100vh;
     padding: 25px;
   }
-
-
-
-  .home-logo-3 {
-    position: absolute;
-    height: 4.5vh;
-    top: 3vh;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: auto;
-    scale: 1.3;
-  }
 }
 
 @media only screen and (max-width: 427px) {
@@ -980,7 +969,6 @@ export default {
     background-color: rgba(102, 102, 102, 0.83);
     overflow-y: scroll;
     overflow-x: hidden;
-
 
   }
 

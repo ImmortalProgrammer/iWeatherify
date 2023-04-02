@@ -4,6 +4,18 @@
         <div class = "menu-location">
           <menu-bar></menu-bar>
         </div>
+      <div class = "options_logged_in_2">
+        <div class ="menu_homepage_logged_in_2" @click="pressOptions()">
+          <p id = "optionsText_2">Open Options</p>
+        </div>
+        <div id="menu-container_2_2">
+          <div class = "diff_options_2">
+            <a  id = "menu_option_2_1"  @click ="pressEightDayForecast()" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
+            <a id = "menu_option_2_2" @click = "pressOutfitOfTheDay()"
+               style = "text-decoration:none; color: inherit;">Outfit of The Day</a>
+          </div>
+          </div>
+        </div>
         <div class ="bar-search">
         <input class="search-input" type="text" name="searching" placeholder="Search up a City..."
                v-model="currentWeatherData.locationInput" @keyup.enter="retrieveAPI()">
@@ -140,7 +152,9 @@ export default {
         iconUrlArr: ['', '', '', '', '', '', '', ''],
       },
       data: {
-        APIKEY: 'c984db1322335af0a97e0dd951e5cb69'
+        APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
+        optionsVisibility: false,
+        eightDayForecastGrayOut: true,
       }
     }
   },
@@ -148,6 +162,21 @@ export default {
     await this.retrieveAPI();
   },
   methods: {
+    pressOptions() {
+      const menuContainer = document.getElementById("menu-container_2_2");
+      const optionsText = document.getElementById("optionsText_2");
+      if (this.$data.data.optionsVisibility) {
+        menuContainer.style.visibility = 'visible';
+        optionsText.textContent = "Close Options";
+      } else {
+        menuContainer.style.visibility = 'hidden';
+        optionsText.textContent = "Open Options";
+      }
+      this.$data.data.optionsVisibility = !this.$data.data.optionsVisibility;
+    },
+    pressOutfitOfTheDay() {
+      this.$router.push('/login');
+    },
     async retrieveAPI() {
       try {
         if (this.currentWeatherData.locationInput === '') {
@@ -267,13 +296,101 @@ export default {
 
 }
 
+.menu_homepage_logged_in_2 {
+  z-index: 1;
+  position: absolute;
+  height: 7.5vh;
+  margin-bottom: -15vh;
+  left: 45%;
+  top: 58vh;
+  border: black solid 6px;
+  bottom: 0;
+  transform: translate(-50%, 0);
+  width: 30vw;
+  padding: 1.3vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 3.2vh;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgba(102, 102, 102, 0.83);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+
+#menu-container_2_2 {
+  z-index: 1;
+  position: absolute;
+  height: 25.5vh;
+  margin-bottom: -15vh;
+  left: 45%;
+  top: 60.1vh;
+  border-top: black solid 3.5px;
+  border-left: black solid 6px;
+  border-right: black solid 6px;
+  border-bottom: black solid 6px;
+  bottom: 0;
+  transform: translate(-50%, 0);
+  width: 30vw;
+  padding: 1.3vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 3.5vh;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgb(124, 124, 124);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  visibility: hidden;
+}
+
+.diff_options_2 {
+  border: none;
+  position: relative;
+  height: auto;
+  display: block;
+  width: 130%;
+  top: -15px;
+  margin-left: -14%;
+  background-color: #14565C;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+}
+
+#menu_option_2_1, #menu_option_2_2 {
+  font-size: 2.5vh;
+  background-color: #1e7c85;
+  padding: 2.1vh;
+  display: block;
+  border-bottom: solid black 0.5vh;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#menu_option_2_1 {
+  opacity: 0.3;
+}
+
 .weekly-weather {
   border: none;
   position: absolute;
   height: auto;
   margin-bottom: -15vh;
   left: 33%;
-  top: 52vh;
+  top: 55.4vh;
   bottom: 0;
   border-top: 0;
   transform: translate(-50%, 0);
@@ -287,7 +404,6 @@ export default {
   background-color: rgba(102, 102, 102, 0.83);
   overflow-y: scroll;
   overflow-x: hidden;
-
 }
 
 
@@ -446,7 +562,67 @@ main {
   scale: 1.3;
 }
 
-@media only screen and (min-width: 359px) and (max-width: 900px) {
+@media only screen and (min-width: 427px) and (max-width: 900px) {
+
+  .menu_homepage_logged_in_2 {
+    z-index: 1;
+    position: absolute;
+    height: 7.5vh;
+    margin-bottom: -15vh;
+    left: 40%;
+    top: 50vh;
+    border: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50vw;
+    padding: 1.3vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 3vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  #menu-container_2_2 {
+    z-index: 1;
+    position: absolute;
+    height: 25.5vh;
+    margin-bottom: -15vh;
+    left: 40.0%;
+    top: 52.1vh;
+    border-top: black solid 3.5px;
+    border-left: black solid 6px;
+    border-right: black solid 6px;
+    border-bottom: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50.1vw;
+    padding: 1.3vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 3.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgb(124, 124, 124);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .diff_options_2 {
+    border: none;
+    position: relative;
+    height: auto;
+    display: block;
+    width: 130%;
+    top: -15px;
+    margin-left: -14%;
+    background-color: #14565C;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+  }
 
   .weekly-weather {
     border: none;
@@ -454,7 +630,7 @@ main {
     height: auto;
     margin-bottom: -20vh;
     left: 11.5%;
-    top: 28vh;
+    top: 35vh;
     bottom: 0;
     border-top: 0;
     transform: translate(-50%, 0);
@@ -468,7 +644,6 @@ main {
     background-color: rgba(102, 102, 102, 0.83);
     overflow-y: scroll;
     overflow-x: hidden;
-
   }
 
   .day-next {
@@ -633,14 +808,74 @@ main {
   }
 }
 
-@media only screen and (max-width: 358px) {
+@media only screen and (max-width: 426px) {
+  .menu_homepage_logged_in_2 {
+    z-index: 1;
+    position: absolute;
+    height: 7.5vh;
+    margin-bottom: -15vh;
+    left: 40%;
+    top: 50vh;
+    border: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50vw;
+    padding: 1.6vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 2.1vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  #menu-container_2_2 {
+    z-index: 1;
+    position: absolute;
+    height: 25.5vh;
+    margin-bottom: -15vh;
+    left: 40.0%;
+    top: 52.1vh;
+    border-top: black solid 3.5px;
+    border-left: black solid 6px;
+    border-right: black solid 6px;
+    border-bottom: black solid 6px;
+    bottom: 0;
+    transform: translate(-50%, 0);
+    width: 50.1vw;
+    padding: 1.3vh;
+    scale: 0.7;
+    color: rgb(255, 255, 255);
+    font-size: 3.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgb(124, 124, 124);
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+
+  .diff_options_2 {
+    border: none;
+    position: relative;
+    height: auto;
+    display: block;
+    width: 130%;
+    top: -15px;
+    margin-left: -14%;
+    background-color: #14565C;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+  }
+
   .weekly-weather {
     border: none;
     position: absolute;
     height: auto;
     margin-bottom: -20vh;
     left: 11.5%;
-    top: 28vh;
+    top: 35vh;
     bottom: 0;
     border-top: 0;
     transform: translate(-50%, 0);
