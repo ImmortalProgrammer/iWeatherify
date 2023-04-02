@@ -1,3 +1,5 @@
+<!-- TODO: This can be reused for a later purpose #63 -->
+
 <template>
     <div class="add-clothing screen">
       <nav-bar class="navbar"></nav-bar>

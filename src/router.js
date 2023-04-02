@@ -9,8 +9,6 @@ import WebsiteLocationSettings from "./components/DesktopLocationSettings/Websit
 import RegisterPage from "./components/RegistrationPage/RegisterPage";
 import WebsiteLoginPage from "./components/LoginPage/WebsiteLoginPage";
 import WebsiteProfileNoSavedOutfit from "./components/SavedOutfits/WebsiteProfileNoSavedOutfit";
-import AddClothing from "./components/SavedOutfits/AddClothing";
-import AddClothingModal from "./components/SavedOutfits/AddClothingModal";
 import MakeOutfit from "./components/DesktopMyItems/MakeOutfit";
 
 import {
@@ -38,46 +36,6 @@ const isUserLoggedIn = () => {
 };
 
 const routes = [
-  {
-    name: "makeOutfit",
-    path: "/makeOutfit",
-    component: MakeOutfit,
-    props: {
-      title: "Make a new outfit"
-    }
-  },
-  {
-    name: "AddClothingModal",
-    path: "/addClothingModal",
-    component: AddClothingModal,
-    props: {
-      title: "Add a new saved outfit"
-    }
-  },
-  {
-    name: "SavedOutfits",
-    path: "/savedOutfits",
-    component: WebsiteProfileNoSavedOutfit,
-    props: {
-      defaultFrameLogo3:
-          "https://anima-uploads.s3.amazonaws.com/projects/6405ee9a4548b3806a50e138/releases/6405ef8c246cb8c2cd3b302a/img/default-frame-logo-2@2x.png",
-      ellipse6Props: websiteProfileNoSavedOutfitData.ellipse6Props,
-    },
-    meta: {
-      needsAuth: true
-    },
-  },
-  {
-    name: "OutfitModal",
-    path: "/addClothing",
-    component: AddClothing,
-    props: {
-      defaultLogo4:
-          "https://anima-uploads.s3.amazonaws.com/projects/6402851d6a37db7167320ed4/releases/640286bb66ed049392a82543/img/default-logo-4@2x.png",
-      title: "Add clothes",
-      ellipse6Props: websiteUnitsPageData.ellipse6Props
-    }
-  },
   {
     name: "NHomepage",
     path: "/",
@@ -129,6 +87,38 @@ const routes = [
     meta: {
       needsAuth: true
     },
+    children: [
+      {
+        name: "Warm Items",
+        path: "warm",
+        component: MakeOutfit,
+      },
+      {
+        name: "Hot Items",
+        path: "hot",
+        component: MakeOutfit,
+      },
+      {
+        name: "Just Right Items",
+        path: "justRight",
+        component: MakeOutfit,
+      },
+      {
+        name: "Chilly Items",
+        path: "chilly",
+        component: MakeOutfit,
+      },
+      {
+        name: "Cold Items",
+        path: "cold",
+        component: MakeOutfit,
+      },
+      {
+        name: "Freezing Items",
+        path: "freezing",
+        component: MakeOutfit,
+      },
+    ]
   },
   {
     name: "Units",
@@ -157,7 +147,20 @@ const routes = [
     meta: {
       needsAuth: true
     },
-  }
+  },
+  {
+    name: "SavedOutfits",
+    path: "/savedOutfits",
+    component: WebsiteProfileNoSavedOutfit,
+    props: {
+      defaultFrameLogo3:
+          "https://anima-uploads.s3.amazonaws.com/projects/6405ee9a4548b3806a50e138/releases/6405ef8c246cb8c2cd3b302a/img/default-frame-logo-2@2x.png",
+      ellipse6Props: websiteProfileNoSavedOutfitData.ellipse6Props,
+    },
+    meta: {
+      needsAuth: true
+    },
+  },
 ];
 
 const router = new Router({

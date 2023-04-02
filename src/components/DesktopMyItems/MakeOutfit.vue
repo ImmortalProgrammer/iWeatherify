@@ -8,30 +8,66 @@
         <!-- Hidden modal -->
         <modal v-show="isModalVisible" @close="closeModal"></modal>
 
-        <h1 class="title">{{ title }}</h1> <!-- Title would be of the following options: [Hot, warm, just right, chilly, cold, freezing] -->
+        <h1 class="title">{{ this.$route.name }}</h1> <!--Name would be literally the name assigned in router.js-->
 
         <div class="clothing-container" id="outerwear" @click.self = "showModal">
-            <p>This is for outerwear container</p>
+            <p>Outerwear</p>
+            <img
+              src="../../../img/make_outfit_icons/outerwear.svg"
+              alt="Coat image"
+              style="width:200px; margin-top: 20px;"
+              @click.self = "showModal"
+            />
         </div>
 
         <div class="clothing-container" id="middlewear" @click.self = "showModal">
-            <p>This is for middle wear container</p>
+            <p>Middlewear</p>
+            <img
+              src="../../../img/make_outfit_icons/middlewear.svg"
+              alt="Sweater image"
+              style="width:200px; margin-top: 20px;"
+              @click.self = "showModal"
+            />
         </div>
 
         <div class="clothing-container" id="innerwear" @click.self = "showModal">
-            <p>This is for inner wear container</p>
+            <p>Innerwear</p>
+            <img
+              src="../../../img/make_outfit_icons/innerwear.svg"
+              alt="T-shirt image"
+              style="width:200px; margin-top: 20px;"
+              @click.self = "showModal"
+            />
         </div>
 
         <div class="clothing-container" id="pants" @click.self = "showModal">
-            <p>This is for pants container</p>
+            <p>Pants</p>
+            <img
+              src="../../../img/make_outfit_icons/pants.svg"
+              alt="Coat image"
+              style="width:200px; margin-top: 20px;"
+              @click.self = "showModal"
+            />
         </div>
         
         <div class="clothing-container" id="headwear" @click.self = "showModal">
-            <p>This is for headwear container</p>
+            <p>Headwear</p>
+            <img
+              src="../../../img/make_outfit_icons/headwear.svg"
+              alt="Coat image"
+              style="width:200px; margin-top: 20px;"
+              @click.self = "showModal"
+            />
         </div>
 
         <div class="clothing-container" id="shoes" @click.self = "showModal">
-            <p>This is for shoes container</p>
+            <p>Shoes</p>
+            <img
+              src="../../../img/make_outfit_icons/shoes.svg"
+              alt="Coat image"
+              style="width:200px; margin-top: 20px;"
+              @click.self = "showModal"
+            />
         </div>
 
     </div>
@@ -48,7 +84,7 @@
         Modal
     },
     props: [
-        "title"
+
     ],
     data(){
       return {
@@ -87,6 +123,10 @@
     left: 0;
     position: absolute;
     top: 170px;
+}
+
+.clothing-container:hover{
+    cursor:pointer
 }
 
 #outerwear {

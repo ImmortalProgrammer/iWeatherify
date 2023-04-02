@@ -1,6 +1,6 @@
 <template>
-    <div class="website-my-items-page screen">
-      
+  <div class="container-center-horizontal">
+    <div class="website-my-items-page screen" v-if="this.$route.name==='myItems'">      
       <!-- Nav bar -->
       <div class="flex-row">
         <nav-bar></nav-bar>
@@ -10,26 +10,37 @@
       <div class="flex-col">
         <div class="overlap-group7">
 
-          <div class="hot-container">
+          <div class="hot-container" @click.self = "goToMakeOutfit('hot')">
             <div class="hot ui---16-regular2">{{ hot }}</div>
             <img
               src="../../../img/my_items_icons/hot.svg"
               alt="Image of a sun with heat waves"
               style="width:200px; margin-top: 20px;"
+              @click.self="goToMakeOutfit('hot')"
             />
           </div>
 
-          <div class="warm-container" @click.self = "showModal">
+          <div class="warm-container" @click.self = "goToMakeOutfit('warm')">
             <img
               src="../../../img/my_items_icons/warm.svg"
               alt="image of a sun"
               style="width:200px; margin-top: 20px;"
-              @click.self="showModal"
+              @click.self="goToMakeOutfit('warm')"
             />
             <div class="warm ui---16-regular2">{{ warm }}</div>
           </div>
 
-          <div class="overlap-group1">
+          <!-- <div class="just-right-container" @click.self = "goToMakeOutfit">
+            <img
+              src="../../../img/my_items_icons/just_right.svg"
+              alt="image of a sun"
+              style="width:200px; margin-top: 20px;"
+              @click.self="goToMakeOutfit"
+            />
+            <div class="warm ui---16-regular2">{{ justRight }}</div>
+          </div> -->
+
+          <!-- <div class="overlap-group1">
             <div class="overlap-group2">
               <img
               src="../../../img/my_items_icons/just_right.svg"
@@ -43,7 +54,7 @@
               />
             </div>
             <p class="categorize-clothes-b">{{ categorizeClothesB }}</p>
-          </div>
+          </div> -->
 
           <h1 class="title">{{ title }}</h1>
         </div>
@@ -95,6 +106,10 @@
         </div>
       </div>
     </div>
+
+    <!-- Allows child views [/warm, /hot, /just right, /chilly, /cold, /freezing] -->
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
@@ -133,6 +148,16 @@ export default {
     "addEditDelete4Props",
     "addEditDelete5Props",
   ],
+  data(){
+    return {
+      isModalVisible: false
+    }
+  },
+  methods: {
+    goToMakeOutfit(temperature){
+      this.$router.push({ path: `myItems/${temperature}` })
+    },
+  },
 };
 </script>
 
@@ -172,6 +197,17 @@ export default {
   width: 200px;
 }
 
+.warm-container:hover{
+  cursor: pointer;
+}
+
+.just-right-container{
+  height: 252px;
+  left: 0;
+  position: absolute;
+  top: 170px;
+  width: 200px;
+}
 
 .overlap-group7 {
   align-self: flex-end;
@@ -187,8 +223,12 @@ export default {
   position: absolute;
   top: 170px;
   width: 200px;
-  background: grey;
 }
+
+.hot-container:hover{
+  cursor:pointer;
+}
+
 
 
 .hot {

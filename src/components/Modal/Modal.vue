@@ -25,17 +25,12 @@
     
                     <div class="Inputs">
                         <form> <!-- TODO - Replace with actual php file when implemented -->
-                            <label>Outfit name: </label>
+                            <label>Clothing name: </label>
                             <input>
-                            <br>
-                            
-                            <label>Location: </label>
-                            <input>
-                            <br>
                             <br>
 
-                            <label>Clothes: </label>
-                            <button class="add-btn" @click.prevent = "$router.push('/addClothing')">Add clothing item</button>
+                            <input type="file">
+                            <!-- <button class="add-btn" @click.prevent = "$router.push('/addClothing')">Upload image</button> -->
                             <br>
                             <br>
 
@@ -61,7 +56,7 @@
   
   <script>
   export default {
-    props: ["showModal"],
+    props: ["showModal", "title"],
     methods: {
         close(){
             this.$emit("close");
