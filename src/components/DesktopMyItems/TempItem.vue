@@ -17,11 +17,13 @@
 </template>
 
 <script>
-import NavBar from '../../NavBar/NavBar.vue'
+import NavBar from '../../NavBar/NavBar.vue';
+import Modal from "../Modal/Modal.vue";
 export default {
     name: "TempItem",
     components: {
-        NavBar
+        NavBar,
+        Modal
     },
     props: [
 

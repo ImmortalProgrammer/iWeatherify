@@ -5,9 +5,6 @@
             <nav-bar></nav-bar>
         </div>
 
-        <!-- Hidden modal -->
-        <modal v-show="isModalVisible" @close="closeModal"></modal>
-
         <div v-if="checkChildRouteNames()">
             <!-- For child routes -->
             <router-view></router-view>
@@ -16,63 +13,63 @@
         <div class="main-content" v-else>
             <h1 class="title">{{ this.$route.name }}</h1> <!--Name would be literally the name assigned in router.js-->
     
-            <div class="clothing-container" id="outerwear" @click.self = "showModal">
+            <div class="clothing-container" id="outerwear">
                 <p>Outerwear</p>
                 <img
                   src="../../../img/make_outfit_icons/outerwear.svg"
                   alt="Coat image"
                   style="width:200px; margin-top: 20px;"
-                  @click.self = "showModal"
+                  @click.self = "goToTempItem('outerwear')"
                 />
             </div>
     
-            <div class="clothing-container" id="middlewear" @click.self = "showModal">
+            <div class="clothing-container" id="middlewear" >
                 <p>Middlewear</p>
                 <img
                   src="../../../img/make_outfit_icons/middlewear.svg"
                   alt="Sweater image"
                   style="width:200px; margin-top: 20px;"
-                  @click.self = "showModal"
+                  @click.self = "goToTempItem('middlewear')"
                 />
             </div>
     
-            <div class="clothing-container" id="innerwear" @click.self = "showModal">
+            <div class="clothing-container" id="innerwear" >
                 <p>Innerwear</p>
                 <img
                   src="../../../img/make_outfit_icons/innerwear.svg"
                   alt="T-shirt image"
                   style="width:200px; margin-top: 20px;"
-                  @click.self = "showModal"
+                  @click.self = "goToTempItem('innerwear')"
                 />
             </div>
     
-            <div class="clothing-container" id="pants" @click.self = "showModal">
+            <div class="clothing-container" id="pants" >
                 <p>Pants</p>
                 <img
                   src="../../../img/make_outfit_icons/pants.svg"
                   alt="Pants image"
                   style="width:200px; margin-top: 20px;"
-                  @click.self = "showModal"
+                  @click.self = "goToTempItem('pants')"
                 />
             </div>
             
-            <div class="clothing-container" id="headwear" @click.self = "showModal">
+            <div class="clothing-container" id="headwear" >
                 <p>Headwear</p>
                 <img
                   src="../../../img/make_outfit_icons/headwear.svg"
                   alt="Hat image"
                   style="width:200px; margin-top: 20px;"
-                  @click.self = "showModal"
+                  @click.self = "goToTempItem('headwear')"
                 />
             </div>
     
-            <div class="clothing-container" id="shoes" @click.self = "showModal">
+            <div class="clothing-container" id="shoes">
                 <p>Shoes</p>
                 <img
                   src="../../../img/make_outfit_icons/shoes.svg"
                   alt="Shoes image"
                   style="width:200px; margin-top: 20px;"
-                  @click.self = "showModal"
+                  @click.self = "goToTempItem('shoes')"
                 />
             </div>
         </div>
@@ -82,13 +79,11 @@
   
   <script>
   import NavBar from "@/NavBar/NavBar.vue";
-  import Modal from "../Modal/Modal.vue";
   
   export default {
     name: "MakeOutfitPage",
     components: {
-        NavBar,
-        Modal
+        NavBar
     },
     props: [
 
@@ -101,19 +96,11 @@
       }
     },
     methods: {
-      showModal(){
-        this.isModalVisible = true
-      },
-      closeModal(){
-        this.isModalVisible = false
-      },
-      checkRouteName(){
-        console.log(this.$route.name)
-        const validRouteNames = ["Hot Items", "Warm Items", "Just Right Items", "Chilly Items", "Cold Items", "Freezing Items"]
-        return validRouteNames.includes(this.$route.name)
-      },
+        goToTempItem(itemCategory){
+            this.$router.push(this.$route.path + `/${itemCategory}`)
+        },
       checkChildRouteNames(){
-        const validRouteNames = ["Outerwear Items", "Middlewear Items", "Innerwear Items", "Pant Items", "Headwear Items", "Shoe Items"]
+        const validRouteNames = ["Outerwear Items", "Middlewear Items", "Innerwear Items", "Pants Items", "Headwear Items", "Shoes Items"]
         return validRouteNames.includes(this.$route.name)
       }
     },
