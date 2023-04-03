@@ -96,13 +96,6 @@ export const websiteMyItemsPageData = {
     chilly: "Chilly",
     cold: "Cold",
     freezing: "Freezing",
-    ellipse6Props: ellipse6Data,
-    listboxComponentProps: listboxComponentData,
-    addEditDelete1Props: addEditDelete2Data,
-    addEditDelete2Props: addEditDelete3Data,
-    addEditDelete3Props: addEditDelete4Data,
-    addEditDelete4Props: addEditDelete5Data,
-    addEditDelete5Props: addEditDelete6Data,
 };
 
 export const websiteLocationSettingsData = {

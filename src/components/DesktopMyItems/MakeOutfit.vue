@@ -114,6 +114,7 @@
     line-height: normal;
     position: absolute;
     text-align: center;
+    top: 7vh; /*TODO Would need to fix title to dynamically be after the navBar*/
 }
 
 .clothing-container {
