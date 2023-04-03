@@ -10,3 +10,30 @@ new Vue({
   render: h => h(App),
   router
   }).$mount("#app");
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, positionError);
+    } else {
+      console.log("Weatherify is not supported by this browser.");
+    }
+  }
+  
+  function showPosition(position) {
+    console.log("Your position is: " + position);
+  }
+  
+  function positionError(error) {
+    if (error.PERMISSION_DENIED) {
+      console.log("Error: permission denied");
+      showError('Location Feature is not enabled. Please enable to use this feature.');
+    } else {
+      console.log("Other kind of error: " + error);
+    }
+  }
+  
+  function showError(message) {
+    
+  }
+  
+  getLocation();
