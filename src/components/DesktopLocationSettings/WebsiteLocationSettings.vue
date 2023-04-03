@@ -1,6 +1,7 @@
 <template>
   <div class="container-center-horizontal">
     <div class="website-location-settings screen">
+      
       <nav-bar class = "locationNav"></nav-bar>
       
       
@@ -25,31 +26,66 @@
                 </label>
           </div>
           <div class="city-container">
-            <input class= "city" type="text" placeholder="Insert City" name="search">
+            <input class="city" type="text" name="searching" placeholder="Insert City"> 
           </div>
 
         </div>
       </div>
-      <div class="save-button">
-        <div class="rectangle-272"></div>
-        <div class="save ui---30-semi2">{{ save }}</div>
+      <div class="save-button-container">
+        <button @click="saveLocation()">Save</button>
+      </div>
+     
       </div>
     </div>
-  </div>
+  
 </template>
 
 <script>
+import axios from "axios"; 
 import Ellipse6 from "./Ellipse6";
 import ToggleSwitchOn from "./ToggleSwitchOn";
 import ToggleSwitchOff from "./ToggleSwitchOff";
 import NavBar from "@/NavBar/NavBar.vue";
 export default {
   name: "WebsiteLocationSettings",
+  
   components: {
     NavBar,
     Ellipse6,
     ToggleSwitchOn,
     ToggleSwitchOff,
+  },
+  data() {
+    return {
+      cities: " ", 
+    };
+  },
+  created() {
+    this.loadLocation();  
+  },
+  methods: {
+    saveLocation() {
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_location.php", {
+        userid: 1,
+        cities: this.cities,
+      })
+      .then(response => {
+        console.log(response.data);
+        alert("Location Settings saved successfully.");
+      })
+      .catch(error => {
+        console.error("Unsuccessful axios post in saveLocation().", error);
+      });
+    },
+    loadLocation() {
+      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php")
+      .then(response => {
+        this.cities = response.data.cities;
+      })
+      .catch(error => {
+        console.error("Unsuccessful axios get in loadLocation().", error);
+      });
+    },
   },
   props: [
     "defaultLogo5",
@@ -66,6 +102,10 @@ export default {
 </script>
 
 <style scoped>
+
+.locationNav{
+  top: -0.85%;
+}
 
 .switch {
   position: relative;
@@ -134,7 +174,6 @@ input:checked + .slider:before {
  
 }
 
-
 .location-title{
   position: relative;
   margin: auto;
@@ -143,15 +182,18 @@ input:checked + .slider:before {
   align-items: center;
   width: 100%;
   height: 10%; 
-  margin-top: -10px; 
+  left: -10px;
+  top: 50px; 
+  
 }
 
 .location-settings-title{
  color: var(--black);
  font-weight: 600;
- font-size: 1.5em;
+ font-size: 2.5em;
  font-family: 'Inter';
  font-style: normal; 
+
 }
 
 .location-text-container {
@@ -159,19 +201,33 @@ input:checked + .slider:before {
   align-self: flex-start;
   display: flex;
   gap: 23px;
-  height: 389px;
-  margin-left: -123px;
-  margin-top: 100px;
-  min-width: 1491px;
+  height: 289px;
+  margin-left: 200px;
+  margin-top: 200px;
+  width: 100%; 
   
+  transform: scale(1.3);
 }
 .text-column1 {
   align-items: flex-start;
   align-self: flex-end;
   display: flex;
   flex-direction: column;
-  min-height: 389px;
-  width: 796px;
+  min-height: 250px;
+  margin-left: -100px; 
+  width: 800px;
+  
+}
+
+.text-column2 {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 104px;
+  min-height: 266px;
+  width: 640px;
+  margin-top: -5px; 
+  margin-left: -200px; 
   
 }
 .location-services {
@@ -214,14 +270,7 @@ input:checked + .slider:before {
   text-align: center;
   width: 706px;
 }
-.text-column2 {
-  align-items: flex-end;
-  display: flex;
-  flex-direction: column;
-  gap: 104px;
-  min-height: 266px;
-  width: 640px;
-}
+
 .toggle-switcho-container {
   align-items: flex-start;
   display: flex;
@@ -246,153 +295,112 @@ input:checked + .slider:before {
   width: 260px;
 }
 
-
-.locationNav {
-  position: relative;
-  display: inline-flex;
-  align-items: safe center;
-  top: -0.2%;
-  margin-top: 2%;
-  width: 88%;
-  z-index: 1;
- 
+.save-button-container{
+  width: 100%; 
+  height: 20%; 
+  
 }
-.save-button {
-  height: 80px;
-  margin-top: 320px;
-  position: relative;
-  width: 706px;
-  margin-left: -60px; 
-
-}
-.rectangle-272 {
-  background-color: var(--black);
-  height: 80px;
-  left: 600px;
-  position: absolute;
-  top: -340px;
-  width: 335px;
-}
-.save {
-  color: var(--white);
-  font-weight: 600;
-  left: 410px;
-  line-height: normal;
-  position: absolute;
-  text-align: center;
-  top: -320px;
-  width: 706px;
+button {
+  font-family: 'Inter';
+  font-style: normal;
+  font-size: large;
+  font-weight: bold;
+  padding: 0.7em 10em;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  margin-left: 528px; 
+  transform: scale(1.2); 
+  margin-top: 80px; 
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1440px) {
-
-  .locationNav{
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 2%;
-    width: 100%;
-    z-index: 1;
-  }
- 
-
-
-}
-
-@media only screen and (min-width: 576px) and (max-width: 900px) {
-
-  .locationNav {
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 2%;
-    width: 110%;
-    z-index: 1;
-  }
+@media screen and (min-width: 992px) and (max-width: 1240px) {
 
   .location-text-container{
-    transform: scale(0.6);
-    margin-left: -410px; 
-    margin-top: 10px; 
-    
+    margin-left: 200px; 
+  }
+
+
+
+}
+
+@media screen and (min-width: 576px) and (max-width: 992px) {
+
+
+  .location-text-container{
+    transform: scale(0.98); 
+    margin-left: 30px; 
   }
 
   .text-column2{
-    margin-left: -230px;
+    margin-left: -80px; 
   }
 
-  .save-button{
-    transform: scale(0.8);
-    margin-left: -350px; 
-    margin-top: 160px;
-  }
+  .save-button-container{
+  transform: scale(0.95); 
+  margin-left: -261px; 
+}
 }
 
-@media only screen and (min-width: 375px) and (max-width: 576px) {
+@media screen and (min-width: 375px) and (max-width: 576px) {
 
   .locationNav{
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 3%;
-    width: 110%;
-    z-index: 1;
-    transform: scale(1);
-    
+    margin-left: -59px; 
+    transform: scale(0.8); 
+  }
+  .location-title{
+    margin-left: 20px; 
+    transform: scale(0.7);
   }
 
   .location-text-container{
-    transform: scale(0.55);
-    margin-left: -430px; 
-    margin-top: -40px; 
+    margin-top: 40px; 
+    margin-left: -100px; 
+    transform: scale(0.56);
   }
 
   .text-column2{
-    margin-left: -410px;
-    margin-top: -20px; 
+    margin-left: -190px; 
+    transform: scale(0.9);
   }
 
-  .save-button{
-    transform: scale(0.6);
-    margin-left: -380px;
-    margin-top: 100px;
-  }
-
- 
-
-
-
-}
-
-@media only screen and (max-width: 375px) {
-
-  .locationNav{
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 3%;
-    width: 110%;
-    z-index: 1;
-    transform: scale(1);
-    
-  }
-
-  .location-text-container{
-    transform: scale(0.4);
-    margin-left: -520px; 
-    margin-top: -70px; 
-  }
-
-  .text-column2{
-    margin-left: -410px;
-    margin-top: -20px; 
-  }
-
-  .save-button{
-    transform: scale(0.6);
-    margin-left: -430px;
-    margin-top: 60px;
+  .save-button-container{
+    margin-top: -80px; 
+    margin-left: -340px; 
+    transform: scale(0.65); 
   }
 
 }
+
+@media screen and (max-width: 374px) {
+
+.location-title{
+  margin-left: 20px; 
+  margin-top: 10px; 
+  transform: scale(0.5);
+}
+
+.text-column1{
+  transform: scale(0.7);
+}
+
+.text-column2{
+  transform: scale(0.7); 
+  margin-left: -280px; 
+}
+
+.location-text-container{
+  margin-top: -5px; 
+  margin-left: -120px; 
+  transform: scale(0.7);
+}
+
+.save-button-container{
+  margin-top: -100px; 
+  margin-left: -270px; 
+  transform: scale(0.5);
+}
+
+}
+
 </style>
