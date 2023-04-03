@@ -6,16 +6,19 @@
         <div class="overlap-group4">
           <div class="overlap-group2">
             <h1 class="title ui---30-semi">Saved Outfits</h1>
-            <listbox-component />
+            <!-- <listbox-component /> #63 deciding that we dont need the dropdown for the saved outfits --> 
           </div>
           <img
             class="undraw_weather_app_re_kcb1-1"
-            src="https://anima-uploads.s3.amazonaws.com/projects/6405ee9a4548b3806a50e138/releases/6405ef8c246cb8c2cd3b302a/img/undraw-weather-app-re-kcb1-1.svg"
-            alt="undraw_weather_app_re_kcb1 1"
+            src="../../../img/girl-on-cloud.svg"
+            alt="girl on cloud icon"
           />
-          <ellipse6 :src="ellipse6Props.src" />
-          <div class="overlap-group1"><img class="plus-math" :src="plusMath" alt="Plus Math" /></div>
-          <input-field />
+          <!-- <ellipse6 :src="ellipse6Props.src" /> -->
+          <!-- <div class="plusButton" @click.self="showModal">
+            <img class="plus-math" :src="plusMath" @click.self="showModal" alt="Plus Math" />
+          </div> -->
+
+          <!-- <input-field /> -->
         </div>
       </div>
       <div class="group-41">
@@ -32,12 +35,14 @@ import InputField from "./InputField";
 import NavBar from "@/NavBar/NavBar.vue";
 export default {
   name: "WebsiteProfileNoSavedOutfit",
+  data() {
+  },
   components: {
     NavBar,
     ListboxComponent,
     InputField,
   },
-  props: ["plusMath", "defaultFrameLogo3", "ellipse6Props"],
+  props: ["defaultFrameLogo3", "ellipse6Props"],
 };
 </script>
 
@@ -233,7 +238,7 @@ export default {
   width: 490px;
 }
 
-.overlap-group1 {
+.plusButton {
   align-items: flex-end;
   background-color: var(--gray01);
   display: flex;
@@ -352,7 +357,7 @@ export default {
 }
 
 /* Add Outfits Box  */
-.overlap-group1 {
+.plusButton {
  display: none;
 }
 
