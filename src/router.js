@@ -10,6 +10,7 @@ import RegisterPage from "./components/RegistrationPage/RegisterPage";
 import WebsiteLoginPage from "./components/LoginPage/WebsiteLoginPage";
 import WebsiteProfileNoSavedOutfit from "./components/SavedOutfits/WebsiteProfileNoSavedOutfit";
 import MakeOutfit from "./components/DesktopMyItems/MakeOutfit";
+import TempItem from "./components/DesktopMyItems/TempItem";
 
 import {
   websiteUnitsPageData,
@@ -34,6 +35,39 @@ const isUserLoggedIn = () => {
   if (authToken) return true;
   return false;
 };
+
+const myItemsClothings = [
+  {
+    name: "Outerwear Items",
+    path: "outerwear",
+    component: TempItem
+  },
+  {
+    name: "Middlewear Items",
+    path: "middlewear",
+    component: TempItem
+  },
+  {
+    name: "Innerwear Items",
+    path: "innerwear",
+    component: TempItem
+  },
+  {
+    name: "Pants Items",
+    path: "pants",
+    component: TempItem
+  },
+  {
+    name: "Headwear Items",
+    path: "headwear",
+    component: TempItem
+  },
+  {
+    name: "Shoes Items",
+    path: "shoes",
+    component: TempItem
+  }
+]
 
 const routes = [
   {
@@ -92,31 +126,37 @@ const routes = [
         name: "Warm Items",
         path: "warm",
         component: MakeOutfit,
+        children: myItemsClothings
       },
       {
         name: "Hot Items",
         path: "hot",
         component: MakeOutfit,
+        children: myItemsClothings
       },
       {
         name: "Just Right Items",
         path: "justRight",
         component: MakeOutfit,
+        children: myItemsClothings
       },
       {
         name: "Chilly Items",
         path: "chilly",
         component: MakeOutfit,
+        children: myItemsClothings
       },
       {
         name: "Cold Items",
         path: "cold",
         component: MakeOutfit,
+        children: myItemsClothings
       },
       {
         name: "Freezing Items",
         path: "freezing",
         component: MakeOutfit,
+        children: myItemsClothings
       },
     ]
   },

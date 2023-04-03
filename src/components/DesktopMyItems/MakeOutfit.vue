@@ -8,66 +8,73 @@
         <!-- Hidden modal -->
         <modal v-show="isModalVisible" @close="closeModal"></modal>
 
-        <h1 class="title">{{ this.$route.name }}</h1> <!--Name would be literally the name assigned in router.js-->
-
-        <div class="clothing-container" id="outerwear" @click.self = "showModal">
-            <p>Outerwear</p>
-            <img
-              src="../../../img/make_outfit_icons/outerwear.svg"
-              alt="Coat image"
-              style="width:200px; margin-top: 20px;"
-              @click.self = "showModal"
-            />
+        <div v-if="checkChildRouteNames()">
+            <!-- For child routes -->
+            <router-view></router-view>
         </div>
 
-        <div class="clothing-container" id="middlewear" @click.self = "showModal">
-            <p>Middlewear</p>
-            <img
-              src="../../../img/make_outfit_icons/middlewear.svg"
-              alt="Sweater image"
-              style="width:200px; margin-top: 20px;"
-              @click.self = "showModal"
-            />
-        </div>
-
-        <div class="clothing-container" id="innerwear" @click.self = "showModal">
-            <p>Innerwear</p>
-            <img
-              src="../../../img/make_outfit_icons/innerwear.svg"
-              alt="T-shirt image"
-              style="width:200px; margin-top: 20px;"
-              @click.self = "showModal"
-            />
-        </div>
-
-        <div class="clothing-container" id="pants" @click.self = "showModal">
-            <p>Pants</p>
-            <img
-              src="../../../img/make_outfit_icons/pants.svg"
-              alt="Coat image"
-              style="width:200px; margin-top: 20px;"
-              @click.self = "showModal"
-            />
-        </div>
-        
-        <div class="clothing-container" id="headwear" @click.self = "showModal">
-            <p>Headwear</p>
-            <img
-              src="../../../img/make_outfit_icons/headwear.svg"
-              alt="Coat image"
-              style="width:200px; margin-top: 20px;"
-              @click.self = "showModal"
-            />
-        </div>
-
-        <div class="clothing-container" id="shoes" @click.self = "showModal">
-            <p>Shoes</p>
-            <img
-              src="../../../img/make_outfit_icons/shoes.svg"
-              alt="Coat image"
-              style="width:200px; margin-top: 20px;"
-              @click.self = "showModal"
-            />
+        <div class="main-content" v-else>
+            <h1 class="title">{{ this.$route.name }}</h1> <!--Name would be literally the name assigned in router.js-->
+    
+            <div class="clothing-container" id="outerwear" @click.self = "showModal">
+                <p>Outerwear</p>
+                <img
+                  src="../../../img/make_outfit_icons/outerwear.svg"
+                  alt="Coat image"
+                  style="width:200px; margin-top: 20px;"
+                  @click.self = "showModal"
+                />
+            </div>
+    
+            <div class="clothing-container" id="middlewear" @click.self = "showModal">
+                <p>Middlewear</p>
+                <img
+                  src="../../../img/make_outfit_icons/middlewear.svg"
+                  alt="Sweater image"
+                  style="width:200px; margin-top: 20px;"
+                  @click.self = "showModal"
+                />
+            </div>
+    
+            <div class="clothing-container" id="innerwear" @click.self = "showModal">
+                <p>Innerwear</p>
+                <img
+                  src="../../../img/make_outfit_icons/innerwear.svg"
+                  alt="T-shirt image"
+                  style="width:200px; margin-top: 20px;"
+                  @click.self = "showModal"
+                />
+            </div>
+    
+            <div class="clothing-container" id="pants" @click.self = "showModal">
+                <p>Pants</p>
+                <img
+                  src="../../../img/make_outfit_icons/pants.svg"
+                  alt="Pants image"
+                  style="width:200px; margin-top: 20px;"
+                  @click.self = "showModal"
+                />
+            </div>
+            
+            <div class="clothing-container" id="headwear" @click.self = "showModal">
+                <p>Headwear</p>
+                <img
+                  src="../../../img/make_outfit_icons/headwear.svg"
+                  alt="Hat image"
+                  style="width:200px; margin-top: 20px;"
+                  @click.self = "showModal"
+                />
+            </div>
+    
+            <div class="clothing-container" id="shoes" @click.self = "showModal">
+                <p>Shoes</p>
+                <img
+                  src="../../../img/make_outfit_icons/shoes.svg"
+                  alt="Shoes image"
+                  style="width:200px; margin-top: 20px;"
+                  @click.self = "showModal"
+                />
+            </div>
         </div>
 
     </div>
@@ -88,17 +95,26 @@
     ],
     data(){
       return {
-        isModalVisible: false
+        isModalVisible: false,
+        isValidRouteName: true, //Conditionally render either this parent component, or child routes
+        isChildRoute: false
       }
     },
     methods: {
       showModal(){
         this.isModalVisible = true
-        console.log("The state of showModal is: " + this.isModalVisible)
       },
       closeModal(){
         this.isModalVisible = false
-        console.log("Closing the modal")
+      },
+      checkRouteName(){
+        console.log(this.$route.name)
+        const validRouteNames = ["Hot Items", "Warm Items", "Just Right Items", "Chilly Items", "Cold Items", "Freezing Items"]
+        return validRouteNames.includes(this.$route.name)
+      },
+      checkChildRouteNames(){
+        const validRouteNames = ["Outerwear Items", "Middlewear Items", "Innerwear Items", "Pant Items", "Headwear Items", "Shoe Items"]
+        return validRouteNames.includes(this.$route.name)
       }
     },
   };
