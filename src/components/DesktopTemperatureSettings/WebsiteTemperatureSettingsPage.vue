@@ -17,7 +17,7 @@
 
             <input class="temp-slider" type="range" min="-100" max="100" v-model="tempValues[label]" @input="updateInputValue(label, $event)"/>
 
-            <input class= "temp-input" type="text" :id="label" :name="label" v-model="tempValues[label]" @input="updateSliderValue(label, $event)"/>
+            <input class= "temp-input" type="text" :id="label" :name="label" v-model="tempValues[label]" @input="updateSliderValue(label, $event)" @keypress="isNumber($event)" pattern="\d*"/>
 
             <button :name="label + '-button'" @click="saveTempSettings()">Save</button>
           </div>
@@ -36,6 +36,7 @@ export default {
   name: "WebsiteTemperatureSettingsPage",
   data() {
     return {
+      userid: null,
       labels: ["hot", "warm", "ideal", "chilly", "cold", "freezing"],
       tempValues: {
         hot: 0,
@@ -48,11 +49,26 @@ export default {
     };
   },
   created() {
-    this.loadTempSettings();
+    this.getUserId();
   },
   methods: {
+    async getUserId() {
+      try {
+        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        this.userid = response.data.userid;
+        console.log("User_id: "+response.data.userid);
+        this.loadTempSettings();
+      } catch (error) {
+        console.error("Unsuccessful request in getUserId().", error);
+      }
+    },
     loadTempSettings() {
-      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_temperatures.php")
+      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_temperatures.php", 
+      {
+        params: {
+          userid: this.userid,
+        },
+      })
       .then(response => {
         if (typeof response.data === 'object') {
           this.tempValues = response.data;
@@ -65,8 +81,9 @@ export default {
       });
     },
     saveTempSettings() {
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_temperatures.php", {
-        userid: 1,
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_temperatures.php", 
+      {
+        userid: this.userid,
         hot: this.tempValues.hot,
         warm: this.tempValues.warm,
         ideal: this.tempValues.ideal,
@@ -87,6 +104,12 @@ export default {
     },
     updateSliderValue(label, event) {
       this.tempValues[label] = event.target.value;  
+    },
+    isNumber(event) {
+      if (event.key.match(/[\d-]/)) {
+        return event;
+      }
+      event.preventDefault();
     },
   },
   watch: {

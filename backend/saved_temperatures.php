@@ -1,13 +1,20 @@
 <?php
     // Connection Setup
     header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Origin: *");
+    // header("Access-Control-Allow-Origin: http://localhost:8080");
+    header("Access-Control-Allow-Origin: https://www-student.cse.buffalo.edu");
     header("Access-Control-Allow-Methods: POST, GET");
     header("Access-Control-Allow-Headers: Content-Type");
+    header("Access-Control-Allow-Credentials: true");
     $servername = "oceanus";
     $username = "jpan26";
     $password = "50314999";
     $dbname = "cse442_2023_spring_team_a_db";
+
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $dbname = "cse442";
 
     // Get the input data
     $input = json_decode(file_get_contents("php://input"), true);

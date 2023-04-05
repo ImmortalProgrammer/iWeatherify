@@ -3,7 +3,8 @@
     function access_control(){
         if (isset($_SERVER["HTTP_ORIGIN"])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is the one that you want to allow
-            header("Access-Control-Allow-Origin: *");
+            // header("Access-Control-Allow-Origin: http://localhost:8080");
+            header("Access-Control-Allow-Origin: https://www-student.cse.buffalo.edu");
             header("Access-Control-Allow-Credentials: true");
             header("Access-Control-Max-Age: 1000");
         }
@@ -12,7 +13,7 @@
             if (isset($_SERVER["HTTP_ACCESS_CONTROL_REQUEST_METHOD"])) {
                 header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
             }
-            if (isset($_SERVER["HTTP_ACESS_CONTROL_REQUEST_HEADERS"])) {
+            if (isset($_SERVER["HTTP_ACCESS_CONTROL_REQUEST_HEADERS"])) {
                 header("Access-Control-Allow-Headers: Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization");
             }
             exit(0);

@@ -9,8 +9,8 @@
     // $dbhost = "localhost";
     // $dbuser = "root";
     // $dbpass = "";
-    // $dbname = "vue_php_cdn_db";
     // $dbname = "cse442";
+    // $dbname = "vue_php_cdn_db";
 
 
     // Create connection
