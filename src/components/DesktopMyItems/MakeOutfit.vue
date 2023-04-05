@@ -100,7 +100,49 @@
             this.$router.push(this.$route.path + `/${itemCategory}`)
         },
       checkChildRouteNames(){
-        const validRouteNames = ["Outerwear Items", "Middlewear Items", "Innerwear Items", "Pants Items", "Headwear Items", "Shoes Items"]
+        const validRouteNames = [
+          "Warm Outerwear Items",
+          "Warm Middlewear Items", 
+          "Warm Innerwear Items", 
+          "Warm Pants Items", 
+          "Warm Headwear Items", 
+          "Warm Shoes Items",
+
+          "Hot Outerwear Items",
+          "Hot Middlewear Items", 
+          "Hot Innerwear Items", 
+          "Hot Pants Items", 
+          "Hot Headwear Items", 
+          "Hot Shoes Items",
+
+          "Just Right Outerwear Items",
+          "Just Right Middlewear Items", 
+          "Just Right Innerwear Items", 
+          "Just Right Pants Items", 
+          "Just Right Headwear Items", 
+          "Just Right Shoes Items",
+
+          "Chilly Outerwear Items",
+          "Chilly Middlewear Items", 
+          "Chilly Innerwear Items", 
+          "Chilly Pants Items", 
+          "Chilly Headwear Items", 
+          "Chilly Shoes Items",
+
+          "Cold Outerwear Items",
+          "Cold Middlewear Items", 
+          "Cold Innerwear Items", 
+          "Cold Pants Items", 
+          "Cold Headwear Items", 
+          "Cold Shoes Items",
+
+          "Freezing Outerwear Items",
+          "Freezing Middlewear Items", 
+          "Freezing Innerwear Items", 
+          "Freezing Pants Items", 
+          "Freezing Headwear Items", 
+          "Freezing Shoes Items",
+      ]
         return validRouteNames.includes(this.$route.name)
       }
     },

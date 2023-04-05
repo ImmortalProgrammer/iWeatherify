@@ -36,34 +36,199 @@ const isUserLoggedIn = () => {
   return false;
 };
 
-const myItemsClothings = [
+const hotMyItemsClothings = [
   {
-    name: "Outerwear Items",
+    name: "Hot Outerwear Items",
     path: "outerwear",
     component: TempItem
   },
   {
-    name: "Middlewear Items",
+    name: "Hot Middlewear Items",
     path: "middlewear",
     component: TempItem
   },
   {
-    name: "Innerwear Items",
+    name: "Hot Innerwear Items",
     path: "innerwear",
     component: TempItem
   },
   {
-    name: "Pants Items",
+    name: "Hot Pants Items",
     path: "pants",
     component: TempItem
   },
   {
-    name: "Headwear Items",
+    name: "Hot Headwear Items",
     path: "headwear",
     component: TempItem
   },
   {
-    name: "Shoes Items",
+    name: "Hot Shoes Items",
+    path: "shoes",
+    component: TempItem
+  }
+]
+
+const warmMyItemsClothings = [
+  {
+    name: "Warm Outerwear Items",
+    path: "outerwear",
+    component: TempItem
+  },
+  {
+    name: "Warm Middlewear Items",
+    path: "middlewear",
+    component: TempItem
+  },
+  {
+    name: "Warm Innerwear Items",
+    path: "innerwear",
+    component: TempItem
+  },
+  {
+    name: "Warm Pants Items",
+    path: "pants",
+    component: TempItem
+  },
+  {
+    name: "Warm Headwear Items",
+    path: "headwear",
+    component: TempItem
+  },
+  {
+    name: "Warm Shoes Items",
+    path: "shoes",
+    component: TempItem
+  }
+]
+
+const justRightMyItemsClothings = [
+  {
+    name: "Just Right Outerwear Items",
+    path: "outerwear",
+    component: TempItem
+  },
+  {
+    name: "Just Right Middlewear Items",
+    path: "middlewear",
+    component: TempItem
+  },
+  {
+    name: "Just Right Innerwear Items",
+    path: "innerwear",
+    component: TempItem
+  },
+  {
+    name: "Just Right Pants Items",
+    path: "pants",
+    component: TempItem
+  },
+  {
+    name: "Just Right Headwear Items",
+    path: "headwear",
+    component: TempItem
+  },
+  {
+    name: "Just Right Shoes Items",
+    path: "shoes",
+    component: TempItem
+  }
+]
+
+const chillyMyItemsClothings = [
+  {
+    name: "Chilly Outerwear Items",
+    path: "outerwear",
+    component: TempItem
+  },
+  {
+    name: "Chilly Middlewear Items",
+    path: "middlewear",
+    component: TempItem
+  },
+  {
+    name: "Chilly Innerwear Items",
+    path: "innerwear",
+    component: TempItem
+  },
+  {
+    name: "Chilly Pants Items",
+    path: "pants",
+    component: TempItem
+  },
+  {
+    name: "Chilly Headwear Items",
+    path: "headwear",
+    component: TempItem
+  },
+  {
+    name: "Chilly Shoes Items",
+    path: "shoes",
+    component: TempItem
+  }
+]
+
+const coldMyItemsClothings = [
+  {
+    name: "Cold Outerwear Items",
+    path: "outerwear",
+    component: TempItem
+  },
+  {
+    name: "Cold Middlewear Items",
+    path: "middlewear",
+    component: TempItem
+  },
+  {
+    name: "Cold Innerwear Items",
+    path: "innerwear",
+    component: TempItem
+  },
+  {
+    name: "Cold Pants Items",
+    path: "pants",
+    component: TempItem
+  },
+  {
+    name: "Cold Headwear Items",
+    path: "headwear",
+    component: TempItem
+  },
+  {
+    name: "Cold Shoes Items",
+    path: "shoes",
+    component: TempItem
+  }
+]
+
+const freezingMyItemsClothings = [
+  {
+    name: "Freezing Outerwear Items",
+    path: "outerwear",
+    component: TempItem
+  },
+  {
+    name: "Freezing Middlewear Items",
+    path: "middlewear",
+    component: TempItem
+  },
+  {
+    name: "Freezing Innerwear Items",
+    path: "innerwear",
+    component: TempItem
+  },
+  {
+    name: "Freezing Pants Items",
+    path: "pants",
+    component: TempItem
+  },
+  {
+    name: "Freezing Headwear Items",
+    path: "headwear",
+    component: TempItem
+  },
+  {
+    name: "Freezing Shoes Items",
     path: "shoes",
     component: TempItem
   }
@@ -126,37 +291,37 @@ const routes = [
         name: "Warm Items",
         path: "warm",
         component: MakeOutfit,
-        children: myItemsClothings
+        children: warmMyItemsClothings
       },
       {
         name: "Hot Items",
         path: "hot",
         component: MakeOutfit,
-        children: myItemsClothings
+        children: hotMyItemsClothings
       },
       {
         name: "Just Right Items",
         path: "justRight",
         component: MakeOutfit,
-        children: myItemsClothings
+        children: justRightMyItemsClothings
       },
       {
         name: "Chilly Items",
         path: "chilly",
         component: MakeOutfit,
-        children: myItemsClothings
+        children: chillyMyItemsClothings
       },
       {
         name: "Cold Items",
         path: "cold",
         component: MakeOutfit,
-        children: myItemsClothings
+        children: coldMyItemsClothings
       },
       {
         name: "Freezing Items",
         path: "freezing",
         component: MakeOutfit,
-        children: myItemsClothings
+        children: freezingMyItemsClothings
       },
     ]
   },
