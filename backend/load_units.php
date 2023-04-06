@@ -36,7 +36,7 @@
 
     $userid = $_GET["userid"];
 
-    $sql = "SELECT temperature, wind, pressure, distance FROM saved_units WHERE userid = ?";
+    $sql = "SELECT temperature, wind, pressure FROM saved_units WHERE userid = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $userid);
     $stmt->execute();
@@ -50,14 +50,13 @@
         $default_values = array(
             "temperature" => "f",
             "wind" => "mph",
-            "pressure" => "in",
-            "distance" => "mi"
+            "pressure" => "hg",
         );
     
         // Insert default values into the database
-        $insert_sql = "INSERT INTO saved_units (userid, temperature, wind, pressure, distance) VALUES (?, ?, ?, ?, ?)";
+        $insert_sql = "INSERT INTO saved_units (userid, temperature, wind, pressure) VALUES (?, ?, ?, ?)";
         $insert_stmt = $conn->prepare($insert_sql);
-        $insert_stmt->bind_param("sssss", $userid, $default_values["temperature"], $default_values["wind"], $default_values["pressure"], $default_values["distance"]);
+        $insert_stmt->bind_param("ssss", $userid, $default_values["temperature"], $default_values["wind"], $default_values["pressure"]);
     
         if ($insert_stmt->execute()) {
             // Return the default values
