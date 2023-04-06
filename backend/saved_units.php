@@ -32,7 +32,6 @@
     $temperature = $data["temperature"];
     $wind = $data["wind"];
     $pressure = $data["pressure"];
-    $distance = $data["distance"];
 
     // Create a connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -53,14 +52,14 @@
 
     if ($count > 0) {
         // Update the existing user settings
-        $sql = "UPDATE saved_units SET temperature = ?, wind = ?, pressure = ?, distance = ? WHERE userid = ?";
+        $sql = "UPDATE saved_units SET temperature = ?, wind = ?, pressure = ? WHERE userid = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $temperature, $wind, $pressure, $distance, $userid);
+        $stmt->bind_param("ssss", $temperature, $wind, $pressure, $userid);
     } else {
         // Insert new user settings
-        $sql = "INSERT INTO saved_units (userid, temperature, wind, pressure, distance) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO saved_units (userid, temperature, wind, pressure) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $userid, $temperature, $wind, $pressure, $distance);
+        $stmt->bind_param("ssss", $userid, $temperature, $wind, $pressure);
     }
 
     if ($stmt->execute()) {
