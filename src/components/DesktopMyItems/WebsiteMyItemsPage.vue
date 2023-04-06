@@ -156,5 +156,12 @@ export default {
   text-align: center;
 }
 
+/* For mobile screens */
+@media screen and (max-width: 615px) {
+  .top-row, .bottom-row{
+    flex-direction: column;
+  }
+}
+
 </style>
  
