@@ -1,10 +1,16 @@
 <?php
-
+    
     function access_control(){
+        $allowed_origins = array(
+            'https://www-student.cse.buffalo.edu',
+            'http://localhost:8080'
+        );
         if (isset($_SERVER["HTTP_ORIGIN"])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is the one that you want to allow
-            // header("Access-Control-Allow-Origin: http://localhost:8080");
-            header("Access-Control-Allow-Origin: https://www-student.cse.buffalo.edu");
+            // Check if the origin is in the list of allowed origins
+            if (in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
+                header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+            }
             header("Access-Control-Allow-Credentials: true");
             header("Access-Control-Max-Age: 1000");
         }
