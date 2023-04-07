@@ -12,66 +12,70 @@
 
         <div class="main-content" v-else>
             <h1 class="title">{{ this.$route.name }}</h1> <!--Name would be literally the name assigned in router.js-->
-    
-            <div class="clothing-container" id="outerwear">
-                <p>Outerwear</p>
-                <img
-                  src="../../../img/make_outfit_icons/outerwear.svg"
-                  alt="Coat image"
-                  style="width:200px; margin-top: 20px;"
-                  @click.self = "goToTempItem('outerwear')"
-                />
-            </div>
-    
-            <div class="clothing-container" id="middlewear" >
-                <p>Middlewear</p>
-                <img
-                  src="../../../img/make_outfit_icons/middlewear.svg"
-                  alt="Sweater image"
-                  style="width:200px; margin-top: 20px;"
-                  @click.self = "goToTempItem('middlewear')"
-                />
-            </div>
-    
-            <div class="clothing-container" id="innerwear" >
-                <p>Innerwear</p>
-                <img
-                  src="../../../img/make_outfit_icons/innerwear.svg"
-                  alt="T-shirt image"
-                  style="width:200px; margin-top: 20px;"
-                  @click.self = "goToTempItem('innerwear')"
-                />
-            </div>
-    
-            <div class="clothing-container" id="pants" >
-                <p>Pants</p>
-                <img
-                  src="../../../img/make_outfit_icons/pants.svg"
-                  alt="Pants image"
-                  style="width:200px; margin-top: 20px;"
-                  @click.self = "goToTempItem('pants')"
-                />
-            </div>
-            
-            <div class="clothing-container" id="headwear" >
-                <p>Headwear</p>
-                <img
-                  src="../../../img/make_outfit_icons/headwear.svg"
-                  alt="Hat image"
-                  style="width:200px; margin-top: 20px;"
-                  @click.self = "goToTempItem('headwear')"
-                />
-            </div>
-    
-            <div class="clothing-container" id="shoes">
-                <p>Shoes</p>
-                <img
-                  src="../../../img/make_outfit_icons/shoes.svg"
-                  alt="Shoes image"
-                  style="width:200px; margin-top: 20px;"
-                  @click.self = "goToTempItem('shoes')"
-                />
-            </div>
+
+            <div class="clothing-choices">
+              <div class="top-row">
+                <div class="clothing-container" id="outerwear">
+                    <p>Outerwear</p>
+                    <img
+                      src="../../../img/make_outfit_icons/outerwear.svg"
+                      alt="Coat image"
+
+                      @click.self = "goToTempItem('outerwear')"
+                    />
+                </div>
+        
+                <div class="clothing-container" id="middlewear" >
+                    <p>Middlewear</p>
+                    <img
+                      src="../../../img/make_outfit_icons/middlewear.svg"
+                      alt="Sweater image"
+                      @click.self = "goToTempItem('middlewear')"
+                    />
+                </div>
+        
+                <div class="clothing-container" id="innerwear" >
+                    <p>Innerwear</p>
+                    <img
+                      src="../../../img/make_outfit_icons/innerwear.svg"
+                      alt="T-shirt image"
+                      @click.self = "goToTempItem('innerwear')"
+                    />
+                </div>
+              </div>
+
+              <div class="bottom-row">
+                <div class="clothing-container" id="pants" >
+                    <p>Pants</p>
+                    <img
+                      src="../../../img/make_outfit_icons/pants.svg"
+                      alt="Pants image"
+
+                      @click.self = "goToTempItem('pants')"
+                    />
+                </div>
+                
+                <div class="clothing-container" id="headwear" >
+                    <p>Headwear</p>
+                    <img
+                      src="../../../img/make_outfit_icons/headwear.svg"
+                      alt="Hat image"
+
+                      @click.self = "goToTempItem('headwear')"
+                    />
+                </div>
+        
+                <div class="clothing-container" id="shoes">
+                    <p>Shoes</p>
+                    <img
+                      src="../../../img/make_outfit_icons/shoes.svg"
+                      alt="Shoes image"
+
+                      @click.self = "goToTempItem('shoes')"
+                    />
+                </div>
+              </div>
+            </div>    
         </div>
 
     </div>
@@ -150,55 +154,46 @@
   </script>
   
   <style scoped>  
+
+  .main-content{
+    margin-top: 10vh;
+  }
+
+  .clothing-choices{
+    width: 75vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
   .title {
     color: var(--black);
     font-family: var(--font-family-inter);
     font-size: var(--font-size-l);
     font-weight: 700;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
     text-align: center;
-    top: 7vh; /*TODO Would need to fix title to dynamically be after the navBar*/
+}
+
+.top-row, .bottom-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .clothing-container {
-    background: grey;
-    height: 252px;
-    width: 200px;
-    left: 0;
-    position: absolute;
-    top: 170px;
+    height: 30vh;
+    width: 20vw;
+    text-align: center;
+}
+
+.clothing-container img{
+  width: 90%;
+  height: 90%
 }
 
 .clothing-container:hover{
     cursor:pointer
 }
 
-#outerwear {
-    left: 25%
-}
-
-#middlewear {
-    left: 50%
-}
-
-#innerwear {
-    left: 75%
-}
-
-#pants{
-    top: 50%;
-    left: 25%
-}
-
-#headwear {
-    top: 50%;
-    left: 50%
-}
-
-#shoes {
-    top: 50%;
-    left: 75%
-}
   </style>  

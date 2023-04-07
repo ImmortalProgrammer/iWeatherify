@@ -6,15 +6,6 @@
             <div class="modal">
                 <header class="modal-header">    
                     
-
-
-                    <!-- <button
-                        type="button"
-                        class="btn-close"
-                        @click="close"
-                    >
-                        x
-                    </button> -->
                 </header>
         
                 <div class="AddClothingModal">

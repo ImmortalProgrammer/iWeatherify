@@ -1,9 +1,5 @@
 <template>
     <div class="Temperature-Items">
-        <div>
-            <nav-bar></nav-bar>
-        </div>
-
         <!-- Hidden modal -->
         <modal v-show="isModalVisible" @close="closeModal"></modal>
 
@@ -47,6 +43,10 @@ export default {
 </script>
 
 <style scoped>
+
+.plusButton{
+  padding-top: 20px;
+}
 
 .Temperature-Items {
     background: white;
