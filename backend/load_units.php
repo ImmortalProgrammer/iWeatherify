@@ -50,7 +50,7 @@
         $default_values = array(
             "temperature" => "f",
             "wind" => "mph",
-            "pressure" => "hg",
+            "pressure" => "mb",
         );
     
         // Insert default values into the database
