@@ -1,13 +1,30 @@
 <?php
     // Connection Setup
     header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Origin: *");
+    $allowed_origins = array(
+        'https://www-student.cse.buffalo.edu',
+        'http://localhost:8080'
+    );
+      
+    // Check if the request has an 'Origin' header
+    if (isset($_SERVER['HTTP_ORIGIN'])) {
+        // Check if the origin is in the list of allowed origins
+        if (in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
+            header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+        }
+    }
     header("Access-Control-Allow-Methods: POST, GET");
     header("Access-Control-Allow-Headers: Content-Type");
+    header("Access-Control-Allow-Credentials: true");
     $servername = "oceanus";
     $username = "jpan26";
     $password = "50314999";
     $dbname = "cse442_2023_spring_team_a_db";
+
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $dbname = "cse442";
 
     // Get the user settings from the request
     $data = json_decode(file_get_contents("php://input"), true);
@@ -15,7 +32,6 @@
     $temperature = $data["temperature"];
     $wind = $data["wind"];
     $pressure = $data["pressure"];
-    $distance = $data["distance"];
 
     // Create a connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -36,14 +52,14 @@
 
     if ($count > 0) {
         // Update the existing user settings
-        $sql = "UPDATE saved_units SET temperature = ?, wind = ?, pressure = ?, distance = ? WHERE userid = ?";
+        $sql = "UPDATE saved_units SET temperature = ?, wind = ?, pressure = ? WHERE userid = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $temperature, $wind, $pressure, $distance, $userid);
+        $stmt->bind_param("ssss", $temperature, $wind, $pressure, $userid);
     } else {
         // Insert new user settings
-        $sql = "INSERT INTO saved_units (userid, temperature, wind, pressure, distance) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO saved_units (userid, temperature, wind, pressure) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $userid, $temperature, $wind, $pressure, $distance);
+        $stmt->bind_param("ssss", $userid, $temperature, $wind, $pressure);
     }
 
     if ($stmt->execute()) {

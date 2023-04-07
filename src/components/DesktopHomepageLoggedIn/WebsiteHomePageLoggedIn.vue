@@ -29,103 +29,35 @@
                v-model="currentWeatherData.locationInput" @keyup.enter="retrieveAPI()">
       </div>
       <div class="daily-weather1">
-        <div class = "current-unit1">
-          <p class ="city-display1">{{this.currentWeatherData.locationOutput.charAt(0).toUpperCase() + this.currentWeatherData.locationOutput.slice(1)
-            }}</p>
-          <p class = "current-day1">{{ this.currentWeatherData.currentDay }}</p>
-          <p class = "weatherDescription1">{{ this.currentWeatherData.iconDescription}}</p>
-          <div class = "currentWeatherContainer1">
-            <div class = "weather-icon-current1">
-              <img :src = "this.currentWeatherData.iconUrl">
+        <div class="current-unit1">
+          <p class="city-display1">{{this.currentWeatherData.locationOutput.charAt(0).toUpperCase() + this.currentWeatherData.locationOutput.slice(1)}}</p>
+          <p class="current-day1">{{this.currentWeatherData.currentDay}}</p>
+          <p class="weatherDescription1">{{this.currentWeatherData.iconDescription}}</p>
+          <div class="currentWeatherContainer1">
+            <div class="weather-icon-current1">
+              <img :src="this.currentWeatherData.iconUrl">
             </div>
           </div>
-          <p class = "high-low-temp1">{{this.currentWeatherData.tempHigh}}°
-            / {{this.currentWeatherData.tempLow}}°</p>
-          <p class = "feelslike_1_1">Feels Like: {{this.currentWeatherData.feelsLike}}°</p>
+          <p class="high-low-temp1">{{this.currentWeatherData.tempHigh}}° / {{this.currentWeatherData.tempLow}}°</p>
+          <p class="feelslike_1_1">Feels Like: {{this.currentWeatherData.feelsLike}}°</p>
+          <p class="current-conditions-1">Current Conditions: {{this.currentWeatherData.wind}} {{this.outputPreferences.windPrefOutput}} winds
+            / {{this.currentWeatherData.pressure}} {{this.outputPreferences.pressurePrefOutput}} pressure </p>
         </div>
       </div>
+
       <div id="weekly-weather_1">
-        <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast </p>
-        <div class = "day-next-1">
-          <p class = "next-1">{{ this.eightDayForecastData.dates[0] }}</p>
-          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[0] }}</p>
-          <div class = "eightDayForecastImg-1">
-            <img :src = "this.eightDayForecastData.iconUrlArr[0]">
+        <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast</p>
+        <div class="day-next-1" v-for="(day, index) in eightDayForecastData.dates" :key="index">
+          <p class="next-1">{{day}}</p>
+          <p class="weatherState-1">{{eightDayForecastData.iconDescription[index]}}</p>
+          <div class="eightDayForecastImg-1">
+            <img :src="eightDayForecastData.iconUrlArr[index]">
           </div>
-          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[0] }}°
-            / {{ this.eightDayForecastData.lowTempArr[0] }}°</p>
-          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[0] }}°</p>
-        </div>
-        <div class = "day-next-1">
-          <p class = "next-1">{{ this.eightDayForecastData.dates[1] }}</p>
-          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[1] }}</p>
-          <div class = "eightDayForecastImg-1">
-            <img :src = "this.eightDayForecastData.iconUrlArr[1]">
-          </div>
-          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[1] }}°
-            / {{ this.eightDayForecastData.lowTempArr[1] }}°</p>
-          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[1] }}°</p>
-        </div>
-        <div class = "day-next-1">
-          <p class = "next-1">{{ this.eightDayForecastData.dates[2] }}</p>
-          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[2] }}</p>
-          <div class = "eightDayForecastImg-1">
-            <img :src = "this.eightDayForecastData.iconUrlArr[2]">
-          </div>
-          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[2] }}°
-            / {{ this.eightDayForecastData.lowTempArr[2] }}°</p>
-          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[2] }}°</p>
-        </div>
-        <div class = "day-next-1">
-          <p class = "next-1">{{ this.eightDayForecastData.dates[3] }}</p>
-          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[3] }}</p>
-          <div class = "eightDayForecastImg-1">
-            <img :src = "this.eightDayForecastData.iconUrlArr[3]">
-          </div>
-          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[3] }}°
-            / {{ this.eightDayForecastData.lowTempArr[3] }}°</p>
-          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[3] }}°</p>
-        </div>
-        <div class = "day-next-1">
-          <p class = "next-1">{{ this.eightDayForecastData.dates[4] }}</p>
-          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[4] }}</p>
-          <div class = "eightDayForecastImg-1">
-            <img :src = "this.eightDayForecastData.iconUrlArr[4]">
-          </div>
-          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[4] }}°
-            / {{ this.eightDayForecastData.lowTempArr[4] }}°</p>
-          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[4] }}°</p>
-        </div>
-        <div class = "day-next-1">
-          <p class = "next-1">{{ this.eightDayForecastData.dates[5] }}</p>
-          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[5] }}</p>
-          <div class = "eightDayForecastImg-1">
-            <img :src = "this.eightDayForecastData.iconUrlArr[5]">
-          </div>
-          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[5] }}°
-            / {{ this.eightDayForecastData.lowTempArr[5] }}°</p>
-          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[5] }}°</p>
-        </div>
-        <div class = "day-next-1">
-          <p class = "next-1">{{ this.eightDayForecastData.dates[6] }}</p>
-          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[6] }}</p>
-          <div class = "eightDayForecastImg-1">
-            <img :src = "this.eightDayForecastData.iconUrlArr[6]">
-          </div>
-          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[6] }}°
-            / {{ this.eightDayForecastData.lowTempArr[6] }}°</p>
-          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[6] }}°</p>
-        </div>
-        <div class = "day-next-1">
-          <p class = "next-1">{{ this.eightDayForecastData.dates[7] }}</p>
-          <p class = "weatherState-1">{{ this.eightDayForecastData.iconDescription[7] }}</p>
-          <div class = "eightDayForecastImg-1">
-            <img :src = "this.eightDayForecastData.iconUrlArr[7]">
-          </div>
-          <p class = "HighLowTemp_1">{{ this.eightDayForecastData.highTempArr[7] }}°
-            / {{ this.eightDayForecastData.lowTempArr[7] }}°</p>
-          <p class = "feelslike-1">Feels Like: {{ this.eightDayForecastData.feelsLikeArr[7] }}°</p>
-        </div>
+          <p class="HighLowTemp_1">{{eightDayForecastData.highTempArr[index]}}° / {{eightDayForecastData.lowTempArr[index]}}°</p>
+          <p class="feelslike-1">Feels Like: {{eightDayForecastData.feelsLikeArr[index]}}°</p>
+          <p class="windy-1">Wind: {{eightDayForecastData.windArr[index]}} {{outputPreferences.windPrefOutput}}</p>
+          <p class="pressure-1">Pressure: {{eightDayForecastData.pressureArr[index]}} {{outputPreferences.pressurePrefOutput}}</p>
+      </div>
       </div>
     </div>
   </div>
@@ -153,7 +85,9 @@ export default {
         mainDescription: ' ',
         iconDescription: ' ',
         suggestedDescription: ' ',
-        suggestedOutfit: '',
+        suggestedOutfit: ' ',
+        wind: ' ',
+        pressure: ' ',
       },
       eightDayForecastData: {
         //Index 0 starts one day after the current weather)
@@ -163,8 +97,21 @@ export default {
         lowTempArr: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ''],
         feelsLikeArr: ['', '', '', '', '', '', '', ''],
         iconUrlArr: ['', '', '', '', '', '', '', ''],
+        windArr: ['', '', '', '', '', '', '', ''],
+        pressureArr: ['', '', '', '', '', '', '', ''],
+      },
+      userPreferences: {
+        tempPref: 'f',
+        windPref: 'mph',
+        pressurePref: 'mb',
+      },
+      outputPreferences: {
+        tempPrefOutput: 'F',
+        windPrefOutput: 'mph',
+        pressurePrefOutput: 'mb',
       },
       data: {
+        userid: null,
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
         optionsVisibility: false,
         eightDayForecastGrayOut: true,
@@ -175,7 +122,46 @@ export default {
   mounted: async function() {
     await this.retrieveAPI();
   },
+  created() {
+    this.getUserId();
+  },
   methods: {
+    async getUserId() {
+      try {
+        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        this.$data.data.userid = response.data.userid;
+        this.loadUnits();
+      } catch (error) {
+        console.error("Unsuccessful request in getUserId().", error);
+      }
+    },
+    loadUnits() {
+      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php",
+          {
+            params: {
+              userid: this.$data.data.userid,
+            }
+          })
+          .then(response => {
+            this.$data.userPreferences.tempPref = response.data.temperature;
+            this.$data.userPreferences.windPref = response.data.wind;
+            this.$data.userPreferences.pressurePref = response.data.pressure;
+          })
+          .catch(error => {
+            console.error("Unsuccessful axios get in loadUnits().", error);
+          });
+    },
+    outputTempPreferences() {
+      if (this.userPreferences.tempPref === 'c') {
+        this.outputPreferences.tempPrefOutput = 'C';
+      }
+      if (this.userPreferences.windPref === 'kmh') {
+        this.outputPreferences.windPrefOutput = 'km/h';
+      }
+      if (this.userPreferences.pressurePref === 'hg') {
+        this.outputPreferences.pressurePrefOutput = 'Hg';
+      }
+    },
     //Refactor pressOutfitOfTheDay and pressEightDayForecast when there is enough time to do so
     pressEightDayForecast() {
       const menuOpt1_1 = document.getElementById("menu_option_1_1");
@@ -184,8 +170,8 @@ export default {
       const outfitOfDay1 = document.getElementById("outfit-of-the-day_1");
 
       if (menuOpt1_1.style.opacity !== "0.3") {
-        menuOpt1_1.style.opacity = 0.3;
-        menuOpt1_2.style.opacity = 1;
+        menuOpt1_1.style.opacity = "0.3";
+        menuOpt1_2.style.opacity = "1";
         weeklyWeather1.style.visibility = "visible";
         outfitOfDay1.style.visibility = "hidden";
         this.pressOptions();
@@ -198,8 +184,8 @@ export default {
       const outfitOfDay1 = document.getElementById("outfit-of-the-day_1");
 
       if (menuOpt1_2.style.opacity !== "0.3") {
-        menuOpt1_1.style.opacity = 1;
-        menuOpt1_2.style.opacity = 0.3;
+        menuOpt1_1.style.opacity = "1";
+        menuOpt1_2.style.opacity = "0.3";
         weeklyWeather1.style.visibility = "hidden";
         outfitOfDay1.style.visibility = "visible";
         this.pressOptions();
@@ -247,11 +233,15 @@ export default {
         } else {
           //Setup the dates data structure
           this.setupDays();
+          //Setup the Temp Output
+          this.outputTempPreferences();
           //Sets up the current weather as of now
           await this.currentWeather();
           //Seven-Day Forecast
           await this.eightDayForecast();
           this.currentWeatherData.locationInput = '';
+
+          this.userid = null;
         }
       } catch (Exception) {
         alert("City not found by the API!")
@@ -268,15 +258,47 @@ export default {
       //Get current Weather
       if (geoLocationStatus === 'OK') {
         const nameOfLocation = geoLocationData['name'];
-        const currentTemp = Math.round(geoLocationData['main']['temp']);
-        const minTemp = Math.round(geoLocationData['main']['temp_min']);
-        const maxTemp = Math.round(geoLocationData['main']['temp_max']);
-        const feelslike = Math.round(geoLocationData['main']['feels_like']);
+        const currentTemp = geoLocationData['main']['temp'];
+        const minTemp = geoLocationData['main']['temp_min'];
+        const maxTemp = geoLocationData['main']['temp_max'];
+        const feelslike = geoLocationData['main']['feels_like'];
+        const pressure = geoLocationData['main']['pressure'];
+        const windSpeed = geoLocationData['wind']['speed'];
+
         this.currentWeatherData.locationOutput = nameOfLocation;
-        this.currentWeatherData.feelsLike = feelslike;
-        this.currentWeatherData.tempLow = minTemp;
-        this.currentWeatherData.tempHigh = maxTemp;
-        this.currentWeatherData.currentTemp = currentTemp;
+
+        if (this.userPreferences.tempPref === 'f') {
+          this.currentWeatherData.currentTemp = Math.round(currentTemp);
+          this.currentWeatherData.feelsLike = Math.round(feelslike);
+          this.currentWeatherData.tempLow = Math.round(minTemp);
+          this.currentWeatherData.tempHigh = Math.round(maxTemp);
+        } else if (this.userPreferences.tempPref === 'c') {
+          this.currentWeatherData.currentTemp = Math.round((((currentTemp) - 32) * 5) / 9);
+          this.currentWeatherData.feelsLike = Math.round((((feelslike) - 32) * 5) / 9);
+          this.currentWeatherData.tempLow = Math.round((((minTemp) - 32) * 5) / 9);
+          this.currentWeatherData.tempHigh = Math.round((((maxTemp) - 32) * 5) / 9);
+        } else {
+          console.log("Nonexistent Units Detected");
+        }
+
+        if (this.userPreferences.pressurePref === 'hg') {
+          //Unit Conversion -> hPa to Hg
+          this.currentWeatherData.pressure = Math.round(pressure / 33.864);
+        } else if (this.userPreferences.pressurePref === 'mb') {
+          //Unit Conversion -> hPa to mg
+          this.currentWeatherData.pressure = Math.round(pressure);
+        } else {
+          console.log("Nonexistent Units Detected");
+        }
+
+        if (this.userPreferences.windPref === 'mph') {
+          this.currentWeatherData.wind = Math.round(windSpeed);
+        } else if (this.userPreferences.windPref === 'kmh') {
+          this.currentWeatherData.wind = Math.round(windSpeed * 1.609);
+        } else {
+          console.log("Nonexistent Units Detected")
+        }
+
         const iconCode = geoLocationData['weather']['0']['icon'];
         const iconUrl = 'https://openweathermap.org/img/wn/'
             + iconCode + ".png";
@@ -303,18 +325,49 @@ export default {
       let x = 0;
       for (let i in data) {
         if (x !== 0) {
-          let currentData = data[i.toString()];
-          let feelsLikeData = currentData['feels_like']
+          const currentData = data[i.toString()];
+          console.log(currentData);
+          const pressure = currentData['pressure'];
+          const windSpeed = currentData['speed'];
+          let feelsLikeData = currentData['feels_like'];
+          feelsLikeData = (feelsLikeData['day'] + feelsLikeData['night'] +
+              feelsLikeData['eve'] + feelsLikeData['morn']) / 4;
+
+          const lowTemp = Math.round(currentData['temp']['min']);
+          const highTemp = Math.round(currentData['temp']['max']);
+
+          if (this.userPreferences.tempPref === 'f') {
+            this.eightDayForecastData.feelsLikeArr[i-1] = Math.round(feelsLikeData).toString();
+            this.eightDayForecastData.lowTempArr[i-1] = Math.round(lowTemp).toString();
+            this.eightDayForecastData.highTempArr[i-1] = Math.round(highTemp).toString();
+          } else if (this.userPreferences.tempPref === 'c') {
+            this.eightDayForecastData.feelsLikeArr[i-1] = Math.round((((feelsLikeData) - 32) * 5) / 9).toString();
+            this.eightDayForecastData.lowTempArr[i-1] = Math.round((((lowTemp) - 32) * 5) / 9).toString();
+            this.eightDayForecastData.highTempArr[i-1] = Math.round((((highTemp) - 32) * 5) / 9).toString();
+          } else {
+            console.log("Nonexistent Units Detected");
+          }
+
+          if (this.userPreferences.pressurePref === 'hg') {
+            //Unit Conversion -> hPa to Hg
+            this.eightDayForecastData.pressureArr[i-1] = Math.round(pressure / 33.864);
+          } else if (this.userPreferences.pressurePref === 'mb') {
+            //Unit Conversion -> hPa to mg
+            this.eightDayForecastData.pressureArr[i-1] = Math.round(pressure);
+          } else {
+            console.log("Nonexistent Units Detected");
+          }
+
+          if (this.userPreferences.windPref === 'mph') {
+            this.eightDayForecastData.windArr[i-1] = Math.round(windSpeed);
+          } else if (this.userPreferences.windPref === 'kmh') {
+            this.eightDayForecastData.windArr[i-1] = Math.round(windSpeed * 1.609);
+          } else {
+            console.log("Nonexistent Units Detected")
+          }
           this.eightDayForecastData.iconDescription[i-1] = currentData['weather']['0']['description'].split(' ')
               .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
               .join(' ');
-          //Low Temp
-          this.eightDayForecastData.lowTempArr[i-1] = Math.round(currentData['temp']['min']).toString();
-          // High Temp
-          this.eightDayForecastData.highTempArr[i-1] = Math.round(currentData['temp']['max']).toString();
-          //Feels Like
-          this.eightDayForecastData.feelsLikeArr[i-1] = Math.round(
-              (feelsLikeData['day'] + feelsLikeData['night'] + feelsLikeData['eve'] + feelsLikeData['morn']) / 4);
 
           const iconCode = currentData['weather']['0']['icon'];
           const iconUrl = 'https://openweathermap.org/img/wn/'
@@ -506,6 +559,7 @@ export default {
 .day-next-1 {
   padding: 1.8vw;
   display: inline-block;
+  margin: 0.2em 1% 0.2em 0;
 }
 
 
@@ -527,6 +581,16 @@ export default {
 
 .feelslike-1 {
   font-size: 2.5vh;
+  padding-bottom: 1.5vh;
+}
+
+.windy-1 {
+  font-size: 1.8vh;
+  padding-bottom: 1.5vh;
+}
+
+.pressure-1 {
+  font-size: 1.8vh;
   padding-bottom: 1.5vh;
 }
 
@@ -597,6 +661,12 @@ export default {
 .feelslike_1_1 {
   font-size: 3vh;
 }
+
+.current-conditions-1 {
+  padding-top: 1.5vh;
+  font-size: 2vh;
+}
+
 
 
 .bar-search1 {

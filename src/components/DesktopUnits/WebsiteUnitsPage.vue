@@ -26,16 +26,8 @@
       <div class="row">
         <p class="unit-font">Pressure</p>
         <select class="pressure-container" id="dropdown-container-font" v-model="pressure">
-          <option value="in">in</option>
-          <option value="mm">mm</option>
-        </select>
-      </div>
-
-      <div class="row">
-        <p class="unit-font">Distance</p>
-        <select class="distance-container" id="dropdown-container-font" v-model="distance">
-          <option value="mi">mi</option>
-          <option value="km">km</option>
+          <option value="hg">hg</option>
+          <option value="mb">mb</option>
         </select>
       </div>
 
@@ -54,23 +46,33 @@ export default {
   components: {NavBar},
   data() {
     return {
+      userid: null,
       temperature: "f",
       wind: "mph",
-      pressure: "in",
-      distance: "mi",
+      pressure: "hg",
     };
   },
   created() {
-    this.loadUnits();  
+    this.getUserId();
   },
   methods: {
+    async getUserId() {
+      try {
+        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        this.userid = response.data.userid;
+        console.log("User_id: "+response.data.userid);
+        this.loadUnits();
+      } catch (error) {
+        console.error("Unsuccessful request in getUserId().", error);
+      }
+    },
     saveUnits() {
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_units.php", {
-        userid: 1,
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_units.php", 
+      {
+        userid: this.userid,
         temperature: this.temperature,
         wind: this.wind,
         pressure: this.pressure,
-        distance: this.distance
       })
       .then(response => {
         console.log(response.data);
@@ -81,12 +83,16 @@ export default {
       });
     },
     loadUnits() {
-      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php")
+      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php",
+      {
+        params: {
+          userid: this.userid,
+        }
+      })
       .then(response => {
         this.temperature = response.data.temperature;
         this.wind = response.data.wind;
         this.pressure = response.data.pressure;
-        this.distance = response.data.distance;
       })
       .catch(error => {
         console.error("Unsuccessful axios get in loadUnits().", error);
