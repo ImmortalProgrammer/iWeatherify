@@ -560,7 +560,7 @@ export default {
 .day-next-1 {
   padding: 1.8vw;
   display: inline-block;
-  margin: 0.2em 1% 0.2em 0;
+  margin: 0.2em 0.7% 0.2em 0;
 }
 
 
