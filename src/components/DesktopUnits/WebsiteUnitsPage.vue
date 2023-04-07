@@ -3,7 +3,7 @@
     <nav-bar class = "unitSettingsPageNav"></nav-bar>
 
     <div class="title-container">
-      <h1 class="unit-title">{{ title }}</h1>
+      <h1 class="unit-title">Unit Settings</h1>
     </div>
 
     <div class="row-format-container">
@@ -99,11 +99,6 @@ export default {
       });
     },
   },
-  props: [
-    "defaultLogo4",
-    "title",
-    "ellipse6Props",
-  ]
 };
 </script>
 
@@ -127,7 +122,6 @@ export default {
   justify-content: center;
   align-items: center;
   width: 45%;
-  height: 10%;
 }
 
 .unit-title {
@@ -189,8 +183,6 @@ export default {
   font-weight: 400;
 }
 
-
-
 #dropdown-container-font {
   font-size: 1.5em;
   font-family: 'Inter';
@@ -208,18 +200,23 @@ button {
   padding: 0.7em 10em;
   color: white;
   background-color: black;
+  border-radius: 15px;
   cursor: pointer;
 }
 
 @media screen and (min-width: 992px) and (max-width: 1440px) {
-
-
   .row {
     width: 50%;
   }
 }
 
 @media screen and (min-width: 576px) and (max-width: 992px) {
+  .title-container{
+    transform: scale(0.9);
+    width: auto;
+    top: 150px;
+  }
+
   .row-format-container {
     height: 200px;
   }
@@ -235,6 +232,11 @@ button {
 }
 
 @media screen and (min-width: 375px) and (max-width: 576px) {
+  .title-container{
+    transform: scale(0.7);
+    width: auto;
+    top: 100px;
+  }
 
   .row {
     width: 90%;
@@ -246,7 +248,10 @@ button {
 }
 
 @media screen and (max-width: 375px) {
-
+  .title-container{
+    transform: scale(0.5);
+    width: auto;
+  }
 
   .row {
     width: 90%;
