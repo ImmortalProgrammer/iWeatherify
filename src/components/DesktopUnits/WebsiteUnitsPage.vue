@@ -26,8 +26,8 @@
       <div class="row">
         <p class="unit-font">Pressure</p>
         <select class="pressure-container" id="dropdown-container-font" v-model="pressure">
-          <option value="mb">mb</option>
           <option value="hg">Hg</option>
+          <option value="mb">mb</option>
         </select>
       </div>
 
