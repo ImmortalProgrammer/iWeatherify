@@ -266,7 +266,7 @@ const routes = [
     component: WebsiteHomePageLoggedIn,
     props: { ...websiteHomePageLoggedInData },
     meta: {
-      needsAuth: false
+      needsAuth: true
     },
   },
   {
