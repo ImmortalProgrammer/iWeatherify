@@ -40,8 +40,8 @@
           </div>
           <p class="high-low-temp1">{{this.currentWeatherData.tempHigh}}° / {{this.currentWeatherData.tempLow}}°</p>
           <p class="feelslike_1_1">Feels Like: {{this.currentWeatherData.feelsLike}}°</p>
-          <p class="current-conditions-1">Current Conditions: {{this.currentWeatherData.wind}} {{this.outputPreferences.windPrefOutput}} winds
-            / {{this.currentWeatherData.pressure}} {{this.outputPreferences.pressurePrefOutput}} pressure </p>
+          <p class="current-conditions-1">Wind: {{this.currentWeatherData.wind}} {{this.outputPreferences.windPrefOutput}}</p>
+          <p class="pressure_1_current">Pressure: {{this.currentWeatherData.pressure}} {{this.outputPreferences.pressurePrefOutput}}</p>
         </div>
       </div>
 
@@ -310,7 +310,6 @@ export default {
         this.currentWeatherData.mainDescription = geoLocationData['weather']['0']['main'].split(' ')
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
-
         this.outfitSuggestions();
       } else {
         alert("Error Status Request Failed!");
@@ -376,6 +375,7 @@ export default {
           this.eightDayForecastData.iconUrlArr[i-1] = iconUrl;
         }
         x++;
+        this.data.userid = null;
       }
     },
     setupDays() {
@@ -664,10 +664,14 @@ export default {
 }
 
 .current-conditions-1 {
-  padding-top: 1.5vh;
-  font-size: 2vh;
+  padding-top: 1.8vh;
+  font-size: 1.8vh;
 }
 
+.pressure_1_current {
+  padding-top: 1.4vh;
+  font-size: 1.8vh;
+}
 
 
 .bar-search1 {
@@ -697,9 +701,6 @@ export default {
   top: 0.6vh;
   width: 93%;
 }
-
-
-
 
 .container-center-horizontal1 {
   min-height: 100vh;
@@ -1013,7 +1014,7 @@ export default {
     height: auto;
     display: block;
     width: 130%;
-    top: -15px;
+    top: -17px;
     margin-left: -14%;
     background-color: #14565C;
     color: rgb(255, 255, 255);
