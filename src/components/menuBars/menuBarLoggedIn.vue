@@ -81,7 +81,7 @@ export default {
         { id: 'link1_2', data: 'homepage'},
         //{ id: 'link2_2', data: 'myItems'},
         { id: 'link3_2', data: 'savedOutfits'},
-       // { id: 'link4_2', data: 'locationSettings'},
+       { id: 'link4_2', data: 'locationSettings'},
         { id: 'link5_2', data: 'units'},
         { id: 'link6_2', data: 'tempSettings'},
       ];
