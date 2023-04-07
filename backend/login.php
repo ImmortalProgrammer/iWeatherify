@@ -3,7 +3,6 @@
     // Citation: https://www.youtube.com/watch?v=ai7T1p3Xj8A&t=134s&ab_channel=DigitalFox
     include("connection.php");
     include("security.php");
-    header("Access-Control-Allow-Credentials: true");
     access_control();
 
     if($_SERVER["REQUEST_METHOD"]  == "POST"){

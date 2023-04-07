@@ -1,12 +1,10 @@
 <template>
   <div class="website-temperature-settings-page">
-    <div class="nav-bar-container">
-      <nav-bar style = "margin-top: 3.4vh;"></nav-bar>
-    </div>
+    <nav-bar class = "tempSettingsPageNav"></nav-bar>
 
     <div class = "pushDowTempDisplay">
       <div class="title-container">
-        <h1 class="temp-setting-title">{{ title }}</h1>
+        <h1 class="temp-setting-title">Temperature Settings</h1>
       </div>
       
       <div class="temp-container">
@@ -19,8 +17,12 @@
 
             <input class= "temp-input" type="text" :id="label" :name="label" v-model="tempValues[label]" @input="updateSliderValue(label, $event)" @keypress="isNumber($event)" pattern="\d*"/>
 
-            <button :name="label + '-button'" @click="saveTempSettings()">Save</button>
           </div>
+        
+          <div id="save-button-container">
+            <button @click="saveTempSettings()">Save</button>
+          </div>
+        
         </div>
       </div>
     </div>
@@ -131,9 +133,6 @@ export default {
     MenuBarLoggedIn,
     menuBar,
   },
-  props: [
-    "title"
-  ]
 };
 </script>
 
@@ -143,6 +142,10 @@ export default {
   width: 100%; 
   height: 100%;
   background: #FFFFFF;
+}
+
+.tempSettingsPageNav {
+  top: -0.85%;
 }
 
 .pushDowTempDisplay {
@@ -186,7 +189,6 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 10%;
   padding-top: 15px;
   padding-bottom: 25px;
 }
@@ -215,7 +217,7 @@ export default {
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  height: 10%;
+  padding-right: 60px;
 }
 
 .hot-to-freezing-container {
@@ -225,7 +227,6 @@ export default {
   justify-content: space-between;
   line-height: 100px;
   text-align: center;
-  height: 100%;
 }
 
 .hot-to-freezing-font {
@@ -250,23 +251,28 @@ export default {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
+  text-align: center;
   font-size: 1em;
-  width: 100px;
-  margin-left: 5px;
-  padding-left: 5px;
+  width: 50px;
   border-radius: 15px;
 }
 
+#save-button-container{
+  display: flex;
+  justify-content: center;
+}
+
 button {
-  color: white;
   font-family: 'Inter';
   font-style: normal;
-  font-size: 1em;
-  background-color: #478887;
-  margin-left: -51px;
-  padding: 0 5px 0 5px;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.7em 9em;
+  color: white;
+  background-color: black;
   cursor: pointer;
-  border-radius: 0 15px 15px 0;
+  border-radius: 15px;
 }
 
 @media screen and (min-width: 992px) and (max-width: 1440px) {
@@ -395,8 +401,9 @@ button {
   }
 
   .title-container {
-    transform: scale(0.6);
-    width: 50%;
+    transform: scale(0.5);
+    width: auto;
+    top: 30px;
     margin-bottom: -150px;
   }
 

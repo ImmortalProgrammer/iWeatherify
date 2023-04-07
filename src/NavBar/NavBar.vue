@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 .nav-bar-container_1 {
-  position: fixed;
+  position: absolute;
   display: inline-block;
   align-items: safe center;
   width: 100%;
