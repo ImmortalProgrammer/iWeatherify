@@ -907,15 +907,6 @@ main {
     padding-bottom: 0.8vh;
   }
 
-  .currentWeatherContainer {
-    width: auto;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-    border-radius: 50%;
-    scale: 2.0;
-    padding-bottom: 0.8vh;
-  }
 
   .weather-icon-current {
     display: inline;

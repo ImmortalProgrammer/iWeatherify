@@ -616,7 +616,7 @@ export default {
   font-weight: 500;
   text-align: center;
   background-color: rgba(102, 102, 102, 0.83);
-  overflow-y: hidden;
+  overflow-y: scroll;
   overflow-x: hidden;
 }
 
@@ -670,6 +670,7 @@ export default {
 .pressure_1_current {
   padding-top: 1.4vh;
   font-size: 1.8vh;
+  padding-bottom: 3vh;
 }
 
 
@@ -865,7 +866,7 @@ export default {
     font-weight: 500;
     text-align: center;
     background-color: rgba(102, 102, 102, 0.83);
-    overflow-y: hidden;
+    overflow-y: scroll;
     overflow-x: hidden;
   }
 
@@ -901,15 +902,6 @@ export default {
     padding-bottom: 0.8vh;
   }
 
-  .currentWeatherContainer1 {
-    width: auto;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-    border-radius: 50%;
-    scale: 2.0;
-    padding-bottom: 0.8vh;
-  }
 
   .weather-icon-current1 {
     display: inline;
@@ -1013,7 +1005,7 @@ export default {
     height: auto;
     display: block;
     width: 130%;
-    top: -17px;
+    top: -20px;
     margin-left: -14%;
     background-color: #14565C;
     color: rgb(255, 255, 255);
@@ -1114,7 +1106,7 @@ export default {
     font-weight: 500;
     text-align: center;
     background-color: rgba(102, 102, 102, 0.83);
-    overflow-y: hidden;
+    overflow-y: scroll;
     overflow-x: hidden;
   }
 
