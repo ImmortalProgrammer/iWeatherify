@@ -326,7 +326,6 @@ export default {
       for (let i in data) {
         if (x !== 0) {
           const currentData = data[i.toString()];
-          console.log(currentData);
           const pressure = currentData['pressure'];
           const windSpeed = currentData['speed'];
           let feelsLikeData = currentData['feels_like'];
