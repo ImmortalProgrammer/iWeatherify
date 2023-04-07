@@ -101,14 +101,14 @@ export default {
         pressureArr: ['', '', '', '', '', '', '', ''],
       },
       userPreferences: {
-        tempPref: 'f',
-        windPref: 'mph',
-        pressurePref: 'mb',
+        tempPref: '',
+        windPref: '',
+        pressurePref: '',
       },
       outputPreferences: {
-        tempPrefOutput: 'F',
-        windPrefOutput: 'mph',
-        pressurePrefOutput: 'mb',
+        tempPrefOutput: '',
+        windPrefOutput: '',
+        pressurePrefOutput: '',
       },
       data: {
         userid: null,
@@ -231,7 +231,9 @@ export default {
     async retrieveAPI() {
       try {
         if (this.currentWeatherData.locationInput === '') {
+          await this.getUserId();
         } else {
+          await this.getUserId();
           //Setup the dates data structure
           this.setupDays();
           //Sets up the current weather as of now
