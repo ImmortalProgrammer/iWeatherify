@@ -664,7 +664,7 @@ export default {
 }
 
 .current-conditions-1 {
-  padding-top: 1.8vh;
+  padding-top: 1.4vh;
   font-size: 1.8vh;
 }
 
