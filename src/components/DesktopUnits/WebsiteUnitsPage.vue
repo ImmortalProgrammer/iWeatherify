@@ -26,7 +26,7 @@
       <div class="row">
         <p class="unit-font">Pressure</p>
         <select class="pressure-container" id="dropdown-container-font" v-model="pressure">
-          <option value="hg">hg</option>
+          <option value="hg">Hg</option>
           <option value="mb">mb</option>
         </select>
       </div>
@@ -49,7 +49,7 @@ export default {
       userid: null,
       temperature: "f",
       wind: "mph",
-      pressure: "hg",
+      pressure: "mb",
     };
   },
   created() {

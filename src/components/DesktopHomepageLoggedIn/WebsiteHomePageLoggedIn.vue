@@ -146,21 +146,22 @@ export default {
             this.$data.userPreferences.tempPref = response.data.temperature;
             this.$data.userPreferences.windPref = response.data.wind;
             this.$data.userPreferences.pressurePref = response.data.pressure;
+            //Setup the Temp Output
+            this.outputTempPreferences();
           })
           .catch(error => {
             console.error("Unsuccessful axios get in loadUnits().", error);
           });
     },
-    outputTempPreferences() {
+    async outputTempPreferences() {
       if (this.userPreferences.tempPref === 'c') {
         this.outputPreferences.tempPrefOutput = 'C';
+      } else if (this.userPreferences.tempPref === 'f') {
+        this.outputPreferences.tempPrefOutput = 'F';
       }
-      if (this.userPreferences.windPref === 'kmh') {
-        this.outputPreferences.windPrefOutput = 'km/h';
-      }
-      if (this.userPreferences.pressurePref === 'hg') {
-        this.outputPreferences.pressurePrefOutput = 'Hg';
-      }
+      this.outputPreferences.windPrefOutput = (this.userPreferences.windPref === 'kmh') ? 'km/h' : 'mph';
+      this.outputPreferences.pressurePrefOutput = (this.userPreferences.pressurePref === 'hg') ? 'Hg' : 'mb';
+
     },
     //Refactor pressOutfitOfTheDay and pressEightDayForecast when there is enough time to do so
     pressEightDayForecast() {
@@ -233,8 +234,6 @@ export default {
         } else {
           //Setup the dates data structure
           this.setupDays();
-          //Setup the Temp Output
-          this.outputTempPreferences();
           //Sets up the current weather as of now
           await this.currentWeather();
           //Seven-Day Forecast
