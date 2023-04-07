@@ -20,12 +20,11 @@
                             <input>
                             <br>
 
-                            <input type="file">
-                            <!-- <button class="add-btn" @click.prevent = "$router.push('/addClothing')">Upload image</button> -->
+                            <input type="file" @change="onFileSelected">
                             <br>
                             <br>
 
-                            <button class="save-btn">SAVE</button>
+                            <button class="save-btn" @click="uploadImage">SAVE</button>
 
                         </form>
                     </div>
@@ -46,11 +45,31 @@
   </template>
   
   <script>
+  import axios from "axios"
   export default {
     props: ["showModal", "title"],
+    data(){
+      return {
+        selectedFile: null,
+      }
+    },
     methods: {
         close(){
             this.$emit("close");
+        },
+        onFileSelected(event){
+          this.selectedFile = event.target.files[0]
+        },
+        uploadImage(){
+          const fd = new FormData()
+          fd.append('image', this.selectedFile, this.selectedFile.name)
+          // alert(this.selectedFile.name)
+          axios.post("http://localhost/project_s23-iweatherify/backend/my_items.php", fd, {header: {'Content-Type':'multipart/form-data'}}).then(
+            (res) => {
+              console.log("This is the response from the server")
+              console.log(res)
+            }
+          )
         }
     },
   };
