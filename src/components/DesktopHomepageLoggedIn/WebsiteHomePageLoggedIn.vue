@@ -9,9 +9,9 @@
         </div>
         <div id="menu-container_2">
           <div class = "diff_options">
-            <a  id = "menu_option_1_1"  @click ="pressEightDayForecast()" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
-            <a id = "menu_option_1_2" @click = "pressOutfitOfTheDay()"
-               style = "text-decoration:none; color: inherit;">Outfit of The Day</a>
+            <a id = "menu_option_1_0" @click="pressOptionsMenuItems('menu_option_1_0')" style = "text-decoration:none; color: inherit;">24-Hour Forecast</a>
+            <a id = "menu_option_1_1"  @click="pressOptionsMenuItems('menu_option_1_1')" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
+            <a id = "menu_option_1_2" @click="pressOptionsMenuItems('menu_option_1_2')" style = "text-decoration:none; color: inherit;">Outfit of the Day</a>
             </div>
         </div>
       </div>
@@ -57,7 +57,22 @@
           <p class="feelslike-1">Feels Like: {{eightDayForecastData.feelsLikeArr[index]}}°</p>
           <p class="windy-1">Wind: {{eightDayForecastData.windArr[index]}} {{outputPreferences.windPrefOutput}}</p>
           <p class="pressure-1">Pressure: {{eightDayForecastData.pressureArr[index]}} {{outputPreferences.pressurePrefOutput}}</p>
+         </div>
       </div>
+
+      <div id="TwentyFourHour-weather_1">
+        <p style="font-size: 5vh; padding-bottom: 3vh;">24 Hour Forecast</p>
+        <div class="hour-next-1" v-for="(hour, index) in twentyFourHourForecastData.hours" :key="index">
+          <p class="next_hour-1">{{hour}}</p>
+          <p class="weatherStateHour-1">{{twentyFourHourForecastData.iconDescription[index]}}</p>
+          <div class="TwentyFourHourForecastImg-1">
+            <img :src="twentyFourHourForecastData.iconUrlArr[index]">
+          </div>
+          <p class="HighLowTempHourly_1">{{twentyFourHourForecastData.highTempArr[index]}}° / {{twentyFourHourForecastData.lowTempArr[index]}}°</p>
+          <p class="feelslikeHourly-1">Feels Like: {{twentyFourHourForecastData.feelsLikeArr[index]}}°</p>
+          <p class="windy-1Hourly">Wind: {{twentyFourHourForecastData.windArr[index]}} {{outputPreferences.windPrefOutput}}</p>
+          <p class="pressure-1Hourly">Pressure: {{twentyFourHourForecastData.pressureArr[index]}} {{outputPreferences.pressurePrefOutput}}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -90,7 +105,7 @@ export default {
         pressure: ' ',
       },
       eightDayForecastData: {
-        //Index 0 starts one day after the current weather)
+        //Index 0 starts one day after the current weather
         dates: ['', '', '', '', '', '', '', ''],
         iconDescription: ['', '', '', '', '', '', '', ''],
         highTempArr: ['', '', '', '', '', '', '', ''],
@@ -99,6 +114,17 @@ export default {
         iconUrlArr: ['', '', '', '', '', '', '', ''],
         windArr: ['', '', '', '', '', '', '', ''],
         pressureArr: ['', '', '', '', '', '', '', ''],
+      },
+      twentyFourHourForecastData: {
+        //Index 0 starts one hour after the current weather
+        hours: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        iconDescription: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        highTempArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        lowTempArr: [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+        feelsLikeArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        iconUrlArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        windArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        pressureArr: ['','','','','','','','','','','','','','','','','','','','','','','','']
       },
       userPreferences: {
         tempPref: '',
@@ -163,34 +189,38 @@ export default {
       this.outputPreferences.pressurePrefOutput = (this.userPreferences.pressurePref === 'hg') ? 'Hg' : 'mb';
 
     },
-    //Refactor pressOutfitOfTheDay and pressEightDayForecast when there is enough time to do so
-    pressEightDayForecast() {
+    //Refactor pressOutfitOfTheDay, pressEightDayForecast, and press24HourForecast into one method when there is enough time to do so
+    pressOptionsMenuItems(menuOption) {
+      const menuOpt1_0 = document.getElementById("menu_option_1_0");
       const menuOpt1_1 = document.getElementById("menu_option_1_1");
       const menuOpt1_2 = document.getElementById("menu_option_1_2");
       const weeklyWeather1 = document.getElementById("weekly-weather_1");
+      const twentyFourHour1 = document.getElementById("TwentyFourHour-weather_1")
       const outfitOfDay1 = document.getElementById("outfit-of-the-day_1");
-
-      if (menuOpt1_1.style.opacity !== "0.3") {
+      if (menuOption === "menu_option_1_0") {
+        console.log(menuOption);
+        menuOpt1_0.style.opacity = "0.3";
+        menuOpt1_1.style.opacity = "1";
+        menuOpt1_2.style.opacity = "1";
+        twentyFourHour1.style.visibility = "visible";
+        weeklyWeather1.style.visibility = "hidden";
+        outfitOfDay1.style.visibility = "hidden";
+      } else if (menuOption === "menu_option_1_1") {
+        menuOpt1_0.style.opacity = "1";
         menuOpt1_1.style.opacity = "0.3";
         menuOpt1_2.style.opacity = "1";
+        twentyFourHour1.style.visibility = "hidden";
         weeklyWeather1.style.visibility = "visible";
         outfitOfDay1.style.visibility = "hidden";
-        this.pressOptions();
-      }
-    },
-    pressOutfitOfTheDay() {
-      const menuOpt1_1 = document.getElementById("menu_option_1_1");
-      const menuOpt1_2 = document.getElementById("menu_option_1_2");
-      const weeklyWeather1 = document.getElementById("weekly-weather_1");
-      const outfitOfDay1 = document.getElementById("outfit-of-the-day_1");
-
-      if (menuOpt1_2.style.opacity !== "0.3") {
+      } else if (menuOption === "menu_option_1_2") {
+        menuOpt1_0.style.opacity = "1";
         menuOpt1_1.style.opacity = "1";
         menuOpt1_2.style.opacity = "0.3";
+        twentyFourHour1.style.visibility = "hidden";
         weeklyWeather1.style.visibility = "hidden";
         outfitOfDay1.style.visibility = "visible";
-        this.pressOptions();
       }
+      this.pressOptions();
     },
     outfitSuggestions() {
       const DESCRIPTIONS = {
@@ -454,7 +484,7 @@ export default {
 #menu-container_2 {
   z-index: 1;
   position: absolute;
-  height: 25.5vh;
+  height: 21.3vh;
   margin-bottom: -15vh;
   left: 45%;
   top: 60.1vh;
@@ -490,7 +520,7 @@ export default {
   font-weight: 500;
 }
 
-#menu_option_1_1, #menu_option_1_2 {
+#menu_option_1_0, #menu_option_1_1, #menu_option_1_2 {
   font-size: 2.5vh;
   background-color: #1e7c85;
   padding: 2.1vh;
@@ -505,10 +535,13 @@ export default {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
-#menu_option_1_1 {
+#menu_option_1_0 {
   opacity: 0.3;
 }
 
+#menu_option_1_2 {
+  border-bottom: none;
+}
 
 #weekly-weather_1 {
   border: none;
@@ -530,31 +563,8 @@ export default {
   background-color: rgba(102, 102, 102, 0.83);
   overflow-y: scroll;
   overflow-x: hidden;
-}
-
-#outfit-of-the-day_1 {
   visibility: hidden;
-  border: none;
-  position: absolute;
-  height: auto;
-  margin-bottom: -15vh;
-  left: 33%;
-  top: 55.4vh;
-  bottom: 0;
-  border-top: 0;
-  transform: translate(-50%, 0);
-  width: 110vw;
-  padding: 2.5vh;
-  scale: 0.7;
-  color: rgb(255, 255, 255);
-  font-size: 25px;
-  font-weight: 500;
-  text-align: center;
-  background-color: rgba(102, 102, 102, 0.83);
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
-
 
 .day-next-1 {
   padding: 1.8vw;
@@ -599,6 +609,97 @@ export default {
   padding-bottom: 1vh;
   scale: 2;
   height: auto;
+}
+
+#TwentyFourHour-weather_1 {
+  border: none;
+  position: absolute;
+  height: auto;
+  margin-bottom: -15vh;
+  left: 33%;
+  top: 55.4vh;
+  bottom: 0;
+  border-top: 0;
+  transform: translate(-50%, 0);
+  width: 110vw;
+  padding: 2.5vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgba(102, 102, 102, 0.83);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.hour-next-1 {
+  padding: 1.8vw;
+  display: inline-block;
+  margin: 0.2em 0.7% 0.2em 0;
+}
+
+
+.next_hour-1 {
+  font-size: 4vh;
+  padding-bottom: 1.5vh;
+}
+
+.weatherStateHour-1 {
+  font-size: 2.3vh;
+  padding-bottom: 1.5vh;
+}
+
+
+.HighLowTempHourly_1 {
+  font-size: 2.5vh;
+  padding-bottom: 1.5vh;
+}
+
+.feelslikeHourly-1 {
+  font-size: 2.5vh;
+  padding-bottom: 1.5vh;
+}
+
+.windy-1Hourly {
+  font-size: 1.8vh;
+  padding-bottom: 1.5vh;
+}
+
+.pressure-1Hourly {
+  font-size: 1.8vh;
+  padding-bottom: 1.5vh;
+}
+
+.TwentyFourHourForecastImg-1 {
+  padding-top: 0.5vh;
+  padding-bottom: 1vh;
+  scale: 2;
+  height: auto;
+}
+
+
+#outfit-of-the-day_1 {
+  visibility: hidden;
+  border: none;
+  position: absolute;
+  height: auto;
+  margin-bottom: -15vh;
+  left: 33%;
+  top: 55.4vh;
+  bottom: 0;
+  border-top: 0;
+  transform: translate(-50%, 0);
+  width: 110vw;
+  padding: 2.5vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgba(102, 102, 102, 0.83);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .current-unit1 {
@@ -734,7 +835,7 @@ export default {
   #menu-container_2 {
     z-index: 1;
     position: absolute;
-    height: 25.5vh;
+    height: 21.2vh;
     margin-bottom: -15vh;
     left: 40.0%;
     top: 52.1vh;
@@ -769,9 +870,6 @@ export default {
     font-weight: 500;
   }
 
-
-
-
   #weekly-weather_1 {
     border: none;
     position: absolute;
@@ -794,28 +892,6 @@ export default {
     overflow-x: hidden;
   }
 
-
-  #outfit-of-the-day_1 {
-    border: none;
-    position: absolute;
-    height: auto;
-    margin-bottom: -20vh;
-    left: 11.5%;
-    top: 35vh;
-    bottom: 0;
-    border-top: 0;
-    transform: translate(-50%, 0);
-    width: 140vw;
-    padding: 2vh;
-    scale: 0.5;
-    color: rgb(255, 255, 255);
-    font-size: 1.5vh;
-    font-weight: 500;
-    text-align: center;
-    background-color: rgba(102, 102, 102, 0.83);
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
 
   .day-next-1 {
     padding: 1.8vw;
@@ -844,12 +920,111 @@ export default {
     padding-bottom: 1.5vh;
   }
 
+  .windy-1 {
+    font-size: 1.8vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .pressure-1 {
+    font-size: 1.8vh;
+    padding-bottom: 1.5vh;
+  }
+
   .eightDayForecastImg-1 {
     padding-top: 0.5vh;
     padding-bottom: 1vh;
     scale: 2;
     height: auto;
   }
+
+  #TwentyFourHour-weather_1 {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 35vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .hour-next-1 {
+    padding: 1.8vw;
+    display: inline-block;
+  }
+
+
+  .next_hour-1 {
+    font-size: 3.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .weatherStateHour-1 {
+    font-size: 2.3vh;
+    padding-bottom: 1.5vh;
+  }
+
+
+  .HighLowTempHourly_1 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .feelslikeHourly-1 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .windy-1Hourly {
+    font-size: 1.8vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .pressure-1Hourly {
+    font-size: 1.8vh;
+    padding-bottom: 1.8vh;
+  }
+
+  .TwentyFourHourForecastImg-1 {
+    padding-top: 0.5vh;
+    padding-bottom: 1vh;
+    scale: 2;
+    height: auto;
+  }
+
+  #outfit-of-the-day_1 {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 35vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
 
   .current-unit1 {
     position: absolute;
@@ -977,7 +1152,7 @@ export default {
   #menu-container_2 {
     z-index: 1;
     position: absolute;
-    height: 25.5vh;
+    height: 21.2vh;
     margin-bottom: -15vh;
     left: 40.0%;
     top: 52.1vh;
@@ -1005,7 +1180,6 @@ export default {
     height: auto;
     display: block;
     width: 130%;
-    top: -20px;
     margin-left: -14%;
     background-color: #14565C;
     color: rgb(255, 255, 255);
@@ -1035,27 +1209,6 @@ export default {
 
   }
 
-  #outfit-of-the-day_1 {
-    border: none;
-    position: absolute;
-    height: auto;
-    margin-bottom: -20vh;
-    left: 11.5%;
-    top: 35vh;
-    bottom: 0;
-    border-top: 0;
-    transform: translate(-50%, 0);
-    width: 140vw;
-    padding: 2vh;
-    scale: 0.5;
-    color: rgb(255, 255, 255);
-    font-size: 1.5vh;
-    font-weight: 500;
-    text-align: center;
-    background-color: rgba(102, 102, 102, 0.83);
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
 
   .day-next-1 {
     padding: 1.8vw;
@@ -1084,11 +1237,111 @@ export default {
     padding-bottom: 1.5vh;
   }
 
+  .windy-1 {
+    font-size: 1.8vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .pressure-1 {
+    font-size: 1.8vh;
+    padding-bottom: 1.8vh;
+  }
+
+
   .eightDayForecastImg-1 {
     padding-top: 0.5vh;
     padding-bottom: 1vh;
     scale: 2;
     height: auto;
+  }
+
+  #TwentyFourHour-weather_1 {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 35vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .hour-next-1 {
+    padding: 1.8vw;
+    display: inline-block;
+  }
+
+
+  .next_hour-1 {
+    font-size: 3.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .weatherStateHour-1 {
+    font-size: 2.3vh;
+    padding-bottom: 1.5vh;
+  }
+
+
+  .HighLowTempHourly_1 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .feelslikeHourly-1 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .windy-1Hourly {
+    font-size: 1.8vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .pressure-1Hourly {
+    font-size: 1.8vh;
+    padding-bottom: 1.8vh;
+  }
+
+
+  .TwentyFourHourForecastImg-1 {
+    padding-top: 0.5vh;
+    padding-bottom: 1vh;
+    scale: 2;
+    height: auto;
+  }
+
+  #outfit-of-the-day_1 {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 35vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .current-unit1 {
