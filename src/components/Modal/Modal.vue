@@ -5,27 +5,23 @@
         <div class="modal-backdrop">
             <div class="modal">
                 <header class="modal-header">    
-                    
+                  <div class="title-container">
+                      <h1 class="title">{{ title }}</h1>
+                  </div>
                 </header>
         
                 <div class="AddClothingModal">
-
-                    <div class="title-container">
-                        <h1 class="title">{{ title }}</h1>
-                    </div>
-    
                     <div class="Inputs">
                         <form>
                             <label>Clothing name: </label>
-                            <input>
+                            <input type="text" id="clothing_name" required v-model="clothing_name">
                             <br>
 
-                            <input type="file" @change="onFileSelected">
+                            <input type="file" @change="onFileSelected" required>
                             <br>
                             <br>
 
                             <button class="save-btn" @click.prevent="uploadImage">SAVE</button>
-
                         </form>
                     </div>
                 </div>
@@ -36,7 +32,7 @@
                         class="btn-green"
                         @click="close"
                     >
-                        Close Modal
+                        Cancel
                     </button>
                 </footer>
             </div>
@@ -47,10 +43,11 @@
   <script>
   import axios from "axios"
   export default {
-    props: ["showModal", "title"],
+    props: ["temp_category", "clothing_category", "title"],
     data(){
       return {
         selectedFile: null,
+        clothing_name: "",
       }
     },
     methods: {
@@ -63,13 +60,16 @@
         uploadImage(){
           const fd = new FormData()
           fd.append('image', this.selectedFile, this.selectedFile.name)
-          // alert(this.selectedFile.name)
+          fd.append("clothing_name", this.clothing_name)
+          fd.append('temp_category', this.temp_category)
+          fd.append('clothing_category', this.clothing_category)
           axios.post("http://localhost/project_s23-iweatherify/backend/my_items.php", fd, {header: {'Content-Type':'multipart/form-data'}}).then(
             (res) => {
               console.log("This is the response from the server")
               console.log(res)
             }
           )
+          this.close()
         }
     },
   };
@@ -84,13 +84,10 @@
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.3);
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto; */
   }
 
   .modal {
+    font-family: 'Inter';
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
@@ -106,8 +103,7 @@
 
   }
 
-  .modal-header,
-  .modal-footer {
+  .modal-header, .modal-footer {
     padding: 15px;
     display: flex;
   }
@@ -115,33 +111,21 @@
   .modal-header {
     position: relative;
     border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
+    color: #264653;
     justify-content: space-between;
+  }
+
+  .title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: xx-large;
+    font-weight: bold;
   }
 
   .modal-footer {
     border-top: 1px solid #eeeeee;
     flex-direction: column;
     justify-content: flex-end;
-  }
-
-  .modal-body {
-    position: relative;
-    /* padding: 20px 10px; */
-  }
-
-  .btn-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: none;
-    font-size: 20px;
-    padding: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #4AAE9B;
-    background: transparent;
-    cursor: pointer;
   }
 
   .btn-green {
@@ -152,17 +136,6 @@
     cursor: pointer;
   }
 
-  .add-btn{
-    font-family: 'Inter';
-    font-style: normal;
-    font-size: large;
-    font-weight: bold;
-    padding: 0.7em;
-    color: white;
-    background-color: grey;
-    cursor: pointer;
-}
-
 .save-btn{
     font-family: 'Inter';
     font-style: normal;
@@ -170,7 +143,7 @@
     font-weight: bold;
     padding: 0.7em 10em;
     color: white;
-    background-color: black;
+    background-color: #264653;
     cursor: pointer;
 }
 

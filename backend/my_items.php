@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     // Connection Setup
     header("Content-Type: application/json; charset=UTF-8");
     $allowed_origins = array(
@@ -17,15 +19,15 @@
     header("Access-Control-Allow-Headers: Content-Type");
     header("Access-Control-Allow-Credentials: true");
     
-    // $servername = "oceanus";
-    // $username = "vwong27";
-    // $password = "50342607";
-    // $dbname = "cse442_2023_spring_team_a_db";
+    $servername = "oceanus";
+    $username = "vwong27";
+    $password = "50342607";
+    $dbname = "cse442_2023_spring_team_a_db";
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "vue_php_cdn_db";
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $dbname = "vue_php_cdn_db";
 
     // Create a connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -40,24 +42,34 @@
     // Validate the file that was uploaded. Ensure that it was an image
     if(isset($_FILES['image']['name'])){
 
+        // Set the target directory to store the images as uploads/
         $targetDir = "uploads/";
         $imageName = basename($_FILES["image"]["name"]); //basename() may prevent filesystem traversal attacks
-        $uploadPath = $targetDir . $imageName;
-        $extension = strtolower(pathinfo($uploadPath, PATHINFO_EXTENSION));
+        $targetPath = $targetDir . $imageName;
+        
+        $extension = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
         $tmp_name = $_FILES['image']['tmp_name'];
+        $clothing_name = $_POST["clothing_name"];
+        $temp_category = $_POST['temp_category'];
+        $clothing_category = $_POST["clothing_category"];
 
         $valid_extensions = array("jpg","jpeg","png");
-        if(in_array($extension, $valid_extensions)){
-            
+
+
+        if(in_array($extension, $valid_extensions)){            
             // Check if the image is a valid upload file. (i.e uploaded via HTTP post upload mechanism)
-            if(move_uploaded_file($tmp_name, $uploadPath)){
+            if(move_uploaded_file($tmp_name, $targetPath)){
                 //Insert the image path name in the database. Sotre the image in the /uploads folder
-
-    
-                $sql = "INSERT INTO `my_items` (`name`, `upload_path`) VALUES (`$imageName`, `$uploadPath`)";
-                mysqli_query($conn, $sql);
-
-                $message = "Successful insertion";
+                $query = "INSERT INTO `my_items` (`temp_category`, `clothing_category`, `clothing_name`, `name`, `upload_path`) VALUES (?, ?, ?, ?, ?)";
+                $stmt = $conn -> prepare($query);
+                if(!$stmt){
+                    die('Error: ' . htmlspecialchars($conn -> error));
+                }
+                $stmt->bind_param('sssss', $temp_category, $clothing_category, $clothing_name, $imageName, $targetPath);
+                if (!$stmt->execute()) {
+                    die('Error: ' . htmlspecialchars($stmt->error));
+                }
+                $message = "Successful image insertion";
             }                
         }else{
             $message = 'Only .jpg, .jpeg and .png images allowed to be upload';
@@ -68,11 +80,9 @@
     }
 
     $output = array(
-        "name" => $_FILES['image']['name'],
-        'isset' => $_FILES['image'],
-        // "extension" => $extension,
         'message' => $message,
-        "size" => $_FILES["image"]["size"]
+        "size" => $_FILES["image"]["size"],
+        'user_id' => $_SESSION, //TODO: Testing
     );
     
     echo json_encode($output);

@@ -1,14 +1,13 @@
 <template>
     <div class="Temperature-Items">
         <!-- Hidden modal -->
-        <modal v-show="isModalVisible" @close="closeModal"></modal>
+        <modal v-show="isModalVisible" @close="closeModal" :title="temp_and_clothing" :temp_category="temp_category" :clothing_category="clothing_category"></modal>
 
         <div class="All-my-clothes">
             <div class="plusButton" @click.self="showModal">
                 <img class="plus-math" src="../../../img/plus-math@2x.png" @click.self="showModal" alt="Plus Math" />  
             </div>
         </div>
-
     </div>
 </template>
 
@@ -26,7 +25,10 @@ export default {
     ],
     data(){
       return {
-        isModalVisible: false
+        isModalVisible: false,
+        temp_and_clothing: this.$route.name,
+        temp_category: this.$route.meta.temp_category,
+        clothing_category: this.$route.meta.clothing_category
       }
     },
     methods: {
