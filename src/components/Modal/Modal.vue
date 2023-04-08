@@ -10,12 +10,12 @@
         
                 <div class="AddClothingModal">
 
-        <div class="title-container">
-            <h1 class="title">{{ title }}</h1>
-        </div>
+                    <div class="title-container">
+                        <h1 class="title">{{ title }}</h1>
+                    </div>
     
                     <div class="Inputs">
-                        <form> <!-- TODO - Replace with actual php file when implemented -->
+                        <form>
                             <label>Clothing name: </label>
                             <input>
                             <br>
@@ -24,7 +24,7 @@
                             <br>
                             <br>
 
-                            <button class="save-btn" @click="uploadImage">SAVE</button>
+                            <button class="save-btn" @click.prevent="uploadImage">SAVE</button>
 
                         </form>
                     </div>

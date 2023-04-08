@@ -35,45 +35,44 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
+    $message = "";
+
     // Validate the file that was uploaded. Ensure that it was an image
-    $image = '';
     if(isset($_FILES['image']['name'])){
 
-        $image_name = $_FILES['image']['name'];
-        $valid_extensions = array("jpg","jpeg","png");
+        $targetDir = "uploads/";
+        $imageName = basename($_FILES["image"]["name"]); //basename() may prevent filesystem traversal attacks
+        $uploadPath = $targetDir . $imageName;
+        $extension = strtolower(pathinfo($uploadPath, PATHINFO_EXTENSION));
         $tmp_name = $_FILES['image']['tmp_name'];
-        $extension = pathinfo($image_name, PATHINFO_EXTENSION);
-        
+
+        $valid_extensions = array("jpg","jpeg","png");
         if(in_array($extension, $valid_extensions)){
-            // $message = "The image name is: " . $image_name;
             
-            // $upload_path = 'upload/' . time() . '.' . $extension;
-            // if(move_uploaded_file($_FILES['image']['tmp_name'], $upload_path)){
-            // $message = 'Image Succesfully Uploaded';
-            // $image = $upload_path;
-            // }else{
-            // $message = 'There is an error while uploading image';
-            // }
+            // Check if the image is a valid upload file. (i.e uploaded via HTTP post upload mechanism)
+            if(move_uploaded_file($tmp_name, $uploadPath)){
+                //Insert the image path name in the database. Sotre the image in the /uploads folder
 
-            $img_upload_path = 'uploads/' . $image_name;
-            move_uploaded_file($tmp_name, $img_upload_path);
-
-            // Insert into Database
-            $sql = "INSERT INTO `my_items` (`name`, `img`) VALUES (`$image_name`, `$img_upload_path`)";
-            mysqli_query($conn, $sql);
-
-            $message = "Successful insertion?";
-        }else{
-            $message = 'Only .jpg, .jpeg and .png Image allowed to upload';
-        }
-    }else{
-        $message = 'Select Image';
-    }
     
+                $sql = "INSERT INTO `my_items` (`name`, `upload_path`) VALUES (`$imageName`, `$uploadPath`)";
+                mysqli_query($conn, $sql);
+
+                $message = "Successful insertion";
+            }                
+        }else{
+            $message = 'Only .jpg, .jpeg and .png images allowed to be upload';
+        }
+        
+    }else{
+        $message = 'Select an image';
+    }
+
     $output = array(
-    'message'  => $message,
-    'image'   => $image,
-    'extension' => $extension, 
+        "name" => $_FILES['image']['name'],
+        'isset' => $_FILES['image'],
+        // "extension" => $extension,
+        'message' => $message,
+        "size" => $_FILES["image"]["size"]
     );
     
     echo json_encode($output);
