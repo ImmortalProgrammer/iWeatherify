@@ -10,9 +10,11 @@
         </div>
         <div id="menu-container_2_2">
           <div class = "diff_options_2">
-            <a  id = "menu_option_2_1"  @click ="pressEightDayForecast()" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
-            <a id = "menu_option_2_2" @click = "pressOutfitOfTheDay()"
-               style = "text-decoration:none; color: inherit;">Outfit of The Day</a>
+            <div class = "diff_options_2">
+              <a id = "menu_option_2_0" @click="pressOptionsMenuItems('menu_option_2_0')" style = "text-decoration:none; color: inherit;">24-Hour Forecast</a>
+              <a id = "menu_option_2_1"  @click="pressOptionsMenuItems('menu_option_2_1')" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
+              <a id = "menu_option_2_2" @click="pressOptionsMenuItems('menu_option_2_2')" style = "text-decoration:none; color: inherit;">Outfit of the Day</a>
+            </div>
           </div>
           </div>
         </div>
@@ -36,10 +38,24 @@
               <p class = "feelslike_1">Feels Like: {{this.currentWeatherData.feelsLike}}°</p>
             </div>
           </div>
-        <div class="weekly-weather">
+
+        <div id="TwentyFourHour-weather_2">
+          <p style="font-size: 5vh; padding-bottom: 3vh;">24-Hour Forecast</p>
+          <div class="hour-next-2" v-for="(hour, index) in twentyFourHourForecastData.hours" :key="index">
+            <p class="next_hour-2">{{hour}}</p>
+            <p class="weatherStateHour-2">{{twentyFourHourForecastData.iconDescription[index]}}</p>
+            <div class="TwentyFourHourForecastImg-2">
+              <img :src="twentyFourHourForecastData.iconUrlArr[index]">
+            </div>
+            <p class="HighLowTempHourly_2">{{twentyFourHourForecastData.highTempArr[index]}}° / {{twentyFourHourForecastData.lowTempArr[index]}}°</p>
+            <p class="feelslikeHourly-2">Feels Like: {{twentyFourHourForecastData.feelsLikeArr[index]}}°</p>
+          </div>
+        </div>
+
+        <div id="weekly-weather_2">
           <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast: </p>
           <div class="day-next" v-for="(day, index) in eightDayForecastData.dates" :key="index">
-            <p class = "next">{{ eightDayForecastData.dates[index] }}</p>
+            <p class = "next">{{ eightDayForecastData.dates[day] }}</p>
             <p class = "weatherState">{{ eightDayForecastData.iconDescription[index] }}</p>
             <div class = "eightDayForecastImg">
               <img :src = "eightDayForecastData.iconUrlArr[index]">
@@ -51,6 +67,8 @@
         </div>
         <img class="home-logo-2" :src="homeLogo2" alt="Home Logo 2" />
       </div>
+
+
   </div>
 </template>
 
@@ -81,6 +99,15 @@ export default {
         feelsLikeArr: ['', '', '', '', '', '', '', ''],
         iconUrlArr: ['', '', '', '', '', '', '', ''],
       },
+      twentyFourHourForecastData: {
+        //Index 0 starts one hour after the current weather
+        hours: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        iconDescription: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        highTempArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        lowTempArr: [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+        feelsLikeArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        iconUrlArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+      },
       data: {
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
         optionsVisibility: false,
@@ -104,8 +131,26 @@ export default {
       }
       this.$data.data.optionsVisibility = !this.$data.data.optionsVisibility;
     },
-    pressOutfitOfTheDay() {
-      this.$router.push('/login');
+    pressOptionsMenuItems(menuOption) {
+      const menuOpt2_0 = document.getElementById("menu_option_2_0");
+      const menuOpt2_1 = document.getElementById("menu_option_2_1");
+      const weeklyWeather2 = document.getElementById("weekly-weather_2");
+      const twentyFourHour2 = document.getElementById("TwentyFourHour-weather_2")
+      if (menuOption === "menu_option_2_0") {
+        console.log(menuOption);
+        menuOpt2_0.style.opacity = "0.3";
+        menuOpt2_1.style.opacity = "1";
+        weeklyWeather2.style.visibility = "hidden";
+        twentyFourHour2.style.visibility = "visible";
+      } else if (menuOption === "menu_option_2_1") {
+        menuOpt2_0.style.opacity = "1";
+        menuOpt2_1.style.opacity = "0.3";
+        twentyFourHour2.style.visibility = "hidden";
+        weeklyWeather2.style.visibility = "visible";
+      } else if (menuOption === "menu_option_2_2") {
+        this.$router.push('/login');
+      }
+      this.pressOptions();
     },
     async retrieveAPI() {
       try {
@@ -226,6 +271,8 @@ export default {
 
 }
 
+
+
 .menu_homepage_logged_in_2 {
   z-index: 1;
   position: absolute;
@@ -236,7 +283,7 @@ export default {
   border: black solid 6px;
   bottom: 0;
   transform: translate(-50%, 0);
-  width: 30vw;
+  width: 32.5vw;
   padding: 1.3vh;
   scale: 0.7;
   color: rgb(255, 255, 255);
@@ -259,17 +306,16 @@ export default {
 #menu-container_2_2 {
   z-index: 1;
   position: absolute;
-  height: 25.5vh;
+  height: 21.8vh;
   margin-bottom: -15vh;
-  left: 45%;
-  top: 60.1vh;
-  border-top: black solid 3.5px;
+  left: 45.0%;
+  top: 61.1vh;
   border-left: black solid 6px;
   border-right: black solid 6px;
-  border-bottom: black solid 6px;
+  border-bottom: black solid 3.5px;
   bottom: 0;
   transform: translate(-50%, 0);
-  width: 30vw;
+  width: 32.5vw;
   padding: 1.3vh;
   scale: 0.7;
   color: rgb(255, 255, 255);
@@ -288,14 +334,14 @@ export default {
   height: auto;
   display: block;
   width: 130%;
-  top: -15px;
+  top: -0.625vh;
   margin-left: -14%;
   background-color: #14565C;
   color: rgb(255, 255, 255);
   font-weight: 500;
 }
 
-#menu_option_2_1, #menu_option_2_2 {
+#menu_option_2_0, #menu_option_2_1, #menu_option_2_2 {
   font-size: 2.5vh;
   background-color: #1e7c85;
   padding: 2.1vh;
@@ -310,11 +356,13 @@ export default {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
-#menu_option_2_1 {
+#menu_option_2_0 {
   opacity: 0.3;
 }
 
-.weekly-weather {
+
+
+#TwentyFourHour-weather_2 {
   border: none;
   position: absolute;
   height: auto;
@@ -334,6 +382,66 @@ export default {
   background-color: rgba(102, 102, 102, 0.83);
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.hour-next-2 {
+  padding: 2.3vw;
+  display: inline-block;
+  margin: 0.4em 1.5% 0.4em 0;
+}
+
+
+.next_hour-2 {
+  font-size: 4vh;
+  padding-bottom: 1.5vh;
+}
+
+.weatherStateHour-2 {
+  font-size: 2.3vh;
+  padding-bottom: 1.5vh;
+}
+
+
+.HighLowTempHourly_2 {
+  font-size: 2.5vh;
+  padding-bottom: 1.5vh;
+}
+
+.feelslikeHourly-2 {
+  font-size: 2.5vh;
+  padding-bottom: 1.5vh;
+}
+
+
+.TwentyFourHourForecastImg-2 {
+  padding-top: 0.5vh;
+  padding-bottom: 1vh;
+  scale: 2;
+  height: auto;
+}
+
+
+#weekly-weather_2 {
+  border: none;
+  position: absolute;
+  height: auto;
+  margin-bottom: -15vh;
+  left: 33%;
+  top: 55.4vh;
+  bottom: 0;
+  border-top: 0;
+  transform: translate(-50%, 0);
+  width: 110vw;
+  padding: 2.5vh;
+  scale: 0.7;
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  font-weight: 500;
+  text-align: center;
+  background-color: rgba(102, 102, 102, 0.83);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  visibility: hidden;
 }
 
 
@@ -492,7 +600,7 @@ main {
   scale: 1.3;
 }
 
-@media only screen and (min-width: 427px) and (max-width: 900px) {
+@media only screen and (min-width: 427px) and (max-width: 901px) {
 
   .menu_homepage_logged_in_2 {
     z-index: 1;
@@ -519,14 +627,14 @@ main {
   #menu-container_2_2 {
     z-index: 1;
     position: absolute;
-    height: 25.5vh;
+    height: 22.2vh;
     margin-bottom: -15vh;
     left: 40.0%;
     top: 52.1vh;
     border-top: black solid 3.5px;
     border-left: black solid 6px;
     border-right: black solid 6px;
-    border-bottom: black solid 6px;
+    border-bottom: black solid 3.5px;
     bottom: 0;
     transform: translate(-50%, 0);
     width: 50.1vw;
@@ -539,6 +647,7 @@ main {
     background-color: rgb(124, 124, 124);
     overflow-y: hidden;
     overflow-x: hidden;
+    visibility: hidden;
   }
 
   .diff_options_2 {
@@ -547,14 +656,71 @@ main {
     height: auto;
     display: block;
     width: 130%;
-    top: -15px;
     margin-left: -14%;
     background-color: #14565C;
     color: rgb(255, 255, 255);
     font-weight: 500;
   }
 
-  .weekly-weather {
+
+  #TwentyFourHour-weather_2 {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 35vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .hour-next-2 {
+    padding: 5.0vw;
+    display: inline-block;
+    margin: 0.4em 1.5% 0.4em 0;
+  }
+
+
+  .next_hour-2 {
+    font-size: 3.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .weatherStateHour-2 {
+    font-size: 2.3vh;
+    padding-bottom: 1.5vh;
+  }
+
+
+  .HighLowTempHourly_2 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .feelslikeHourly-2 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .TwentyFourHourForecastImg-2 {
+    padding-top: 0.5vh;
+    padding-bottom: 1vh;
+    scale: 2;
+    height: auto;
+  }
+
+  #weekly-weather_2 {
     border: none;
     position: absolute;
     height: auto;
@@ -651,15 +817,7 @@ main {
     font-size: 3vh;
   }
 
-  .currentWeatherContainer {
-    width: auto;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-    border-radius: 50%;
-    scale: 1.5;
-    padding-bottom: 0.8vh;
-  }
+
 
   .currentWeatherContainer {
     width: auto;
@@ -667,7 +825,7 @@ main {
     position: relative;
     overflow: hidden;
     border-radius: 50%;
-    scale: 2.0;
+    scale: 1.5;
     padding-bottom: 0.8vh;
   }
 
@@ -759,19 +917,26 @@ main {
     background-color: rgba(102, 102, 102, 0.83);
     overflow-y: hidden;
     overflow-x: hidden;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
   }
 
   #menu-container_2_2 {
     z-index: 1;
     position: absolute;
-    height: 25.5vh;
+    height: 22.0vh;
     margin-bottom: -15vh;
     left: 40.0%;
     top: 52.1vh;
     border-top: black solid 3.5px;
     border-left: black solid 6px;
     border-right: black solid 6px;
-    border-bottom: black solid 6px;
+    border-bottom: black solid 3.5px;
     bottom: 0;
     transform: translate(-50%, 0);
     width: 50.1vw;
@@ -792,14 +957,13 @@ main {
     height: auto;
     display: block;
     width: 130%;
-    top: -15px;
     margin-left: -14%;
     background-color: #14565C;
     color: rgb(255, 255, 255);
     font-weight: 500;
   }
 
-  .weekly-weather {
+  #weekly-weather_2 {
     border: none;
     position: absolute;
     height: auto;
@@ -855,6 +1019,65 @@ main {
     scale: 2;
     height: auto;
   }
+
+  #TwentyFourHour-weather_2 {
+    border: none;
+    position: absolute;
+    height: auto;
+    margin-bottom: -20vh;
+    left: 11.5%;
+    top: 35vh;
+    bottom: 0;
+    border-top: 0;
+    transform: translate(-50%, 0);
+    width: 140vw;
+    padding: 2vh;
+    scale: 0.5;
+    color: rgb(255, 255, 255);
+    font-size: 1.5vh;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(102, 102, 102, 0.83);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .hour-next-2 {
+    padding: 5.0vw;
+    display: inline-block;
+    margin: 0.4em 1.5% 0.4em 0;
+  }
+
+
+  .next_hour-2 {
+    font-size: 3.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .weatherStateHour-2 {
+    font-size: 2.3vh;
+    padding-bottom: 1.5vh;
+  }
+
+
+  .HighLowTempHourly_2 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+  .feelslikeHourly-2 {
+    font-size: 2.5vh;
+    padding-bottom: 1.5vh;
+  }
+
+
+  .TwentyFourHourForecastImg-2 {
+    padding-top: 0.5vh;
+    padding-bottom: 1vh;
+    scale: 2;
+    height: auto;
+  }
+
 
   .current-unit {
     position: absolute;
