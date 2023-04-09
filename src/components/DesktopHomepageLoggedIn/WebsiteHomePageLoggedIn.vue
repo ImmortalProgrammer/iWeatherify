@@ -189,7 +189,6 @@ export default {
       this.outputPreferences.pressurePrefOutput = (this.userPreferences.pressurePref === 'hg') ? 'Hg' : 'mb';
 
     },
-    //Refactor pressOutfitOfTheDay, pressEightDayForecast, and press24HourForecast into one method when there is enough time to do so
     pressOptionsMenuItems(menuOption) {
       const menuOpt1_0 = document.getElementById("menu_option_1_0");
       const menuOpt1_1 = document.getElementById("menu_option_1_1");
@@ -634,9 +633,9 @@ export default {
 }
 
 .hour-next-1 {
-  padding: 1.8vw;
+  padding: 2.3vw;
   display: inline-block;
-  margin: 0.2em 0.7% 0.2em 0;
+  margin: 0.4em 1.5% 0.4em 0;
 }
 
 
@@ -960,8 +959,9 @@ export default {
   }
 
   .hour-next-1 {
-    padding: 1.8vw;
+    padding: 5.0vw;
     display: inline-block;
+    margin: 0.4em 1.5% 0.4em 0;
   }
 
 
@@ -1278,8 +1278,9 @@ export default {
   }
 
   .hour-next-1 {
-    padding: 1.8vw;
+    padding: 5.0vw;
     display: inline-block;
+    margin: 0.4em 1.5% 0.4em 0;
   }
 
 
