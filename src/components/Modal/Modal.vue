@@ -4,6 +4,16 @@
     <transition name="modal-fade">
         <div class="modal-backdrop">
             <div class="modal">
+
+              <div v-if="showErrorModal" class="overlay">
+                <error-modal
+                  :show-modal="showErrorModal"
+                  :title="errorTitle"
+                  :message="errorMessage"
+                  @close-modal="showErrorModal = false"
+                ></error-modal>
+              </div>
+
                 <header class="modal-header">    
                   <div class="title-container">
                       <h1 class="title">{{ title }}</h1>
@@ -42,12 +52,19 @@
   
   <script>
   import axios from "axios"
+  import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
   export default {
     props: ["temp_category", "clothing_category", "title"],
+    components: {
+      ErrorModal
+    },
     data(){
       return {
         selectedFile: null,
         clothing_name: "",
+        errorTitle: "Default",
+        errorMessage: "Default",
+        showErrorModal: false,
       }
     },
     methods: {
@@ -63,13 +80,20 @@
           fd.append("clothing_name", this.clothing_name)
           fd.append('temp_category', this.temp_category)
           fd.append('clothing_category', this.clothing_category)
-          axios.post("http://localhost/project_s23-iweatherify/backend/my_items.php", fd, {header: {'Content-Type':'multipart/form-data'}}).then(
+          // http://localhost/project_s23-iweatherify/backend/my_items.php
+          axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/my_items.php", fd, {header: {'Content-Type':'multipart/form-data'}}).then(
             (res) => {
-              console.log("This is the response from the server")
-              console.log(res)
+              if(res.data.status === 1){
+                console.log("This is the response from the server")
+                console.log(res)
+                this.close()
+              } else{
+                this.errorTitle = "Upload Error";
+                this.errorMessage = "Make sure you upload a proper file";
+                this.showErrorModal = true;
+              }
             }
           )
-          this.close()
         }
     },
   };
