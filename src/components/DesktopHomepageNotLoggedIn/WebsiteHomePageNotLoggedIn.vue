@@ -283,7 +283,7 @@ export default {
   border: black solid 6px;
   bottom: 0;
   transform: translate(-50%, 0);
-  width: 30vw;
+  width: 32.5vw;
   padding: 1.3vh;
   scale: 0.7;
   color: rgb(255, 255, 255);
@@ -308,15 +308,14 @@ export default {
   position: absolute;
   height: 21.8vh;
   margin-bottom: -15vh;
-  left: 45%;
-  top: 60.1vh;
-  border-top: black solid 3.5px;
+  left: 45.0%;
+  top: 61.1vh;
   border-left: black solid 6px;
   border-right: black solid 6px;
   border-bottom: black solid 3.5px;
   bottom: 0;
   transform: translate(-50%, 0);
-  width: 30vw;
+  width: 32.5vw;
   padding: 1.3vh;
   scale: 0.7;
   color: rgb(255, 255, 255);
@@ -601,7 +600,7 @@ main {
   scale: 1.3;
 }
 
-@media only screen and (min-width: 427px) and (max-width: 900px) {
+@media only screen and (min-width: 427px) and (max-width: 901px) {
 
   .menu_homepage_logged_in_2 {
     z-index: 1;
@@ -628,17 +627,17 @@ main {
   #menu-container_2_2 {
     z-index: 1;
     position: absolute;
-    height: 21.3vh;
+    height: 22.2vh;
     margin-bottom: -15vh;
-    left: 45%;
-    top: 60.1vh;
+    left: 40.0%;
+    top: 52.1vh;
     border-top: black solid 3.5px;
     border-left: black solid 6px;
     border-right: black solid 6px;
-    border-bottom: black solid 6px;
+    border-bottom: black solid 3.5px;
     bottom: 0;
     transform: translate(-50%, 0);
-    width: 30vw;
+    width: 50.1vw;
     padding: 1.3vh;
     scale: 0.7;
     color: rgb(255, 255, 255);
@@ -657,7 +656,6 @@ main {
     height: auto;
     display: block;
     width: 130%;
-    top: -15px;
     margin-left: -14%;
     background-color: #14565C;
     color: rgb(255, 255, 255);
@@ -919,19 +917,26 @@ main {
     background-color: rgba(102, 102, 102, 0.83);
     overflow-y: hidden;
     overflow-x: hidden;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
   }
 
   #menu-container_2_2 {
     z-index: 1;
     position: absolute;
-    height: 22.5vh;
+    height: 22.0vh;
     margin-bottom: -15vh;
     left: 40.0%;
     top: 52.1vh;
     border-top: black solid 3.5px;
     border-left: black solid 6px;
     border-right: black solid 6px;
-    border-bottom: black solid 6px;
+    border-bottom: black solid 3.5px;
     bottom: 0;
     transform: translate(-50%, 0);
     width: 50.1vw;

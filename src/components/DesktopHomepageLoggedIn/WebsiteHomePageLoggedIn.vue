@@ -820,28 +820,34 @@ export default {
     bottom: 0;
     transform: translate(-50%, 0);
     width: 50vw;
-    padding: 1.3vh;
+    padding: 1.6vh;
     scale: 0.7;
     color: rgb(255, 255, 255);
-    font-size: 3vh;
+    font-size: 2.1vh;
     font-weight: 500;
     text-align: center;
     background-color: rgba(102, 102, 102, 0.83);
     overflow-y: hidden;
     overflow-x: hidden;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
   }
 
   #menu-container_2 {
     z-index: 1;
     position: absolute;
-    height: 21.2vh;
-    margin-bottom: -15vh;
+    height: 21.3vh;
     left: 40.0%;
     top: 52.1vh;
     border-top: black solid 3.5px;
     border-left: black solid 6px;
     border-right: black solid 6px;
-    border-bottom: black solid 6px;
+    border-bottom: black solid 3.5px;
     bottom: 0;
     transform: translate(-50%, 0);
     width: 50.1vw;
@@ -862,7 +868,6 @@ export default {
     height: auto;
     display: block;
     width: 130%;
-    top: -15px;
     margin-left: -14%;
     background-color: #14565C;
     color: rgb(255, 255, 255);
@@ -1137,7 +1142,7 @@ export default {
     border: black solid 6px;
     bottom: 0;
     transform: translate(-50%, 0);
-    width: 50vw;
+    width: 55vw;
     padding: 1.6vh;
     scale: 0.7;
     color: rgb(255, 255, 255);
@@ -1152,8 +1157,7 @@ export default {
   #menu-container_2 {
     z-index: 1;
     position: absolute;
-    height: 21.2vh;
-    margin-bottom: -15vh;
+    height: 20.7vh;
     left: 40.0%;
     top: 52.1vh;
     border-top: black solid 3.5px;
@@ -1162,7 +1166,7 @@ export default {
     border-bottom: black solid 6px;
     bottom: 0;
     transform: translate(-50%, 0);
-    width: 50.1vw;
+    width: 55vw;
     padding: 1.3vh;
     scale: 0.7;
     color: rgb(255, 255, 255);
