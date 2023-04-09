@@ -117,14 +117,14 @@ export default {
       },
       twentyFourHourForecastData: {
         //Index 0 starts one hour after the current weather
-        hours: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        iconDescription: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        highTempArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        lowTempArr: [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-        feelsLikeArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        iconUrlArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        windArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        pressureArr: ['','','','','','','','','','','','','','','','','','','','','','','','']
+        hours: new Array(24),
+        iconDescription: new Array(24),
+        highTempArr: new Array(24),
+        lowTempArr: new Array(24),
+        feelsLikeArr: new Array(24),
+        iconUrlArr: new Array(24),
+        windArr: new Array(24),
+        pressureArr: new Array(24)
       },
       userPreferences: {
         tempPref: '',

@@ -101,12 +101,16 @@ export default {
       },
       twentyFourHourForecastData: {
         //Index 0 starts one hour after the current weather
-        hours: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        iconDescription: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        highTempArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        lowTempArr: [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-        feelsLikeArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        iconUrlArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        UTCdates: new Array(24),
+        hours: new Array(24),
+        iconDescription: new Array(24),
+        highTempArr: new Array(24),
+        lowTempArr: new Array(24),
+        feelsLikeArr: new Array(24),
+        iconUrlArr: new Array(24),
+        windArr: new Array(24),
+        pressureArr: new Array(24),
+        timezoneOffset: 0,
       },
       data: {
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
@@ -160,13 +164,18 @@ export default {
           this.setupDays();
           //Sets up the current weather as of now
           await this.currentWeather();
-          //Seven-Day Forecast
+          //Twenty-Four Hour Forecast
+          await this.twentyFourForecast();
+          //Eight-Day Forecast
           await this.eightDayForecast();
 
           this.currentWeatherData.locationInput = '';
 
         }
       } catch (Exception) {
+        console.log("Error", Exception.stack);
+        console.log("Error", Exception.name);
+        console.log("Error", Exception.message);
         alert("City unrecognized!")
       }
     },
@@ -199,6 +208,32 @@ export default {
             .join(' ');
       } else {
         alert("Error Status Request Failed!");
+      }
+    },
+    async twentyFourForecast() {
+      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${locationFormatting}
+        &units=imperial&cnt=24&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
+        console.log(error.toJSON());
+      });
+      this.twentyFourHourForecastData.timezoneOffset = weatherAPI['data']['city']['timezone'];
+      const data = weatherAPI['data']['list'];
+      for (let x in data) {
+        const currentData = data[x.toString()];
+        this.twentyFourHourForecastData.UTCdates[x] = currentData['dt_txt'].toString();
+        this.twentyFourHourForecastData.iconDescription[x] = currentData['weather']['0']['description'].split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+        //Low Temp
+        this.twentyFourHourForecastData.lowTempArr[x] = Math.round(currentData['main']['temp_min']).toString();
+        // High Temp
+        this.twentyFourHourForecastData.highTempArr[x] = Math.round(currentData['main']['temp_max']).toString();
+        //Feels Like
+        this.twentyFourHourForecastData.feelsLikeArr[x] = Math.round(currentData['main']['feels_like']).toString();
+        const iconCode = currentData['weather']['0']['icon'];
+        const iconUrl = 'https://openweathermap.org/img/wn/'
+            + iconCode + ".png";
+        this.twentyFourHourForecastData.iconUrlArr[x] = iconUrl;
       }
     },
     async eightDayForecast() {
@@ -241,6 +276,23 @@ export default {
         currentDay = (currentDay + 1) % 7;
         this.eightDayForecastData.dates[i] = weekdays[currentDay];
       }
+    },
+     setupHours() {
+      const UTCdates = this.data.twentyFourHourForecastData.UTCdates;
+      const timezoneOffset = this.data.twentyFourHourForecastData.timezoneOffset;
+      for (let i = 0; i < UTCdates.length; i++) {
+        const datetimeString = UTCdates[i];
+        const datetime = new Date(datetimeString);
+        const offsetMinutes = datetime.getTimezoneOffset();
+        const totalOffsetSeconds = (offsetMinutes * 60) + timezoneOffset;
+        const localTimeSeconds = datetime.getTime() / 1000 - totalOffsetSeconds;
+        const localTime = new Date(localTimeSeconds * 1000);
+        const hours = localTime.getHours();
+        const minutes = localTime.getMinutes();
+        const seconds = localTime.getSeconds();
+        console.log(`Local time: ${hours}:${minutes}:${seconds}`);
+      }
+
     },
   },
   components: {
