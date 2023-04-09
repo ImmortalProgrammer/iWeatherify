@@ -41,7 +41,7 @@
 
         <div id="TwentyFourHour-weather_2">
           <p style="font-size: 5vh; padding-bottom: 3vh;">24-Hour Forecast</p>
-          <div class="hour-next-2" v-for="(hour, index) in twentyFourHourForecastData.hours" :key="index">
+          <div class="hour-next-2" v-for="(hour, index) in twentyFourHourForecastData.UTCdates" :key="index">
             <p class="next_hour-2">{{hour}}</p>
             <p class="weatherStateHour-2">{{twentyFourHourForecastData.iconDescription[index]}}</p>
             <div class="TwentyFourHourForecastImg-2">
@@ -55,7 +55,7 @@
         <div id="weekly-weather_2">
           <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast: </p>
           <div class="day-next" v-for="(day, index) in eightDayForecastData.dates" :key="index">
-            <p class = "next">{{ eightDayForecastData.dates[day] }}</p>
+            <p class = "next">{{ eightDayForecastData.dates[index] }}</p>
             <p class = "weatherState">{{ eightDayForecastData.iconDescription[index] }}</p>
             <div class = "eightDayForecastImg">
               <img :src = "eightDayForecastData.iconUrlArr[index]">
@@ -173,9 +173,6 @@ export default {
 
         }
       } catch (Exception) {
-        console.log("Error", Exception.stack);
-        console.log("Error", Exception.name);
-        console.log("Error", Exception.message);
         alert("City unrecognized!")
       }
     },
@@ -220,7 +217,7 @@ export default {
       const data = weatherAPI['data']['list'];
       for (let x in data) {
         const currentData = data[x.toString()];
-        this.twentyFourHourForecastData.UTCdates[x] = currentData['dt_txt'].toString();
+        this.twentyFourHourForecastData.UTCdates[x] = currentData['dt_txt'].toString().slice(11) + ' UTC';;
         this.twentyFourHourForecastData.iconDescription[x] = currentData['weather']['0']['description'].split(' ')
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
@@ -276,23 +273,6 @@ export default {
         currentDay = (currentDay + 1) % 7;
         this.eightDayForecastData.dates[i] = weekdays[currentDay];
       }
-    },
-     setupHours() {
-      const UTCdates = this.data.twentyFourHourForecastData.UTCdates;
-      const timezoneOffset = this.data.twentyFourHourForecastData.timezoneOffset;
-      for (let i = 0; i < UTCdates.length; i++) {
-        const datetimeString = UTCdates[i];
-        const datetime = new Date(datetimeString);
-        const offsetMinutes = datetime.getTimezoneOffset();
-        const totalOffsetSeconds = (offsetMinutes * 60) + timezoneOffset;
-        const localTimeSeconds = datetime.getTime() / 1000 - totalOffsetSeconds;
-        const localTime = new Date(localTimeSeconds * 1000);
-        const hours = localTime.getHours();
-        const minutes = localTime.getMinutes();
-        const seconds = localTime.getSeconds();
-        console.log(`Local time: ${hours}:${minutes}:${seconds}`);
-      }
-
     },
   },
   components: {
