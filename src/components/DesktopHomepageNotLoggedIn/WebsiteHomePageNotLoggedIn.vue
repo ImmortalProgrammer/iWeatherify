@@ -40,7 +40,7 @@
           </div>
 
         <div id="TwentyFourHour-weather_2">
-          <p style="font-size: 5vh; padding-bottom: 3vh;">24 Hour Forecast</p>
+          <p style="font-size: 5vh; padding-bottom: 3vh;">24-Hour Forecast</p>
           <div class="hour-next-2" v-for="(hour, index) in twentyFourHourForecastData.hours" :key="index">
             <p class="next_hour-2">{{hour}}</p>
             <p class="weatherStateHour-2">{{twentyFourHourForecastData.iconDescription[index]}}</p>
