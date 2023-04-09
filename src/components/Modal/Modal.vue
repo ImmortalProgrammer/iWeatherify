@@ -5,12 +5,12 @@
         <div class="modal-backdrop">
             <div class="modal">
 
-              <div v-if="showErrorModal" class="overlay">
+              <div v-if="showErrorModal">
                 <error-modal
                   :show-modal="showErrorModal"
                   :title="errorTitle"
                   :message="errorMessage"
-                  @close-modal="showErrorModal = false"
+                  @close-modal="closeErrorModal"
                 ></error-modal>
               </div>
 
@@ -68,6 +68,9 @@
       }
     },
     methods: {
+        closeErrorModal(){
+          this.showErrorModal = false;
+        },
         close(){
             this.$emit("close");
         },
@@ -76,24 +79,30 @@
         },
         uploadImage(){
           const fd = new FormData()
-          fd.append('image', this.selectedFile, this.selectedFile.name)
-          fd.append("clothing_name", this.clothing_name)
-          fd.append('temp_category', this.temp_category)
-          fd.append('clothing_category', this.clothing_category)
-          // http://localhost/project_s23-iweatherify/backend/my_items.php
-          axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/my_items.php", fd, {header: {'Content-Type':'multipart/form-data'}}).then(
-            (res) => {
-              if(res.data.status === 1){
-                console.log("This is the response from the server")
-                console.log(res)
-                this.close()
-              } else{
-                this.errorTitle = "Upload Error";
-                this.errorMessage = "Make sure you upload a proper file";
-                this.showErrorModal = true;
+          if(!this.selectedFile){
+            alert("Make sure you upload an image with a name before saving")
+          } else {
+            fd.append('image', this.selectedFile, this.selectedFile.name)
+            fd.append("clothing_name", this.clothing_name)
+            fd.append('temp_category', this.temp_category)
+            fd.append('clothing_category', this.clothing_category)
+            // https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/my_items.php
+            // http://localhost/project_s23-iweatherify/backend/my_items.php
+            axios.post("http://localhost/project_s23-iweatherify/backend/my_items.php", fd, {header: {'Content-Type':'multipart/form-data'}}).then(
+              (res) => {
+                if(res.data.status === 1){
+                  console.log("This is the response from the server")
+                  console.log(res)
+                  this.close()
+                } else{
+                  console.log(res)
+                  this.errorTitle = "Upload Error";
+                  this.errorMessage = res.data.message;
+                  this.showErrorModal = true;
+                }
               }
-            }
-          )
+            )
+          }
         }
     },
   };
