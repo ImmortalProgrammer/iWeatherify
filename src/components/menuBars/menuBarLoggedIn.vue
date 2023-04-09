@@ -6,7 +6,7 @@
     <div id = "routes-container1_2">
       <div class = "links_2">
         <a id ="link1_2" :href="$router.resolve('/homepage').href" style = "text-decoration:none; color: inherit;">Homepage</a>
-        <!--<a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a> -->
+        <a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a>
         <a id ="link3_2" :href="$router.resolve('/savedOutfits').href" style = "text-decoration:none; color: inherit;">Saved Outfits</a>
         <!-- <a id ="link4_2" :href="$router.resolve('/locationSettings').href" style = "text-decoration:none; color: inherit;">Location Settings</a> -->
         <a id ="link5_2" :href="$router.resolve('/unitsSettings').href" style = "text-decoration:none; color: inherit;">Unit Settings</a>
@@ -79,7 +79,7 @@ export default {
     grayOut() {
       const links = [
         { id: 'link1_2', data: 'homepage'},
-        //{ id: 'link2_2', data: 'myItems'},
+        { id: 'link2_2', data: 'myItems'},
         { id: 'link3_2', data: 'savedOutfits'},
        // { id: 'link4_2', data: 'locationSettings'},
         { id: 'link5_2', data: 'units'},
