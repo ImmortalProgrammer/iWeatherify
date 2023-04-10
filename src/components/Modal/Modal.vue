@@ -63,8 +63,8 @@
         userid: null,
         selectedFile: null,
         clothing_name: "",
-        errorTitle: "Default",
-        errorMessage: "Default",
+        errorTitle: "Upload error",
+        errorMessage: "There was something wrong when uploading your image :/",
         showErrorModal: false,
       }
     },
@@ -86,6 +86,7 @@
           try {
             const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
             this.userid = response.data.userid;
+            console.log("The user id is: " + this.userid)
           } catch (error) {
             console.error("Unsuccessful request in getUserId().", error);
           }

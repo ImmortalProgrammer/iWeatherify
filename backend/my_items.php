@@ -6,7 +6,7 @@
     include("security.php");
     access_control();
 
-    $message = "";
+    $message = "default";
     $status = 1;
 
     //Max size is going to be 0.5 gb or 500 mb
@@ -53,11 +53,8 @@
         //Check image size
         if (!isValidSize($_FILES["image"]["size"])){
             $status = 0;
-            $message = "Your upload was too big";
+            $message = "Your image can't be larger than 50mb";
         //Check if the image already exists on the backend
-        } elseif(image_exists($user_id, $targetPath, $temp_category, $clothing_category)){
-            $status = 0;
-            $message = "This image has already been uploaded";
         } elseif(in_array($extension, $valid_extensions)){
             if(move_uploaded_file($tmp_name, $targetPath)){ //Insert image path name in the database. Store image in /uploads
                 $query = "INSERT INTO `my_items` (`user_id`, `temp_category`, `clothing_category`, `clothing_name`, `name`, `upload_path`) VALUES (?, ?, ?, ?, ?, ?)";
@@ -80,6 +77,7 @@
         
     } else {
         $message = 'Select an image'; //Actually handled by front end, but for safety measure
+        $status = 0;
     }
 
     $output = array(
