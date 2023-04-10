@@ -62,7 +62,7 @@
 
       <div id="TwentyFourHour-weather_1">
         <p style="font-size: 5vh; padding-bottom: 3vh;">24-Hour Forecast</p>
-        <div class="hour-next-1" v-for="(hour, index) in twentyFourHourForecastData.hours" :key="index">
+        <div class="hour-next-1" v-for="(hour, index) in twentyFourHourForecastData.UTCdates" :key="index">
           <p class="next_hour-1">{{hour}}</p>
           <p class="weatherStateHour-1">{{twentyFourHourForecastData.iconDescription[index]}}</p>
           <div class="TwentyFourHourForecastImg-1">
@@ -117,6 +117,7 @@ export default {
       },
       twentyFourHourForecastData: {
         //Index 0 starts one hour after the current weather
+        UTCdates: new Array(24),
         hours: new Array(24),
         iconDescription: new Array(24),
         highTempArr: new Array(24),
@@ -172,7 +173,7 @@ export default {
             this.$data.userPreferences.tempPref = response.data.temperature;
             this.$data.userPreferences.windPref = response.data.wind;
             this.$data.userPreferences.pressurePref = response.data.pressure;
-            //Setup the Temp Output
+            //Set up the Temp Output
             this.outputTempPreferences();
           })
           .catch(error => {
@@ -267,8 +268,11 @@ export default {
           this.setupDays();
           //Sets up the current weather as of now
           await this.currentWeather();
+          //24-Hour Forecast
+          await this.twentyFourForecast();
           //Seven-Day Forecast
           await this.eightDayForecast();
+
           this.currentWeatherData.locationInput = '';
 
           this.userid = null;
@@ -342,6 +346,66 @@ export default {
         this.outfitSuggestions();
       } else {
         alert("Error Status Request Failed!");
+      }
+    },
+    async twentyFourForecast() {
+      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${locationFormatting}
+        &units=imperial&cnt=24&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
+        console.log(error.toJSON());
+      });
+      this.twentyFourHourForecastData.timezoneOffset = weatherAPI['data']['city']['timezone'];
+      const data = weatherAPI['data']['list'];
+      for (let x in data) {
+        const currentData = data[x.toString()];
+        this.twentyFourHourForecastData.UTCdates[x] = currentData['dt_txt'].toString().slice(11) + ' UTC';;
+        this.twentyFourHourForecastData.iconDescription[x] = currentData['weather']['0']['description'].split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+
+        if (this.userPreferences.tempPref === 'f') {
+          //Low Temp
+          this.twentyFourHourForecastData.lowTempArr[x] = Math.round(currentData['main']['temp_min']).toString();
+          // High Temp
+          this.twentyFourHourForecastData.highTempArr[x] = Math.round(currentData['main']['temp_max']).toString();
+          //Feels Like
+          this.twentyFourHourForecastData.feelsLikeArr[x] = Math.round(currentData['main']['feels_like']).toString();
+        } else if (this.userPreferences.tempPref === 'c') {
+          //Low Temp
+          this.twentyFourHourForecastData.lowTempArr[x] = Math.round((((currentData['main']['temp_min'])-32)*5)/9).toString();
+          // High Temp
+          this.twentyFourHourForecastData.highTempArr[x] = Math.round(((((currentData['main']['temp_max'])-32)*5)/9)).toString();
+          //Feels Like
+          this.twentyFourHourForecastData.feelsLikeArr[x] = Math.round(((((currentData['main']['feels_like'])-32)*5)/9)).toString();
+        } else {
+          console.log("Nonexistent Units Detected");
+        }
+
+        const pressure = currentData['main']['pressure'];
+        const windSpeed = currentData['wind']['speed'];
+
+        if (this.userPreferences.pressurePref === 'hg') {
+          //Unit Conversion -> hPa to Hg
+          this.twentyFourHourForecastData.pressureArr[x] = Math.round(pressure / 33.864);
+        } else if (this.userPreferences.pressurePref === 'mb') {
+          //Unit Conversion -> hPa to mg
+          this.twentyFourHourForecastData.pressureArr[x] = Math.round(pressure);
+        } else {
+          console.log("Nonexistent Units Detected");
+        }
+
+        if (this.userPreferences.windPref === 'mph') {
+          this.twentyFourHourForecastData.windArr[x] = Math.round(windSpeed);
+        } else if (this.userPreferences.windPref === 'kmh') {
+          this.twentyFourHourForecastData.windArr[x] = Math.round(windSpeed * 1.609);
+        } else {
+          console.log("Nonexistent Units Detected")
+        }
+
+        const iconCode = currentData['weather']['0']['icon'];
+        const iconUrl = 'https://openweathermap.org/img/wn/'
+            + iconCode + ".png";
+        this.twentyFourHourForecastData.iconUrlArr[x] = iconUrl;
       }
     },
     async eightDayForecast() {
@@ -448,7 +512,6 @@ export default {
   background-position: bottom;
   overflow-x: hidden;
   background-attachment: scroll;
-
 }
 
 .menu_homepage_logged_in {
