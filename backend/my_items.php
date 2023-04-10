@@ -17,12 +17,12 @@
         return false;
     }
 
-    function image_exists($image_path){
+    function image_exists($user_id, $image_path, $temp_category, $clothing_category){
         include("connection.php");
 
-        $query = "SELECT * FROM my_items WHERE upload_path = ?";
+        $query = "SELECT * FROM my_items WHERE `user_id` = ? AND `upload_path` = ? AND `temp_category` = ? AND `clothing_category` = ?";
         $query = $conn -> prepare($query);
-        $query -> bind_param("s", $image_path);
+        $query -> bind_param("isss", $user_id, $image_path, $temp_category, $clothing_category);
         $query -> execute();
         $result = $query -> get_result();
 
@@ -43,6 +43,7 @@
         
         $extension = strtolower(pathinfo($targetPath, PATHINFO_EXTENSION));
         $tmp_name = $_FILES['image']['tmp_name'];
+        $user_id = intval($_POST["user_id"]);
         $clothing_name = htmlspecialchars($_POST["clothing_name"], ENT_QUOTES);
         $temp_category = $_POST['temp_category'];
         $clothing_category = $_POST["clothing_category"];
@@ -54,18 +55,18 @@
             $status = 0;
             $message = "Your upload was too big";
         //Check if the image already exists on the backend
-        } elseif(image_exists($targetPath)){
+        } elseif(image_exists($user_id, $targetPath, $temp_category, $clothing_category)){
             $status = 0;
             $message = "This image has already been uploaded";
         } elseif(in_array($extension, $valid_extensions)){
             if(move_uploaded_file($tmp_name, $targetPath)){ //Insert image path name in the database. Store image in /uploads
-                $query = "INSERT INTO `my_items` (`temp_category`, `clothing_category`, `clothing_name`, `name`, `upload_path`) VALUES (?, ?, ?, ?, ?)";
+                $query = "INSERT INTO `my_items` (`user_id`, `temp_category`, `clothing_category`, `clothing_name`, `name`, `upload_path`) VALUES (?, ?, ?, ?, ?, ?)";
                 $stmt = $conn -> prepare($query);
                 if(!$stmt){
                     $status = 0;
                     die('Error: ' . htmlspecialchars($conn -> error));
                 }
-                $stmt->bind_param('sssss', $temp_category, $clothing_category, $clothing_name, $imageName, $targetPath);
+                $stmt->bind_param('isssss', $user_id, $temp_category, $clothing_category, $clothing_name, $imageName, $targetPath);
                 if (!$stmt->execute()) {
                     $status = 0;
                     die('Error: ' . htmlspecialchars($stmt->error));
@@ -83,9 +84,7 @@
 
     $output = array(
         'message' => $message,
-        'size' => $_FILES["image"]["size"],
         'status' => $status,
-        'user_id' => $_SESSION, //TODO: Testing
     );
     
     echo json_encode($output);
