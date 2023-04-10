@@ -52,7 +52,7 @@ const hotMyItemsClothings = [
     component: TempItem,
     meta: {
       temp_category: "hot",
-      clothing_category: "middlwear"
+      clothing_category: "middlewear"
     }
   },
   {
@@ -166,7 +166,7 @@ const justRightMyItemsClothings = [
     component: TempItem,
     meta: {
       temp_category: "just right",
-      clothing_category: "middlwear"
+      clothing_category: "middlewear"
     }
   },
   {
@@ -223,7 +223,7 @@ const chillyMyItemsClothings = [
     component: TempItem,
     meta: {
       temp_category: "chilly",
-      clothing_category: "middlwear"
+      clothing_category: "middlewear"
     }
   },
   {
@@ -280,7 +280,7 @@ const coldMyItemsClothings = [
     component: TempItem,
     meta: {
       temp_category: "cold",
-      clothing_category: "middlwear"
+      clothing_category: "middlewear"
     }
   },
   {
@@ -337,7 +337,7 @@ const freezingMyItemsClothings = [
     component: TempItem,
     meta: {
       temp_category: "freezing",
-      clothing_category: "middlwear"
+      clothing_category: "middlewear"
     }
   },
   {

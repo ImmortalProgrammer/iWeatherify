@@ -84,7 +84,7 @@
         },
         async getUserId() {
           try {
-            const response = await axios.get("http://localhost/project_s23-iweatherify/backend/get_userid.php", { withCredentials: true });
+            const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
             this.userid = response.data.userid;
           } catch (error) {
             console.error("Unsuccessful request in getUserId().", error);
