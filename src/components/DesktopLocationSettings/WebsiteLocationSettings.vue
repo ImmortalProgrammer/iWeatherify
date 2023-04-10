@@ -1,7 +1,8 @@
 <template>
   <div class="container-center-horizontal">
     <div class="website-location-settings screen">
-      <nav-bar class = "locationNavPosition"></nav-bar>
+      
+      <nav-bar class = "locationNav"></nav-bar>
       
       
       <div class="location-title">
@@ -20,39 +21,100 @@
         <div class="text-column2">
           <div class="toggle-switcho-container">
             <label class="switch">
-              <input type="checkbox">
+              <input type="checkbox" v-model="toggleValue">
                 <span class="slider round"></span>
                 </label>
           </div>
-          <div class="city-or-zip">
-            <input class= "city" type="text" placeholder="Insert City" name="search">
-            <input class= "zip-code" type="text" placeholder="Insert Zip Code" name="search1">
-            <div class="or ui---30-semi2">{{ or }}</div>
+          <div class="city-container">
+            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="cityName"> 
           </div>
 
         </div>
       </div>
-      <div class="save-button">
-        <div class="rectangle-272"></div>
-        <div class="save ui---30-semi2">{{ save }}</div>
+      <div class="save-button-container">
+        <button @click="saveLocation()">Save</button>
+      </div>
+     
       </div>
     </div>
-  </div>
+  
 </template>
 
 <script>
-import Ellipse6 from "./Ellipse6";
-import ToggleSwitchOn from "./ToggleSwitchOn";
-import ToggleSwitchOff from "./ToggleSwitchOff";
+import axios from "axios"; 
 import NavBar from "@/NavBar/NavBar.vue";
+
+
 export default {
   name: "WebsiteLocationSettings",
+  data(){
+    return {
+      weatherData: {
+        userid: null, 
+        locationInput: '',
+      },
+      data: {
+        cityName: "",
+        userid: null, 
+        APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
+      }
+    };
+  },
+  created() {
+    this.getUserId();
+  },
+  computed: {
+    toggleInt(){
+      return this.toggleValue ? 1 : 0; 
+    }
+  },
+  methods: {
+    async getUserId() {
+      try {
+        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        this.userid = response.data.userid;
+        console.log("User_id: "+response.data.userid);
+        this.loadLocation();
+      } catch (error) {
+        console.error("Unsuccessful request in getUserId().", error);
+      }
+    },
+    saveLocation() {
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_location.php", 
+      {
+        userid: this.userid,
+        city: this.city,
+        toggle: this.toggle, 
+      })
+      .then(response => {
+        console.log(response.data);
+        alert("Location Settings saved successfully!");
+      })
+      .catch(error => {
+        console.error("Unsuccessful axios post in saveLocation().", error);
+      });
+    },
+    loadLocation() {
+      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php",
+      {
+        params: {
+          userid: this.userid,
+        }
+      })
+      .then(response => {
+        this.city = response.data.city;
+        this.toggle = response.data.toggle; 
+      })
+      .catch(error => {
+        console.error("Unsuccessful axios get in loadLocation().", error);
+      });
+    },
+  },
+  
   components: {
     NavBar,
-    Ellipse6,
-    ToggleSwitchOn,
-    ToggleSwitchOff,
   },
+ 
   props: [
     "defaultLogo5",
     "title",
@@ -68,6 +130,10 @@ export default {
 </script>
 
 <style scoped>
+
+.locationNav{
+  top: -0.85%;
+}
 
 .switch {
   position: relative;
@@ -128,7 +194,6 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
 .website-location-settings {
   position: absolute;
   width: 100%; 
