@@ -6,12 +6,12 @@
     include("security.php");
     access_control();
 
-    $message = "default";
-    // $status = 1;
+    $message = "Please select an image that is less than 2MB";
+    $status = 1;
 
-    //Max size is going to be 0.5 gb or 500 mb
+    //Max size is going to be 2 mb as specified in upload_max_filesize directive in php -i
     function isValidSize($imgSize){
-        if($imgSize < 500000000){ 
+        if($imgSize < 2000000){ 
             return true;
         }
         return false;
@@ -82,7 +82,7 @@
         }
         
     } else {
-        $message = 'Select an image'; //Actually handled by front end, but for safety measure
+        $message = 'Select an image that is less than 2MB'; //Actually handled by front end, but for safety measure
         $status = 0;
     }
 

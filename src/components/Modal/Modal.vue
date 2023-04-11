@@ -30,6 +30,7 @@
                             <input type="file" @change="onFileSelected" required>
                             <br>
                             <br>
+                            <p>Please only upload photos that are less than 2MB</p>
 
                             <button class="save-btn" @click.prevent="uploadImage">SAVE</button>
                         </form>
@@ -70,7 +71,6 @@
     },
     created() {
       this.getUserId();
-      console.log(this.userid);
     },    
     methods: {
         closeErrorModal(){
