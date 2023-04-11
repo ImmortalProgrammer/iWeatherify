@@ -7,7 +7,7 @@
     access_control();
 
     $message = "default";
-    $status = 1;
+    // $status = 1;
 
     //Max size is going to be 0.5 gb or 500 mb
     function isValidSize($imgSize){
@@ -55,6 +55,9 @@
             $status = 0;
             $message = "Your image can't be larger than 50mb";
         //Check if the image already exists on the backend
+        } elseif(image_exists($user_id, $targetPath, $temp_category, $clothing_category)){
+            $status = 0;
+            $message = "This image has already been uploaded";
         } elseif(in_array($extension, $valid_extensions)){
             if(move_uploaded_file($tmp_name, $targetPath)){ //Insert image path name in the database. Store image in /uploads
                 $query = "INSERT INTO `my_items` (`user_id`, `temp_category`, `clothing_category`, `clothing_name`, `name`, `upload_path`) VALUES (?, ?, ?, ?, ?, ?)";
@@ -69,6 +72,7 @@
                     die('Error: ' . htmlspecialchars($stmt->error));
                 }
                 $message = "Successful image insertion";
+                $status = 1;
             } 
         } else {
             $status = 0;
