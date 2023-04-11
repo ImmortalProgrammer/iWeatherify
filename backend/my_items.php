@@ -64,11 +64,13 @@
                 $stmt = $conn -> prepare($query);
                 if(!$stmt){
                     $status = 0;
+                    $message = "Couldn't make the connection prepare the query";
                     die('Error: ' . htmlspecialchars($conn -> error));
                 }
                 $stmt->bind_param('isssss', $user_id, $temp_category, $clothing_category, $clothing_name, $imageName, $targetPath);
                 if (!$stmt->execute()) {
                     $status = 0;
+                    $message = "Couldn't execute the sql statement";
                     die('Error: ' . htmlspecialchars($stmt->error));
                 }
                 $message = "Successful image insertion";

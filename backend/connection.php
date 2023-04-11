@@ -1,6 +1,6 @@
 <?php 
 
-    $dbhost = "oceanus.cse.buffalo.edu:3306";
+    $dbhost = "oceanus";
     $dbuser = "vwong27";
     $dbpass = "50342607";
     $dbname = "cse442_2023_spring_team_a_db";
