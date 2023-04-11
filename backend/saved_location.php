@@ -23,12 +23,12 @@
         // Update the existing user settings
         $sql = "UPDATE saved_location SET city = ?, toggle = ? WHERE userid = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $city, $toggle, $userid);
+        $stmt->bind_param("sss", $city, $toggle, $userid);
     } else {
         // Insert new user settings
         $sql = "INSERT INTO saved_location (userid, city, toggle) VALUES (?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssss", $userid, $city, $toggle);
+        $stmt->bind_param("sss", $userid, $city, $toggle);
     }
 
     if ($stmt->execute()) {
