@@ -26,7 +26,7 @@
                 </label>
           </div>
           <div class="city-container">
-            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="cityName"> 
+            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="data.cityName"> 
           </div>
 
         </div>
@@ -84,7 +84,7 @@ export default {
       axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_location.php", 
       {
         userid: this.userid,
-        city: this.cityName,
+        city: this.data.cityName,
         toggle: this.toggleValue, 
       })
       .then(response => {
