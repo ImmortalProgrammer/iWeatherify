@@ -18,7 +18,7 @@
         // Insert a new row with default values when no data is found for the user
         $default_values = array("city" => "", "toggle" => 0); 
         $insert_stmt = $conn->prepare("INSERT INTO saved_location (userid, city, toggle) VALUES (?, ?, ?)");
-        $insert_stmt->bind_param("siiiiii", $userid, $default_values["city"], $default_values["toggle"]);
+        $insert_stmt->bind_param("sii", $userid, $default_values["city"], $default_values["toggle"]);
 
         if ($insert_stmt->execute()) {
             echo json_encode($default_values);
