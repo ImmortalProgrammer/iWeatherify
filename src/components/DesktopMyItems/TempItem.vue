@@ -40,7 +40,10 @@ export default {
       return {
         items: [
           {image_name: "my jacket", upload_path: "bunny.jpg", index: 1},
-          {image_name: "my duck", upload_path: "duck.jpg", index: 2}
+          {image_name: "my duck", upload_path: "duck.jpg", index: 2},
+          {image_name: "cute", upload_path: "cute_bunny.jpg", index: 1},
+          {image_name: "cuteeeeeeeeeeeee", upload_path: "cute_bunny_2.jpg", index: 2},
+          {image_name: "Actual jacket", upload_path: "Summer jacket.png", index: 1},
         ],
         isModalVisible: false,
         temp_and_clothing: this.$route.name,
@@ -65,6 +68,15 @@ export default {
 
 .plusButton{
   padding-top: 20px;
+}
+
+.All-my-items{
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: space-between;
 }
 
 .Temperature-Items {

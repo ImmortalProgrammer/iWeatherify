@@ -7,6 +7,11 @@
         <div class="image-container">
             <img :src="require(`@/assets/${upload_path}`)">
         </div>
+
+        <div class="footer">
+            <p>Edit</p>
+            <p>Delete</p>
+        </div>
     </div>
 </template>
 
@@ -34,6 +39,18 @@ export default {
     width: 30vw;
     height: 40vh;
     background: blue;
+}
+
+.name-container{
+    text-align: center;
+}
+
+.name-container h1{
+    font-size: larger;
+}
+
+img{
+    width: -webkit-fill-available;
 }
 
 </style>
