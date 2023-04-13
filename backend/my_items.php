@@ -88,6 +88,7 @@
     $output = array(
         'message' => $message,
         'status' => $status,
+        'file' => $_FILES
     );
     
     echo json_encode($output);
