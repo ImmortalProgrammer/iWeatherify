@@ -34,7 +34,7 @@
       <div class="save-button-container">
         <button @click="saveLocation()">Save</button>
       </div>
-     
+      <settings-component></settings-component>
       </div>
     </div>
   
@@ -43,6 +43,7 @@
 <script>
 import axios from "axios"; 
 import NavBar from "@/NavBar/NavBar.vue";
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
 
 
 export default {
@@ -114,6 +115,7 @@ export default {
   
   components: {
     NavBar,
+    SettingsComponent,
   },
  
   props: [

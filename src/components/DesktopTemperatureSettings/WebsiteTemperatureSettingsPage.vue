@@ -25,6 +25,7 @@
         
         </div>
       </div>
+      <SettingsComponent></SettingsComponent>
     </div>
   </div>
 </template>
@@ -34,6 +35,7 @@ import axios from "axios";
 import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
 import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 import NavBar from "@/NavBar/NavBar.vue";
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
 export default {
   name: "WebsiteTemperatureSettingsPage",
   data() {
@@ -132,6 +134,7 @@ export default {
     NavBar,
     MenuBarLoggedIn,
     menuBar,
+    SettingsComponent,
   },
 };
 </script>
