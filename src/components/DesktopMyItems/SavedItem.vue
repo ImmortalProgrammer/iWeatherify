@@ -5,12 +5,12 @@
         </div>
 
         <div class="image-container">
-            <img :src="require(`@/assets/${upload_path}`)">
+            <img :src="require(`@/assets/${upload_path}`)"> <!-- TODO: Look at this and try to see if you can make it come from /uploads-->
         </div>
 
         <div class="footer">
-            <p>Edit</p>
-            <p>Delete</p>
+            <p class="edit-text">Edit</p>
+            <p class="delete-text">Delete</p>
         </div>
     </div>
 </template>
@@ -36,21 +36,49 @@ export default {
 <style scoped>
 
 .container{
-    width: 30vw;
+    width: 25vw;
     height: 40vh;
-    background: blue;
 }
 
 .name-container{
     text-align: center;
+    font-size: x-large;
+    font-weight: bold;
 }
 
 .name-container h1{
     font-size: larger;
 }
 
-img{
-    width: -webkit-fill-available;
+.name-container :hover{
+    cursor: pointer;
 }
 
+.image-container{
+    width: 100%;
+    height: 100%;
+}
+
+.image-container :hover{
+    cursor: pointer;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.edit-text{
+    color: #4AAE9B;
+}
+.delete-text{
+    color: red;
+}
 </style>

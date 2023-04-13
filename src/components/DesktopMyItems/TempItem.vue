@@ -4,7 +4,7 @@
         <modal v-show="isModalVisible" @close="closeModal" :title="temp_and_clothing" :temp_category="temp_category" :clothing_category="clothing_category"></modal>
 
         <div class="All-my-items">
-          <saved-item 
+          <saved-item class="savedItem"
             v-for="item in items"
             :key = "item.index"
             :image_name = "item.image_name"
@@ -68,15 +68,18 @@ export default {
 
 .plusButton{
   padding-top: 20px;
+  margin: auto;
+  width: min-content;
 }
 
 .All-my-items{
   display: grid;
-  width: 100vw;
+  width: 90vw;
   height: 100vh;
   justify-content: space-evenly;
   grid-template-columns: repeat(3, 1fr);
   align-content: space-between;
+  margin-top: 10vh;
 }
 
 .Temperature-Items {
