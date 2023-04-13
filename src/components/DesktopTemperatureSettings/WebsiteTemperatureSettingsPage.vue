@@ -54,6 +54,13 @@ export default {
     this.getUserId();
   },
   methods: {
+    enforceTemperatureConstraints() {
+      this.tempValues.warm = Math.min(this.tempValues.warm, this.tempValues.hot - 1);
+      this.tempValues.ideal = Math.min(this.tempValues.ideal, this.tempValues.warm - 1);
+      this.tempValues.chilly = Math.min(this.tempValues.chilly, this.tempValues.ideal - 1);
+      this.tempValues.cold = Math.min(this.tempValues.cold, this.tempValues.chilly - 1);
+      this.tempValues.freezing = Math.min(this.tempValues.freezing, this.tempValues.cold - 1);
+    },
     async getUserId() {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
@@ -103,9 +110,11 @@ export default {
     },
     updateInputValue(label, event) {
       this.tempValues[label] = event.target.value;
+      this.enforceTemperatureConstraints();
     },
     updateSliderValue(label, event) {
-      this.tempValues[label] = event.target.value;  
+      this.tempValues[label] = event.target.value;
+      this.enforceTemperatureConstraints();
     },
     isNumber(event) {
       if (event.key.match(/[\d-]/)) {
