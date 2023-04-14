@@ -1,0 +1,215 @@
+<template>
+  <div class= "settings-sidebar">
+    <p class = "settingsText">Settings</p>
+      <ul class = "settings">
+        <li class = "button" ><a  href="#/unitsSettings">Unit Settings</a></li>
+        <li class = "button" ><a  href="#/locationSettings"ocationSettings>Location Settings</a></li>
+        <li class = "button" ><a  href="#/tempSettings">Temperature Settings</a></li>
+      </ul>
+  </div>
+
+</template>
+
+
+<script>
+
+
+</script>
+
+<style scoped>
+
+.settings-sidebar {
+  user-select: none;
+  background-color: #1e7c85;
+  color: white;
+  padding: 20px;
+
+  position: fixed;
+  height: 60vh;
+  font-size: 100%;
+  top: 15%;
+  left: 0%;
+  width: 15%;
+  float: left;
+}
+
+.button {
+  padding-top: 25px;
+  border-top: none;
+}
+
+.settingsText {
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 2.6em;
+  border-bottom: 11px black solid;
+}
+
+
+.settings {
+  font-size: 1.7em;
+  text-align: center;
+}
+
+.settings-sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.settings-sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.settings-sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.settings-sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.settings-sidebar ul li a:hover {
+  background-color: gray;
+}
+
+@media only screen and (min-width: 900px) and (max-width: 1300px) {
+  .settings-sidebar {
+    user-select: none;
+    background-color: #1e7c85;
+    color: white;
+    padding: 20px;
+
+    position: fixed;
+    height: 75vh;
+    font-size: 100%;
+    top: 15%;
+    left: 0%;
+    width: 20%;
+    float: left;
+  }
+
+  .button {
+    padding-top: 25px;
+    border-top: none;
+  }
+
+  .settingsText {
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 2.6em;
+    border-bottom: 11px black solid;
+  }
+
+
+  .settings {
+    font-size: 1.7em;
+    text-align: center;
+  }
+
+  .settings-sidebar h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .settings-sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .settings-sidebar ul li {
+    margin-bottom: 10px;
+  }
+
+  .settings-sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .settings-sidebar ul li a:hover {
+    background-color: gray;
+  }
+
+}
+
+@media only screen and (min-width: 390px) and (max-width: 899px) {
+
+  .settings-sidebar {
+    user-select: none;
+    background-color: #1e7c85;
+    color: white;
+    padding: 0px;
+    position: fixed;
+    height: 6vh;
+    font-size: 80%;
+    top: 10%;
+    left: 0%;
+    width: 100%;
+    float: left;
+  }
+
+  .button {
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 3px;
+    border-top: none;
+    float: left;
+    display: inline;
+  }
+
+  .settingsText {
+    padding-bottom: 0px;
+    text-align: center;
+    font-size: 0em;
+    border-bottom: 5px black solid;
+    visibility: hidden;
+  }
+
+
+  .settings {
+    font-size: 1.0em;
+    text-align: center;
+    margin-top: -20px;
+  }
+
+  .settings-sidebar h2 {
+    font-size: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+  }
+
+  .settings-sidebar ul {
+    list-style: none;
+    margin: 0 0 0 25px;
+    padding: 0;
+  }
+
+  .settings-sidebar ul li {
+    margin-bottom: 10px;
+  }
+
+  .settings-sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 6px;
+    border-radius: 5px;
+  }
+
+  .settings-sidebar ul li a:hover {
+    background-color: gray;
+  }
+
+}
+</style>

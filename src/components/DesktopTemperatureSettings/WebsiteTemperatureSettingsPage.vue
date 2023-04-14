@@ -25,6 +25,7 @@
         
         </div>
       </div>
+      <SettingsComponent></SettingsComponent>
     </div>
   </div>
 </template>
@@ -34,6 +35,7 @@ import axios from "axios";
 import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
 import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 import NavBar from "@/NavBar/NavBar.vue";
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
 export default {
   name: "WebsiteTemperatureSettingsPage",
   data() {
@@ -141,6 +143,7 @@ export default {
     NavBar,
     MenuBarLoggedIn,
     menuBar,
+    SettingsComponent,
   },
 };
 </script>
@@ -353,10 +356,9 @@ button {
 }
 
 @media screen and (min-width: 375px) and (max-width: 576px) {
-  .logo-container {
-    transform: scale(0.7); 
+  .pushDowTempDisplay {
+    margin-top: 30.5%;
   }
-
   .title-container{
     transform: scale(0.8);
     padding-top: 55px;
@@ -375,33 +377,6 @@ button {
     font-size: 2em;
   }
 
-  .nav-bar-container {
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 2%;
-    width: 70%;
-    z-index: 1;
-  }
-
-  .logo-container {
-    position: relative;
-    width: 5%;
-    left: 5%;
-  }
-
-  .menu-bar-container {
-    position: relative;
-    left: 112.5%;
-    top: -5.1vh;
-    scale: 1;
-  }
-  .profile-img-container {
-    position: relative;
-    scale: 0.90;
-    top: 0.5vh;
-    left: 85%;
-  }
 }
 
 @media screen and (max-width: 375px) {
