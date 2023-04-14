@@ -38,13 +38,6 @@ export default {
     ],
     data(){
       return {
-        // items: [
-        //   {image_name: "my jacket", upload_path: "bunny.jpg", index: 1},
-        //   {image_name: "my duck", upload_path: "duck.jpg", index: 2},
-        //   {image_name: "cute", upload_path: "cute_bunny.jpg", index: 1},
-        //   {image_name: "cuteeeeeeeeeeeee", upload_path: "cute_bunny_2.jpg", index: 2},
-        //   {image_name: "Actual jacket", upload_path: "Summer jacket.png", index: 1},
-        // ],
         items: null,
         isModalVisible: false,
         userid: null,
@@ -67,7 +60,7 @@ export default {
       },
       async getUserId() {
         try {
-          const response = await axios.get("http://localhost/project_s23-iweatherify/backend/get_userid.php", { withCredentials: true });
+          const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
           this.userid = response.data.userid;
           console.log("The user id is: " + this.userid)
         } catch (error) {
@@ -75,23 +68,19 @@ export default {
         }
       },
       getAllItems(){
-        console.log(this.userid)
-        console.log(this.temp_category)
-        console.log(this.clothing_category)
-        axios.post("http://localhost/project_s23-iweatherify/backend/get_my_items.php", 
+        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_my_items.php", 
         {
           user_id: this.userid,
           temp_category: this.temp_category,
           clothing_category: this.clothing_category
         })
         .then(res => {
-          // if(res != null){
-          //   this.items = res.data.message  
-          // }
-          // console.log(res.data.message[0].clothing_name)
-          let lod = JSON.parse(JSON.stringify(res.data.message))
-          console.log(lod)
-          this.items = lod
+          if(res != null){
+            let lod = JSON.parse(JSON.stringify(res.data.message))
+            this.items = lod
+          } else {
+            console.log("There was no data in the response")
+          }
         }).catch((err) => {
           console.log(err)
         })
@@ -111,7 +100,7 @@ export default {
 .All-my-items{
   display: grid;
   width: 90vw;
-  height: 100vh;
+  /* height: 100vh; */
   justify-content: space-evenly;
   grid-template-columns: repeat(3, 1fr);
   align-content: space-between;

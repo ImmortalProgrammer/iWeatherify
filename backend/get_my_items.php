@@ -29,7 +29,7 @@
             $row = [
                 "id" => $rows["id"],
                 "clothing_name" => $rows["clothing_name"],
-                "upload_path" => $rows["upload_path"]
+                "upload_path" => $rows["name"]
             ];
             array_push($data, $row);
           }
