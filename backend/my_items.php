@@ -7,7 +7,7 @@
     access_control();
 
     $message = "Please select an image that is less than 2MB";
-    $status = 1;
+    $status = 0;
 
     //Max size is going to be 2 mb as specified in upload_max_filesize directive in `php -i`
     function isValidSize($imgSize){
@@ -39,6 +39,7 @@
 
         // Set the target directory to store the images as uploads/
         $targetDir = "../src/assets/";
+        // $targetDir = "../uploads/";
         $imageBaseName = basename($_FILES["image"]["name"]); //basename() may prevent filesystem traversal attacks
         $extension = strtolower(pathinfo($imageBaseName, PATHINFO_EXTENSION)); //jpg, jpeg, or png 
         $imageName = create_token(10); //Create a random alphanumeric string as image name so that attackers can't guess the image and also prevent users from acessing same named images
@@ -58,7 +59,7 @@
             $status = 0;
             $message = "Your image can't be larger than 2MB";
         } elseif(in_array($extension, $valid_extensions)){
-            if(move_uploaded_file($tmp_name, $targetPath)){ //Store image path in database. Store actual image in ../src/assets/
+            if(copy($tmp_name, $targetPath)){ //Store image path in database. Store actual image in ../src/assets/
                 $query = "INSERT INTO `my_items` (`user_id`, `temp_category`, `clothing_category`, `clothing_name`, `name`, `upload_path`) VALUES (?, ?, ?, ?, ?, ?)";
                 $stmt = $conn -> prepare($query);
                 if(!$stmt){
@@ -74,6 +75,9 @@
                 }
                 $message = "Successful image insertion";
                 $status = 1;
+            } else {
+                $message = "Issue on the backend with copy function. Permissions issue perhaps";
+                $status = 0;
             } 
         } else {
             $status = 0;
