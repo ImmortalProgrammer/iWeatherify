@@ -375,12 +375,10 @@ button {
 
 @media screen and (min-width: 375px) and (max-width: 576px) {
 
-  .locationNav{
-    margin-left: -59px; 
-    transform: scale(0.8); 
-  }
+
   .location-title{
-    margin-left: 20px; 
+    margin-left: 20px;
+    margin-top: 100px;
     transform: scale(0.7);
   }
 
