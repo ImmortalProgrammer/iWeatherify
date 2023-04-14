@@ -2,9 +2,9 @@
   <div class= "settings-sidebar">
     <p class = "settingsText">Settings</p>
       <ul class = "settings">
-        <li class = "button" ><a  href="#/unitsSettings">Unit Settings</a></li>
-        <li class = "button" ><a  href="#/locationSettings"ocationSettings>Location Settings</a></li>
-        <li class = "button" ><a  href="#/tempSettings">Temperature Settings</a></li>
+        <li id = "button1" ><a  href="#/unitsSettings">Unit Settings</a></li>
+        <li id = "button2" ><a  href="#/locationSettings"ocationSettings>Location Settings</a></li>
+        <li id = "button3" ><a  href="#/tempSettings">Temperature Settings</a></li>
       </ul>
   </div>
 
@@ -12,6 +12,54 @@
 
 
 <script>
+export default {
+  name: "SettingsComponent",
+  data() {
+    return {
+      disabled: true,
+      units: true,
+      tempSettings: true,
+      locationSettings: true,
+    }
+  }, async created() {
+    await this.routeDetection();
+    await this.grayOut();
+  }, methods: {
+      async routeDetection() {
+        const route = this.$route.name;
+        switch (route) {
+          case 'Units':
+            this.$data.units = false;
+            break;
+          case 'LocationSettings':
+            this.$data.tempSettings = false;
+            break;
+          case 'TemperatureSettings':
+            this.$data.locationSettings = false;
+            break;
+        }
+      },
+      async grayOut() {
+        const links = [
+          { id: 'button1', data: 'units'},
+          { id: 'button2', data: 'tempSettings'},
+          { id: 'button3', data: 'locationSettings'},
+        ];
+
+        links.forEach((link) => {
+          const element = document.getElementById(link.id);
+          if (!this.$data[link.data]) {
+            element.style.pointerEvents = 'none';
+            element.style.opacity = '0.3';
+          } else {
+            element.style.pointerEvents = 'auto';
+            element.style.opacity = '1';
+          }
+        });
+      }
+    }
+
+}
 
 
 </script>
@@ -33,7 +81,7 @@
   float: left;
 }
 
-.button {
+#button1, #button2, #button3 {
   padding-top: 25px;
   border-top: none;
 }
@@ -95,7 +143,7 @@
     float: left;
   }
 
-  .button {
+  #button1, #button2, #button3 {
     padding-top: 25px;
     border-top: none;
   }
@@ -159,7 +207,7 @@
     float: left;
   }
 
-  .button {
+  #button1, #button2, #button3 {
     padding-top: 10px;
     padding-right: 10px;
     padding-left: 3px;
@@ -167,6 +215,8 @@
     float: left;
     display: inline;
   }
+
+
 
   .settingsText {
     padding-bottom: 0px;
