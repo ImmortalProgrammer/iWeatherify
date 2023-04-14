@@ -274,7 +274,7 @@ export default {
       };
       const DESCRIPTION = this.$data.currentWeatherData.mainDescription;
       if (DESCRIPTION in DESCRIPTIONS) {
-        this.$data.currentWeatherData.suggestedDescription = DESCRIPTIONS[DESCRIPTION] + " " + this.temperatureMessage() + " based on the current temperature and the user’s set temperature preferences.";
+        this.$data.currentWeatherData.suggestedDescription = DESCRIPTIONS[DESCRIPTION] + " " + this.temperatureMessage() + " based on the current temperature and your set temperature preferences.";
         this.$data.currentWeatherData.suggestedOutfit = "";
       }
     },
