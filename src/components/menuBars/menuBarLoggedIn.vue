@@ -8,9 +8,7 @@
         <a id ="link1_2" :href="$router.resolve('/homepage').href" style = "text-decoration:none; color: inherit;">Homepage</a>
         <a id ="link2_2" :href="$router.resolve('/myItems').href" style = "text-decoration:none; color: inherit;">My Items</a>
         <a id ="link3_2" :href="$router.resolve('/savedOutfits').href" style = "text-decoration:none; color: inherit;">Saved Outfits</a>
-        <a id ="link4_2" :href="$router.resolve('/locationSettings').href" style = "text-decoration:none; color: inherit;">Location Settings</a>
-        <a id ="link5_2" :href="$router.resolve('/unitsSettings').href" style = "text-decoration:none; color: inherit;">Unit Settings</a>
-        <a id ="link6_2" :href="$router.resolve('/tempSettings').href" style = "text-decoration:none; color: inherit;">Temperature Settings</a>
+        <a id ="link5_2" :href="$router.resolve('/unitsSettings').href" style = "text-decoration:none; color: inherit;">Settings</a>
         <a id ="link7_2"  style = "text-decoration:none; color: inherit;" @click = "logOutAccount()" :href="$router.resolve('/').href">Log Out</a>
       </div>
     </div>
@@ -28,7 +26,6 @@ export default {
     return {
       disabled: true,
       homepage: true,
-      locationSettings: true,
       savedOutfits: true,
       myItems: true,
       units: true,
@@ -42,17 +39,11 @@ export default {
         case 'Homepage':
           this.$data.homepage = false;
           break;
-        case 'LocationSettings':
-          this.$data.locationSettings = false;
-          break;
         case 'myItems':
           this.$data.myItems = false;
           break;
         case 'Units':
           this.$data.units = false;
-          break;
-        case 'TemperatureSettings':
-          this.$data.tempSettings = false;
           break;
         case 'SavedOutfits':
           this.$data.savedOutfits = false;
@@ -81,9 +72,7 @@ export default {
         { id: 'link1_2', data: 'homepage'},
         { id: 'link2_2', data: 'myItems'},
         { id: 'link3_2', data: 'savedOutfits'},
-       { id: 'link4_2', data: 'locationSettings'},
         { id: 'link5_2', data: 'units'},
-        { id: 'link6_2', data: 'tempSettings'},
       ];
  
       links.forEach((link) => {
@@ -120,7 +109,7 @@ export default {
   position: relative;
   height: auto;
   left: -60%;
-  top: -4.0vh;
+  top: -3vh;
   bottom: 0;
   border-top: 0;
   margin-top: 0.6vh;
@@ -151,6 +140,7 @@ export default {
   border-bottom: solid black 0.3vh;
  
 }
+
  
 @media screen and (min-width: 1000px) and (max-width: 1400px) {
   .menu_2 {

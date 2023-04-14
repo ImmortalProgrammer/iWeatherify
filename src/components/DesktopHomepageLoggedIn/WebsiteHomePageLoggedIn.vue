@@ -169,13 +169,14 @@ export default {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
         this.$data.data.userid = response.data.userid;
-        this.loadUnits();
-        this.loadTempSettings();
+        await this.loadUnits();
+        await this.loadTempSettings();
+        await new Promise(resolve => setTimeout(resolve, 400));
       } catch (error) {
         console.error("Unsuccessful request in getUserId().", error);
       }
     },
-    loadUnits() {
+    async loadUnits() {
       axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php",
           {
             params: {
@@ -193,7 +194,7 @@ export default {
             console.error("Unsuccessful axios get in loadUnits().", error);
           });
     },
-    loadTempSettings() {
+    async loadTempSettings() {
       axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_temperatures.php", 
       {
         params: {
