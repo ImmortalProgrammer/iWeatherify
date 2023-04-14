@@ -45,6 +45,12 @@ export default {
         case 'Units':
           this.$data.units = false;
           break;
+        case 'LocationSettings':
+          this.$data.units = false;
+          break;
+        case 'TemperatureSettings':
+          this.$data.units = false;
+          break;
         case 'SavedOutfits':
           this.$data.savedOutfits = false;
           break;
