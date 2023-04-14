@@ -1,13 +1,8 @@
 <?php
     // Connection Setup
-    header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: POST, GET");
-    header("Access-Control-Allow-Headers: Content-Type");
-    $servername = "oceanus";
-    $username = "jpan26";
-    $password = "50314999";
-    $dbname = "cse442_2023_spring_team_a_db";
+    include("connection.php");
+    include("security.php");
+    access_control();
 
     // Get the user settings from the request
     $data = json_decode(file_get_contents("php://input"), true);
@@ -15,15 +10,6 @@
     $temperature = $data["temperature"];
     $wind = $data["wind"];
     $pressure = $data["pressure"];
-    $distance = $data["distance"];
-
-    // Create a connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
 
     // Check if the user settings already exist
     $sql = "SELECT COUNT(*) as count FROM saved_units WHERE userid = ?";
@@ -36,14 +22,14 @@
 
     if ($count > 0) {
         // Update the existing user settings
-        $sql = "UPDATE saved_units SET temperature = ?, wind = ?, pressure = ?, distance = ? WHERE userid = ?";
+        $sql = "UPDATE saved_units SET temperature = ?, wind = ?, pressure = ? WHERE userid = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $temperature, $wind, $pressure, $distance, $userid);
+        $stmt->bind_param("ssss", $temperature, $wind, $pressure, $userid);
     } else {
         // Insert new user settings
-        $sql = "INSERT INTO saved_units (userid, temperature, wind, pressure, distance) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO saved_units (userid, temperature, wind, pressure) VALUES (?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssss", $userid, $temperature, $wind, $pressure, $distance);
+        $stmt->bind_param("ssss", $userid, $temperature, $wind, $pressure);
     }
 
     if ($stmt->execute()) {
@@ -53,5 +39,4 @@
     }
 
     $stmt->close();
-    $conn->close();
 ?>
