@@ -26,7 +26,7 @@
                 </label>
           </div>
           <div class="city-container">
-            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="cityName"> 
+            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="data.cityName"> 
           </div>
 
         </div>
@@ -34,7 +34,7 @@
       <div class="save-button-container">
         <button @click="saveLocation()">Save</button>
       </div>
-     
+      <settings-component></settings-component>
       </div>
     </div>
   
@@ -43,6 +43,7 @@
 <script>
 import axios from "axios"; 
 import NavBar from "@/NavBar/NavBar.vue";
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
 
 
 export default {
@@ -57,6 +58,7 @@ export default {
         cityName: "",
         userid: null, 
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
+        toggleValue: 0, 
       }
     };
   },
@@ -83,8 +85,8 @@ export default {
       axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_location.php", 
       {
         userid: this.userid,
-        city: this.city,
-        toggle: this.toggle, 
+        city: this.data.cityName,
+        toggle: this.toggleValue, 
       })
       .then(response => {
         console.log(response.data);
@@ -113,6 +115,7 @@ export default {
   
   components: {
     NavBar,
+    SettingsComponent,
   },
  
   props: [
@@ -372,12 +375,10 @@ button {
 
 @media screen and (min-width: 375px) and (max-width: 576px) {
 
-  .locationNav{
-    margin-left: -59px; 
-    transform: scale(0.8); 
-  }
+
   .location-title{
-    margin-left: 20px; 
+    margin-left: 20px;
+    margin-top: 140px;
     transform: scale(0.7);
   }
 

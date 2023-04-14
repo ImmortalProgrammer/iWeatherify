@@ -66,7 +66,6 @@ export default {
   max-width: 100%;
   overflow: visible;
   white-space: nowrap;
-  margin-top: -8px; 
 }
 .main_logo {
   background-image: url("../../img/Logo.png");

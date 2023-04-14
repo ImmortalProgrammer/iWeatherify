@@ -34,6 +34,7 @@
       <div>
         <button @click="saveUnits()">Save</button>
       </div>
+      <SettingsComponent></SettingsComponent>
     </div>
   </div>
 </template>
@@ -41,9 +42,13 @@
 <script>
 import axios from "axios";
 import NavBar from "@/NavBar/NavBar.vue";
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
 export default {
   name: "WebsiteUnitsPage",
-  components: {NavBar},
+  components: {
+    NavBar,
+    SettingsComponent
+  },
   data() {
     return {
       userid: null,
@@ -235,7 +240,7 @@ button {
   .title-container{
     transform: scale(0.7);
     width: auto;
-    top: 100px;
+    top: 170px;
   }
 
   .row {

@@ -18,7 +18,11 @@
 
       <div id = "outfit-of-the-day_1">
         <p style="font-size: 5.5vh; padding-bottom: 3vh;">Outfit Recommendations for Today</p>
-        <p style="font-size: 3.5vh; padding-top: 3vh;">{{this.$data.currentWeatherData.suggestedDescription}}</p>
+        <p style="font-size: 3.5vh; padding-top: 3vh;" v-if="currentWeatherData.suggestedDescription" >
+          {{ currentWeatherData.suggestedDescription.split("Today's temperature is: ")[0] }}
+          Today's temperature is: <span :class="temperatureClass">{{ temperatureClass }}</span>
+          {{ currentWeatherData.suggestedDescription.split("Today's temperature is: ")[1].split(temperatureClass)[1] }}
+        </p>
         <div class = "weather-icon-current1">
           <img src = "">
         </div>
@@ -90,19 +94,19 @@ export default {
     return {
       currentWeatherData: {
         locationInput: 'Buffalo',
-        currentDay: ' ',
+        currentDay: '',
         locationOutput: '',
         currentTemp: '',
-        feelsLike: ' ',
-        tempLow: ' ',
-        tempHigh: ' ',
-        iconUrl: ' ',
-        mainDescription: ' ',
-        iconDescription: ' ',
-        suggestedDescription: ' ',
-        suggestedOutfit: ' ',
-        wind: ' ',
-        pressure: ' ',
+        feelsLike: '',
+        tempLow: '',
+        tempHigh: '',
+        iconUrl: '',
+        mainDescription: '',
+        iconDescription: '',
+        suggestedDescription: '',
+        suggestedOutfit: '',
+        wind: '',
+        pressure: '',
       },
       eightDayForecastData: {
         //Index 0 starts one day after the current weather
@@ -137,6 +141,14 @@ export default {
         windPrefOutput: '',
         pressurePrefOutput: '',
       },
+      tempValues: {
+        hot: 0,
+        warm: 0,
+        ideal: 0,
+        chilly: 0,
+        cold: 0,
+        freezing: 0,
+      },
       data: {
         userid: null,
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
@@ -157,12 +169,14 @@ export default {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
         this.$data.data.userid = response.data.userid;
-        this.loadUnits();
+        await this.loadUnits();
+        await this.loadTempSettings();
+        await new Promise(resolve => setTimeout(resolve, 400));
       } catch (error) {
         console.error("Unsuccessful request in getUserId().", error);
       }
     },
-    loadUnits() {
+    async loadUnits() {
       axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php",
           {
             params: {
@@ -179,6 +193,24 @@ export default {
           .catch(error => {
             console.error("Unsuccessful axios get in loadUnits().", error);
           });
+    },
+    async loadTempSettings() {
+      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_temperatures.php", 
+      {
+        params: {
+          userid: this.$data.data.userid,
+        },
+      })
+      .then(response => {
+        if (typeof response.data === 'object') {
+          this.tempValues = response.data;
+        } else {
+          console.error('Invalid response data:', response.data);
+        }
+      })
+      .catch(error => {
+        console.error("Unsuccessful axios post in loadTempSettings().", error);
+      });
     },
     async outputTempPreferences() {
       if (this.userPreferences.tempPref === 'c') {
@@ -242,9 +274,50 @@ export default {
       };
       const DESCRIPTION = this.$data.currentWeatherData.mainDescription;
       if (DESCRIPTION in DESCRIPTIONS) {
-        this.$data.currentWeatherData.suggestedDescription = DESCRIPTIONS[DESCRIPTION];
+        this.$data.currentWeatherData.suggestedDescription = DESCRIPTIONS[DESCRIPTION] + " " + this.temperatureMessage() + " based on the current temperature and the user’s set temperature preferences.";
         this.$data.currentWeatherData.suggestedOutfit = "";
       }
+    },
+    temperatureMessage() {
+      const currentTemp = parseFloat(this.$data.currentWeatherData.feelsLike);
+      let temperatureMessage = "Today's temperature is: ";
+
+      const userTemps = {
+        freezing: parseFloat(this.tempValues.freezing),
+        cold: parseFloat(this.tempValues.cold),
+        chilly: parseFloat(this.tempValues.chilly),
+        ideal: parseFloat(this.tempValues.ideal),
+        warm: parseFloat(this.tempValues.warm),
+        hot: parseFloat(this.tempValues.hot),
+      };
+
+      console.log(
+        "Hot:"+userTemps.hot+
+        " Warm:"+userTemps.warm+
+        " Idea:"+userTemps.ideal+
+        " Chilly:"+userTemps.chilly+
+        " Cold:"+userTemps.cold+
+        " Freezing:"+userTemps.freezing
+      );
+
+      const differences = {};
+      for (const key in userTemps) {
+        differences[key] = Math.abs(currentTemp - userTemps[key]);
+      }
+
+      let closestCategory = 'freezing';
+      let smallerDifference = differences['freezing'];
+
+      for (const key in differences) {
+        if (differences[key] < smallerDifference) {
+          smallerDifference = differences[key];
+          closestCategory = key;
+        }
+      }
+
+      temperatureMessage += closestCategory;
+
+      return temperatureMessage;
     },
     pressOptions() {
       const menuContainer = document.getElementById("menu-container_2");
@@ -481,6 +554,13 @@ export default {
       }
     },
   },
+  computed: {
+    temperatureClass() {
+      const tempMessage = this.temperatureMessage();
+      const tempCategory = tempMessage.split(': ')[1];
+      return tempCategory;
+    },
+  },
   components: {
     NavBar,
     MenuBarLoggedIn,
@@ -499,6 +579,25 @@ export default {
   padding: 0;
   box-sizing: border-box;
 
+}
+
+.hot {
+  color: red;
+}
+.warm {
+  color: orange;
+}
+.ideal {
+  color: lightgreen;
+}
+.chilly {
+  color: blue;
+}
+.cold {
+  color: darkblue;
+}
+.freezing {
+  color: purple;
 }
 
 .HomePageNavBar {
