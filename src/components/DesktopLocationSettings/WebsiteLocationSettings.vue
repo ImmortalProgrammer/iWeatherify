@@ -26,7 +26,7 @@
                 </label>
           </div>
           <div class="city-container">
-            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="data.cityName"> 
+            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="cityName"> 
           </div>
 
         </div>
@@ -49,14 +49,9 @@ export default {
   name: "WebsiteLocationSettings",
   data(){
     return {
-      weatherData: {
-        userid: null, 
-        locationInput: '',
-      },
       data: {
         cityName: "",
         userid: null, 
-        APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
         toggleValue: 0, 
       }
     };
@@ -73,7 +68,7 @@ export default {
     async getUserId() {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
-        this.userid = response.data.userid;
+        this.data.userid = response.data.userid;
         console.log("User_id: "+response.data.userid);
         this.loadLocation();
       } catch (error) {
@@ -83,8 +78,8 @@ export default {
     saveLocation() {
       axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_location.php", 
       {
-        userid: this.userid,
-        city: this.data.cityName,
+        userid: this.data.userid,
+        city: this.cityName,
         toggle: this.toggleValue, 
       })
       .then(response => {
@@ -99,12 +94,12 @@ export default {
       axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php",
       {
         params: {
-          userid: this.userid,
+          userid: this.data.userid,
         }
       })
       .then(response => {
-        this.city = response.data.city;
-        this.toggle = response.data.toggle; 
+        this.cityName = response.data.city;
+        this.toggleValue = response.data.toggle; 
       })
       .catch(error => {
         console.error("Unsuccessful axios get in loadLocation().", error);
