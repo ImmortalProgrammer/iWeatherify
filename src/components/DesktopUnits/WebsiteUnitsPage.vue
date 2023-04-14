@@ -240,7 +240,7 @@ button {
   .title-container{
     transform: scale(0.7);
     width: auto;
-    top: 150px;
+    top: 170px;
   }
 
   .row {

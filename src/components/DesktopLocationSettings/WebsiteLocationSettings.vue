@@ -378,7 +378,7 @@ button {
 
   .location-title{
     margin-left: 20px;
-    margin-top: 100px;
+    margin-top: 140px;
     transform: scale(0.7);
   }
 
