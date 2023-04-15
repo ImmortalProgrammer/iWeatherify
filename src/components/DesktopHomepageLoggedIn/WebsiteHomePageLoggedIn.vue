@@ -161,15 +161,15 @@ export default {
   mounted: async function() {
     await this.retrieveAPI();
   },
-  created() {
-    this.getUserId();
+  async created() {
+    await this.loadLocation();
+    await this.getUserId();
   },
   methods: {
     async getUserId() {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
         this.$data.data.userid = response.data.userid;
-        await this.loadLocation(); 
         await this.loadUnits();
         await this.loadTempSettings();
         await new Promise(resolve => setTimeout(resolve, 400));
@@ -178,6 +178,12 @@ export default {
       }
     },
     async loadLocation() {
+        try {
+          const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+          this.$data.data.userid = response.data.userid;
+        } catch (error) {
+          console.error("Unsuccessful request in getUserId().", error);
+        }
 	      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php",
 	      {
 	        params: {
@@ -186,7 +192,6 @@ export default {
 	      })
 	      .then(response => {
 	        this.$data.currentWeatherData.locationInput = response.data.city;
-	        
 	      })
 	      .catch(error => {
 	        console.error("Unsuccessful axios get in loadLocation().", error);
@@ -350,9 +355,7 @@ export default {
     async retrieveAPI() {
       try {
         if (this.currentWeatherData.locationInput === '') {
-          await this.getUserId();
         } else {
-          await this.getUserId();
           //Setup the dates data structure
           this.setupDays();
           //Sets up the current weather as of now
