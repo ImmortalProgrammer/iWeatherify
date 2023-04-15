@@ -231,8 +231,6 @@ input:checked + .slider:before {
   margin-left: 200px;
   margin-top: 200px;
   width: 100%; 
-  
-  transform: scale(1.3);
 }
 .text-column1 {
   align-items: flex-start;
