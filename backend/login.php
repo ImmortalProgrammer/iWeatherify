@@ -21,11 +21,16 @@
             $hash = $data["password"];
 
             //Create the cookie and the hashed version of the cookie
-            $cookie = create_token();
+            // $cookie = create_token();
+            $cookie = array(
+                "token" => create_token(),
+                "expire" => time() + 60 // set at 1 minute will change to 20 min after testing
+            )
+            
             $hashed_cookie = hash("sha256", $cookie);
 
             // Store username with hashed cookie into database
-            add_auth_user($username, $hashed_cookie);
+            add_auth_user($username, $hashed_cookie, $cookie['expire']);
 
             // Input validation before actually logging in user
             if($data == NULL){
