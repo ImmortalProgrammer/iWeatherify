@@ -91,11 +91,11 @@
     }
 
     //When the user logs in, create an auth_token, hash it, store in data base with their username as an authenticated user
-    function add_auth_user($username, $hashed_cookie){
+    function add_auth_user($username, $hashed_cookie, $expire){
         include("connection.php");
-        $query = "INSERT INTO `auth_users` (`username`, `auth_token`) VALUES (?, ?)";
+        $query = "INSERT INTO `auth_users` (`username`, `auth_token`, 'expire') VALUES (?, ?, ?)";
         $query = $conn -> prepare($query);
-        $query -> bind_param("ss", $username, $hashed_cookie);
+        $query -> bind_param("ssi", $username, $hashed_cookie, $expire);
         $query -> execute();
     }
 
