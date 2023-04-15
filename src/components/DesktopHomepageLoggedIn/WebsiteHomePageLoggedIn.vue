@@ -93,7 +93,7 @@ export default {
   data() {
     return {
       currentWeatherData: {
-        locationInput: 'Buffalo',
+        locationInput: '',
         currentDay: '',
         locationOutput: '',
         currentTemp: '',
