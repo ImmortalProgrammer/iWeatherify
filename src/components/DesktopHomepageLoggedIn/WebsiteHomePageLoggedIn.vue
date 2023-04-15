@@ -158,18 +158,16 @@ export default {
       }
     }
   },
-  mounted: async function() {
-    await this.retrieveAPI();
-  },
   async created() {
-    await this.loadLocation();
     await this.getUserId();
+    await this.retrieveAPI();
   },
   methods: {
     async getUserId() {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
         this.$data.data.userid = response.data.userid;
+        await this.loadLocation();
         await this.loadUnits();
         await this.loadTempSettings();
         await new Promise(resolve => setTimeout(resolve, 400));
