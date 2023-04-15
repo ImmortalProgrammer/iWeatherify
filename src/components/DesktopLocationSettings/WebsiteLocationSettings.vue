@@ -21,12 +21,12 @@
         <div class="text-column2">
           <div class="toggle-switcho-container">
             <label class="switch">
-              <input type="checkbox" v-model="toggleValue">
+              <input type="checkbox" v-model="data.toggleValue">
                 <span class="slider round"></span>
                 </label>
           </div>
           <div class="city-container">
-            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="cityName"> 
+            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="data.cityName"> 
           </div>
 
         </div>
@@ -80,8 +80,8 @@ export default {
       axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_location.php", 
       {
         userid: this.data.userid,
-        city: this.cityName,
-        toggle: this.toggleValue, 
+        city: this.data.cityName,
+        toggle: this.data.toggleValue, 
       })
       .then(response => {
         console.log(response.data);
@@ -99,8 +99,8 @@ export default {
         }
       })
       .then(response => {
-        this.cityName = response.data.city;
-        this.toggleValue = response.data.toggle; 
+        this.data.cityName = response.data.city;
+        this.data.toggleValue = response.data.toggle; 
       })
       .catch(error => {
         console.error("Unsuccessful axios get in loadLocation().", error);
