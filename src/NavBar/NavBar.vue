@@ -105,13 +105,13 @@ export default {
     left: 2.9%;
   }
   .main_menu_container {
-    left: 77.5%;
+    left: 88.5%;
   }
 
   .profile_image_loggedin{
-    margin-top: -0.2%;
+    margin-top: -0.5%;
     height: 40px;
-    left: 70.5%;
+    left: 80.5%;
   }
 }
 @media only screen and (min-width: 500px) and (max-width: 759px) {
@@ -148,7 +148,7 @@ export default {
   .profile_image_loggedin{
     margin-top: -2.2%;
     height: 40px;
-    left: 64%;
+    left: 60%;
     transform: scale(0.7)
   }
 }
