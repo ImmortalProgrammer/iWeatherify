@@ -34,7 +34,7 @@
       <div class="save-button-container">
         <button @click="saveLocation()">Save</button>
       </div>
-     
+      <settings-component></settings-component>
       </div>
     </div>
   
@@ -43,6 +43,7 @@
 <script>
 import axios from "axios"; 
 import NavBar from "@/NavBar/NavBar.vue";
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
 
 
 export default {
@@ -109,6 +110,7 @@ export default {
   
   components: {
     NavBar,
+    SettingsComponent,
   },
  
   props: [
@@ -368,12 +370,10 @@ button {
 
 @media screen and (min-width: 375px) and (max-width: 576px) {
 
-  .locationNav{
-    margin-left: -59px; 
-    transform: scale(0.8); 
-  }
+
   .location-title{
-    margin-left: 20px; 
+    margin-left: 20px;
+    margin-top: 140px;
     transform: scale(0.7);
   }
 

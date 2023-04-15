@@ -41,7 +41,7 @@
 
         <div id="TwentyFourHour-weather_2">
           <p style="font-size: 5vh; padding-bottom: 3vh;">24-Hour Forecast</p>
-          <div class="hour-next-2" v-for="(hour, index) in twentyFourHourForecastData.hours" :key="index">
+          <div class="hour-next-2" v-for="(hour, index) in twentyFourHourForecastData.UTCdates" :key="index">
             <p class="next_hour-2">{{hour}}</p>
             <p class="weatherStateHour-2">{{twentyFourHourForecastData.iconDescription[index]}}</p>
             <div class="TwentyFourHourForecastImg-2">
@@ -55,7 +55,7 @@
         <div id="weekly-weather_2">
           <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast: </p>
           <div class="day-next" v-for="(day, index) in eightDayForecastData.dates" :key="index">
-            <p class = "next">{{ eightDayForecastData.dates[day] }}</p>
+            <p class = "next">{{ eightDayForecastData.dates[index] }}</p>
             <p class = "weatherState">{{ eightDayForecastData.iconDescription[index] }}</p>
             <div class = "eightDayForecastImg">
               <img :src = "eightDayForecastData.iconUrlArr[index]">
@@ -101,12 +101,16 @@ export default {
       },
       twentyFourHourForecastData: {
         //Index 0 starts one hour after the current weather
-        hours: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        iconDescription: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        highTempArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        lowTempArr: [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
-        feelsLikeArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
-        iconUrlArr: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+        UTCdates: new Array(24),
+        hours: new Array(24),
+        iconDescription: new Array(24),
+        highTempArr: new Array(24),
+        lowTempArr: new Array(24),
+        feelsLikeArr: new Array(24),
+        iconUrlArr: new Array(24),
+        windArr: new Array(24),
+        pressureArr: new Array(24),
+        timezoneOffset: 0,
       },
       data: {
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
@@ -160,7 +164,9 @@ export default {
           this.setupDays();
           //Sets up the current weather as of now
           await this.currentWeather();
-          //Seven-Day Forecast
+          //Twenty-Four Hour Forecast
+          await this.twentyFourForecast();
+          //Eight-Day Forecast
           await this.eightDayForecast();
 
           this.currentWeatherData.locationInput = '';
@@ -199,6 +205,32 @@ export default {
             .join(' ');
       } else {
         alert("Error Status Request Failed!");
+      }
+    },
+    async twentyFourForecast() {
+      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${locationFormatting}
+        &units=imperial&cnt=24&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
+        console.log(error.toJSON());
+      });
+      this.twentyFourHourForecastData.timezoneOffset = weatherAPI['data']['city']['timezone'];
+      const data = weatherAPI['data']['list'];
+      for (let x in data) {
+        const currentData = data[x.toString()];
+        this.twentyFourHourForecastData.UTCdates[x] = currentData['dt_txt'].toString().slice(11) + ' UTC';;
+        this.twentyFourHourForecastData.iconDescription[x] = currentData['weather']['0']['description'].split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
+        //Low Temp
+        this.twentyFourHourForecastData.lowTempArr[x] = Math.round(currentData['main']['temp_min']).toString();
+        // High Temp
+        this.twentyFourHourForecastData.highTempArr[x] = Math.round(currentData['main']['temp_max']).toString();
+        //Feels Like
+        this.twentyFourHourForecastData.feelsLikeArr[x] = Math.round(currentData['main']['feels_like']).toString();
+        const iconCode = currentData['weather']['0']['icon'];
+        const iconUrl = 'https://openweathermap.org/img/wn/'
+            + iconCode + ".png";
+        this.twentyFourHourForecastData.iconUrlArr[x] = iconUrl;
       }
     },
     async eightDayForecast() {
