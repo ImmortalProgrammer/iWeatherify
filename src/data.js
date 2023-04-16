@@ -93,16 +93,9 @@ export const websiteMyItemsPageData = {
     justRight: "Just right",
     categorizeClothesB: "Categorize clothes based on your temperature preferences",
     title: "My Items",
-    place: "Chilly",
+    chilly: "Chilly",
     cold: "Cold",
     freezing: "Freezing",
-    ellipse6Props: ellipse6Data,
-    listboxComponentProps: listboxComponentData,
-    addEditDelete1Props: addEditDelete2Data,
-    addEditDelete2Props: addEditDelete3Data,
-    addEditDelete3Props: addEditDelete4Data,
-    addEditDelete4Props: addEditDelete5Data,
-    addEditDelete5Props: addEditDelete6Data,
 };
 
 export const websiteLocationSettingsData = {

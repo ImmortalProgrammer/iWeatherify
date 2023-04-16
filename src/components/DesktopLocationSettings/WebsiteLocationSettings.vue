@@ -1,7 +1,8 @@
 <template>
   <div class="container-center-horizontal">
     <div class="website-location-settings screen">
-      <nav-bar class = "locationNavPosition"></nav-bar>
+      
+      <nav-bar class = "locationNav"></nav-bar>
       
       
       <div class="location-title">
@@ -20,39 +21,98 @@
         <div class="text-column2">
           <div class="toggle-switcho-container">
             <label class="switch">
-              <input type="checkbox">
+              <input type="checkbox" v-model="data.toggleValue">
                 <span class="slider round"></span>
                 </label>
           </div>
-          <div class="city-or-zip">
-            <input class= "city" type="text" placeholder="Insert City" name="search">
-            <input class= "zip-code" type="text" placeholder="Insert Zip Code" name="search1">
-            <div class="or ui---30-semi2">{{ or }}</div>
+          <div class="city-container">
+            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="data.cityName"> 
           </div>
 
         </div>
       </div>
-      <div class="save-button">
-        <div class="rectangle-272"></div>
-        <div class="save ui---30-semi2">{{ save }}</div>
+      <div class="save-button-container">
+        <button @click="saveLocation()">Save</button>
+      </div>
+      <settings-component></settings-component>
       </div>
     </div>
-  </div>
+  
 </template>
 
 <script>
-import Ellipse6 from "./Ellipse6";
-import ToggleSwitchOn from "./ToggleSwitchOn";
-import ToggleSwitchOff from "./ToggleSwitchOff";
+import axios from "axios"; 
 import NavBar from "@/NavBar/NavBar.vue";
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
+
+
 export default {
   name: "WebsiteLocationSettings",
+  data(){
+    return {
+      data: {
+        cityName: "",
+        userid: null, 
+        toggleValue: 0, 
+      }
+    };
+  },
+  created() {
+    this.getUserId();
+  },
+  computed: {
+    toggleInt(){
+      return this.toggleValue ? 1 : 0; 
+    }
+  },
+  methods: {
+    async getUserId() {
+      try {
+        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        this.data.userid = response.data.userid;
+        console.log("User_id: "+response.data.userid);
+        this.loadLocation();
+      } catch (error) {
+        console.error("Unsuccessful request in getUserId().", error);
+      }
+    },
+    saveLocation() {
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_location.php", 
+      {
+        userid: this.data.userid,
+        city: this.data.cityName,
+        toggle: this.data.toggleValue, 
+      })
+      .then(response => {
+        console.log(response.data);
+        alert("Location Settings saved successfully!");
+      })
+      .catch(error => {
+        console.error("Unsuccessful axios post in saveLocation().", error);
+      });
+    },
+    loadLocation() {
+      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php",
+      {
+        params: {
+          userid: this.data.userid,
+        }
+      })
+      .then(response => {
+        this.data.cityName = response.data.city;
+        this.data.toggleValue = response.data.toggle; 
+      })
+      .catch(error => {
+        console.error("Unsuccessful axios get in loadLocation().", error);
+      });
+    },
+  },
+  
   components: {
     NavBar,
-    Ellipse6,
-    ToggleSwitchOn,
-    ToggleSwitchOff,
+    SettingsComponent,
   },
+ 
   props: [
     "defaultLogo5",
     "title",
@@ -68,6 +128,10 @@ export default {
 </script>
 
 <style scoped>
+
+.locationNav{
+  top: -0.85%;
+}
 
 .switch {
   position: relative;
@@ -129,17 +193,12 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 .website-location-settings {
-  align-items: center;
-  background-color: var(--white);
-  border: 1px none;
-  display: flex;
-  flex-direction: column;
-  height: 1024px;
-  overflow: hidden;
-  padding: 43px 0;
-  width: 1440px;
+  position: absolute;
+  width: 100%; 
+  height: 100%;
+  background: #FFFFFF;
+ 
 }
-
 
 .location-title{
   position: relative;
@@ -149,15 +208,18 @@ input:checked + .slider:before {
   align-items: center;
   width: 100%;
   height: 10%; 
-  margin-top: -10px; 
+  left: -10px;
+  top: 50px; 
+  
 }
 
 .location-settings-title{
  color: var(--black);
  font-weight: 600;
- font-size: 1.5em;
+ font-size: 2.5em;
  font-family: 'Inter';
  font-style: normal; 
+
 }
 
 .location-text-container {
@@ -165,19 +227,31 @@ input:checked + .slider:before {
   align-self: flex-start;
   display: flex;
   gap: 23px;
-  height: 389px;
-  margin-left: -123px;
-  margin-top: 10px;
-  min-width: 1491px;
-  
+  height: 289px;
+  margin-left: 200px;
+  margin-top: 200px;
+  width: 100%; 
 }
 .text-column1 {
   align-items: flex-start;
   align-self: flex-end;
   display: flex;
   flex-direction: column;
-  min-height: 389px;
-  width: 796px;
+  min-height: 250px;
+  margin-left: -100px; 
+  width: 800px;
+  
+}
+
+.text-column2 {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 104px;
+  min-height: 266px;
+  width: 640px;
+  margin-top: -5px; 
+  margin-left: -200px; 
   
 }
 .location-services {
@@ -220,14 +294,7 @@ input:checked + .slider:before {
   text-align: center;
   width: 706px;
 }
-.text-column2 {
-  align-items: flex-end;
-  display: flex;
-  flex-direction: column;
-  gap: 104px;
-  min-height: 266px;
-  width: 672px;
-}
+
 .toggle-switcho-container {
   align-items: flex-start;
   display: flex;
@@ -238,10 +305,10 @@ input:checked + .slider:before {
   min-width: 431px;
   position: relative;
 }
-.city-or-zip {
+.city-container {
   height: 107px;
   position: relative;
-  width: 672px;
+  width: 400px;
   left: 200px; 
 }
 .city{
@@ -251,106 +318,111 @@ input:checked + .slider:before {
   top: 0;
   width: 260px;
 }
-.zip-code {
-  height: 50px;
-  left: 290px;
-  position: absolute;
-  top: 0;
-  width: 188px;
-}
-.or {
-  color: var(--black);
-  font-family:"Inter";
-  font-size: 26px;
-  font-weight: 600;
-  left: 50px;
-  line-height: normal;
-  position: absolute;
-  text-align: center;
-  top: 10px;
-  width: 254px;
-}
-.locationNavPosition {
-  position: relative;
-  display: inline-flex;
-  align-items: safe center;
-  top: -0.2%;
-  margin-top: 2%;
-  width: 88%;
-  z-index: 1;
- 
-}
-.save-button {
-  height: 80px;
-  margin-top: 250px;
-  position: relative;
-  width: 706px;
-  margin-left: -770px; 
 
-}
-.rectangle-272 {
-  background-color: var(--black);
-  height: 80px;
-  left: 600px;
-  position: absolute;
-  top: -340px;
-  width: 335px;
-}
-.save {
-  color: var(--white);
-  font-weight: 600;
-  left: 410px;
-  line-height: normal;
-  position: absolute;
-  text-align: center;
-  top: -320px;
-  width: 706px;
-}
-
-@media screen and (min-width: 992px) and (max-width: 1440px){
-  .locationNavPosition {
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 2%;
-    width: 83%;
-    z-index: 1;
-  }
-
-}
-@media screen and (min-width: 576px) and (max-width: 992px){
-  .locationNavPosition {
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 2%;
-    width: 75%;
-    z-index: 1;
-  }
-}
-
-@media screen and (min-width: 375px) and (max-width: 576px){
-  .locationNavPosition {
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 2%;
-    width: 70%;
-    z-index: 1;
-  }
-
-}
-
-@media screen and (max-width: 375px){
-
-  .locationNavPosition{
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 2%;
-    width: 80%;
-    z-index: 1;
-  }
+.save-button-container{
+  width: 100%; 
+  height: 20%; 
   
 }
+button {
+  font-family: 'Inter';
+  font-style: normal;
+  font-size: large;
+  font-weight: bold;
+  padding: 0.7em 10em;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+  margin-left: 528px; 
+  transform: scale(1.2); 
+  margin-top: 80px; 
+}
+
+@media screen and (min-width: 992px) and (max-width: 1240px) {
+
+  .location-text-container{
+    margin-left: 200px; 
+  }
+
+
+
+}
+
+@media screen and (min-width: 576px) and (max-width: 992px) {
+
+
+  .location-text-container{
+    transform: scale(0.98); 
+    margin-left: 30px; 
+  }
+
+  .text-column2{
+    margin-left: -80px; 
+  }
+
+  .save-button-container{
+  transform: scale(0.95); 
+  margin-left: -261px; 
+}
+}
+
+@media screen and (min-width: 375px) and (max-width: 576px) {
+
+
+  .location-title{
+    margin-left: 20px;
+    margin-top: 140px;
+    transform: scale(0.7);
+  }
+
+  .location-text-container{
+    margin-top: 40px; 
+    margin-left: -100px; 
+    transform: scale(0.56);
+  }
+
+  .text-column2{
+    margin-left: -190px; 
+    transform: scale(0.9);
+  }
+
+  .save-button-container{
+    margin-top: -80px; 
+    margin-left: -340px; 
+    transform: scale(0.65); 
+  }
+
+}
+
+@media screen and (max-width: 374px) {
+
+.location-title{
+  margin-left: 20px; 
+  margin-top: 10px; 
+  transform: scale(0.5);
+}
+
+.text-column1{
+  transform: scale(0.7);
+}
+
+.text-column2{
+  transform: scale(0.7); 
+  margin-left: -280px; 
+}
+
+.location-text-container{
+  margin-top: -5px; 
+  margin-left: -120px; 
+  transform: scale(0.7);
+}
+
+.save-button-container{
+  margin-top: -100px; 
+  margin-left: -270px; 
+  transform: scale(0.5);
+}
+
+}
+
 </style>

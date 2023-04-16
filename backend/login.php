@@ -35,16 +35,17 @@
             } else {
                 session_start();
                 $_SESSION["loggedin"] = true;
-                $_SESSION['user_id'] = $data["user_id"];
+                $_SESSION["user_id"] = $data["user_id"];
                 $_SESSION["username"] = $username;
                 $_SESSION["auth_token"] = $cookie;
+
                 $res = array(
                     "status" => 1,
                     "auth_token" => $cookie,
+                    "user_id" => $_SESSION["user_id"],
                 );
             }
             echo json_encode($res);
-            exit;
         }
     }
 ?>
