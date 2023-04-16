@@ -38,7 +38,7 @@
     if(isset($_FILES['image']['name'])){
 
         // Set the target directory to store the images as uploads/
-        $targetDir = "../../../img/uploaded_images/";
+        $targetDir = "../../../img/";
         // $targetDir = "../uploads/";
         $imageBaseName = basename($_FILES["image"]["name"]); //basename() may prevent filesystem traversal attacks
         $extension = strtolower(pathinfo($imageBaseName, PATHINFO_EXTENSION)); //jpg, jpeg, or png 
@@ -92,6 +92,7 @@
     $output = array(
         'message' => $message,
         'status' => $status,
+        'file' => $_FILES,
     );
     
     echo json_encode($output);
