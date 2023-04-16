@@ -228,7 +228,7 @@ input:checked + .slider:before {
   display: flex;
   gap: 23px;
   height: 289px;
-  margin-left: 200px;
+  margin-left: 500px;
   margin-top: 200px;
   width: 100%; 
 }
@@ -322,7 +322,7 @@ input:checked + .slider:before {
 .save-button-container{
   width: 100%; 
   height: 20%; 
-  
+  margin-left: 300px; 
 }
 button {
   font-family: 'Inter';
@@ -352,8 +352,8 @@ button {
 
 
   .location-text-container{
-    transform: scale(0.98); 
-    margin-left: 30px; 
+    transform: scale(0.8); 
+    margin-left: 150px; 
   }
 
   .text-column2{
@@ -362,7 +362,7 @@ button {
 
   .save-button-container{
   transform: scale(0.95); 
-  margin-left: -261px; 
+  margin-left: -100px; 
 }
 }
 
