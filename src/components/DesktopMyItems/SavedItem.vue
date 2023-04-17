@@ -5,7 +5,7 @@
         </div>
 
         <div class="image-container">
-            <img :src="require(`../../../img/uploaded_images/${upload_path}`)"> <!-- MUST BE IMAGES FROM /src/assets bc: https://stackoverflow.com/questions/56083044/how-to-pass-imageurl-as-props -->
+            <img :src="require(`../../../uploads/${upload_path}`)"> <!-- MUST BE IMAGES FROM /src/assets bc: https://stackoverflow.com/questions/56083044/how-to-pass-imageurl-as-props -->
         </div>
 
         <!-- <div class="footer">
