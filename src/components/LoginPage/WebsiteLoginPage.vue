@@ -108,7 +108,7 @@
         formData.append("username", this.username);
         formData.append("password", this.password);
         
-        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/login.php?action=login", formData, { withCredentials: true })
+        axios.post("http://localhost/project_s23-iweatherify/backend/login.php?action=login", formData, { withCredentials: true })
         .then((res) => {
             console.log(res)
             console.log(res.data)

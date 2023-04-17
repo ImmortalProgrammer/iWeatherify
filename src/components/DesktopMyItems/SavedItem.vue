@@ -4,9 +4,9 @@
             <h1>{{ image_name }}</h1>
         </div>
 
-        <div class="image-container">
-            <img :src="require(`@/assets/${upload_path}`)"> <!-- MUST BE IMAGES FROM /src/assets bc: https://stackoverflow.com/questions/56083044/how-to-pass-imageurl-as-props -->
-        </div>
+        <!-- <div class="image-container">
+            <img :src="require(`@/assets/${upload_path}`)">
+        </div> -->
 
         <!-- <div class="footer">
             <p class="edit-text">Edit</p>
