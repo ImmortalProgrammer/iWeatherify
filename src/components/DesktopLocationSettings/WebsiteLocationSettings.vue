@@ -21,7 +21,7 @@
         <div class="text-column2">
           <div class="toggle-switcho-container">
             <label class="switch">
-              <input type="checkbox" v-model="toggleValue">
+              <input type="checkbox" v-model="data.toggleValue">
                 <span class="slider round"></span>
                 </label>
           </div>
@@ -50,14 +50,9 @@ export default {
   name: "WebsiteLocationSettings",
   data(){
     return {
-      weatherData: {
-        userid: null, 
-        locationInput: '',
-      },
       data: {
         cityName: "",
         userid: null, 
-        APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
         toggleValue: 0, 
       }
     };
@@ -74,7 +69,7 @@ export default {
     async getUserId() {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
-        this.userid = response.data.userid;
+        this.data.userid = response.data.userid;
         console.log("User_id: "+response.data.userid);
         this.loadLocation();
       } catch (error) {
@@ -84,9 +79,9 @@ export default {
     saveLocation() {
       axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_location.php", 
       {
-        userid: this.userid,
+        userid: this.data.userid,
         city: this.data.cityName,
-        toggle: this.toggleValue, 
+        toggle: this.data.toggleValue, 
       })
       .then(response => {
         console.log(response.data);
@@ -100,12 +95,12 @@ export default {
       axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php",
       {
         params: {
-          userid: this.userid,
+          userid: this.data.userid,
         }
       })
       .then(response => {
-        this.city = response.data.city;
-        this.toggle = response.data.toggle; 
+        this.data.cityName = response.data.city;
+        this.data.toggleValue = response.data.toggle; 
       })
       .catch(error => {
         console.error("Unsuccessful axios get in loadLocation().", error);
@@ -236,8 +231,6 @@ input:checked + .slider:before {
   margin-left: 200px;
   margin-top: 200px;
   width: 100%; 
-  
-  transform: scale(1.3);
 }
 .text-column1 {
   align-items: flex-start;
