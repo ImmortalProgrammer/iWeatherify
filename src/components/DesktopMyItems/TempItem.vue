@@ -8,7 +8,7 @@
             v-for="item in items"
             :key = "item.id"
             :image_name = "item.clothing_name"
-            :upload_path = "item.upload_path"
+            :upload_path = '`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${item.upload_path}`'
           >
           </saved-item>
         </div>

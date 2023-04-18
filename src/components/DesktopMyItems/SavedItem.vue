@@ -5,7 +5,7 @@
         </div>
 
         <div class="image-container">
-            <img :src="require(`../../../uploads/${upload_path}`)"> <!-- MUST BE IMAGES FROM /src/assets bc: https://stackoverflow.com/questions/56083044/how-to-pass-imageurl-as-props -->
+            <img :src = upload_path >
         </div>
 
         <!-- <div class="footer">
@@ -26,9 +26,7 @@ export default {
         return {}
     },
     methods: {
-        getImageUrl(){
-            return this.upload_path
-        }
+    
     }
     
 }

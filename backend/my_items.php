@@ -17,29 +17,12 @@
         return false;
     }
 
-    //! #80 This function is no longer is use because we rename the image to be an alphanumeric string. Originally used the same image name that the user used -> would run into an issue if another user named their image the same thing
-    function image_exists($user_id, $image_path, $temp_category, $clothing_category){
-        include("connection.php");
-
-        $query = "SELECT * FROM my_items WHERE `user_id` = ? AND `upload_path` = ? AND `temp_category` = ? AND `clothing_category` = ?";
-        $query = $conn -> prepare($query);
-        $query -> bind_param("isss", $user_id, $image_path, $temp_category, $clothing_category);
-        $query -> execute();
-        $result = $query -> get_result();
-
-        if (mysqli_num_rows($result)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
     // Validate the file that was uploaded. Ensure that it was an image
     if(isset($_FILES['image']['name'])){
 
         // Set the target directory to store the images as uploads/
-        $targetDir = "../../../img/";
-        // $targetDir = "../uploads/";
+        // $targetDir = "../../../img/";
+        $targetDir = "../uploads/";
         $imageBaseName = basename($_FILES["image"]["name"]); //basename() may prevent filesystem traversal attacks
         $extension = strtolower(pathinfo($imageBaseName, PATHINFO_EXTENSION)); //jpg, jpeg, or png 
         $imageName = create_token(10); //Create a random alphanumeric string as image name so that attackers can't guess the image and also prevent users from acessing same named images
