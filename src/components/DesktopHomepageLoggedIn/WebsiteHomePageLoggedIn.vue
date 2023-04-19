@@ -11,7 +11,7 @@
           <div class = "diff_options">
             <a id = "menu_option_1_0" @click="pressOptionsMenuItems('menu_option_1_0')" style = "text-decoration:none; color: inherit;">24-Hour Forecast</a>
             <a id = "menu_option_1_1"  @click="pressOptionsMenuItems('menu_option_1_1')" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
-            <a id = "menu_option_1_2" @click="pressOptionsMenuItems('menu_option_1_2')" style = "text-decoration:none; color: inherit;">Outfit of the Day</a>
+            <a id = "menu_option_1_2" @click="pressOptionsMenuItems('menu_option_1_2'); fetchRecommendedOutfit();" style = "text-decoration:none; color: inherit;">Outfit of the Day</a>
             </div>
         </div>
       </div>
@@ -23,8 +23,38 @@
           Today's temperature is: <span :class="temperatureClass">{{ temperatureClass }}</span>
           {{ currentWeatherData.suggestedDescription.split("Today's temperature is: ")[1].split(temperatureClass)[1] }}
         </p>
-        <div class = "weather-icon-current1">
-          <img src = "">
+
+        <div class="outfit-recommendations">
+          <div class="outfit-box" v-if="recommendedOutfit.outerwear">
+            <h1>Outerwear</h1>
+            <img :src="recommendedOutfit.outerwear.image" alt="Outerwear" />
+            <p>{{ recommendedOutfit.outerwear.name }}</p>
+          </div>
+          <div class="outfit-box" v-if="recommendedOutfit.middlewear">
+            <h1>Middlewear</h1>
+            <img :src="recommendedOutfit.middlewear.image" alt="Middlewear" />
+            <p>{{ recommendedOutfit.middlewear.name }}</p>
+          </div>
+          <div class="outfit-box" v-if="recommendedOutfit.innerwear">
+            <h1>Innerwear</h1>
+            <img :src="recommendedOutfit.innerwear.image" alt="Innerwear" />
+            <p>{{ recommendedOutfit.innerwear.name }}</p>
+          </div>
+          <div class="outfit-box" v-if="recommendedOutfit.pants">
+            <h1>Pants</h1>
+            <img :src="recommendedOutfit.pants.image" alt="Pants" />
+            <p>{{ recommendedOutfit.pants.name }}</p>
+          </div>
+          <div class="outfit-box" v-if="recommendedOutfit.headwear">
+            <h1>Headwear</h1>
+            <img :src="recommendedOutfit.headwear.image" alt="Headwear" />
+            <p>{{ recommendedOutfit.headwear.name }}</p>
+          </div>
+          <div class="outfit-box" v-if="recommendedOutfit.shoes">
+            <h1>Shoes</h1>
+            <img :src="recommendedOutfit.shoes.image" alt="Shoes" />
+            <p>{{ recommendedOutfit.shoes.name }}</p>
+          </div>
         </div>
       </div>
 
@@ -149,8 +179,17 @@ export default {
         cold: 0,
         freezing: 0,
       },
+      recommendedOutfit: {
+        outerwear: null,
+        middlewear: null,
+        innerwear: null,
+        pants: null,
+        headwear: null,
+        shoes: null,
+      },
       data: {
         userid: null,
+        userIdLoaded: false,
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
         optionsVisibility: false,
         eightDayForecastGrayOut: true,
@@ -171,17 +210,12 @@ export default {
         await this.loadUnits();
         await this.loadTempSettings();
         await new Promise(resolve => setTimeout(resolve, 400));
+        this.userIdLoaded = true;
       } catch (error) {
         console.error("Unsuccessful request in getUserId().", error);
       }
     },
     async loadLocation() {
-        try {
-          const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
-          this.$data.data.userid = response.data.userid;
-        } catch (error) {
-          console.error("Unsuccessful request in getUserId().", error);
-        }
 	      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php",
 	      {
 	        params: {
@@ -226,10 +260,51 @@ export default {
         } else {
           console.error('Invalid response data:', response.data);
         }
+        return Promise.resolve();
       })
       .catch(error => {
         console.error("Unsuccessful axios post in loadTempSettings().", error);
+        return Promise.reject(error);
       });
+    },
+    async fetchRecommendedOutfit() {
+      if (!this.userIdLoaded) {
+        console.log("User ID not loaded yet.");
+        return;
+      }
+      const temperatureCategory = this.temperatureClass;
+      try {
+        const items = await this.getAllItems(temperatureCategory);
+        this.recommendedOutfit.outerwear = items.outerwear || null;
+        this.recommendedOutfit.middlewear = items.middlewear || null;
+        this.recommendedOutfit.innerwear = items.innerwear || null;
+        this.recommendedOutfit.pants = items.pants || null;
+        this.recommendedOutfit.headwear = items.headwear || null;
+        this.recommendedOutfit.shoes = items.shoes || null;
+      } catch (error) {
+        console.error("Failed to fetch the recommended outfit.", error);
+      }
+    },
+    async getAllItems(temp_category) {
+      let items = {};
+      try {
+        const response = await axios.post("http://localhost/project_s23-iweatherify/backend/get_my_items.php", {
+          user_id: this.$data.data.userid,
+          temp_category: temp_category,
+        });
+
+        if (response.data.message) {
+          for (const item of response.data.message) {
+            items[item.clothing_category] = {
+              name: item.clothing_name,
+              image: item.upload_path,
+            };
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      return items;
     },
     async outputTempPreferences() {
       if (this.userPreferences.tempPref === 'c') {
@@ -333,7 +408,6 @@ export default {
           closestCategory = key;
         }
       }
-
       temperatureMessage += closestCategory;
 
       return temperatureMessage;
@@ -364,8 +438,6 @@ export default {
           await this.eightDayForecast();
 
           this.currentWeatherData.locationInput = '';
-
-          this.userid = null;
         }
       } catch (Exception) {
         alert("City not found by the API!")
@@ -557,7 +629,6 @@ export default {
           this.eightDayForecastData.iconUrlArr[i-1] = iconUrl;
         }
         x++;
-        this.data.userid = null;
       }
     },
     setupDays() {
@@ -878,6 +949,54 @@ export default {
   background-color: rgba(102, 102, 102, 0.83);
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.outfit-recommendations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.outfit-box {
+  width: 200px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.outfit-box h1 {
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  text-decoration: underline black;
+  text-decoration-thickness: 5px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.outfit-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.outfit-box p {
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .current-unit1 {

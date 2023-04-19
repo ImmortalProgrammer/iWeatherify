@@ -11,29 +11,33 @@
     $input = json_decode(file_get_contents("php://input"), true);
     $user_id =  $input["user_id"];
     $temp_category = $input["temp_category"];
-    $clothing_category = $input["clothing_category"];
+    // Define an array of clothing categories
+    $clothing_categories = ['outerwear', 'middlewear', 'innerwear', 'pants', 'headwear', 'shoes'];
 
-    // Check the input data against the database
-    $row_exists = false;
-    $query = "SELECT * FROM `my_items` WHERE `user_id` = ? AND `temp_category` = ? AND `clothing_category` = ?";
-    $query = $conn -> prepare($query);
-    $query -> bind_param("iss", $user_id, $temp_category, $clothing_category);
-    $query -> execute();
-    $result = $query -> get_result();
+    // Loop through all clothing categories
+    foreach ($clothing_categories as $clothing_category) {
+        // Check the input data against the database
+        $row_exists = false;
+        $query = "SELECT * FROM `my_items` WHERE `user_id` = ? AND `temp_category` = ? AND `clothing_category` = ?";
+        $query = $conn->prepare($query);
+        $query->bind_param("iss", $user_id, $temp_category, $clothing_category);
+        $query->execute();
+        $result = $query->get_result();
 
-    //If there any rows associated with the query, load all the clothing_names and upload_paths
-    if ($result -> num_rows > 0) {
-
-        while($rows = $result->fetch_assoc()) {
-            // An associative array acts like a dictionary in python
-            $row = [
-                "id" => $rows["id"],
-                "clothing_name" => $rows["clothing_name"],
-                "upload_path" => $rows["name"]
-            ];
-            array_push($data, $row);
-          }
+        // If there are any rows associated with the query, load all the clothing_names and upload_paths
+        if ($result->num_rows > 0) {
+            while ($rows = $result->fetch_assoc()) {
+                // An associative array acts like a dictionary in python
+                $row = [
+                    "clothing_category" => $clothing_category,
+                    "clothing_name" => $rows["clothing_name"],
+                    "upload_path" => $rows["name"]
+                ];
+                array_push($data, $row);
+            }
+        }
     }
+
 
     $res = array(
         "message" => $data
