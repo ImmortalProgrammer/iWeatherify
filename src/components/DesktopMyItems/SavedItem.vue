@@ -4,9 +4,9 @@
             <h1>{{ image_name }}</h1>
         </div>
 
-        <!-- <div class="image-container">
-            <img :src="require(`@/assets/${upload_path}`)">
-        </div> -->
+        <div class="image-container">
+            <img :src = upload_path >
+        </div>
 
         <!-- <div class="footer">
             <p class="edit-text">Edit</p>
@@ -26,9 +26,7 @@ export default {
         return {}
     },
     methods: {
-        getImageUrl(){
-            return this.upload_path
-        }
+    
     }
     
 }
