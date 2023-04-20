@@ -60,7 +60,7 @@ export default {
       },
       async getUserId() {
         try {
-          const response = await axios.get("http://localhost/project_s23-iweatherify/backend/get_userid.php", { withCredentials: true });
+          const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
           this.userid = response.data.userid;
           console.log("The user id is: " + this.userid)
         } catch (error) {
@@ -68,7 +68,7 @@ export default {
         }
       },
       getAllItems(){
-        axios.post("http://localhost/project_s23-iweatherify/backend/get_my_items.php", 
+        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_my_items.php", 
         {
           user_id: this.userid,
           temp_category: this.temp_category,
