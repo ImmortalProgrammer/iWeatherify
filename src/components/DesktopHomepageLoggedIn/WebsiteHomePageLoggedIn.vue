@@ -372,6 +372,24 @@ export default {
         this.$data.currentWeatherData.suggestedOutfit = "";
       }
     },
+    saveToMyItems(){
+      axios.post("http://localhost/project_s23-iweatherify/backend/saved_items.php", {
+        "outerwear": this.recommendedOutfit.outerwear,
+        "middlewear": this.recommendedOutfit.middlewear,
+        "innerwear": this.recommendedOutfit.innerwear,
+        "pants": this.recommendedOutfit.pants,
+        "headwear": this.recommendedOutfit.headwear,
+        "shoes": this.recommendedOutfit.shoes,
+        "user_id": this.$data.data.userid,
+        "location": this.$data.currentWeatherData.locationInput,
+        "temp_category": this.temperatureClass,
+        "temp": this.currentWeatherData.currentTemp,
+        "temp_unit": this.userPreferences.tempPref
+      }).then((res) => {
+        console.log(res)
+        alert(res.data.result)
+      })
+    },
     temperatureMessage() {
       const currentTemp = parseFloat(this.$data.currentWeatherData.feelsLike);
       let temperatureMessage = "Today's temperature is: ";
@@ -958,6 +976,16 @@ export default {
   justify-content: center;
   align-items: center;
   padding-top: 20px;
+}
+
+.save-to-my-items{
+  padding: 2em;
+  font-size: large;
+  background:#1e7c85
+}
+
+.save-to-my-items:hover{
+  cursor: pointer;
 }
 
 .outfit-box {

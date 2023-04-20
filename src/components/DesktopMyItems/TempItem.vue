@@ -75,9 +75,16 @@ export default {
           clothing_category: this.clothing_category
         })
         .then(res => {
+          console.log(res)
           if(res != null){
+            let allMyItems = []
             let lod = JSON.parse(JSON.stringify(res.data.message))
-            this.items = lod
+            for(let obj of lod){
+              if(obj.clothing_category == this.clothing_category){
+                allMyItems.push(obj)
+              }
+            }
+            this.items = allMyItems
           } else {
             console.log("There was no data in the response")
           }
