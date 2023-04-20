@@ -48,7 +48,7 @@
     function username_exists($sanitized_username){
         include("connection.php");
         
-        $query = "SELECT * FROM users where username = ?";
+        $query = "SELECT * FROM users where userid = ?";
         $query = $conn -> prepare($query);
         $query -> bind_param("s", $sanitized_username);
         $query -> execute();
@@ -92,27 +92,34 @@
     }
 
     //When the user logs in, create an auth_token, hash it, store in data base with their username as an authenticated user
-    function add_auth_user($username, $hashed_cookie, $expire){
+    function add_auth_user($userid, $hashed_cookie, $expire_token){
         include("connection.php");
-        $query = "INSERT INTO `auth_users` (`username`, `auth_token`, 'expire') VALUES (?, ?, ?)";
+        $query = "INSERT INTO `auth_users` (`userid`, `auth_token`, 'expire_token') VALUES (?, ?, ?)";
         $query = $conn -> prepare($query);
-        $query -> bind_param("ssi", $username, $hashed_cookie, $expire);
+        $query -> bind_param("sss", $userid, $hashed_cookie, $expire_token);
         $query -> execute();
     }
 
     // When a user tries to access any restricted page, if they have an authenticated cookie associated with them, let them in
-    function is_valid_auth_token($username, $auth_token){
+    function is_valid_auth_token($userid, $auth_token){
         include("connection.php");
         
-        $query = "SELECT `username`, `auth_token` FROM auth_users where `username` = ?";
+        $query = "SELECT `userid`, `auth_token`, `expire_token` FROM auth_users where `userid` = ?";
         $query = $conn -> prepare($query);
-        $query -> bind_param("s", $username);
+        $query -> bind_param("s", $userid);
         $query -> execute();
         $result = $query -> get_result();
         $data = $result -> fetch_assoc();
-        $hashed_auth_token = $data["auth_token"]; // Get the stored hashed authentication token for this user from the database
+        $hashed_auth_token = $data["auth_token"]; 
+        $expire_token = $data["expire_token"]; 
+        
+        
+        if(hash("sha256", $auth_token) === $hashed_auth_token && time() - $expire_token <= 60){
 
-        if(hash("sha256", $auth_token) === $hashed_auth_token){
+            $query = "UPDATE auth_users SET `expire_token` = ? WHERE `userid` = ?";
+            $query = $conn -> prepare($query);
+            $query -> bind_param("is", time(), $userid);
+            $query -> execute();
             return true;
         } else {
             return false;
@@ -120,12 +127,12 @@
     }
 
     // TODO: When implementing logout functionality, would need to delete the instance of the auth_token from the database
-    function delete_auth_token($username){
+    function delete_auth_token($userid){
         include("connection.php");
         
-        $query = "DELETE FROM auth_users where `username` = ?";
+        $query = "DELETE FROM auth_users where `userid` = ?";
         $query = $conn -> prepare($query);
-        $query -> bind_param("s", $username);
+        $query -> bind_param("s", $userid);
         $query -> execute();
     }
 ?>
