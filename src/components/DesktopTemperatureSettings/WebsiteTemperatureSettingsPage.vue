@@ -67,7 +67,6 @@ export default {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
         this.userid = response.data.userid;
-        console.log("User_id: "+response.data.userid);
         this.loadTempSettings();
       } catch (error) {
         console.error("Unsuccessful request in getUserId().", error);
@@ -103,7 +102,6 @@ export default {
         freezing: this.tempValues.freezing
       })
       .then(response => {
-        console.log(response.data);
         alert("Temperatures Saved Successfully!");
       })
       .catch(error => {

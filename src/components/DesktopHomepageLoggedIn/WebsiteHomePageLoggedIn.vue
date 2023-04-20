@@ -288,7 +288,7 @@ export default {
     async getAllItems(temp_category) {
       let items = {};
       try {
-        const response = await axios.post("http://localhost/project_s23-iweatherify/backend/get_my_items.php", {
+        const response = await axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_my_items.php", {
           user_id: this.$data.data.userid,
           temp_category: temp_category,
         });
