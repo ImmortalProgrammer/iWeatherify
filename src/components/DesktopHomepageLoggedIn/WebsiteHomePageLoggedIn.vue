@@ -17,7 +17,7 @@
       </div>
 
       <div id = "outfit-of-the-day_1">
-        <p style="font-size: 5.5vh; padding-bottom: 3vh;">Outfit Recommendations for Today</p>
+        <p style="font-size: 5.5vh; border-bottom: 1vh solid black; padding: 0 5vw 1vh 5vw;">Outfit Recommendations for Today</p>
         <p style="font-size: 3.5vh; padding-top: 3vh;" v-if="currentWeatherData.suggestedDescription" >
           {{ currentWeatherData.suggestedDescription.split("Today's temperature is: ")[0] }}
           Today's temperature is: <span :class="temperatureClass">{{ temperatureClass }}</span>
@@ -27,32 +27,32 @@
         <div class="outfit-recommendations">
           <div class="outfit-box" v-if="recommendedOutfit.outerwear">
             <h1>Outerwear</h1>
-            <img :src="recommendedOutfit.outerwear.image" alt="Outerwear" />
+            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.outerwear.image}`" alt="Outerwear" />
             <p>{{ recommendedOutfit.outerwear.name }}</p>
           </div>
           <div class="outfit-box" v-if="recommendedOutfit.middlewear">
             <h1>Middlewear</h1>
-            <img :src="recommendedOutfit.middlewear.image" alt="Middlewear" />
+            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.middlewear.image}`" alt="Middlewear" />
             <p>{{ recommendedOutfit.middlewear.name }}</p>
           </div>
           <div class="outfit-box" v-if="recommendedOutfit.innerwear">
             <h1>Innerwear</h1>
-            <img :src="recommendedOutfit.innerwear.image" alt="Innerwear" />
+            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.innerwear.image}`" alt="Innerwear" />
             <p>{{ recommendedOutfit.innerwear.name }}</p>
           </div>
           <div class="outfit-box" v-if="recommendedOutfit.pants">
             <h1>Pants</h1>
-            <img :src="recommendedOutfit.pants.image" alt="Pants" />
+            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.pants.image}`" alt="Pants" />
             <p>{{ recommendedOutfit.pants.name }}</p>
           </div>
           <div class="outfit-box" v-if="recommendedOutfit.headwear">
             <h1>Headwear</h1>
-            <img :src="recommendedOutfit.headwear.image" alt="Headwear" />
+            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.headwear.image}`" alt="Headwear" />
             <p>{{ recommendedOutfit.headwear.name }}</p>
           </div>
           <div class="outfit-box" v-if="recommendedOutfit.shoes">
             <h1>Shoes</h1>
-            <img :src="recommendedOutfit.shoes.image" alt="Shoes" />
+            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.shoes.image}`" alt="Shoes" />
             <p>{{ recommendedOutfit.shoes.name }}</p>
           </div>
         </div>
@@ -80,7 +80,7 @@
       </div>
 
       <div id="weekly-weather_1">
-        <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast</p>
+        <p style="font-size: 5vh; border-bottom: 1vh solid black; padding: 0 5vw 1vh 5vw;">8-Day Forecast</p>
         <div class="day-next-1" v-for="(day, index) in eightDayForecastData.dates" :key="index">
           <p class="next-1">{{day}}</p>
           <p class="weatherState-1">{{eightDayForecastData.iconDescription[index]}}</p>
@@ -95,7 +95,7 @@
       </div>
 
       <div id="TwentyFourHour-weather_1">
-        <p style="font-size: 5vh; padding-bottom: 3vh;">24-Hour Forecast</p>
+        <p style="font-size: 5vh; border-bottom: 1vh solid black; padding: 0 5vw 1vh 5vw;">24-Hour Forecast</p>
         <div class="hour-next-1" v-for="(hour, index) in twentyFourHourForecastData.UTCdates" :key="index">
           <p class="next_hour-1">{{hour}}</p>
           <p class="weatherStateHour-1">{{twentyFourHourForecastData.iconDescription[index]}}</p>
@@ -699,6 +699,7 @@ export default {
   background-position: bottom;
   overflow-x: hidden;
   background-attachment: scroll;
+  font-family: sans-serif;
 }
 
 .menu_homepage_logged_in {

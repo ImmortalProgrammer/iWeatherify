@@ -40,7 +40,7 @@
           </div>
 
         <div id="TwentyFourHour-weather_2">
-          <p style="font-size: 5vh; padding-bottom: 3vh;">24-Hour Forecast</p>
+          <p style="font-size: 5vh; border-bottom: 1vh solid black; padding: 0 5vw 1vh 5vw;">24-Hour Forecast</p>
           <div class="hour-next-2" v-for="(hour, index) in twentyFourHourForecastData.UTCdates" :key="index">
             <p class="next_hour-2">{{hour}}</p>
             <p class="weatherStateHour-2">{{twentyFourHourForecastData.iconDescription[index]}}</p>
@@ -53,7 +53,7 @@
         </div>
 
         <div id="weekly-weather_2">
-          <p style="font-size: 5vh; padding-bottom: 3vh;">8-Day Forecast: </p>
+          <p style="font-size: 5vh; border-bottom: 1vh solid black; padding: 0 5vw 1vh 5vw;">8-Day Forecast: </p>
           <div class="day-next" v-for="(day, index) in eightDayForecastData.dates" :key="index">
             <p class = "next">{{ eightDayForecastData.dates[index] }}</p>
             <p class = "weatherState">{{ eightDayForecastData.iconDescription[index] }}</p>
@@ -300,7 +300,7 @@ export default {
   background-position: bottom;
   overflow-x: hidden;
   background-attachment: scroll;
-
+  font-family: sans-serif;
 }
 
 
