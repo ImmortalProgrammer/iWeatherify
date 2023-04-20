@@ -3,7 +3,7 @@
     <nav-bar class = "unitSettingsPageNav"></nav-bar>
 
     <div class="title-container">
-      <h1 class="unit-title">{{ title }}</h1>
+      <h1 class="unit-title">Unit Settings</h1>
     </div>
 
     <div class="row-format-container">
@@ -26,14 +26,15 @@
       <div class="row">
         <p class="unit-font">Pressure</p>
         <select class="pressure-container" id="dropdown-container-font" v-model="pressure">
-          <option value="mb">mb</option>
           <option value="hg">Hg</option>
+          <option value="mb">mb</option>
         </select>
       </div>
 
       <div>
         <button @click="saveUnits()">Save</button>
       </div>
+      <SettingsComponent></SettingsComponent>
     </div>
   </div>
 </template>
@@ -41,9 +42,13 @@
 <script>
 import axios from "axios";
 import NavBar from "@/NavBar/NavBar.vue";
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
 export default {
   name: "WebsiteUnitsPage",
-  components: {NavBar},
+  components: {
+    NavBar,
+    SettingsComponent
+  },
   data() {
     return {
       userid: null,
@@ -60,7 +65,6 @@ export default {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
         this.userid = response.data.userid;
-        console.log("User_id: "+response.data.userid);
         this.loadUnits();
       } catch (error) {
         console.error("Unsuccessful request in getUserId().", error);
@@ -75,7 +79,6 @@ export default {
         pressure: this.pressure,
       })
       .then(response => {
-        console.log(response.data);
         alert("Units saved successfully.");
       })
       .catch(error => {
@@ -99,11 +102,6 @@ export default {
       });
     },
   },
-  props: [
-    "defaultLogo4",
-    "title",
-    "ellipse6Props",
-  ]
 };
 </script>
 
@@ -127,7 +125,6 @@ export default {
   justify-content: center;
   align-items: center;
   width: 45%;
-  height: 10%;
 }
 
 .unit-title {
@@ -189,8 +186,6 @@ export default {
   font-weight: 400;
 }
 
-
-
 #dropdown-container-font {
   font-size: 1.5em;
   font-family: 'Inter';
@@ -208,18 +203,23 @@ button {
   padding: 0.7em 10em;
   color: white;
   background-color: black;
+  border-radius: 15px;
   cursor: pointer;
 }
 
 @media screen and (min-width: 992px) and (max-width: 1440px) {
-
-
   .row {
     width: 50%;
   }
 }
 
 @media screen and (min-width: 576px) and (max-width: 992px) {
+  .title-container{
+    transform: scale(0.9);
+    width: auto;
+    top: 150px;
+  }
+
   .row-format-container {
     height: 200px;
   }
@@ -235,6 +235,11 @@ button {
 }
 
 @media screen and (min-width: 375px) and (max-width: 576px) {
+  .title-container{
+    transform: scale(0.7);
+    width: auto;
+    top: 170px;
+  }
 
   .row {
     width: 90%;
@@ -246,7 +251,10 @@ button {
 }
 
 @media screen and (max-width: 375px) {
-
+  .title-container{
+    transform: scale(0.5);
+    width: auto;
+  }
 
   .row {
     width: 90%;

@@ -1,38 +1,8 @@
 <?php
     // Connection Setup
-    header("Content-Type: application/json; charset=UTF-8");
-    $allowed_origins = array(
-        'https://www-student.cse.buffalo.edu',
-        'http://localhost:8080'
-    );
-      
-    // Check if the request has an 'Origin' header
-    if (isset($_SERVER['HTTP_ORIGIN'])) {
-        // Check if the origin is in the list of allowed origins
-        if (in_array($_SERVER['HTTP_ORIGIN'], $allowed_origins)) {
-            header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
-        }
-    }
-    header("Access-Control-Allow-Methods: POST, GET");
-    header("Access-Control-Allow-Headers: Content-Type");
-    header("Access-Control-Allow-Credentials: true");
-    $servername = "oceanus";
-    $username = "jpan26";
-    $password = "50314999";
-    $dbname = "cse442_2023_spring_team_a_db";
-
-    // $servername = "localhost";
-    // $username = "root";
-    // $password = "";
-    // $dbname = "cse442";
-
-    // Create a connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include("connection.php");
+    include("security.php");
+    access_control();
 
     $userid = $_GET["userid"];
 
@@ -50,7 +20,7 @@
         $default_values = array(
             "temperature" => "f",
             "wind" => "mph",
-            "pressure" => "mb",
+            "pressure" => "hg",
         );
     
         // Insert default values into the database
@@ -69,5 +39,4 @@
     }
 
     $stmt->close();
-    $conn->close();
 ?>

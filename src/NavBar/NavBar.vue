@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 .nav-bar-container_1 {
-  position: fixed;
+  position: absolute;
   display: inline-block;
   align-items: safe center;
   width: 100%;
@@ -59,7 +59,7 @@ export default {
 .profile_image_loggedin{
   position: absolute;
   margin: 0;
-  left: 79%;
+  left: 80.5%;
   object-fit: scale-down;
   height: 100%;
   width: 7%;
@@ -109,7 +109,7 @@ export default {
   }
 
   .profile_image_loggedin{
-    margin-top: -0.4%;
+    margin-top: -0.2%;
     height: 40px;
     left: 70.5%;
   }
@@ -127,9 +127,10 @@ export default {
   }
 
   .profile_image_loggedin{
-    margin-top: -1.8%;
-    height: 40px;
-    left: 64%;
+   top: 1.9%;
+   left: 80.5%;
+   height: 55px;
+   width: 45px; 
   }
 }
 @media screen and (min-width: 200px) and (max-width: 499px) {
@@ -145,10 +146,10 @@ export default {
   }
 
   .profile_image_loggedin{
-    margin-top: -2%;
+    margin-top: -2.2%;
     height: 40px;
-    left: 60%;
-    transform: scale(0.8)
+    left: 64%;
+    transform: scale(0.7)
   }
 }
 </style>

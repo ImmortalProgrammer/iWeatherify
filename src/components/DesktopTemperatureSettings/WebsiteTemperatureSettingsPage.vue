@@ -1,12 +1,10 @@
 <template>
   <div class="website-temperature-settings-page">
-    <div class="nav-bar-container">
-      <nav-bar style = "margin-top: 3.4vh;"></nav-bar>
-    </div>
+    <nav-bar class = "tempSettingsPageNav"></nav-bar>
 
     <div class = "pushDowTempDisplay">
       <div class="title-container">
-        <h1 class="temp-setting-title">{{ title }}</h1>
+        <h1 class="temp-setting-title">Temperature Settings</h1>
       </div>
       
       <div class="temp-container">
@@ -19,10 +17,15 @@
 
             <input class= "temp-input" type="text" :id="label" :name="label" v-model="tempValues[label]" @input="updateSliderValue(label, $event)" @keypress="isNumber($event)" pattern="\d*"/>
 
-            <button :name="label + '-button'" @click="saveTempSettings()">Save</button>
           </div>
+        
+          <div id="save-button-container">
+            <button @click="saveTempSettings()">Save</button>
+          </div>
+        
         </div>
       </div>
+      <SettingsComponent></SettingsComponent>
     </div>
   </div>
 </template>
@@ -32,6 +35,7 @@ import axios from "axios";
 import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
 import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 import NavBar from "@/NavBar/NavBar.vue";
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
 export default {
   name: "WebsiteTemperatureSettingsPage",
   data() {
@@ -52,11 +56,17 @@ export default {
     this.getUserId();
   },
   methods: {
+    enforceTemperatureConstraints() {
+      this.tempValues.warm = Math.min(this.tempValues.warm, this.tempValues.hot - 1);
+      this.tempValues.ideal = Math.min(this.tempValues.ideal, this.tempValues.warm - 1);
+      this.tempValues.chilly = Math.min(this.tempValues.chilly, this.tempValues.ideal - 1);
+      this.tempValues.cold = Math.min(this.tempValues.cold, this.tempValues.chilly - 1);
+      this.tempValues.freezing = Math.min(this.tempValues.freezing, this.tempValues.cold - 1);
+    },
     async getUserId() {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
         this.userid = response.data.userid;
-        console.log("User_id: "+response.data.userid);
         this.loadTempSettings();
       } catch (error) {
         console.error("Unsuccessful request in getUserId().", error);
@@ -92,7 +102,6 @@ export default {
         freezing: this.tempValues.freezing
       })
       .then(response => {
-        console.log(response.data);
         alert("Temperatures Saved Successfully!");
       })
       .catch(error => {
@@ -101,9 +110,11 @@ export default {
     },
     updateInputValue(label, event) {
       this.tempValues[label] = event.target.value;
+      this.enforceTemperatureConstraints();
     },
     updateSliderValue(label, event) {
-      this.tempValues[label] = event.target.value;  
+      this.tempValues[label] = event.target.value;
+      this.enforceTemperatureConstraints();
     },
     isNumber(event) {
       if (event.key.match(/[\d-]/)) {
@@ -130,10 +141,8 @@ export default {
     NavBar,
     MenuBarLoggedIn,
     menuBar,
+    SettingsComponent,
   },
-  props: [
-    "title"
-  ]
 };
 </script>
 
@@ -143,6 +152,10 @@ export default {
   width: 100%; 
   height: 100%;
   background: #FFFFFF;
+}
+
+.tempSettingsPageNav {
+  top: -0.85%;
 }
 
 .pushDowTempDisplay {
@@ -186,7 +199,6 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 10%;
   padding-top: 15px;
   padding-bottom: 25px;
 }
@@ -215,7 +227,7 @@ export default {
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  height: 10%;
+  padding-right: 60px;
 }
 
 .hot-to-freezing-container {
@@ -225,7 +237,6 @@ export default {
   justify-content: space-between;
   line-height: 100px;
   text-align: center;
-  height: 100%;
 }
 
 .hot-to-freezing-font {
@@ -250,23 +261,28 @@ export default {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
+  text-align: center;
   font-size: 1em;
-  width: 100px;
-  margin-left: 5px;
-  padding-left: 5px;
+  width: 50px;
   border-radius: 15px;
 }
 
+#save-button-container{
+  display: flex;
+  justify-content: center;
+}
+
 button {
-  color: white;
   font-family: 'Inter';
   font-style: normal;
-  font-size: 1em;
-  background-color: #478887;
-  margin-left: -51px;
-  padding: 0 5px 0 5px;
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.7em 9em;
+  color: white;
+  background-color: black;
   cursor: pointer;
-  border-radius: 0 15px 15px 0;
+  border-radius: 15px;
 }
 
 @media screen and (min-width: 992px) and (max-width: 1440px) {
@@ -338,10 +354,9 @@ button {
 }
 
 @media screen and (min-width: 375px) and (max-width: 576px) {
-  .logo-container {
-    transform: scale(0.7); 
+  .pushDowTempDisplay {
+    margin-top: 30.5%;
   }
-
   .title-container{
     transform: scale(0.8);
     padding-top: 55px;
@@ -360,33 +375,6 @@ button {
     font-size: 2em;
   }
 
-  .nav-bar-container {
-    position: relative;
-    display: inline-flex;
-    align-items: safe center;
-    margin-top: 2%;
-    width: 70%;
-    z-index: 1;
-  }
-
-  .logo-container {
-    position: relative;
-    width: 5%;
-    left: 5%;
-  }
-
-  .menu-bar-container {
-    position: relative;
-    left: 112.5%;
-    top: -5.1vh;
-    scale: 1;
-  }
-  .profile-img-container {
-    position: relative;
-    scale: 0.90;
-    top: 0.5vh;
-    left: 85%;
-  }
 }
 
 @media screen and (max-width: 375px) {
@@ -395,8 +383,9 @@ button {
   }
 
   .title-container {
-    transform: scale(0.6);
-    width: 50%;
+    transform: scale(0.5);
+    width: auto;
+    top: 30px;
     margin-bottom: -150px;
   }
 

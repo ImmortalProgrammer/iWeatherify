@@ -4,38 +4,35 @@
     <transition name="modal-fade">
         <div class="modal-backdrop">
             <div class="modal">
+
+              <div v-if="showErrorModal">
+                <error-modal
+                  :show-modal="showErrorModal"
+                  :title="errorTitle"
+                  :message="errorMessage"
+                  @close-modal="closeErrorModal"
+                ></error-modal>
+              </div>
+
                 <header class="modal-header">    
-                    
-
-
-                    <!-- <button
-                        type="button"
-                        class="btn-close"
-                        @click="close"
-                    >
-                        x
-                    </button> -->
+                  <div class="title-container">
+                      <h1 class="title">{{ title }}</h1>
+                  </div>
                 </header>
         
                 <div class="AddClothingModal">
-
-        <div class="title-container">
-            <h1 class="title">{{ title }}</h1>
-        </div>
-    
                     <div class="Inputs">
-                        <form> <!-- TODO - Replace with actual php file when implemented -->
+                        <form>
                             <label>Clothing name: </label>
-                            <input>
+                            <input type="text" id="clothing_name" required v-model="clothing_name">
                             <br>
 
-                            <input type="file">
-                            <!-- <button class="add-btn" @click.prevent = "$router.push('/addClothing')">Upload image</button> -->
+                            <input type="file" @change="onFileSelected" required>
                             <br>
                             <br>
+                            <p>Please only upload photos that are less than 2MB</p>
 
-                            <button class="save-btn">SAVE</button>
-
+                            <button class="save-btn" @click.prevent="uploadImage">SAVE</button>
                         </form>
                     </div>
                 </div>
@@ -46,7 +43,7 @@
                         class="btn-green"
                         @click="close"
                     >
-                        Close Modal
+                        Cancel
                     </button>
                 </footer>
             </div>
@@ -55,11 +52,72 @@
   </template>
   
   <script>
+  import axios from "axios"
+  import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
   export default {
-    props: ["showModal", "title"],
+    props: ["temp_category", "clothing_category", "title"],
+    components: {
+      ErrorModal
+    },
+    data(){
+      return {
+        userid: null,
+        selectedFile: null,
+        clothing_name: "",
+        errorTitle: "Upload error",
+        errorMessage: "There was something wrong when uploading your image :/",
+        showErrorModal: false,
+      }
+    },
+    created() {
+      this.getUserId();
+    },    
     methods: {
+        closeErrorModal(){
+          this.showErrorModal = false;
+        },
         close(){
             this.$emit("close");
+        },
+        onFileSelected(event){
+          this.selectedFile = event.target.files[0]
+        },
+        async getUserId() {
+          try {
+            const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+            this.userid = response.data.userid;
+            console.log("The user id is: " + this.userid)
+          } catch (error) {
+            console.error("Unsuccessful request in getUserId().", error);
+          }
+        },
+        uploadImage(){
+          const fd = new FormData()
+          if(!this.selectedFile){
+            alert("Make sure you upload an image with a name before saving")
+          } else {
+            fd.append('image', this.selectedFile, this.selectedFile.name)
+            fd.append('user_id', this.userid)
+            fd.append("clothing_name", this.clothing_name)
+            fd.append('temp_category', this.temp_category)
+            fd.append('clothing_category', this.clothing_category)
+            // https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/my_items.php
+            // http://localhost/project_s23-iweatherify/backend/my_items.php
+            axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/my_items.php", fd, {header: {'Content-Type':'multipart/form-data'}}).then(
+              (res) => {
+                if(res.data.status === 1){
+                  console.log("This is the response from the server")
+                  console.log(res)
+                  this.close()
+                } else{
+                  console.log(res)
+                  this.errorTitle = "Upload Error";
+                  this.errorMessage = res.data.message;
+                  this.showErrorModal = true;
+                }
+              }
+            )
+          }
         }
     },
   };
@@ -74,13 +132,10 @@
     left: 0;
     right: 0;
     background-color: rgba(0, 0, 0, 0.3);
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto; */
   }
 
   .modal {
+    font-family: 'Inter';
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
@@ -96,8 +151,7 @@
 
   }
 
-  .modal-header,
-  .modal-footer {
+  .modal-header, .modal-footer {
     padding: 15px;
     display: flex;
   }
@@ -105,33 +159,21 @@
   .modal-header {
     position: relative;
     border-bottom: 1px solid #eeeeee;
-    color: #4AAE9B;
+    color: #264653;
     justify-content: space-between;
+  }
+
+  .title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: xx-large;
+    font-weight: bold;
   }
 
   .modal-footer {
     border-top: 1px solid #eeeeee;
     flex-direction: column;
     justify-content: flex-end;
-  }
-
-  .modal-body {
-    position: relative;
-    /* padding: 20px 10px; */
-  }
-
-  .btn-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: none;
-    font-size: 20px;
-    padding: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #4AAE9B;
-    background: transparent;
-    cursor: pointer;
   }
 
   .btn-green {
@@ -142,17 +184,6 @@
     cursor: pointer;
   }
 
-  .add-btn{
-    font-family: 'Inter';
-    font-style: normal;
-    font-size: large;
-    font-weight: bold;
-    padding: 0.7em;
-    color: white;
-    background-color: grey;
-    cursor: pointer;
-}
-
 .save-btn{
     font-family: 'Inter';
     font-style: normal;
@@ -160,7 +191,7 @@
     font-weight: bold;
     padding: 0.7em 10em;
     color: white;
-    background-color: black;
+    background-color: #264653;
     cursor: pointer;
 }
 
