@@ -1,8 +1,18 @@
 <template>
   <div id="app1">
-    <nav-bar class = "HomePageNavBar"></nav-bar>
-
     <div class="container-center-horizontal1">
+      <nav-bar class = "HomePageNavBar"></nav-bar>
+
+      <div v-if="$data.weatherAlert.showWeatherAlert" class = "alertBox">
+        <weather-popup
+            :sender-name="$data.weatherAlert.senderName"
+            :event-alert="$data.weatherAlert.eventAlert"
+            :description="$data.weatherAlert.description"
+            :show-alert="$data.weatherAlert.showWeatherAlert"
+            @close-alert="$data.weatherAlert.showWeatherAlert = false"
+        ></weather-popup>
+      </div>
+
       <div class = "options_logged_in">
         <div class ="menu_homepage_logged_in" @click="pressOptions()">
           <p id = "optionsText">Open Options</p>
@@ -78,6 +88,7 @@
           <p class="pressure-1Hourly">Pressure: {{twentyFourHourForecastData.pressureArr[index]}} {{outputPreferences.pressurePrefOutput}}</p>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -87,6 +98,7 @@ import axios from "axios";
 import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
 import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 import NavBar from "@/NavBar/NavBar.vue";
+import WeatherPopup from "@/components/WeatherAlert/WeatherPopup.vue";
 
 export default {
   name: "WebsiteHomePageLoggedIn",
@@ -110,14 +122,14 @@ export default {
       },
       eightDayForecastData: {
         //Index 0 starts one day after the current weather
-        dates: ['', '', '', '', '', '', '', ''],
-        iconDescription: ['', '', '', '', '', '', '', ''],
-        highTempArr: ['', '', '', '', '', '', '', ''],
-        lowTempArr: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ''],
-        feelsLikeArr: ['', '', '', '', '', '', '', ''],
-        iconUrlArr: ['', '', '', '', '', '', '', ''],
-        windArr: ['', '', '', '', '', '', '', ''],
-        pressureArr: ['', '', '', '', '', '', '', ''],
+        dates: new Array(8),
+        iconDescription: new Array(8),
+        highTempArr: new Array(8),
+        lowTempArr: new Array(8),
+        feelsLikeArr: new Array(8),
+        iconUrlArr: new Array(8),
+        windArr: new Array(8),
+        pressureArr: new Array(8),
       },
       twentyFourHourForecastData: {
         //Index 0 starts one hour after the current weather
@@ -148,6 +160,13 @@ export default {
         chilly: 0,
         cold: 0,
         freezing: 0,
+      },
+      weatherAlert: {
+        showWeatherAlert: false,
+        senderName: '',
+        eventAlert: '',
+        description: '',
+
       },
       data: {
         userid: null,
@@ -356,16 +375,15 @@ export default {
         } else {
           //Setup the dates data structure
           this.setupDays();
-          //Sets up the current weather as of now
+          //Sets up the current weather
           await this.currentWeather();
           //24-Hour Forecast
           await this.twentyFourForecast();
-          //Seven-Day Forecast
+          //Eight-Day Forecast
           await this.eightDayForecast();
-
+          //Clears Location Input
           this.currentWeatherData.locationInput = '';
 
-          this.userid = null;
         }
       } catch (Exception) {
         alert("City not found by the API!")
@@ -448,7 +466,7 @@ export default {
       const data = weatherAPI['data']['list'];
       for (let x in data) {
         const currentData = data[x.toString()];
-        this.twentyFourHourForecastData.UTCdates[x] = currentData['dt_txt'].toString().slice(11) + ' UTC';;
+        this.twentyFourHourForecastData.UTCdates[x] = currentData['dt_txt'].toString().slice(11) + ' UTC';
         this.twentyFourHourForecastData.iconDescription[x] = currentData['weather']['0']['description'].split(' ')
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
@@ -557,7 +575,6 @@ export default {
           this.eightDayForecastData.iconUrlArr[i-1] = iconUrl;
         }
         x++;
-        this.data.userid = null;
       }
     },
     setupDays() {
@@ -579,6 +596,7 @@ export default {
     },
   },
   components: {
+    WeatherPopup,
     NavBar,
     MenuBarLoggedIn,
     menuBar
@@ -627,6 +645,7 @@ export default {
   background-size: cover;
   background-position: bottom;
   overflow-x: hidden;
+
   background-attachment: scroll;
 }
 

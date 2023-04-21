@@ -92,12 +92,12 @@ export default {
       },
       eightDayForecastData: {
         //Index 0 starts one day after the current weather)
-        dates: ['', '', '', '', '', '', '', ''],
-        iconDescription: ['', '', '', '', '', '', '', ''],
-        highTempArr: ['', '', '', '', '', '', '', ''],
-        lowTempArr: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ''],
-        feelsLikeArr: ['', '', '', '', '', '', '', ''],
-        iconUrlArr: ['', '', '', '', '', '', '', ''],
+        dates: new Array(8),
+        iconDescription: new Array(8),
+        highTempArr: new Array(8),
+        lowTempArr: new Array(8),
+        feelsLikeArr: new Array(8),
+        iconUrlArr: new Array(8),
       },
       twentyFourHourForecastData: {
         //Index 0 starts one hour after the current weather
