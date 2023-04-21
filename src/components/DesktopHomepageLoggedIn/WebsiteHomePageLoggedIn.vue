@@ -55,6 +55,7 @@
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.shoes.image}`" alt="Shoes" />
             <p>{{ recommendedOutfit.shoes.name }}</p>
           </div>
+          <button class="save-to-my-items" @click.prevent="saveToMyItems">Save to My Items</button>
         </div>
       </div>
 
