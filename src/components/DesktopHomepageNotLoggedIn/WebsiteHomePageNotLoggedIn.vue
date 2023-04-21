@@ -4,6 +4,17 @@
         <div class = "menu-location">
           <menu-bar></menu-bar>
         </div>
+
+      <div v-if="$data.weatherAlert.showWeatherAlert" class = "alertBox">
+        <weather-popup
+            :sender-name="$data.weatherAlert.senderName"
+            :event-alert="$data.weatherAlert.eventAlert"
+            :description="$data.weatherAlert.description"
+            :show-alert="$data.weatherAlert.showWeatherAlert"
+            @close-alert="$data.weatherAlert.showWeatherAlert = false"
+        ></weather-popup>
+      </div>
+
       <div class = "options_logged_in_2">
         <div class ="menu_homepage_logged_in_2" @click="pressOptions()">
           <p id = "optionsText_2">Open Options</p>
@@ -75,6 +86,7 @@
 <script>
 import axios from "axios";
 import menuBar from "@/components/menuBars/menuBarNonLoggedIn.vue";
+import WeatherPopup from "@/components/WeatherAlert/WeatherPopup.vue";
 export default {
   name: "WebsiteHomePageNotLoggedIn",
   data() {
@@ -92,12 +104,12 @@ export default {
       },
       eightDayForecastData: {
         //Index 0 starts one day after the current weather)
-        dates: ['', '', '', '', '', '', '', ''],
-        iconDescription: ['', '', '', '', '', '', '', ''],
-        highTempArr: ['', '', '', '', '', '', '', ''],
-        lowTempArr: [' ', ' ', ' ', ' ', ' ', ' ', ' ', ''],
-        feelsLikeArr: ['', '', '', '', '', '', '', ''],
-        iconUrlArr: ['', '', '', '', '', '', '', ''],
+        dates: new Array(8),
+        iconDescription: new Array(8),
+        highTempArr: new Array(8),
+        lowTempArr: new Array(8),
+        feelsLikeArr: new Array(8),
+        iconUrlArr: new Array(8),
       },
       twentyFourHourForecastData: {
         //Index 0 starts one hour after the current weather
@@ -111,6 +123,12 @@ export default {
         windArr: new Array(24),
         pressureArr: new Array(24),
         timezoneOffset: 0,
+      },
+      weatherAlert: {
+        showWeatherAlert: false,
+        senderName: '',
+        eventAlert: '',
+        description: '',
       },
       data: {
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
@@ -276,6 +294,7 @@ export default {
     },
   },
   components: {
+    WeatherPopup,
     menuBar
   },
   props: [
