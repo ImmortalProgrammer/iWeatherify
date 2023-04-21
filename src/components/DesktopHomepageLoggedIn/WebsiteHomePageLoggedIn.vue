@@ -196,7 +196,6 @@ export default {
         senderName: '',
         eventAlert: '',
         description: '',
-
       },
       recommendedOutfit: {
         outerwear: null,
