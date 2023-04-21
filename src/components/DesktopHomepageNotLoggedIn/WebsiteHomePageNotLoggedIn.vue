@@ -4,6 +4,17 @@
         <div class = "menu-location">
           <menu-bar></menu-bar>
         </div>
+
+      <div v-if="$data.weatherAlert.showWeatherAlert" class = "alertBox">
+        <weather-popup
+            :sender-name="$data.weatherAlert.senderName"
+            :event-alert="$data.weatherAlert.eventAlert"
+            :description="$data.weatherAlert.description"
+            :show-alert="$data.weatherAlert.showWeatherAlert"
+            @close-alert="$data.weatherAlert.showWeatherAlert = false"
+        ></weather-popup>
+      </div>
+
       <div class = "options_logged_in_2">
         <div class ="menu_homepage_logged_in_2" @click="pressOptions()">
           <p id = "optionsText_2">Open Options</p>
@@ -111,6 +122,12 @@ export default {
         windArr: new Array(24),
         pressureArr: new Array(24),
         timezoneOffset: 0,
+      },
+      weatherAlert: {
+        showWeatherAlert: false,
+        senderName: '',
+        eventAlert: '',
+        description: '',
       },
       data: {
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',

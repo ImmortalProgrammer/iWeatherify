@@ -166,7 +166,6 @@ export default {
         senderName: '',
         eventAlert: '',
         description: '',
-
       },
       data: {
         userid: null,
