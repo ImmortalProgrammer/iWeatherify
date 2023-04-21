@@ -118,6 +118,7 @@
           <p class="pressure-1Hourly">Pressure: {{twentyFourHourForecastData.pressureArr[index]}} {{outputPreferences.pressurePrefOutput}}</p>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -455,6 +456,7 @@ export default {
           await this.eightDayForecast();
           //Clears Location Input
           this.currentWeatherData.locationInput = '';
+
         }
       } catch (Exception) {
         alert("City not found by the API!")
@@ -716,6 +718,7 @@ export default {
   background-size: cover;
   background-position: bottom;
   overflow-x: hidden;
+
   background-attachment: scroll;
   font-family: sans-serif;
 }
