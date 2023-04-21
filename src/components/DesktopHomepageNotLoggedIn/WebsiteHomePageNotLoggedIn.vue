@@ -86,6 +86,7 @@
 <script>
 import axios from "axios";
 import menuBar from "@/components/menuBars/menuBarNonLoggedIn.vue";
+import WeatherPopup from "@/components/WeatherAlert/WeatherPopup.vue";
 export default {
   name: "WebsiteHomePageNotLoggedIn",
   data() {
@@ -293,6 +294,7 @@ export default {
     },
   },
   components: {
+    WeatherPopup,
     menuBar
   },
   props: [
