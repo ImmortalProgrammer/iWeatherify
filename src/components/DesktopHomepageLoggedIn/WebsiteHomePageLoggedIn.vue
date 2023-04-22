@@ -36,7 +36,7 @@
 
         <div class="outfit-recommendations">
           <div v-if="!hasRecommendedOutfit">
-            <p>No saved items for the current temperature category.</p>
+            <p style="font-size: 3.5vh; padding-top: 3vh; color: #ffdd57;">No saved items for the current temperature category.</p>
           </div>
 
           <div class="outfit-box" v-if="recommendedOutfit.outerwear">
