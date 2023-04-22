@@ -116,4 +116,12 @@ export default {
     cursor: pointer;
 }
 
+/* For mobile screens */
+@media screen and (max-width: 615px) {
+    .All-my-items{
+      display: flex;
+      flex-direction: column;
+      width: auto;
+  }
+}
 </style>
