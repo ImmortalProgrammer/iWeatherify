@@ -140,13 +140,13 @@ export default {
   }
   .menu-edit {
     top: 1.1%;
-    left: 75.5%;
+    left: 55.5%;
     height: 55px;
     width: 45px;
   }
 
   .profile_image_loggedin{
-    margin-top: -2.2%;
+    margin-top: -1%;
     height: 40px;
     left: 64%;
     transform: scale(0.7)
