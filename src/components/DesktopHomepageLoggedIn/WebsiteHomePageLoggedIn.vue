@@ -35,6 +35,10 @@
         </p>
 
         <div class="outfit-recommendations">
+          <div v-if="!hasRecommendedOutfit">
+            <p>No saved items for the current temperature category.</p>
+          </div>
+
           <div class="outfit-box" v-if="recommendedOutfit.outerwear">
             <h1>Outerwear</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.outerwear.image}`" alt="Outerwear" />
@@ -667,6 +671,9 @@ export default {
       const tempCategory = tempMessage.split(': ')[1];
       return tempCategory;
     },
+    hasRecommendedOutfit() {
+      return Object.values(this.recommendedOutfit).some(item => item !== null);
+    },
   },
   components: {
     WeatherPopup,
@@ -982,8 +989,8 @@ export default {
 }
 
 .outfit-box {
-  width: 200px;
-  height: 250px;
+  min-width: 200px;
+  min-height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
