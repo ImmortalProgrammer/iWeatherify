@@ -8,6 +8,12 @@
         <div class="accountSettings-title">
           <h1 class="account-settings-title">{{ title }}</h1>
         </div>
+
+        <div class="profile-image-container">
+          <img src="../../../img/changeProfileImage.png" alt="ProfileImage"/>
+          <button class="change">Change</button>
+          <button class= "remove">Remove</button>
+        </div>
   
         <div class="accountSettings-text-container">
         
@@ -70,7 +76,6 @@
   justify-content: center;
   align-items: center;
   width: 105%;
-  
 }
 
 .account-settings-title {
@@ -79,11 +84,27 @@
   font-size: 1.8em;
   font-family: 'Inter';
   font-style: normal;
+  transform: scale(1.5); 
 }
   
   .accountSettingsNav{
     top: -0.85%;
   }
+
+  .profile-image-container{
+    transform: scale(0.4); 
+    margin-top: 200px; 
+  }
+
+  .change{
+    transform: scale(3.3);
+  }
+
+  .remove{
+    transform: scale(3.3); 
+    margin-left: 200px; 
+  }
+
 
   .accountSettings-text-container{
     
@@ -93,15 +114,11 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    top: 30%;
+    top: 40%;
     width: 100%;
     height: 300px;
     left: 20px; 
     transform: scale(1.3); 
-  }
-
-  .old-password{
-    margin-left: -110px; 
   }
 
   button{
@@ -127,13 +144,28 @@
   .newPassword{
     margin-top: 10px; 
   }
+
+  .new-username{
+    margin-top: 100px; 
+
+  }
+
+  .old-password{
+    margin-left: -110px; 
+   
+  }
+
+ 
+
+ 
   
   
-  /*
-  @media screen and (min-width: 992px) and (max-width: 1240px) {
+  @media screen and (min-width: 992px) and (max-width: 2000px) {
   
   
-  
+  .profile-image-container{
+    margin-top: 10px; 
+  }
   
   
   }
@@ -146,7 +178,19 @@
   
   @media screen and (min-width: 375px) and (max-width: 576px) {
   
-  
+  .account-settings-title{
+    margin-top: 150px; 
+    transform: scale(0.8);
+  }
+
+  .profile-image-container{
+    margin-top: -10px; 
+  }
+
+  .accountSettings-text-container{
+    margin-left: -130px; 
+    margin-top: -70px; 
+  }
   
   
   }
@@ -155,5 +199,5 @@
   
   
   }
-  */ 
+  
   </style>
