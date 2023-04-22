@@ -52,24 +52,24 @@
 
         <div id="TwentyFourHour-weather_2">
           <p style="font-size: 5vh; border-bottom: 1vh solid black; padding: 0 5vw 1vh 5vw;">24-Hour Forecast</p>
-          <div class="hour-next-2" v-for="(hour, index) in twentyFourHourForecastData.UTCdates" :key="index">
+          <div class="hour-next-2" v-for="(hour, index) in $data.twentyFourHourForecastData.UTCdates" :key="index">
             <p class="next_hour-2">{{hour}}</p>
-            <p class="weatherStateHour-2">{{twentyFourHourForecastData.iconDescription[index]}}</p>
+            <p class="weatherStateHour-2">{{$data.twentyFourHourForecastData.iconDescription[index]}}</p>
             <div class="TwentyFourHourForecastImg-2">
-              <img :src="twentyFourHourForecastData.iconUrlArr[index]">
+              <img :src="$data.twentyFourHourForecastData.iconUrlArr[index]">
             </div>
-            <p class="HighLowTempHourly_2">{{twentyFourHourForecastData.highTempArr[index]}}° / {{twentyFourHourForecastData.lowTempArr[index]}}°</p>
-            <p class="feelslikeHourly-2">Feels Like: {{twentyFourHourForecastData.feelsLikeArr[index]}}°</p>
+            <p class="HighLowTempHourly_2">{{$data.twentyFourHourForecastData.highTempArr[index]}}° / {{$data.twentyFourHourForecastData.lowTempArr[index]}}°</p>
+            <p class="feelslikeHourly-2">Feels Like: {{$data.twentyFourHourForecastData.feelsLikeArr[index]}}°</p>
           </div>
         </div>
 
         <div id="weekly-weather_2">
           <p style="font-size: 5vh; border-bottom: 1vh solid black; padding: 0 5vw 1vh 5vw;">8-Day Forecast: </p>
-          <div class="day-next" v-for="(day, index) in eightDayForecastData.dates" :key="index">
-            <p class = "next">{{ eightDayForecastData.dates[index] }}</p>
-            <p class = "weatherState">{{ eightDayForecastData.iconDescription[index] }}</p>
+          <div class="day-next" v-for="(day, index) in $data.eightDayForecastData.dates" :key="index">
+            <p class = "next">{{ $data.eightDayForecastData.dates[index] }}</p>
+            <p class = "weatherState">{{ $data.eightDayForecastData.iconDescription[index] }}</p>
             <div class = "eightDayForecastImg">
-              <img :src = "eightDayForecastData.iconUrlArr[index]">
+              <img :src = "$data.eightDayForecastData.iconUrlArr[index]">
             </div>
             <p class = "HighLowTemp_1">{{ eightDayForecastData.highTempArr[index] }}°
               / {{ eightDayForecastData.lowTempArr[index] }}°</p>
@@ -78,7 +78,6 @@
         </div>
         <img class="home-logo-2" :src="homeLogo2" alt="Home Logo 2" />
       </div>
-
 
   </div>
 </template>
@@ -92,7 +91,10 @@ export default {
   data() {
     return {
       currentWeatherData: {
-        locationInput: 'Buffalo',
+        locationInput: '',
+        locationAPI: 'Buffalo',
+        latCords: '',
+        lonCords: '',
         currentDay: ' ',
         locationOutput: '',
         currentTemp: '',
@@ -104,7 +106,7 @@ export default {
       },
       eightDayForecastData: {
         //Index 0 starts one day after the current weather)
-        dates: new Array(8),
+        dates: ['', '', '', '', '', '', '', ''],
         iconDescription: new Array(8),
         highTempArr: new Array(8),
         lowTempArr: new Array(8),
@@ -141,6 +143,34 @@ export default {
     await this.retrieveAPI();
   },
   methods: {
+    async retrieveAPI() {
+      try {
+        if (this.currentWeatherData.locationInput === '' && this.currentWeatherData.locationAPI === '') {
+        } else {
+          if (this.currentWeatherData.locationAPI === '') {
+            this.currentWeatherData.locationAPI = this.currentWeatherData.locationInput;
+            this.currentWeatherData.locationInput = '';
+          }
+          //Setup the dates data structure
+          await this.setupDays();
+          //Sets up the current weather as of now
+          await this.currentWeather();
+          //Twenty-Four Hour Forecast
+          await this.twentyFourForecast();
+          //Eight-Day Forecast
+          await this.eightDayForecast();
+          //Weather Alert Information
+          await this.retrieveWeatherAlertInfo();
+          //MUST RE-RENDER HTML COMPONENTS
+          this.$forceUpdate();
+
+          this.currentWeatherData.locationAPI = '';
+        }
+      } catch (Exception) {
+        alert("City unrecognized!")
+      }
+    },
+
     pressOptions() {
       const menuContainer = document.getElementById("menu-container_2_2");
       const optionsText = document.getElementById("optionsText_2");
@@ -174,28 +204,12 @@ export default {
       }
       this.pressOptions();
     },
-    async retrieveAPI() {
-      try {
-        if (this.currentWeatherData.locationInput === '') {
-        } else {
-          //Setup the dates data structure
-          this.setupDays();
-          //Sets up the current weather as of now
-          await this.currentWeather();
-          //Twenty-Four Hour Forecast
-          await this.twentyFourForecast();
-          //Eight-Day Forecast
-          await this.eightDayForecast();
+    async retrieveWeatherAlertInfo() {
 
-          this.currentWeatherData.locationInput = '';
 
-        }
-      } catch (Exception) {
-        alert("City unrecognized!")
-      }
     },
     async currentWeather() {
-      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const locationFormatting = this.currentWeatherData.locationAPI.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/weather?q=${locationFormatting}
         &units=imperial&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
@@ -204,6 +218,8 @@ export default {
       const geoLocationData = weatherAPI['data'];
       //Get current Weather
       if (geoLocationStatus === 'OK') {
+        this.currentWeatherData.latCords = geoLocationData['coord']['lat'];
+        this.currentWeatherData.lonCords = geoLocationData['coord']['lon'];
         const nameOfLocation = geoLocationData['name'];
         const currentTemp = Math.round(geoLocationData['main']['temp']);
         const minTemp = Math.round(geoLocationData['main']['temp_min']);
@@ -226,7 +242,7 @@ export default {
       }
     },
     async twentyFourForecast() {
-      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const locationFormatting = this.currentWeatherData.locationAPI.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${locationFormatting}
         &units=imperial&cnt=24&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
@@ -252,7 +268,7 @@ export default {
       }
     },
     async eightDayForecast() {
-      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const locationFormatting = this.currentWeatherData.locationAPI.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/daily?q=${locationFormatting}
         &units=imperial&cnt=9&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
@@ -261,8 +277,8 @@ export default {
       let x = 0;
       for (let i in data) {
         if (x !== 0) {
-          let currentData = data[i.toString()];
-          let feelsLikeData = currentData['feels_like']
+          const currentData = data[i.toString()];
+          const feelsLikeData = currentData['feels_like']
           this.eightDayForecastData.iconDescription[i-1] = currentData['weather']['0']['description'].split(' ')
               .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
               .join(' ');
@@ -282,7 +298,7 @@ export default {
         x++;
       }
     },
-    setupDays() {
+    async setupDays() {
       const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       const currentDate = new Date();
       let currentDay = currentDate.getDay();

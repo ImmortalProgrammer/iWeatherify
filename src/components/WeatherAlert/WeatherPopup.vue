@@ -98,14 +98,18 @@ h1 {
 }
 
 .descriptionText {
-  padding-top: 20px;
+  word-break: break-word;
+  word-wrap: break-word;
+  white-space: pre;
+  font-size: 20px;
+  padding: 20px
 
 }
 
 
 
 button {
-  margin-top: 7rem;
+  margin-top: 2.2rem;
   cursor: pointer;
   border-radius: 5px;
   font-size: 20px;
