@@ -54,6 +54,9 @@ export default {
         case 'SavedOutfits':
           this.$data.savedOutfits = false;
           break;
+        case 'AccountSettings':
+          this.$data.units = false;
+          break; 
       }
     },
     logOutAccount() {

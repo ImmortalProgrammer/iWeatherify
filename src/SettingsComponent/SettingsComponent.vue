@@ -3,8 +3,9 @@
     <p class = "settingsText">Settings</p>
       <ul class = "settings">
         <li id = "button1" ><a  href="#/unitsSettings">Unit Settings</a></li>
-        <li id = "button2" ><a  href="#/locationSettings"ocationSettings>Location Settings</a></li>
+        <li id = "button2" ><a  href="#/locationSettings">Location Settings</a></li>
         <li id = "button3" ><a  href="#/tempSettings">Temperature Settings</a></li>
+        <li id = "button4"><a href="#/accountSettings">Account Settings</a></li>
       </ul>
   </div>
 
@@ -20,6 +21,7 @@ export default {
       units: true,
       tempSettings: true,
       locationSettings: true,
+      accountSettings: true, 
     }
   }, async created() {
     await this.routeDetection();
@@ -37,6 +39,9 @@ export default {
           case 'TemperatureSettings':
             this.$data.locationSettings = false;
             break;
+          case 'AccountSettings':
+            this.$data.accountSettings = false;
+            break;
         }
       },
       async grayOut() {
@@ -44,6 +49,7 @@ export default {
           { id: 'button1', data: 'units'},
           { id: 'button2', data: 'tempSettings'},
           { id: 'button3', data: 'locationSettings'},
+          { id: 'button4', data: 'accountSettings'},
         ];
 
         links.forEach((link) => {
@@ -73,15 +79,15 @@ export default {
   padding: 20px;
 
   position: fixed;
-  height: 60vh;
+  height: 70vh;
   font-size: 100%;
   top: 15%;
   left: 0%;
-  width: 15%;
+  width: 20%;
   float: left;
 }
 
-#button1, #button2, #button3 {
+#button1, #button2, #button3, #button4 {
   padding-top: 25px;
   border-top: none;
 }
@@ -143,7 +149,7 @@ export default {
     float: left;
   }
 
-  #button1, #button2, #button3 {
+  #button1, #button2, #button3, #button4 {
     padding-top: 25px;
     border-top: none;
   }
@@ -202,12 +208,13 @@ export default {
     height: 6vh;
     font-size: 80%;
     top: 10%;
-    left: 0%;
+    left: -15%;
     width: 100%;
     float: left;
+    transform: scale(0.7); 
   }
 
-  #button1, #button2, #button3 {
+  #button1, #button2, #button3, #button4 {
     padding-top: 10px;
     padding-right: 10px;
     padding-left: 3px;

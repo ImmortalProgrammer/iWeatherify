@@ -114,6 +114,11 @@ export const websiteProfileNoSavedOutfitData = {
     ellipse6Props: "https://anima-uploads.s3.amazonaws.com/projects/6405ee9a4548b3806a50e138/releases/6405ef8c246cb8c2cd3b302a/img/ellipse"
 };
 
+export const accountSettingsData = {
+    title: "Account Settings",
+    
+};
+
 
 
 

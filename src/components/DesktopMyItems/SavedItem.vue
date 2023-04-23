@@ -37,6 +37,7 @@ export default {
 .container{
     width: 25vw;
     height: 40vh;
+    padding-bottom: 5vh;
 }
 
 .name-container{
@@ -79,5 +80,13 @@ img{
 }
 .delete-text{
     color: red;
+}
+
+@media screen and (max-width: 615px) {
+    .container{
+      height: 40vh;
+      padding-bottom: 5vh;
+      width: 80vw;
+  }
 }
 </style>
