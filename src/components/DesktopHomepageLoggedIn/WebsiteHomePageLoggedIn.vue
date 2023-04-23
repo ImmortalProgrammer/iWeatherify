@@ -386,7 +386,7 @@ export default {
       let savedOutfitAlready = false;
 
       try {
-        const response = await axios.post("http://localhost/project_s23-iweatherify/backend/saved_items.php", {
+        const response = await axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_items.php", {
           "outerwear": this.recommendedOutfit.outerwear,
           "middlewear": this.recommendedOutfit.middlewear,
           "innerwear": this.recommendedOutfit.innerwear,
@@ -408,7 +408,7 @@ export default {
       return savedOutfitAlready
     },
     saveToMyItems(){
-      axios.post("http://localhost/project_s23-iweatherify/backend/saved_items.php", {
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_items.php", {
         "outerwear": this.recommendedOutfit.outerwear,
         "middlewear": this.recommendedOutfit.middlewear,
         "innerwear": this.recommendedOutfit.innerwear,
