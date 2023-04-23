@@ -7,9 +7,10 @@
         <div id = "text-alert-container">
           <p class = "eventText">{{eventAlert}}</p>
           <p class = "senderText">{{senderName}}</p>
-          <p class = "descriptionText">{{description}}</p>
+          <p id = "descriptionText">{{description.slice(0, 150)}}...</p>
+          <button id = "expandAlert" @click="expandAlert">Expand Alert</button>
         </div>
-        <button @click="closeAlert">Close Alert</button>
+        <button id = "closeAlert" @click="closeAlert">Close Alert</button>
       </div>
     </div>
 </template>
@@ -38,6 +39,15 @@ export default {
   methods: {
     closeAlert() {
       this.$emit("close-alert");
+    },
+    expandAlert() {
+      if (document.getElementById("expandAlert").innerHTML === "Expand Alert") {
+        document.getElementById("descriptionText").innerHTML = this.description;
+        document.getElementById("expandAlert").innerHTML = "Minimize Alert"
+      } else if (document.getElementById("expandAlert").innerHTML === "Minimize Alert") {
+        document.getElementById("descriptionText").innerHTML = this.description.slice(0, 150);
+        document.getElementById("expandAlert").innerHTML = "Expand Alert"
+      }
     }
   },
 }
@@ -97,7 +107,7 @@ h1 {
   border-bottom: 5px solid rgba(255, 255, 255, 0.869);
 }
 
-.descriptionText {
+#descriptionText {
   word-break: break-word;
   word-wrap: break-word;
   white-space: pre;
@@ -119,7 +129,7 @@ h1 {
     overflow: scroll;
   }
 
-  .descriptionText {
+  #descriptionText {
     word-break: break-word;
     word-wrap: break-word;
     white-space: normal;
@@ -142,7 +152,7 @@ h1 {
     overflow: scroll;
   }
 
-  .descriptionText {
+  #descriptionText {
     word-break: break-word;
     word-wrap: break-word;
     white-space: normal;
@@ -152,12 +162,26 @@ h1 {
 }
 
 
-button {
-  margin-top: 2.2rem;
+#expandAlert {
+  background-color: #28882b;
+  margin-top: 1.7rem;
   cursor: pointer;
   border-radius: 5px;
   font-size: 20px;
-  height: 3.5rem;
-  width: 15rem;
+  height: 3.0rem;
+  width: 20rem;
+  color: #ffffff
+
 }
+
+#closeAlert{
+  margin-top: 1.8rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 20px;
+  height: 4rem;
+  width: 20rem;
+}
+
+
 </style>
