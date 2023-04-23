@@ -73,9 +73,21 @@
         showErrorModal: false,
         usernameError: false,
         passwordError: false,
+        timoutId: null
       };
     },
     methods: {
+      startLogoutTimer(){
+        this.timeoutId = setTimeout(() => {
+          console.log("Logging out due to inactivity");
+          document.cookie = "auth_token=; expires=00:00:00 UTC; path=/;"
+          this.$router.push("/login"); 
+        }, 6000); 
+      },
+      resetLogoutTimer(){
+        clearTimeout(this.timeoutId);
+        this.startLogoutTimer();
+      },
       validateForm(){
         if(!this.username && !this.password){
           this.errorTitle = "Login Error";
@@ -100,6 +112,7 @@
         }
         else {
           this.loginUser()
+          this.startLogoutTimer(); 
         }     
       },
       loginUser() {
@@ -127,6 +140,12 @@
         })
       }
     },
+    mounted(){
+      this.startLogoutTimer();
+    },
+    beforeDestroy(){
+      clearTimeout(this.timeoutId); 
+    },
     components: {
       menuBar,
       ErrorModal,
@@ -140,7 +159,6 @@
   flex-direction: row;
   align-items: center;
 }
-
 .Rectangle {
   display: flex;
   flex-direction: column;
@@ -152,21 +170,17 @@
   width: 40%;
   padding: 0em 2em;
 }
-
 .LoginForm{
   display: flex;
   flex-direction: column;
   margin: auto;
 }
-
 .Header {
   font-size: xx-large;
 }
-
 .error {
   border: 2px solid red;
 }
-
 .overlay {
   position: fixed;
   top: 0;
@@ -176,12 +190,10 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
-
 input {
   height: 3em;
   width: 30.5em;
 }
-
 button {
   font-size: large;
   font-weight: bold;
@@ -190,11 +202,9 @@ button {
   background-color: black;
   cursor: pointer;
 }
-
 a {
   color: #2a9d8f;
 }
-
 @media screen and (max-width: 800px) {
   .Rectangle {
     display: none;
