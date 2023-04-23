@@ -140,6 +140,9 @@ export default {
     return {
       currentWeatherData: {
         locationInput: '',
+        locationAPI: '',
+        latCord: '',
+        lonCord: '',
         currentDay: '',
         locationOutput: '',
         currentTemp: '',
@@ -156,7 +159,7 @@ export default {
       },
       eightDayForecastData: {
         //Index 0 starts one day after the current weather
-        dates: new Array(8),
+        dates: ['', '', '', '', '', '', '', ''],
         iconDescription: new Array(8),
         highTempArr: new Array(8),
         lowTempArr: new Array(8),
@@ -224,6 +227,47 @@ export default {
     await this.retrieveAPI();
   },
   methods: {
+    async clearAlerts() {
+      this.$data.weatherAlert.senderName = '';
+      this.$data.weatherAlert.eventAlert = '';
+      this.$data.weatherAlert.description = '';
+      this.$data.weatherAlert.showWeatherAlert = false;
+    },
+    async retrieveAPI() {
+      try {
+        if (this.currentWeatherData.locationInput === '' && this.currentWeatherData.locationAPI === '') {
+          await this.clearAlerts();
+        } else {
+          if (this.currentWeatherData.locationAPI === '') {
+            this.currentWeatherData.locationAPI = this.currentWeatherData.locationInput;
+            this.currentWeatherData.locationInput = '';
+            await this.clearAlerts();
+          }
+          //Clear the Alerts
+          await this.clearAlerts();
+          //Setup the dates data structure
+          this.setupDays();
+          //Sets up the current weather
+          await this.currentWeather();
+          //24-Hour Forecast
+          await this.twentyFourForecast();
+          //Eight-Day Forecast
+          await this.eightDayForecast();
+          //Weather Alert Information
+          await this.retrieveWeatherAlertInfo();
+          //MUST RE-RENDER HTML COMPONENTS
+          this.$forceUpdate();
+
+          //Clears Location Input
+          this.currentWeatherData.locationAPI = '';
+        }
+      } catch (Exception) {
+        alert("City unrecognized!")
+        this.currentWeatherData.locationAPI = '';
+        this.currentWeatherData.locationInput = '';
+        await this.clearAlerts();
+      }
+    },
     async getUserId() {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
@@ -245,7 +289,7 @@ export default {
 	        }
 	      })
 	      .then(response => {
-	        this.$data.currentWeatherData.locationInput = response.data.city;
+	        this.$data.currentWeatherData.locationAPI = response.data.city;
 	      })
 	      .catch(error => {
 	        console.error("Unsuccessful axios get in loadLocation().", error);
@@ -446,28 +490,25 @@ export default {
       }
       this.$data.data.optionsVisibility = !this.$data.data.optionsVisibility;
     },
-    async retrieveAPI() {
-      try {
-        if (this.currentWeatherData.locationInput === '') {
-        } else {
-          //Setup the dates data structure
-          this.setupDays();
-          //Sets up the current weather
-          await this.currentWeather();
-          //24-Hour Forecast
-          await this.twentyFourForecast();
-          //Eight-Day Forecast
-          await this.eightDayForecast();
-          //Clears Location Input
-          this.currentWeatherData.locationInput = '';
-
-        }
-      } catch (Exception) {
-        alert("City not found by the API!")
+    async retrieveWeatherAlertInfo() {
+      const weatherAPI = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.$data.currentWeatherData.latCords}&lon=${this.$data.currentWeatherData.lonCords}&exclude=current,minutely,hourly,daily&appid=${this.$data.data.APIKEY}`).catch(function (error) {
+        console.log(error.toJSON());
+      });
+      const weatherData = weatherAPI['data'];
+      console.log(weatherData);
+      if (weatherData.hasOwnProperty('alerts')) {
+        const alertData = weatherData['alerts']['0'];
+        console.log(alertData);
+        this.$data.weatherAlert.senderName = alertData['sender_name'];
+        this.$data.weatherAlert.eventAlert = alertData['event'];
+        const unformattedDescription = alertData['description'];
+        const formattedDescription = unformattedDescription.replace(/\n/g, '\n\n');
+        this.$data.weatherAlert.description = formattedDescription;
+        this.$data.weatherAlert.showWeatherAlert = true;
       }
     },
     async currentWeather() {
-      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const locationFormatting = this.currentWeatherData.locationAPI.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/weather?q=${locationFormatting}
         &units=imperial&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
@@ -476,6 +517,8 @@ export default {
       const geoLocationData = weatherAPI['data'];
       //Get current Weather
       if (geoLocationStatus === 'OK') {
+        this.currentWeatherData.latCords = geoLocationData['coord']['lat'];
+        this.currentWeatherData.lonCords = geoLocationData['coord']['lon'];
         const nameOfLocation = geoLocationData['name'];
         const currentTemp = geoLocationData['main']['temp'];
         const minTemp = geoLocationData['main']['temp_min'];
@@ -534,7 +577,7 @@ export default {
       }
     },
     async twentyFourForecast() {
-      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const locationFormatting = this.currentWeatherData.locationAPI.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${locationFormatting}
         &units=imperial&cnt=24&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
@@ -594,7 +637,7 @@ export default {
       }
     },
     async eightDayForecast() {
-      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const locationFormatting = this.currentWeatherData.locationAPI.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/daily?q=${locationFormatting}
         &units=imperial&cnt=9&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
