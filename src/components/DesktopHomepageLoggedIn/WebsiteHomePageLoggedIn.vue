@@ -69,6 +69,8 @@
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.shoes.image}`" alt="Shoes" />
             <p>{{ recommendedOutfit.shoes.name }}</p>
           </div>
+          <button class="save-to-my-items" @click.prevent="saveToMyItems" v-if="this.$data.data.isThereRecommendedOutfit && !this.$data.data.savedOutfitAlready">Save to Saved Outfits</button>
+          <button class="grayed-out-save-to-my-items" v-if="this.$data.data.savedOutfitAlready">Outfit already saved to Saved Outfits</button>
         </div>
       </div>
 
@@ -218,13 +220,19 @@ export default {
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
         optionsVisibility: false,
         eightDayForecastGrayOut: true,
-        outfitOfTheDayGrayOut: false,
+        savedOutfitAlready: false,
+        isThereRecommendedOutfit: false,
+        displayNewButton: false
       }
     }
   },
   async created() {
     await this.getUserId();
     await this.retrieveAPI();
+    this.$data.data.isThereRecommendedOutfit = await this.fetchRecommendedOutfit();
+    this.$data.data.savedOutfitAlready = await this.checkIfSavedOutfit();
+    // console.log(this.$data.data.isThereRecommendedOutfit)
+    // console.log(this.$data.data.savedOutfitAlready)
   },
   methods: {
     async clearAlerts() {
@@ -336,7 +344,7 @@ export default {
     async fetchRecommendedOutfit() {
       if (!this.userIdLoaded) {
         console.log("User ID not loaded yet.");
-        return;
+        return false;
       }
       const temperatureCategory = this.temperatureClass;
       try {
@@ -347,8 +355,10 @@ export default {
         this.recommendedOutfit.pants = items.pants || null;
         this.recommendedOutfit.headwear = items.headwear || null;
         this.recommendedOutfit.shoes = items.shoes || null;
+        return Object.keys(items).length !== 0;
       } catch (error) {
         console.error("Failed to fetch the recommended outfit.", error);
+        return false;
       }
     },
     async getAllItems(temp_category) {
@@ -437,6 +447,54 @@ export default {
         this.$data.currentWeatherData.suggestedDescription = DESCRIPTIONS[DESCRIPTION] + " " + this.temperatureMessage() + " based on the current temperature and your set temperature preferences.";
         this.$data.currentWeatherData.suggestedOutfit = "";
       }
+    },
+    async checkIfSavedOutfit(){
+      let savedOutfitAlready = false;
+
+      try {
+        const response = await axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_items.php", {
+          "outerwear": this.recommendedOutfit.outerwear,
+          "middlewear": this.recommendedOutfit.middlewear,
+          "innerwear": this.recommendedOutfit.innerwear,
+          "pants": this.recommendedOutfit.pants,
+          "headwear": this.recommendedOutfit.headwear,
+          "shoes": this.recommendedOutfit.shoes,
+          "user_id": this.$data.data.userid,
+          "location": this.$data.currentWeatherData.locationInput,
+          "temp_category": this.temperatureClass,
+          "temp": this.currentWeatherData.currentTemp,
+          "temp_unit": this.userPreferences.tempPref,
+          "checkingForSavedOutfit": true
+        }).then((res) => {
+          res.data.status === 0 ? savedOutfitAlready = true : savedOutfitAlready = false
+        })
+      } catch(err) {
+        console.log(err)
+      }
+      return savedOutfitAlready
+    },
+    saveToMyItems(){
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_items.php", {
+        "outerwear": this.recommendedOutfit.outerwear,
+        "middlewear": this.recommendedOutfit.middlewear,
+        "innerwear": this.recommendedOutfit.innerwear,
+        "pants": this.recommendedOutfit.pants,
+        "headwear": this.recommendedOutfit.headwear,
+        "shoes": this.recommendedOutfit.shoes,
+        "user_id": this.$data.data.userid,
+        "location": this.$data.currentWeatherData.locationInput,
+        "temp_category": this.temperatureClass,
+        "temp": this.currentWeatherData.currentTemp,
+        "temp_unit": this.userPreferences.tempPref,
+        "checkingForSavedOutfit": false
+      }).then((res) => {
+        console.log(res)
+        this.$data.data.savedOutfitAlready = this.checkIfSavedOutfit();
+
+        // console.log("This is what savedOutfitAlready is in state: ")
+        // console.log(this.$data.data.savedOutfitAlready)
+        alert(res.data.result)
+      })
     },
     temperatureMessage() {
       const currentTemp = parseFloat(this.$data.currentWeatherData.feelsLike);
@@ -1029,6 +1087,22 @@ export default {
   justify-content: center;
   align-items: center;
   padding-top: 20px;
+}
+
+.save-to-my-items{
+  padding: 2em;
+  font-size: large;
+  background:#1e7c85
+}
+
+.save-to-my-items:hover{
+  cursor: pointer;
+}
+
+.grayed-out-save-to-my-items{
+  padding: 2em;
+  font-size: large;
+  background:grey
 }
 
 .outfit-box {
