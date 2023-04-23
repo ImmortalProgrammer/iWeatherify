@@ -230,7 +230,7 @@ export default {
     },
     async retrieveAPI() {
       try {
-        if (this.currentWeatherData.locationInput === '') {
+        if (this.currentWeatherData.locationInput === '' && this.currentWeatherData.locationAPI === '') {
           await this.clearAlerts();
         } else {
           if (this.currentWeatherData.locationAPI === '') {
