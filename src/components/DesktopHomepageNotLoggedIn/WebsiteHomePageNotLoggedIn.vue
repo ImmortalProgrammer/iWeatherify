@@ -143,14 +143,24 @@ export default {
     await this.retrieveAPI();
   },
   methods: {
+    async clearAlerts() {
+      this.$data.weatherAlert.senderName = '';
+      this.$data.weatherAlert.eventAlert = '';
+      this.$data.weatherAlert.description = '';
+      this.$data.weatherAlert.showWeatherAlert = false;
+    },
     async retrieveAPI() {
       try {
         if (this.currentWeatherData.locationInput === '' && this.currentWeatherData.locationAPI === '') {
+          await this.clearAlerts();
         } else {
           if (this.currentWeatherData.locationAPI === '') {
             this.currentWeatherData.locationAPI = this.currentWeatherData.locationInput;
             this.currentWeatherData.locationInput = '';
+            await this.clearAlerts();
           }
+          //Clear Previous Alerts
+          await this.clearAlerts();
           //Setup the dates data structure
           await this.setupDays();
           //Sets up the current weather as of now
@@ -168,6 +178,9 @@ export default {
         }
       } catch (Exception) {
         alert("City unrecognized!")
+        this.currentWeatherData.locationAPI = '';
+        this.currentWeatherData.locationInput = '';
+        await this.clearAlerts();
       }
     },
 
@@ -205,8 +218,21 @@ export default {
       this.pressOptions();
     },
     async retrieveWeatherAlertInfo() {
-
-
+      const weatherAPI = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.$data.currentWeatherData.latCords}&lon=${this.$data.currentWeatherData.lonCords}&exclude=current,minutely,hourly,daily&appid=${this.$data.data.APIKEY}`).catch(function (error) {
+        console.log(error.toJSON());
+      });
+      const weatherData = weatherAPI['data'];
+      console.log(weatherData);
+      if (weatherData.hasOwnProperty('alerts')) {
+          const alertData = weatherData['alerts']['0'];
+        console.log(alertData);
+          this.$data.weatherAlert.senderName = alertData['sender_name'];
+          this.$data.weatherAlert.eventAlert = alertData['event'];
+          const unformattedDescription = alertData['description'];
+          const formattedDescription = unformattedDescription.replace(/\n/g, '\n\n');
+          this.$data.weatherAlert.description = formattedDescription;
+          this.$data.weatherAlert.showWeatherAlert = true;
+      }
     },
     async currentWeather() {
       const locationFormatting = this.currentWeatherData.locationAPI.replaceAll(' ', '%20');

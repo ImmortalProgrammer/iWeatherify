@@ -103,9 +103,53 @@ h1 {
   white-space: pre;
   font-size: 20px;
   padding: 20px
-
 }
 
+@media only screen and (max-width: 1000px) {
+  .alert-content {
+    background-color: #264653;
+    color: rgba(255, 255, 255, 0.869);
+    width: auto;
+    max-width: 85%;
+    height: auto;
+    max-height: 85%;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    overflow: scroll;
+  }
+
+  .descriptionText {
+    word-break: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+    font-size: 20px;
+    padding: 20px
+  }
+}
+
+@media only screen and (max-height: 1000px) {
+  .alert-content {
+    background-color: #264653;
+    color: rgba(255, 255, 255, 0.869);
+    width: auto;
+    max-width: 85%;
+    height: auto;
+    max-height: 85%;
+    padding: 2rem;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    overflow: scroll;
+  }
+
+  .descriptionText {
+    word-break: break-word;
+    word-wrap: break-word;
+    white-space: normal;
+    font-size: 20px;
+    padding: 20px
+  }
+}
 
 
 button {
