@@ -43,10 +43,12 @@ export default {
     expandAlert() {
       if (document.getElementById("expandAlert").innerHTML === "Expand Alert") {
         document.getElementById("descriptionText").innerHTML = this.description;
+        document.getElementById("expandAlert").style.backgroundColor = "rgba(225,61,61,0.82)";
         document.getElementById("expandAlert").innerHTML = "Minimize Alert"
       } else if (document.getElementById("expandAlert").innerHTML === "Minimize Alert") {
         document.getElementById("descriptionText").innerHTML = this.description.slice(0, 150);
         document.getElementById("expandAlert").innerHTML = "Expand Alert"
+        document.getElementById("expandAlert").style.backgroundColor = "#28882b";
       }
     }
   },
