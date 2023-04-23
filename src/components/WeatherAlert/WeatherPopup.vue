@@ -129,7 +129,9 @@ h1 {
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     overflow: scroll;
+    overflow-x: hidden;
   }
+
 
   #descriptionText {
     word-break: break-word;
@@ -138,6 +140,28 @@ h1 {
     font-size: 20px;
     padding: 20px
   }
+
+  #expandAlert {
+    background-color: #28882b;
+    margin-top: 1.7rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+    height: 3.0rem;
+    width: 15rem;
+    color: #ffffff
+
+  }
+
+  #closeAlert{
+    margin-top: 1.8rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+    height: 4rem;
+    width: 15rem;
+  }
+
 }
 
 @media only screen and (max-height: 1000px) {
@@ -152,7 +176,30 @@ h1 {
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     overflow: scroll;
+    overflow-x: hidden;
+
+  #expandAlert {
+    background-color: #28882b;
+    margin-top: 1.7rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+    height: 3.0rem;
+    width: 15rem;
+    color: #ffffff
+
   }
+
+  #closeAlert{
+    margin-top: 1.8rem;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 20px;
+    height: 4rem;
+    width: 15rem;
+  }
+
+}
 
   #descriptionText {
     word-break: break-word;
