@@ -136,6 +136,7 @@ import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 import NavBar from "@/NavBar/NavBar.vue";
 import WeatherPopup from "@/components/WeatherAlert/WeatherPopup.vue";
 
+
 export default {
   name: "WebsiteHomePageLoggedIn",
   data() {
@@ -290,19 +291,51 @@ export default {
       }
     },
     async loadLocation() {
-	      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php",
-	      {
-	        params: {
-	          userid: this.$data.data.userid,
-	        }
-	      })
-	      .then(response => {
-	        this.$data.currentWeatherData.locationAPI = response.data.city;
-	      })
-	      .catch(error => {
-	        console.error("Unsuccessful axios get in loadLocation().", error);
-	      });
-     }, 
+      try {
+        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php", {
+          params: {
+            userid: this.$data.data.userid,
+          },
+      });
+
+      this.$data.currentWeatherData.locationAPI = response.data.city;
+      
+
+      if (response.data.toggle == 1 && navigator.geolocation) {
+        const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+      
+      const { latitude, longitude } = position.coords; 
+      await this.getCurrentCity(latitude, longitude);
+
+    }
+  } catch (error) {
+    console.error("Unsuccessful axios get in loadLocation().", error);
+  }
+},
+
+async getCurrentCity(latitude, longitude) {
+  try {
+    const apiKey = this.$data.data.APIKEY;
+    const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`;
+    const response = await axios.get(url);
+    let city = response.data[0].name;
+    console.log(city); 
+    
+    const regex = /^(Town of|City of)\s+(.*)$/i;
+    const matches = city.match(regex);
+    if (matches) {
+
+      city = matches[2];
+    }
+    
+    this.$data.currentWeatherData.locationAPI = city;
+  } catch (error) {
+    console.error("Unsuccessful axios get in getCurrentCity().", error);
+  }
+},
+
     async loadUnits() {
       axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php",
           {
