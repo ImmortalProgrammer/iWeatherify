@@ -228,7 +228,7 @@ input:checked + .slider:before {
   display: flex;
   gap: 23px;
   height: 289px;
-  margin-left: 200px;
+  margin-left: 500px; /*changed */ 
   margin-top: 200px;
   width: 100%; 
 }
@@ -333,16 +333,22 @@ button {
   color: white;
   background-color: black;
   cursor: pointer;
-  margin-left: 528px; 
+  margin-left: 828px; /* changed */ 
   transform: scale(1.2); 
   margin-top: 80px; 
 }
 
-@media screen and (min-width: 992px) and (max-width: 1240px) {
+@media screen and (min-width: 992px) and (max-width: 1440px) { /* changed */ 
 
   .location-text-container{
-    margin-left: 200px; 
+    margin-left: 250px; 
+    
   }
+
+  .save-button-container{
+  transform: scale(0.95); 
+  margin-left: -261px; 
+}
 
 
 
@@ -426,3 +432,4 @@ button {
 }
 
 </style>
+
