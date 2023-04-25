@@ -44,31 +44,37 @@
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.outerwear.image}`" alt="Outerwear" />
             <p>{{ recommendedOutfit.outerwear.name }}</p>
           </div>
+          
           <div class="outfit-box" v-if="recommendedOutfit.middlewear">
             <h1>Middlewear</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.middlewear.image}`" alt="Middlewear" />
             <p>{{ recommendedOutfit.middlewear.name }}</p>
           </div>
+
           <div class="outfit-box" v-if="recommendedOutfit.innerwear">
             <h1>Innerwear</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.innerwear.image}`" alt="Innerwear" />
             <p>{{ recommendedOutfit.innerwear.name }}</p>
           </div>
+
           <div class="outfit-box" v-if="recommendedOutfit.pants">
             <h1>Pants</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.pants.image}`" alt="Pants" />
             <p>{{ recommendedOutfit.pants.name }}</p>
           </div>
+
           <div class="outfit-box" v-if="recommendedOutfit.headwear">
             <h1>Headwear</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.headwear.image}`" alt="Headwear" />
             <p>{{ recommendedOutfit.headwear.name }}</p>
           </div>
+
           <div class="outfit-box" v-if="recommendedOutfit.shoes">
             <h1>Shoes</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.shoes.image}`" alt="Shoes" />
             <p>{{ recommendedOutfit.shoes.name }}</p>
           </div>
+
           <button class="save-to-my-items" @click.prevent="saveToMyItems" v-if="this.$data.data.isThereRecommendedOutfit && !this.$data.data.savedOutfitAlready">Save to Saved Outfits</button>
           <button class="grayed-out-save-to-my-items" v-if="this.$data.data.savedOutfitAlready">Outfit already saved to Saved Outfits</button>
         </div>
