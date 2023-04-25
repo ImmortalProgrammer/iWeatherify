@@ -72,6 +72,52 @@
           <button class="save-to-my-items" @click.prevent="saveToMyItems" v-if="this.$data.data.isThereRecommendedOutfit && !this.$data.data.savedOutfitAlready">Save to Saved Outfits</button>
           <button class="grayed-out-save-to-my-items" v-if="this.$data.data.savedOutfitAlready">Outfit already saved to Saved Outfits</button>
         </div>
+
+        <p style="font-size: 3.5vh; padding-top: 3vh;" v-if="!allCategoriesSaved">Here are some suggestions for the current temperature category:</p>
+        
+        <div class="suggested-items" v-if="!allCategoriesSaved">
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.outerwear">
+            <h1>Outerwear</h1>
+            <a :href="suggestedLinks.outerwear" target="_blank">
+              <p>Suggested Outerwear Link</p>
+            </a>
+          </div>
+
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.middlewear">
+            <h1>Middlewear</h1>
+            <a :href="suggestedLinks.middlewear" target="_blank">
+              <p>Suggested Middlewear Link</p>
+            </a>
+          </div>
+
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.innerwear">
+            <h1>Innerwear</h1>
+            <a :href="suggestedLinks.innerwear" target="_blank">
+              <p>Suggested Innerwear Link</p>
+            </a>
+          </div>
+
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.pants">
+            <h1>Pants</h1>
+            <a :href="suggestedLinks.pants" target="_blank">
+              <p>Suggested Pants Link</p>
+            </a>
+          </div>
+
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.headwear">
+            <h1>Headwear</h1>
+            <a :href="suggestedLinks.headwear" target="_blank">
+              <p>Suggested Headwear Link</p>
+            </a>
+          </div>
+
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.shoes">
+            <h1>Shoes</h1>
+            <a :href="suggestedLinks.shoes" target="_blank">
+              <p>Suggested Shoes Link</p>
+            </a>
+          </div>
+        </div>
       </div>
 
       <div class ="bar-search1">
@@ -296,46 +342,44 @@ export default {
           params: {
             userid: this.$data.data.userid,
           },
-      });
+        });
 
-      this.$data.currentWeatherData.locationAPI = response.data.city;
-      
+        this.$data.currentWeatherData.locationAPI = response.data.city;
 
-      if (response.data.toggle == 1 && navigator.geolocation) {
-        const position = await new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
-      });
-      
-      const { latitude, longitude } = position.coords; 
-      await this.getCurrentCity(latitude, longitude);
 
-    }
-  } catch (error) {
-    console.error("Unsuccessful axios get in loadLocation().", error);
-  }
-},
+        if (response.data.toggle == 1 && navigator.geolocation) {
+          const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+          });
 
-async getCurrentCity(latitude, longitude) {
-  try {
-    const apiKey = this.$data.data.APIKEY;
-    const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`;
-    const response = await axios.get(url);
-    let city = response.data[0].name;
-    console.log(city); 
-    
-    const regex = /^(Town of|City of)\s+(.*)$/i;
-    const matches = city.match(regex);
-    if (matches) {
+          const { latitude, longitude } = position.coords; 
+          await this.getCurrentCity(latitude, longitude);
 
-      city = matches[2];
-    }
-    
-    this.$data.currentWeatherData.locationAPI = city;
-  } catch (error) {
-    console.error("Unsuccessful axios get in getCurrentCity().", error);
-  }
-},
+        }
+      } catch (error) {
+      console.error("Unsuccessful axios get in loadLocation().", error);
+      }
+    },
+    async getCurrentCity(latitude, longitude) {
+      try {
+        const apiKey = this.$data.data.APIKEY;
+        const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`;
+        const response = await axios.get(url);
+        let city = response.data[0].name;
+        console.log(city); 
+        
+        const regex = /^(Town of|City of)\s+(.*)$/i;
+        const matches = city.match(regex);
+        if (matches) {
 
+          city = matches[2];
+        }
+        
+        this.$data.currentWeatherData.locationAPI = city;
+      } catch (error) {
+        console.error("Unsuccessful axios get in getCurrentCity().", error);
+      }
+    },
     async loadUnits() {
       axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php",
           {
@@ -808,6 +852,53 @@ async getCurrentCity(latitude, longitude) {
     hasRecommendedOutfit() {
       return Object.values(this.recommendedOutfit).some(item => item !== null);
     },
+    allCategoriesSaved() {
+      return Object.values(this.recommendedOutfit).every(item => item !== null);
+    },
+    suggestedLinks() {
+      const baseLink = "https://example.com/";
+      const outerwearLink = "https://example.com/";
+      const middlewearLink = "https://example.edu/";
+      const headwearLink = "https://example.org/";
+      const shoesLink = "https://example.net/";
+      const temperatureLinks = {
+        hot: {
+          innerwear: "https://www.amazon.com/Bossy-Just-Should-Doing-T-Shirt/dp/B0785FFH6N/ref=sr_1_5?crid=2MEESFS92K41D&keywords=t+shirt+or+hot&qid=1682382276&sprefix=t+shirt+or+hot%2Caps%2C135&sr=8-5",
+          pants: "https://www.amazon.com/Columbia-Silver-Ridge-Cargo-Fossil/dp/B0058YR376/ref=sr_1_5?crid=3JBUAYX0PO2XN&keywords=shorts+for+hot+weather&qid=1682382346&sprefix=shorts+for+hot+weather%2Caps%2C93&sr=8-5",
+        },
+        warm: {
+          innerwear: "https://www.amazon.com/Cooling-Running-Athletic-T-Shirts-Outdoor/dp/B087N2H367/ref=sr_1_5?crid=2O5NVFY0D8KAN&keywords=t+shirt+for+warm+weather&qid=1682382407&sprefix=t+shirt+for+warm+weathe%2Caps%2C99&sr=8-5",
+          pants: "https://www.amazon.com/Little-Donkey-Andy-Stretch-Camping/dp/B07RJLQ274/ref=sr_1_25?crid=3QGXKFN7N1XPI&keywords=shorts+for+warm+weather+men&qid=1682382441&sprefix=shorts+for+warm+weather+me%2Caps%2C101&sr=8-25",
+        },
+        ideal: {
+          innerwear: "https://www.amazon.com/Columbia-Bahama-Sleeve-Shirt-X-Large/dp/B000EOQ2Q8/ref=sr_1_18?crid=VQLPNLVNJ8IE&keywords=long+sleeve+shirts+for+ideal+weather+men&qid=1682382519&sprefix=long+sleeve+shirts+for+ideal+weather+men%2Caps%2C84&sr=8-18",
+          pants: "https://www.amazon.com/Wrangler-Authentics-Fleece-Carpenter-Autumn/dp/B00XKY30I2/ref=sr_1_3?crid=2OTIC80RLDDUM&keywords=pants+for+ideal+weather+men&qid=1682382491&sprefix=pants+for+ideal+weather+men%2Caps%2C96&sr=8-3 ",
+        },
+        chilly: {
+          innerwear: "https://www.amazon.com/Columbia-Bahama-Sleeve-Shirt-X-Large/dp/B07RDRYSLS/ref=sr_1_18?crid=VQLPNLVNJ8IE&keywords=long%2Bsleeve%2Bshirts%2Bfor%2Bideal%2Bweather%2Bmen&qid=1682382519&sprefix=long%2Bsleeve%2Bshirts%2Bfor%2Bideal%2Bweather%2Bmen%2Caps%2C84&sr=8-18&th=1",
+          pants: "amazon.com/ActionHeat-Heated-Base-Layer-Pants/dp/B074CN726H/ref=sr_1_12?crid=9PXMD1RJ1D2G&keywords=pants+for+chilly+weather+men&qid=1682382590&sprefix=pant+for+chilly+weather+men%2Caps%2C83&sr=8-12",
+        },
+        cold: {
+          innerwear: "https://www.amazon.com/Fruit-Loom-Recycled-Underwear-Greystone/dp/B08D364MFP/ref=sr_1_22?crid=1BFF5VQ0XBZCX&keywords=innerwear+for+cold+weather+men&qid=1682382660&sprefix=innerwear+for+col+weather+men%2Caps%2C92&sr=8-22",
+          pants: "https://www.amazon.com/Gash-Hao-Waterproof-Softshell-Outdoor/dp/B07HMNL2CG/ref=sr_1_10?crid=1F0V7LG91XA6S&keywords=pants+for+cold+weather+men&qid=1682382692&sprefix=pant+for+cold+weather+men%2Caps%2C96&sr=8-10",
+        },
+        freezing: {
+          innerwear: "https://www.amazon.com/romision-Thermal-Underwear-Insulated-Weather/dp/B08DP2HFN6/ref=sr_1_15?crid=1C9BPKWCWH47E&keywords=innerwear+for+freezing+weather+men&qid=1682382724&sprefix=innerwear+for+freezing+weather+men%2Caps%2C90&sr=8-15",
+          pants: "https://www.amazon.com/1960-Sports-Cargo-Pants-Medium/dp/B082YNDFBT/ref=sr_1_23?crid=28CNGEZQPNZZJ&keywords=pants%2Bfor%2Bfreezing%2Bweather%2Bmen&qid=1682382751&sprefix=pants%2Bfor%2Bfreezing%2Bweather%2Bmen%2Caps%2C122&sr=8-23&th=1",
+        },
+      };
+
+      const links = {
+        outerwear: outerwearLink,
+        middlewear: middlewearLink,
+        innerwear: temperatureLinks[this.temperatureClass].innerwear || baseLink,
+        pants: temperatureLinks[this.temperatureClass].pants || baseLink,
+        headwear: headwearLink,
+        shoes: shoesLink,
+      };
+
+      return links;
+    },
   },
   components: {
     WeatherPopup,
@@ -1122,6 +1213,14 @@ async getCurrentCity(latitude, longitude) {
   padding-top: 20px;
 }
 
+.suggested-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
 .save-to-my-items{
   padding: 2em;
   font-size: large;
@@ -1176,6 +1275,51 @@ async getCurrentCity(latitude, longitude) {
   color: #fff;
   text-align: center;
   margin-top: 10px;
+}
+
+.suggested-outfit-box {
+  width: 200px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.suggested-outfit-box h1 {
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  text-decoration: underline black;
+  text-decoration-thickness: 5px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.suggested-outfit-box p {
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.suggested-outfit-box a {
+  text-decoration: none;
+}
+
+.suggested-outfit-box a:link p {
+  color: rgba(37, 95, 204);
+}
+
+.suggested-outfit-box a:visited p {
+  color: rgba(128, 0, 128, 0.6);
 }
 
 .current-unit1 {
