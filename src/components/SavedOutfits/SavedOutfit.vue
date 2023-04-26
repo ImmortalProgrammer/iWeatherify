@@ -23,10 +23,12 @@
 
         <div class="location-temp">
             <h1>{{ temp_category }}</h1>
-            <h1>{{ location }} - {{ temp }}°{{temp_unit}}</h1>
+            <h1>{{ location }}</h1>
+            <h1>{{ temp }}°{{temp_unit}}</h1>
         </div>
 
         <div class="clothes">
+            <p id="clothes-subheader"> Clothing pieces: </p>
             <p> {{outerwear_name}} </p>
             <p> {{middlewear_name}} </p>
             <p> {{innerwear_name}} </p>
@@ -80,7 +82,8 @@ export default {
     display: flex;
     flex-direction: column;
     margin: auto;
-    padding-bottom: 2vh;
+    margin-bottom: 5vh;
+    border: solid;
 }
 
 .images{
@@ -105,6 +108,14 @@ export default {
     object-fit: cover;
 }
 
+.clothes {
+    text-align: center;
+}
+
+#clothes-subheader{
+    font-weight: bold;
+    color: #1e7c85;
+}
 
 .location-temp{
     text-align: center;
@@ -119,6 +130,8 @@ export default {
 }
 
 .delete-text{
+    margin-left:auto;
+    margin-right: 0;
     color: red;
     z-index: 1;
 }
@@ -126,11 +139,4 @@ export default {
     cursor: pointer;
 }
 
-@media screen and (max-width: 615px) {
-    .container{
-      height: 40vh;
-      padding-bottom: 5vh;
-      width: 80vw;
-  }
-}
 </style>
