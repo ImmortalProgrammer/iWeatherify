@@ -7,9 +7,13 @@
           <saved-item class="savedItem"
             v-for="item in items"
             :key = "item.id"
-            :image_name = "item.clothing_name"
+            :clothing_name = "item.clothing_name"
             :upload_path = '`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${item.upload_path}`'
-          >
+            :image_name = "item.upload_path"
+            :userid = userid
+            :temp_category = temp_category
+            :clothing_category = clothing_category
+        >
           </saved-item>
         </div>
 
