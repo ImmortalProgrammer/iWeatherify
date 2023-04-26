@@ -1,5 +1,5 @@
 <template>
-  <div class="container-center-horizontal">
+  <!-- <div class="container-center-horizontal">
     <nav-bar></nav-bar>
     <div class="website-profile-no-saved-outfit screen">
       <div class="overlap-group3">
@@ -22,13 +22,51 @@
         <p class="no-saved-outfits-try-saving-one ui---16-regular">No saved outfits, try saving one!</p>
       </div>
     </div>
+  </div> -->
+
+  <div class="Saved-outfits-page">
+    <div class="nav-bar">
+      <nav-bar></nav-bar>
+    </div>
+    
+    <!-- <div>
+      <h1 class="title ui---30-semi">Saved Outfits</h1>
+    </div> -->
+
+    <div class="all-saved-outfits">
+      <saved-outfit class="savedOutfit"
+        v-for="outfit in savedOutfits"
+        :key = "outfit.id"
+        :location = "outfit.location"
+        :temp = "outfit.temp"
+        :temp_unit = "outfit.temp_unit"
+
+        :outerwear_name = "outfit.outerwear_name"
+        :middlewear_name = "outfit.middlewear_name"
+        :innerwear_name = "outfit.innerwear_name"
+        :pants_name = "outfit.pants_name"
+        :headwear_name = "outfit.headwear_name"
+        :shoes_name = "outfit.shoes_name"
+
+        :outerwear_img = "outfit.outerwear_img"
+        :middlewear_img = "outfit.middlewear_img"
+        :innerwear_img = "outfit.innerwear_img"
+        :pants_img = "outfit.pants_img"
+        :headwear_img = "outfit.headwear_img"
+        :shoes_img = "outfit.shoes_img"
+      >
+      </saved-outfit>
+    </div>
+  
   </div>
 
 </template>
 
 <script>
+import axios from "axios";
 import ListboxComponent from "./ListboxComponent";
 import InputField from "./InputField";
+import SavedOutfit from "./SavedOutfit.vue";
 import NavBar from "@/NavBar/NavBar.vue";
 export default {
   name: "WebsiteProfileNoSavedOutfit",
@@ -36,16 +74,56 @@ export default {
     NavBar,
     ListboxComponent,
     InputField,
+    SavedOutfit
+  },
+  data(){
+    return {
+      userid: null,
+      savedOutfits: []
+    }
+  },
+  created() {
+    this.getUserId().then(() => {this.getAllItems()});
   },
   props: ["plusMath", "defaultFrameLogo3", "ellipse6Props"],
+  methods: {
+    async getUserId() {
+      try {
+        const response = await axios.get("http://localhost/project_s23-iweatherify/backend/get_userid.php", { withCredentials: true });
+        this.userid = response.data.userid;
+        console.log("The user id is: " + this.userid)
+      } catch (error) {
+        console.error("Unsuccessful request in getUserId().", error);
+      }
+    },
+    getAllItems(){
+      axios.post("http://localhost/project_s23-iweatherify/backend/get_saved_outfits.php", 
+      {
+        user_id: this.userid,
+      })
+      .then(res => {
+        console.log(res)
+        if(res != null){
+          let allMySavedOutfits = JSON.parse(JSON.stringify(res.data.message))
+          this.savedOutfits = allMySavedOutfits
+          console.log(this.savedOutfits)
+        } else {
+          console.log("There was no data in the response")
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+  }
 };
 </script>
 
 <style scoped>
-@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500|Inter:400,700,500,600|PT+Mono:400");
-/* The following line is used to measure usage of this code in production. For more info see our usage billing page */
-@import url("https://px.animaapp.com/6405ee99331c8a40850ac606.6405ee9ad144788be20d5c18.NXDGJzF.vcp.png");
+.all-saved-outfits{
+  /* margin-top: 15vh; */
+  height: 100vh;
+}
+
 .screen a {
   display: contents;
   text-decoration: none;
