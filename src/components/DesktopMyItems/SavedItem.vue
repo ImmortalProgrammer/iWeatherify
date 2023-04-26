@@ -54,6 +54,7 @@ export default {
     margin-right: 1vw;
     display: flex;
     flex-direction: column;
+    height: 40vh;
 }
 
 .name-container{
