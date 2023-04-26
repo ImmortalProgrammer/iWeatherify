@@ -44,30 +44,84 @@
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.outerwear.image}`" alt="Outerwear" />
             <p>{{ recommendedOutfit.outerwear.name }}</p>
           </div>
+          
           <div class="outfit-box" v-if="recommendedOutfit.middlewear">
             <h1>Middlewear</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.middlewear.image}`" alt="Middlewear" />
             <p>{{ recommendedOutfit.middlewear.name }}</p>
           </div>
+
           <div class="outfit-box" v-if="recommendedOutfit.innerwear">
             <h1>Innerwear</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.innerwear.image}`" alt="Innerwear" />
             <p>{{ recommendedOutfit.innerwear.name }}</p>
           </div>
+
           <div class="outfit-box" v-if="recommendedOutfit.pants">
             <h1>Pants</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.pants.image}`" alt="Pants" />
             <p>{{ recommendedOutfit.pants.name }}</p>
           </div>
+
           <div class="outfit-box" v-if="recommendedOutfit.headwear">
             <h1>Headwear</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.headwear.image}`" alt="Headwear" />
             <p>{{ recommendedOutfit.headwear.name }}</p>
           </div>
+
           <div class="outfit-box" v-if="recommendedOutfit.shoes">
             <h1>Shoes</h1>
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.shoes.image}`" alt="Shoes" />
             <p>{{ recommendedOutfit.shoes.name }}</p>
+          </div>
+
+          <button class="save-to-my-items" @click.prevent="saveToMyItems" v-if="this.$data.data.isThereRecommendedOutfit && !this.$data.data.savedOutfitAlready">Save to Saved Outfits</button>
+          <button class="grayed-out-save-to-my-items" v-if="this.$data.data.savedOutfitAlready">Outfit already saved to Saved Outfits</button>
+        </div>
+
+        <p style="font-size: 3.5vh; padding-top: 3vh;" v-if="!allCategoriesSaved">Here are some suggestions for the current temperature category:</p>
+        
+        <div class="suggested-items" v-if="!allCategoriesSaved">
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.outerwear">
+            <h1>Outerwear</h1>
+            <a :href="suggestedLinks.outerwear" target="_blank">
+              <p>Suggested Outerwear Link</p>
+            </a>
+          </div>
+
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.middlewear">
+            <h1>Middlewear</h1>
+            <a :href="suggestedLinks.middlewear" target="_blank">
+              <p>Suggested Middlewear Link</p>
+            </a>
+          </div>
+
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.innerwear">
+            <h1>Innerwear</h1>
+            <a :href="suggestedLinks.innerwear" target="_blank">
+              <p>Suggested Innerwear Link</p>
+            </a>
+          </div>
+
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.pants">
+            <h1>Pants</h1>
+            <a :href="suggestedLinks.pants" target="_blank">
+              <p>Suggested Pants Link</p>
+            </a>
+          </div>
+
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.headwear">
+            <h1>Headwear</h1>
+            <a :href="suggestedLinks.headwear" target="_blank">
+              <p>Suggested Headwear Link</p>
+            </a>
+          </div>
+
+          <div class="suggested-outfit-box" v-if="!recommendedOutfit.shoes">
+            <h1>Shoes</h1>
+            <a :href="suggestedLinks.shoes" target="_blank">
+              <p>Suggested Shoes Link</p>
+            </a>
           </div>
         </div>
       </div>
@@ -134,12 +188,16 @@ import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 import NavBar from "@/NavBar/NavBar.vue";
 import WeatherPopup from "@/components/WeatherAlert/WeatherPopup.vue";
 
+
 export default {
   name: "WebsiteHomePageLoggedIn",
   data() {
     return {
       currentWeatherData: {
         locationInput: '',
+        locationAPI: '',
+        latCord: '',
+        lonCord: '',
         currentDay: '',
         locationOutput: '',
         currentTemp: '',
@@ -156,7 +214,7 @@ export default {
       },
       eightDayForecastData: {
         //Index 0 starts one day after the current weather
-        dates: new Array(8),
+        dates: ['', '', '', '', '', '', '', ''],
         iconDescription: new Array(8),
         highTempArr: new Array(8),
         lowTempArr: new Array(8),
@@ -215,15 +273,62 @@ export default {
         APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
         optionsVisibility: false,
         eightDayForecastGrayOut: true,
-        outfitOfTheDayGrayOut: false,
+        savedOutfitAlready: false,
+        isThereRecommendedOutfit: false,
+        displayNewButton: false
       }
     }
   },
   async created() {
     await this.getUserId();
     await this.retrieveAPI();
+    this.$data.data.isThereRecommendedOutfit = await this.fetchRecommendedOutfit();
+    this.$data.data.savedOutfitAlready = await this.checkIfSavedOutfit();
+    // console.log(this.$data.data.isThereRecommendedOutfit)
+    // console.log(this.$data.data.savedOutfitAlready)
   },
   methods: {
+    async clearAlerts() {
+      this.$data.weatherAlert.senderName = '';
+      this.$data.weatherAlert.eventAlert = '';
+      this.$data.weatherAlert.description = '';
+      this.$data.weatherAlert.showWeatherAlert = false;
+    },
+    async retrieveAPI() {
+      try {
+        if (this.currentWeatherData.locationInput === '' && this.currentWeatherData.locationAPI === '') {
+          await this.clearAlerts();
+        } else {
+          if (this.currentWeatherData.locationAPI === '') {
+            this.currentWeatherData.locationAPI = this.currentWeatherData.locationInput;
+            this.currentWeatherData.locationInput = '';
+            await this.clearAlerts();
+          }
+          //Clear the Alerts
+          await this.clearAlerts();
+          //Setup the dates data structure
+          this.setupDays();
+          //Sets up the current weather
+          await this.currentWeather();
+          //24-Hour Forecast
+          await this.twentyFourForecast();
+          //Eight-Day Forecast
+          await this.eightDayForecast();
+          //Weather Alert Information
+          await this.retrieveWeatherAlertInfo();
+          //MUST RE-RENDER HTML COMPONENTS
+          this.$forceUpdate();
+
+          //Clears Location Input
+          this.currentWeatherData.locationAPI = '';
+        }
+      } catch (Exception) {
+        alert("City unrecognized!")
+        this.currentWeatherData.locationAPI = '';
+        this.currentWeatherData.locationInput = '';
+        await this.clearAlerts();
+      }
+    },
     async getUserId() {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
@@ -238,19 +343,49 @@ export default {
       }
     },
     async loadLocation() {
-	      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php",
-	      {
-	        params: {
-	          userid: this.$data.data.userid,
-	        }
-	      })
-	      .then(response => {
-	        this.$data.currentWeatherData.locationInput = response.data.city;
-	      })
-	      .catch(error => {
-	        console.error("Unsuccessful axios get in loadLocation().", error);
-	      });
-     }, 
+      try {
+        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php", {
+          params: {
+            userid: this.$data.data.userid,
+          },
+        });
+
+        this.$data.currentWeatherData.locationAPI = response.data.city;
+
+
+        if (response.data.toggle == 1 && navigator.geolocation) {
+          const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(resolve, reject);
+          });
+
+          const { latitude, longitude } = position.coords; 
+          await this.getCurrentCity(latitude, longitude);
+
+        }
+      } catch (error) {
+      console.error("Unsuccessful axios get in loadLocation().", error);
+      }
+    },
+    async getCurrentCity(latitude, longitude) {
+      try {
+        const apiKey = this.$data.data.APIKEY;
+        const url = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`;
+        const response = await axios.get(url);
+        let city = response.data[0].name;
+        console.log(city); 
+        
+        const regex = /^(Town of|City of)\s+(.*)$/i;
+        const matches = city.match(regex);
+        if (matches) {
+
+          city = matches[2];
+        }
+        
+        this.$data.currentWeatherData.locationAPI = city;
+      } catch (error) {
+        console.error("Unsuccessful axios get in getCurrentCity().", error);
+      }
+    },
     async loadUnits() {
       axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php",
           {
@@ -292,7 +427,7 @@ export default {
     async fetchRecommendedOutfit() {
       if (!this.userIdLoaded) {
         console.log("User ID not loaded yet.");
-        return;
+        return false;
       }
       const temperatureCategory = this.temperatureClass;
       try {
@@ -303,8 +438,10 @@ export default {
         this.recommendedOutfit.pants = items.pants || null;
         this.recommendedOutfit.headwear = items.headwear || null;
         this.recommendedOutfit.shoes = items.shoes || null;
+        return Object.keys(items).length !== 0;
       } catch (error) {
         console.error("Failed to fetch the recommended outfit.", error);
+        return false;
       }
     },
     async getAllItems(temp_category) {
@@ -394,6 +531,54 @@ export default {
         this.$data.currentWeatherData.suggestedOutfit = "";
       }
     },
+    async checkIfSavedOutfit(){
+      let savedOutfitAlready = false;
+
+      try {
+        const response = await axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_items.php", {
+          "outerwear": this.recommendedOutfit.outerwear,
+          "middlewear": this.recommendedOutfit.middlewear,
+          "innerwear": this.recommendedOutfit.innerwear,
+          "pants": this.recommendedOutfit.pants,
+          "headwear": this.recommendedOutfit.headwear,
+          "shoes": this.recommendedOutfit.shoes,
+          "user_id": this.$data.data.userid,
+          "location": this.$data.currentWeatherData.locationInput,
+          "temp_category": this.temperatureClass,
+          "temp": this.currentWeatherData.currentTemp,
+          "temp_unit": this.userPreferences.tempPref,
+          "checkingForSavedOutfit": true
+        }).then((res) => {
+          res.data.status === 0 ? savedOutfitAlready = true : savedOutfitAlready = false
+        })
+      } catch(err) {
+        console.log(err)
+      }
+      return savedOutfitAlready
+    },
+    saveToMyItems(){
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_items.php", {
+        "outerwear": this.recommendedOutfit.outerwear,
+        "middlewear": this.recommendedOutfit.middlewear,
+        "innerwear": this.recommendedOutfit.innerwear,
+        "pants": this.recommendedOutfit.pants,
+        "headwear": this.recommendedOutfit.headwear,
+        "shoes": this.recommendedOutfit.shoes,
+        "user_id": this.$data.data.userid,
+        "location": this.$data.currentWeatherData.locationInput,
+        "temp_category": this.temperatureClass,
+        "temp": this.currentWeatherData.currentTemp,
+        "temp_unit": this.userPreferences.tempPref,
+        "checkingForSavedOutfit": false
+      }).then((res) => {
+        console.log(res)
+        this.$data.data.savedOutfitAlready = this.checkIfSavedOutfit();
+
+        // console.log("This is what savedOutfitAlready is in state: ")
+        // console.log(this.$data.data.savedOutfitAlready)
+        alert(res.data.result)
+      })
+    },
     temperatureMessage() {
       const currentTemp = parseFloat(this.$data.currentWeatherData.feelsLike);
       let temperatureMessage = "Today's temperature is: ";
@@ -446,28 +631,25 @@ export default {
       }
       this.$data.data.optionsVisibility = !this.$data.data.optionsVisibility;
     },
-    async retrieveAPI() {
-      try {
-        if (this.currentWeatherData.locationInput === '') {
-        } else {
-          //Setup the dates data structure
-          this.setupDays();
-          //Sets up the current weather
-          await this.currentWeather();
-          //24-Hour Forecast
-          await this.twentyFourForecast();
-          //Eight-Day Forecast
-          await this.eightDayForecast();
-          //Clears Location Input
-          this.currentWeatherData.locationInput = '';
-
-        }
-      } catch (Exception) {
-        alert("City not found by the API!")
+    async retrieveWeatherAlertInfo() {
+      const weatherAPI = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${this.$data.currentWeatherData.latCords}&lon=${this.$data.currentWeatherData.lonCords}&exclude=current,minutely,hourly,daily&appid=${this.$data.data.APIKEY}`).catch(function (error) {
+        console.log(error.toJSON());
+      });
+      const weatherData = weatherAPI['data'];
+      console.log(weatherData);
+      if (weatherData.hasOwnProperty('alerts')) {
+        const alertData = weatherData['alerts']['0'];
+        console.log(alertData);
+        this.$data.weatherAlert.senderName = alertData['sender_name'];
+        this.$data.weatherAlert.eventAlert = alertData['event'];
+        const unformattedDescription = alertData['description'];
+        const formattedDescription = unformattedDescription.replace(/\n/g, '\n\n');
+        this.$data.weatherAlert.description = formattedDescription;
+        this.$data.weatherAlert.showWeatherAlert = true;
       }
     },
     async currentWeather() {
-      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const locationFormatting = this.currentWeatherData.locationAPI.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/weather?q=${locationFormatting}
         &units=imperial&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
@@ -476,6 +658,8 @@ export default {
       const geoLocationData = weatherAPI['data'];
       //Get current Weather
       if (geoLocationStatus === 'OK') {
+        this.currentWeatherData.latCords = geoLocationData['coord']['lat'];
+        this.currentWeatherData.lonCords = geoLocationData['coord']['lon'];
         const nameOfLocation = geoLocationData['name'];
         const currentTemp = geoLocationData['main']['temp'];
         const minTemp = geoLocationData['main']['temp_min'];
@@ -534,7 +718,7 @@ export default {
       }
     },
     async twentyFourForecast() {
-      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const locationFormatting = this.currentWeatherData.locationAPI.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/hourly?q=${locationFormatting}
         &units=imperial&cnt=24&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
@@ -594,7 +778,7 @@ export default {
       }
     },
     async eightDayForecast() {
-      const locationFormatting = this.currentWeatherData.locationInput.replaceAll(' ', '%20');
+      const locationFormatting = this.currentWeatherData.locationAPI.replaceAll(' ', '%20');
       const weatherAPI = await axios.get(`https://pro.openweathermap.org/data/2.5/forecast/daily?q=${locationFormatting}
         &units=imperial&cnt=9&APPID=${this.$data.data.APIKEY}`).catch(function (error) {
         console.log(error.toJSON());
@@ -673,6 +857,53 @@ export default {
     },
     hasRecommendedOutfit() {
       return Object.values(this.recommendedOutfit).some(item => item !== null);
+    },
+    allCategoriesSaved() {
+      return Object.values(this.recommendedOutfit).every(item => item !== null);
+    },
+    suggestedLinks() {
+      const baseLink = "https://example.com/";
+      const outerwearLink = "https://example.com/";
+      const middlewearLink = "https://example.edu/";
+      const headwearLink = "https://example.org/";
+      const shoesLink = "https://example.net/";
+      const temperatureLinks = {
+        hot: {
+          innerwear: "https://www.amazon.com/Bossy-Just-Should-Doing-T-Shirt/dp/B0785FFH6N/ref=sr_1_5?crid=2MEESFS92K41D&keywords=t+shirt+or+hot&qid=1682382276&sprefix=t+shirt+or+hot%2Caps%2C135&sr=8-5",
+          pants: "https://www.amazon.com/Columbia-Silver-Ridge-Cargo-Fossil/dp/B0058YR376/ref=sr_1_5?crid=3JBUAYX0PO2XN&keywords=shorts+for+hot+weather&qid=1682382346&sprefix=shorts+for+hot+weather%2Caps%2C93&sr=8-5",
+        },
+        warm: {
+          innerwear: "https://www.amazon.com/Cooling-Running-Athletic-T-Shirts-Outdoor/dp/B087N2H367/ref=sr_1_5?crid=2O5NVFY0D8KAN&keywords=t+shirt+for+warm+weather&qid=1682382407&sprefix=t+shirt+for+warm+weathe%2Caps%2C99&sr=8-5",
+          pants: "https://www.amazon.com/Little-Donkey-Andy-Stretch-Camping/dp/B07RJLQ274/ref=sr_1_25?crid=3QGXKFN7N1XPI&keywords=shorts+for+warm+weather+men&qid=1682382441&sprefix=shorts+for+warm+weather+me%2Caps%2C101&sr=8-25",
+        },
+        ideal: {
+          innerwear: "https://www.amazon.com/Columbia-Bahama-Sleeve-Shirt-X-Large/dp/B000EOQ2Q8/ref=sr_1_18?crid=VQLPNLVNJ8IE&keywords=long+sleeve+shirts+for+ideal+weather+men&qid=1682382519&sprefix=long+sleeve+shirts+for+ideal+weather+men%2Caps%2C84&sr=8-18",
+          pants: "https://www.amazon.com/Wrangler-Authentics-Fleece-Carpenter-Autumn/dp/B00XKY30I2/ref=sr_1_3?crid=2OTIC80RLDDUM&keywords=pants+for+ideal+weather+men&qid=1682382491&sprefix=pants+for+ideal+weather+men%2Caps%2C96&sr=8-3 ",
+        },
+        chilly: {
+          innerwear: "https://www.amazon.com/Columbia-Bahama-Sleeve-Shirt-X-Large/dp/B07RDRYSLS/ref=sr_1_18?crid=VQLPNLVNJ8IE&keywords=long%2Bsleeve%2Bshirts%2Bfor%2Bideal%2Bweather%2Bmen&qid=1682382519&sprefix=long%2Bsleeve%2Bshirts%2Bfor%2Bideal%2Bweather%2Bmen%2Caps%2C84&sr=8-18&th=1",
+          pants: "amazon.com/ActionHeat-Heated-Base-Layer-Pants/dp/B074CN726H/ref=sr_1_12?crid=9PXMD1RJ1D2G&keywords=pants+for+chilly+weather+men&qid=1682382590&sprefix=pant+for+chilly+weather+men%2Caps%2C83&sr=8-12",
+        },
+        cold: {
+          innerwear: "https://www.amazon.com/Fruit-Loom-Recycled-Underwear-Greystone/dp/B08D364MFP/ref=sr_1_22?crid=1BFF5VQ0XBZCX&keywords=innerwear+for+cold+weather+men&qid=1682382660&sprefix=innerwear+for+col+weather+men%2Caps%2C92&sr=8-22",
+          pants: "https://www.amazon.com/Gash-Hao-Waterproof-Softshell-Outdoor/dp/B07HMNL2CG/ref=sr_1_10?crid=1F0V7LG91XA6S&keywords=pants+for+cold+weather+men&qid=1682382692&sprefix=pant+for+cold+weather+men%2Caps%2C96&sr=8-10",
+        },
+        freezing: {
+          innerwear: "https://www.amazon.com/romision-Thermal-Underwear-Insulated-Weather/dp/B08DP2HFN6/ref=sr_1_15?crid=1C9BPKWCWH47E&keywords=innerwear+for+freezing+weather+men&qid=1682382724&sprefix=innerwear+for+freezing+weather+men%2Caps%2C90&sr=8-15",
+          pants: "https://www.amazon.com/1960-Sports-Cargo-Pants-Medium/dp/B082YNDFBT/ref=sr_1_23?crid=28CNGEZQPNZZJ&keywords=pants%2Bfor%2Bfreezing%2Bweather%2Bmen&qid=1682382751&sprefix=pants%2Bfor%2Bfreezing%2Bweather%2Bmen%2Caps%2C122&sr=8-23&th=1",
+        },
+      };
+
+      const links = {
+        outerwear: outerwearLink,
+        middlewear: middlewearLink,
+        innerwear: temperatureLinks[this.temperatureClass].innerwear || baseLink,
+        pants: temperatureLinks[this.temperatureClass].pants || baseLink,
+        headwear: headwearLink,
+        shoes: shoesLink,
+      };
+
+      return links;
     },
   },
   components: {
@@ -988,6 +1219,30 @@ export default {
   padding-top: 20px;
 }
 
+.suggested-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.save-to-my-items{
+  padding: 2em;
+  font-size: large;
+  background:#1e7c85
+}
+
+.save-to-my-items:hover{
+  cursor: pointer;
+}
+
+.grayed-out-save-to-my-items{
+  padding: 2em;
+  font-size: large;
+  background:grey
+}
+
 .outfit-box {
   min-width: 200px;
   min-height: 250px;
@@ -1026,6 +1281,51 @@ export default {
   color: #fff;
   text-align: center;
   margin-top: 10px;
+}
+
+.suggested-outfit-box {
+  width: 200px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.suggested-outfit-box h1 {
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  text-decoration: underline black;
+  text-decoration-thickness: 5px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.suggested-outfit-box p {
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.suggested-outfit-box a {
+  text-decoration: none;
+}
+
+.suggested-outfit-box a:link p {
+  color: rgba(37, 95, 204);
+}
+
+.suggested-outfit-box a:visited p {
+  color: rgba(128, 0, 128, 0.6);
 }
 
 .current-unit1 {
