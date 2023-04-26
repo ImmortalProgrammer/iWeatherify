@@ -1,24 +1,25 @@
 <template>
     <div class="container">
         <div class="name-container">
-            <h1>{{ image_name }}</h1>
+            <h1>{{ clothing_name }}</h1>
         </div>
 
         <div class="image-container">
             <img :src = upload_path >
         </div>
 
-        <!-- <div class="footer">
+        <div class="footer">
             <p class="edit-text">Edit</p>
-            <p class="delete-text">Delete</p>
-        </div> -->
+            <p class="delete-text" @click="deleteAnItem">Delete</p>
+        </div>
     </div>
 </template>
 
 <script> 
+import axios from "axios"
 export default {
     name: "SavedItem",
-    props: ["image_name", "upload_path"],
+    props: ["clothing_name", "upload_path", "image_name", "userid", "temp_category", "clothing_category"],
     components: {
 
     },
@@ -26,7 +27,19 @@ export default {
         return {}
     },
     methods: {
-    
+        deleteAnItem(){
+            console.log("Delete was called")
+            axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/delete_my_items.php", {
+                userid: this.userid,
+                clothing_name: this.clothing_name,
+                image_name: this.image_name,
+                temp_category: this.temp_category,
+                clothing_category: this.clothing_category
+            }).then((res) => {
+                console.log(res)
+                alert(res.data.message)
+            })
+        }
     }
     
 }
@@ -35,9 +48,12 @@ export default {
 <style scoped>
 
 .container{
-    width: 25vw;
+    /* width: 25vw;
     height: 40vh;
-    padding-bottom: 5vh;
+    padding-bottom: 5vh; */
+    margin-right: 1vw;
+    display: flex;
+    flex-direction: column;
 }
 
 .name-container{
@@ -80,6 +96,9 @@ img{
 }
 .delete-text{
     color: red;
+}
+.delete-text :hover{
+    cursor: pointer;
 }
 
 @media screen and (max-width: 615px) {
