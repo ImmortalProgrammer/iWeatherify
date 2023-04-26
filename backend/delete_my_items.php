@@ -53,6 +53,25 @@
         }
     }
 
+    //If there are any saved outfits where there are no items, then we should just remove the row entirely
+    $query = "DELETE FROM `saved_items` WHERE `user_id` = ? AND `outerwear_name` = '' AND `outerwear_img` = '' AND `middlewear_name` = '' AND `middlewear_img` = '' AND `innerwear_name` = '' AND `innerwear_img` = '' AND `pants_name` = '' AND `pants_img` = '' AND `headwear_name` = '' AND `headwear_img` = '' AND `shoes_name` = '' AND `shoes_img` = ''";
+    $stmt = $conn -> prepare($query);
+    if(!$stmt){
+        $status = 0;
+        $message = "Couldn't make the connection to prepare the query";
+        die("Error: " . htmlspecialchars($conn -> error));
+    } else {
+        $stmt -> bind_param('i', $user_id);
+        if(!$stmt -> execute()){
+            $status = 0;
+            $message = "Couldn't execute the sql statement";
+            die('Error: ' . htmlspecialchars($stmt -> error));
+        } else {
+            $status = 1;
+            $message = "Successful deletion";
+        }
+    }
+
     $res = array(
         "status" => $status,
         "message" => $message,
