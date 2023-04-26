@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" v-if="outerwear_img || middlewear_img || innerwear_img || pants_img || headwear_img || shoes_img">
         <div class="images">
             <div class="image-container" v-if="outerwear_img">
                 <img :src = '`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${outerwear_img}`' >
