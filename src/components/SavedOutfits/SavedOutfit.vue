@@ -23,8 +23,17 @@
 
         <div class="location-temp">
             <h1>{{ temp_category }}</h1>
-            <h1>{{ location }}</h1>
-            <h1>{{ temp }}°{{temp_unit}}</h1>
+            <div v-if="location && temp != null && temp_unit">
+                <h1> 
+                    {{ location }} - {{ temp }}°{{temp_unit}}
+                </h1>
+            </div>
+            <div v-else>
+                <h1>
+                    {{ location }}
+                </h1>
+                <h1>{{ temp }}°{{temp_unit}}</h1>
+            </div>
         </div>
 
         <div class="clothes">
@@ -108,6 +117,10 @@ export default {
     object-fit: cover;
 }
 
+.image-container :hover{
+    transform: scale(1.25); 
+}
+
 .clothes {
     text-align: center;
 }
@@ -139,4 +152,32 @@ export default {
     cursor: pointer;
 }
 
+@media screen and (max-width: 800px) {
+    .container{
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: 5vh;
+    border: solid;
+    height: min-content;
+    }
+
+    .images{
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        background: grey;
+        overflow: scroll;
+        justify-content: start;
+    }
+
+    .image-container{
+        width: 90%;
+    }
+
+    .image-container :hover{
+        transform: scale(0); 
+    }
+}
 </style>
