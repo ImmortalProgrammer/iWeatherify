@@ -75,11 +75,9 @@ export default {
         user_id: this.userid,
       })
       .then(res => {
-        console.log(res)
         if(res != null){
           let allMySavedOutfits = JSON.parse(JSON.stringify(res.data.message))
           this.savedOutfits = allMySavedOutfits
-          console.log(this.savedOutfits)
         } else {
           console.log("There was no data in the response")
         }
