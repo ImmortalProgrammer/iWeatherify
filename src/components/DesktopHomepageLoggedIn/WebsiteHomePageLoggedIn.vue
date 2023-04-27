@@ -193,6 +193,7 @@ export default {
   name: "WebsiteHomePageLoggedIn",
   data() {
     return {
+      timer: null, 
       currentWeatherData: {
         locationInput: '',
         locationAPI: '',
@@ -279,7 +280,19 @@ export default {
       }
     }
   },
+  mounted() {
+    this.timer = setTimeout(() => {
+      document.cookie = "auth_token=; expires= 00:00:00 UTC;"
+      this.$router.push('/login')
+    }, 60000); 
+  }, 
+  beforeDestroy() {
+    clearTimeout(this.timer)
+  },
   async created() {
+    document.addEventListener('click', this.resetTimer);
+    document.addEventListener('mousemove', this.resetTimer);
+    document.addEventListener('keydown', this.resetTimer);
     await this.getUserId();
     await this.retrieveAPI();
     this.$data.data.isThereRecommendedOutfit = await this.fetchRecommendedOutfit();
@@ -288,6 +301,18 @@ export default {
     // console.log(this.$data.data.savedOutfitAlready)
   },
   methods: {
+    resetTimer() {
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.$router.push('/login)
+      }, 60000)
+     }, 
+     beforeDestory(){
+      document.removeEventListener('click', this.resetTimer)
+      document.removeEventListener('mousemove', this.resetTimer)
+      document.removeEventListener('keydown', this.resetTimer)
+      clearTimeout(this.timer)
+     }, 
     async clearAlerts() {
       this.$data.weatherAlert.senderName = '';
       this.$data.weatherAlert.eventAlert = '';
