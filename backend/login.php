@@ -22,6 +22,8 @@ if($_SERVER["REQUEST_METHOD"]  == "POST"){
         //Create the cookie and the hashed version of the cookie
         $cookie = create_token();
         $hashed_cookie = hash("sha256", $cookie);
+        $expire_cookie = time() + 60; 
+        setcookie("auth_token", $cookie, $expire_cookie, "/"); 
 
         // Store username with hashed cookie into database
         add_auth_user($username, $hashed_cookie);
