@@ -3,7 +3,6 @@ import App from "./App.vue";
 import router from "./router";
 import "../styleguide.css"
 import "../globals.css"
-import VueGeolocation from 'vue-browser-geolocation';
 
 Vue.config.productionTip = false;
 
