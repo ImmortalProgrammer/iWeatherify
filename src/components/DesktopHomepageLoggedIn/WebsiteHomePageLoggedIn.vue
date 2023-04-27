@@ -74,11 +74,11 @@
             <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.shoes.image}`" alt="Shoes" />
             <p>{{ recommendedOutfit.shoes.name }}</p>
           </div>
-
-          <button class="save-to-my-items" @click.prevent="saveToMyItems" v-if="this.$data.data.isThereRecommendedOutfit && !this.$data.data.savedOutfitAlready">Save to Saved Outfits</button>
-          <button class="grayed-out-save-to-my-items" v-if="this.$data.data.savedOutfitAlready">Outfit already saved to Saved Outfits</button>
         </div>
 
+        <button class="save-to-my-items" @click.prevent="saveToMyItems" v-if="this.$data.data.isThereRecommendedOutfit && !this.$data.data.savedOutfitAlready">Save to Saved Outfits</button>
+        <button class="grayed-out-save-to-my-items" v-if="this.$data.data.savedOutfitAlready">Outfit already saved to Saved Outfits</button>
+        
         <p style="font-size: 3.5vh; padding-top: 3vh;" v-if="!allCategoriesSaved">Here are some suggestions for the current temperature category:</p>
         
         <div class="suggested-items" v-if="!allCategoriesSaved">
@@ -1230,7 +1230,8 @@ export default {
 .save-to-my-items{
   padding: 2em;
   font-size: large;
-  background:#1e7c85
+  background:#1e7c85;
+  color: white;
 }
 
 .save-to-my-items:hover{
@@ -1240,7 +1241,8 @@ export default {
 .grayed-out-save-to-my-items{
   padding: 2em;
   font-size: large;
-  background:grey
+  background:grey;
+  color: white;
 }
 
 .outfit-box {
