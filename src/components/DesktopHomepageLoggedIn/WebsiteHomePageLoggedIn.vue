@@ -164,7 +164,7 @@
 
       <div id="TwentyFourHour-weather_1">
         <p style="font-size: 5vh; border-bottom: 1vh solid black; padding: 0 5vw 1vh 5vw;">24-Hour Forecast</p>
-        <div class="hour-next-1" v-for="(hour, index) in twentyFourHourForecastData.UTCdates" :key="index">
+        <div class="hour-next-1" v-for="(hour, index) in twentyFourHourForecastData.hours" :key="index">
           <p class="next_hour-1">{{hour}}</p>
           <p class="weatherStateHour-1">{{twentyFourHourForecastData.iconDescription[index]}}</p>
           <div class="TwentyFourHourForecastImg-1">
@@ -187,7 +187,7 @@ import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
 import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 import NavBar from "@/NavBar/NavBar.vue";
 import WeatherPopup from "@/components/WeatherAlert/WeatherPopup.vue";
-
+import moment from 'moment';
 
 export default {
   name: "WebsiteHomePageLoggedIn",
@@ -753,6 +753,7 @@ export default {
       for (let x in data) {
         const currentData = data[x.toString()];
         this.twentyFourHourForecastData.UTCdates[x] = currentData['dt_txt'].toString().slice(11) + ' UTC';
+	this.twentyFourHourForecastData.hours[x] = moment.utc(this.twentyFourHourForecastData.UTCdates[x], 'HH:mm:ss UTC').utcOffset(this.twentyFourHourForecastData.timezoneOffset / 60).format('h:mm A');
         this.twentyFourHourForecastData.iconDescription[x] = currentData['weather']['0']['description'].split(' ')
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');

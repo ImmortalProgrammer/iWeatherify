@@ -52,7 +52,7 @@
 
         <div id="TwentyFourHour-weather_2">
           <p style="font-size: 5vh; border-bottom: 1vh solid black; padding: 0 5vw 1vh 5vw;">24-Hour Forecast</p>
-          <div class="hour-next-2" v-for="(hour, index) in $data.twentyFourHourForecastData.UTCdates" :key="index">
+          <div class="hour-next-2" v-for="(hour, index) in $data.twentyFourHourForecastData.hours" :key="index">
             <p class="next_hour-2">{{hour}}</p>
             <p class="weatherStateHour-2">{{$data.twentyFourHourForecastData.iconDescription[index]}}</p>
             <div class="TwentyFourHourForecastImg-2">
@@ -86,6 +86,7 @@
 import axios from "axios";
 import menuBar from "@/components/menuBars/menuBarNonLoggedIn.vue";
 import WeatherPopup from "@/components/WeatherAlert/WeatherPopup.vue";
+import moment from 'moment';
 export default {
   name: "WebsiteHomePageNotLoggedIn",
   data() {
@@ -277,7 +278,8 @@ export default {
       const data = weatherAPI['data']['list'];
       for (let x in data) {
         const currentData = data[x.toString()];
-        this.twentyFourHourForecastData.UTCdates[x] = currentData['dt_txt'].toString().slice(11) + ' UTC';;
+        this.twentyFourHourForecastData.UTCdates[x] = currentData['dt_txt'].toString().slice(11) + ' UTC';
+        this.twentyFourHourForecastData.hours[x] = moment.utc(this.twentyFourHourForecastData.UTCdates[x], 'HH:mm:ss UTC').utcOffset(this.twentyFourHourForecastData.timezoneOffset / 60).format('h:mm A');
         this.twentyFourHourForecastData.iconDescription[x] = currentData['weather']['0']['description'].split(' ')
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
