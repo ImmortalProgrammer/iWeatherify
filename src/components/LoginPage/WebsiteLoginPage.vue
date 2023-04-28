@@ -100,7 +100,6 @@
         }
         else {
           this.loginUser()
-          this.startLogoutTimer(); 
         }     
       },
       loginUser() {
