@@ -46,12 +46,13 @@
         </div>
 
         <div class="footer">
-            <p class="delete-text">Delete</p>
+            <p class="delete-text" @click = "deleteSavedOutfit">Delete</p>
         </div>
     </div>
 </template>
 
 <script> 
+import axios from "axios";
 export default {
     name: "SavedOutfit",
     props: [
@@ -72,14 +73,57 @@ export default {
         "shoes_name",
         "shoes_img",
     ],
-    components: {
-
+    created() {
+        this.getUserId();
     },
     data(){
-        return {}
+        return {
+            userid: this.null,
+        }
     },
     methods: {
+    async getUserId() {
+      try {
+        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        this.userid = response.data.userid;
+        console.log("The user id is: " + this.userid)
+      } catch (error) {
+        console.error("Unsuccessful request in getUserId().", error);
+      }
+    },
+    deleteSavedOutfit(){
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/delete_saved_outfit.php", 
+      {
+        user_id: this.userid,
+        location: this.location,
+        temp: this.temp,
+        temp_unit: this.temp_unit,
+        temp_category: this.temp_category,
+        outerwear_name: this.outerwear_name,
+        outerwear_img: this.outerwear_img,
+        middlewear_name: this.middlewear_name,
+        middlewear_img: this.middlewear_img,
+        innerwear_name: this.innerwear_name,
+        innerwear_img: this.innerwear_img,
+        pants_name: this.pants_name,
+        pants_img: this.pants_img,
+        headwear_name: this.headwear_name,
+        headwear_img: this.headwear_name,
+        shoes_name: this.shoes_name,
+        shoes_img: this.shoes_img,
+      })
+      .then(res => {
+        if(res != null){
+          console.log(res)
+          alert(res.data.message)
+        } else {
+          console.log("There was no data in the response")
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
     }
+  }
     
 }
 </script>
