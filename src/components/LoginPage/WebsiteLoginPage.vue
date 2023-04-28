@@ -73,21 +73,9 @@
         showErrorModal: false,
         usernameError: false,
         passwordError: false,
-        timoutId: null
       };
     },
     methods: {
-      startLogoutTimer(){
-        this.timeoutId = setTimeout(() => {
-          console.log("Logging out due to inactivity");
-          document.cookie = "auth_token=; expires=00:00:00 UTC; path=/;"
-          this.$router.push("/login"); 
-        }, 6000); 
-      },
-      resetLogoutTimer(){
-        clearTimeout(this.timeoutId);
-        this.startLogoutTimer();
-      },
       validateForm(){
         if(!this.username && !this.password){
           this.errorTitle = "Login Error";
@@ -139,12 +127,6 @@
           console.log("Unsuccessful axios post", err)
         })
       }
-    },
-    mounted(){
-      this.startLogoutTimer();
-    },
-    beforeDestroy(){
-      clearTimeout(this.timeoutId); 
     },
     components: {
       menuBar,
