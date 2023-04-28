@@ -281,14 +281,8 @@ export default {
     }
   },
   mounted() {
-    this.timer = setTimeout(() => {
-      document.cookie = "auth_token=; expires= 00:00:00 UTC;"
-      this.$router.push('/login')
-    }, 60000); 
+    this.startTimer(); 
   }, 
-  beforeDestroy() {
-    clearTimeout(this.timer)
-  },
   async created() {
     document.addEventListener('click', this.resetTimer);
     document.addEventListener('mousemove', this.resetTimer);
@@ -301,23 +295,24 @@ export default {
     // console.log(this.$data.data.savedOutfitAlready)
   },
   methods: {
-    resetTimer() {
-      clearTimeout(this.timer)
+     startTimer() {
       this.timer = setTimeout(() => {
-        this.$router.push('/login)
-      }, 60000)
-     }, 
-     beforeDestory(){
-      document.removeEventListener('click', this.resetTimer)
-      document.removeEventListener('mousemove', this.resetTimer)
-      document.removeEventListener('keydown', this.resetTimer)
-      clearTimeout(this.timer)
-     }, 
-    async clearAlerts() {
-      this.$data.weatherAlert.senderName = '';
-      this.$data.weatherAlert.eventAlert = '';
-      this.$data.weatherAlert.description = '';
-      this.$data.weatherAlert.showWeatherAlert = false;
+        this.logoutUser();
+      }, 900000); 
+    },
+    resetTimer() {
+      clearTimeout(this.timer);
+      this.startTimer();
+    },
+    logoutUser(){
+      document.cookie = "auth_token=; expires=00:00:00 UTC; path=/;";
+      this.$router.push('/login');
+    }, 
+    beforeDestroy() {
+      document.removeEventListener('click', this.resetTimer);
+      document.removeEventListener('mousemove', this.resetTimer);
+      document.removeEventListener('keydown', this.resetTimer);
+      clearTimeout(this.timer);
     },
     async retrieveAPI() {
       try {
