@@ -306,7 +306,9 @@ export default {
     },
     logoutUser(){
       document.cookie = "auth_token=; expires=00:00:00 UTC; path=/;";
-      this.$router.push('/login');
+      if (this.$router.path !== '/login') {
+      	this.$router.push('/login');
+      }
     }, 
     beforeDestroy() {
       document.removeEventListener('click', this.resetTimer);
