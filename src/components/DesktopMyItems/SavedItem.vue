@@ -9,7 +9,6 @@
         </div>
 
         <div class="footer">
-            <p class="edit-text">Edit</p>
             <p class="delete-text" @click="deleteAnItem">Delete</p>
         </div>
     </div>
@@ -97,6 +96,7 @@ img{
 }
 .delete-text{
     color: red;
+    margin-left: auto;
 }
 .delete-text :hover{
     cursor: pointer;
