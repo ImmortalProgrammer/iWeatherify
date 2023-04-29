@@ -25,14 +25,14 @@
             <h1>{{ temp_category }}</h1>
             <div v-if="location && temp != null && temp_unit">
                 <h1> 
-                    {{ location }} - {{ temp }}°{{temp_unit}}
+                    {{ location }} - {{ temp }}°{{temp_unit}} - {{ time_stamp }}
                 </h1>
             </div>
             <div v-else>
                 <h1>
                     {{ location }}
                 </h1>
-                <h1>{{ temp }}°{{temp_unit}}</h1>
+                <h1>{{ temp }}°{{temp_unit}} - {{ time_stamp }}</h1>
             </div>
         </div>
 
@@ -72,6 +72,7 @@ export default {
         "headwear_img",
         "shoes_name",
         "shoes_img",
+        "time_stamp",
     ],
     created() {
         this.getUserId();

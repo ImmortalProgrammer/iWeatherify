@@ -36,7 +36,8 @@
                 "headwear_name" => $rows["headwear_name"],
                 "headwear_img" => $rows["headwear_img"],
                 "shoes_name" => $rows["shoes_name"],
-                "shoes_img" => $rows["shoes_img"]
+                "shoes_img" => $rows["shoes_img"],
+                "time_stamp" => $rows["time_stamp"],
             ];
             array_push($data, $row);
         }

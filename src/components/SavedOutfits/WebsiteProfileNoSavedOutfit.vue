@@ -28,6 +28,8 @@
         :pants_img = "outfit.pants_img"
         :headwear_img = "outfit.headwear_img"
         :shoes_img = "outfit.shoes_img"
+
+        :time_stamp = "outfit.time_stamp"
       >
       </saved-outfit>
     </div>
