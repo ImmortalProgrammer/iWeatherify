@@ -591,7 +591,8 @@ export default {
         "temp_category": this.temperatureClass,
         "temp": this.currentWeatherData.currentTemp,
         "temp_unit": this.userPreferences.tempPref,
-        "checkingForSavedOutfit": false
+        "checkingForSavedOutfit": false,
+        "time_stamp": new Date().toLocaleDateString()
       }).then((res) => {
         console.log(res)
         this.$data.data.savedOutfitAlready = this.checkIfSavedOutfit();
