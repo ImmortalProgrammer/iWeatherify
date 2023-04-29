@@ -59,6 +59,7 @@
     $temp_category = $input["temp_category"];
     $temp = $input["temp"];
     $temp_unit = $input["temp_unit"];
+    $time_stamp = $input["time_stamp"];
 
     //Functions
     //Check if there already exists the saved outfit
@@ -89,9 +90,9 @@
             echo json_encode(array("result" => "You already saved this outfit", "status" => 0));
         } else {
             //Only input to the database if there doesn't exist a row with the same exact information
-            $query = "INSERT INTO `saved_items` (`user_id`, `location`, `temp_category`, `temp`, `temp_unit`, `outerwear_name`, `outerwear_img`, `middlewear_name`, `middlewear_img`, `innerwear_name`, `innerwear_img`, `pants_name`, `pants_img`, `headwear_name`, `headwear_img`, `shoes_name`, `shoes_img`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO `saved_items` (`user_id`, `location`, `temp_category`, `temp`, `temp_unit`, `outerwear_name`, `outerwear_img`, `middlewear_name`, `middlewear_img`, `innerwear_name`, `innerwear_img`, `pants_name`, `pants_img`, `headwear_name`, `headwear_img`, `shoes_name`, `shoes_img`, `time_stamp`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("sssisssssssssssss", $user_id, $location, $temp_category, $temp, $temp_unit, $outerwear_name, $outerwear_img, $middlewear_name, $middlewear_img, $innerwear_name, $innerwear_img, $pants_name, $pants_img, $headwear_name, $headwear_img, $shoes_name, $shoes_img);
+            $stmt->bind_param("sssissssssssssssss", $user_id, $location, $temp_category, $temp, $temp_unit, $outerwear_name, $outerwear_img, $middlewear_name, $middlewear_img, $innerwear_name, $innerwear_img, $pants_name, $pants_img, $headwear_name, $headwear_img, $shoes_name, $shoes_img, $time_stamp);
         
             if ($stmt->execute()) {
                 if ($stmt->affected_rows > 0) {
