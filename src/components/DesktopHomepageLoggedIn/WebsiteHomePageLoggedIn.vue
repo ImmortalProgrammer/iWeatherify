@@ -424,7 +424,7 @@ export default {
       }
     },
     async loadUnits() {
-      axios.get("http://localhost/project_s23-iweatherify/backend/load_units.php",
+      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php",
           {
             params: {
               userid: this.$data.data.userid,
