@@ -298,7 +298,7 @@ export default {
      startTimer() {
       this.timer = setTimeout(() => {
         this.logoutUser();
-      }, 30000); 
+      }, 900000); 
     },
     resetTimer() {
       clearTimeout(this.timer);
