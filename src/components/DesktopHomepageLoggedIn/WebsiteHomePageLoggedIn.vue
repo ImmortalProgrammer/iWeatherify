@@ -298,7 +298,7 @@ export default {
      startTimer() {
       this.timer = setTimeout(() => {
         this.logoutUser();
-      }, 900000); 
+      }, 30000); //testing for 30 seconds will change to 900000
     },
     resetTimer() {
       clearTimeout(this.timer);
@@ -306,15 +306,22 @@ export default {
     },
     logoutUser(){
       document.cookie = "auth_token=; expires=00:00:00 UTC; path=/;";
-      if (this.$router.path !== '/login') {
-      	this.$router.push('/login');
+      if (this.$router && this.$router.currentRoute.path !== '/login') {
+        this.$router.push('/login');
       }
+      console.log("Token has expired after 15 minutes.");
     }, 
     beforeDestroy() {
       document.removeEventListener('click', this.resetTimer);
       document.removeEventListener('mousemove', this.resetTimer);
       document.removeEventListener('keydown', this.resetTimer);
       clearTimeout(this.timer);
+    },
+    async clearAlerts() {
+      this.$data.weatherAlert.senderName = '';
+      this.$data.weatherAlert.eventAlert = '';
+      this.$data.weatherAlert.description='';
+      this.$data.weatherAlert.showWeatherAlert = false;
     },
     async retrieveAPI() {
       try {
