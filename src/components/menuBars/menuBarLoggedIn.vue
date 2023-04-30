@@ -60,8 +60,20 @@ export default {
       }
     },
     logOutAccount() {
-      document.cookie = "auth_token" + "=; Max-Age=-999999999;";
-      //You need to delete the auth_token from the database, currently not working, so it was left out for now
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/logout.php?action=logout", null, { withCredentials: true })
+    .then((res) => {
+      console.log(res);
+      console.log(res.data);
+      if (res.data.status === 1) {
+        document.cookie = "auth_token=; Max-Age=-999999999;"; // delete the auth_token cookie
+        this.$router.push("/login"); // redirect to login page after successful logout
+      } else {
+        console.log("Logout unsuccessful");
+      }
+    })
+    .catch((err) => {
+      console.log("Unsuccessful axios post", err);
+    });
     },
     menuPress() {
       this.routeDetection();
