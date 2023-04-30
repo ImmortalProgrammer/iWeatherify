@@ -308,7 +308,7 @@ export default {
       axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/logout.php?action=logout" , null, { withCredentials: true })
     .then((res) => {
     if (res.data.status === 1 && this.$router && this.$router.currentRoute.path !== '/login') {
-      document.cookie = "auth_token=; expires=00:00:00 UTC; path=/;";
+      document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/CSE442-542/2023-Spring/cse-442a;";
     this.$router.push('/login');
     console.log(res.data.status); 
     console.log("Logging out due to inactivity");
