@@ -298,18 +298,26 @@ export default {
      startTimer() {
       this.timer = setTimeout(() => {
         this.logoutUser();
-      }, 30000); //testing for 30 seconds will change to 900000
+      }, 30000); 
     },
     resetTimer() {
       clearTimeout(this.timer);
       this.startTimer();
     },
     logoutUser(){
+      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/logout.php?action=logout" , null, { withCredentials: true })
+    .then((res) => {
+    if (res.data.status === 1 && this.$router && this.$router.currentRoute.path !== '/login') {
       document.cookie = "auth_token=; expires=00:00:00 UTC; path=/;";
-      if (this.$router && this.$router.currentRoute.path !== '/login') {
-        this.$router.push('/login');
-      }
-      console.log("Token has expired after 15 minutes.");
+    this.$router.push('/login');
+    console.log(res.data.status); 
+    console.log("Logging out due to inactivity");
+    } 
+    })
+    .catch((err) => {
+      console.log("Unsuccessful axios post", err);
+    });
+
     }, 
     beforeDestroy() {
       document.removeEventListener('click', this.resetTimer);
@@ -416,7 +424,7 @@ export default {
       }
     },
     async loadUnits() {
-      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php",
+      axios.get("http://localhost/project_s23-iweatherify/backend/load_units.php",
           {
             params: {
               userid: this.$data.data.userid,
