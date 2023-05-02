@@ -120,6 +120,21 @@ export default {
 </script>
 
 <style scoped>
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
+* {
+  animation: fadeInAnimation ease .5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
 .website-my-items-page {
   padding-top: 5%; /*TODO - Ideally want to look back at the navbar so that we dont need to hardcode applying padding of content of page*/
   display: flex;

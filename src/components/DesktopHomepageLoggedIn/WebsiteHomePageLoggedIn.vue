@@ -959,11 +959,23 @@ export default {
 
 <style scoped>
 
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 
+  animation: fadeInAnimation ease .5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .hot {
