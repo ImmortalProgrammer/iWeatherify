@@ -7,6 +7,11 @@
     </div> -->
 
     <div class="all-saved-outfits">
+      <div class="NoSavedOutfitIcon" v-if="savedOutfits.length == 0">
+        <img src="../../../img/girl-on-cloud.svg" class="NoSavedOutfitIconImage">
+        <p>There are no saved outfits. Save one from the homepage!</p>
+      </div>
+
       <saved-outfit class="savedOutfit"
         v-for="outfit in savedOutfits"
         :key = "outfit.id"
@@ -100,6 +105,16 @@ export default {
   display:flex;
   flex-direction: column-reverse; /*Will show most recently saved outfit first*/
   margin-top: 10vh;
+}
+
+.NoSavedOutfitIcon{
+  text-align: center;
+  margin: auto;
+}
+
+.NoSavedOutfitIconImage{
+  width: 100%;
+  height: 100%;
 }
 
 .screen a {
