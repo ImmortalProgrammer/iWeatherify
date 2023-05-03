@@ -1,9 +1,9 @@
 <template>
   <div class="container-center-horizontal">
-    <div class="website-location-settings screen">
-      
       <nav-bar class = "locationNav"></nav-bar>
-      
+
+      <div class="website-location-settings screen">
+
       
       <div class="location-title">
         <h1 class="location-settings-title">{{ title }}</h1>
@@ -131,6 +131,7 @@ export default {
 
 .locationNav{
   top: -0.85%;
+    width: 95%;
 }
 
 .switch {
@@ -206,9 +207,9 @@ input:checked + .slider:before {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 75%;
   height: 10%; 
-  left: -10px;
+  left: 20px;
   top: 50px; 
   
 }
@@ -218,7 +219,9 @@ input:checked + .slider:before {
  font-weight: 600;
  font-size: 2.5em;
  font-family: 'Inter';
- font-style: normal; 
+ font-style: normal;
+    margin-top: 150px;
+    margin-left: 110px;
 
 }
 
@@ -228,9 +231,9 @@ input:checked + .slider:before {
   display: flex;
   gap: 23px;
   height: 289px;
-  margin-left: 500px; /*changed */ 
+  margin-left: 500px; /*changed */
   margin-top: 200px;
-  width: 100%; 
+  width: 60%;
 }
 .text-column1 {
   align-items: flex-start;
@@ -238,7 +241,7 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   min-height: 250px;
-  margin-left: -100px; 
+  margin-left: -100px;
   width: 800px;
   
 }
@@ -264,9 +267,9 @@ input:checked + .slider:before {
   width: 706px;
 }
 .enable-location-to-g {
-  align-self: flex-end;
   color: #808080;
-  font-size: 20px; 
+  font-size: 20px;
+    margin-left: 150px;
   font-weight: 500;
   line-height: normal;
   min-height: 82px;
@@ -289,7 +292,7 @@ input:checked + .slider:before {
   font-size: 20px; 
   font-weight: 500;
   line-height: normal;
-  margin-left: 26px;
+  margin-left: 75px;
   min-height: 82px;
   text-align: center;
   width: 706px;
@@ -308,8 +311,9 @@ input:checked + .slider:before {
 .city-container {
   height: 107px;
   position: relative;
-  width: 400px;
-  left: 200px; 
+  width: 0;
+  margin-right: 150px;
+    background-color: red;
 }
 .city{
   height: 50px;
@@ -335,7 +339,7 @@ button {
   cursor: pointer;
   margin-left: 828px; /* changed */ 
   transform: scale(1.2); 
-  margin-top: 80px; 
+  margin-top: 80px;
 }
 
 @media screen and (min-width: 992px) and (max-width: 1440px) { /* changed */ 

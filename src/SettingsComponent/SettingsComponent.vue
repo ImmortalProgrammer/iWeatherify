@@ -5,7 +5,7 @@
         <li id = "button1" ><a  href="#/unitsSettings">Unit Settings</a></li>
         <li id = "button2" ><a  href="#/locationSettings">Location Settings</a></li>
         <li id = "button3" ><a  href="#/tempSettings">Temperature Settings</a></li>
-        <li id = "button4"><a href="#/accountSettings">Account Settings</a></li>
+        <li id = "button4"> <a href="#/accountSettings">Account Settings</a></li>
       </ul>
   </div>
 
@@ -203,13 +203,13 @@ export default {
     user-select: none;
     background-color: #1e7c85;
     color: white;
-    padding: 0px;
-    position: fixed;
+    padding: 0;
+    position: absolute;
     height: 6vh;
-    font-size: 80%;
+    font-size: 85%;
     top: 10%;
     left: -15%;
-    width: 100%;
+    width: 130%;
     float: left;
     transform: scale(0.7); 
   }

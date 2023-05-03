@@ -34,7 +34,7 @@
       <div>
         <button @click="saveUnits()">Save</button>
       </div>
-      <SettingsComponent></SettingsComponent>
+        <SettingsComponent></SettingsComponent>
     </div>
   </div>
 </template>
@@ -130,6 +130,7 @@ export default {
 .unit-title {
   color: var(--black);
   font-weight: 600;
+    margin-top: 55px;
   font-size: 3em;
   font-family: 'Inter';
   font-style: normal;
@@ -238,7 +239,7 @@ button {
   .title-container{
     transform: scale(0.7);
     width: auto;
-    top: 170px;
+    top: 120px;
   }
 
   .row {
@@ -255,7 +256,6 @@ button {
     transform: scale(0.5);
     width: auto;
   }
-
   .row {
     width: 90%;
   }
