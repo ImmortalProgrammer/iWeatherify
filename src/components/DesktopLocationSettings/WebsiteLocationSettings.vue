@@ -312,7 +312,6 @@ input:checked + .slider:before {
   position: relative;
   width: 0;
   margin-right: 150px;
-    background-color: red;
 }
 .city{
   height: 50px;
@@ -379,15 +378,36 @@ button {
 
 
   .location-title{
-    margin-left: 20px;
-    margin-top: 140px;
+    margin-left: -90px;
+    margin-top: 50px;
     transform: scale(0.7);
+    width: 130%;
+      font-size: 85%;
   }
 
   .location-text-container{
     margin-top: 40px; 
     margin-left: -100px; 
-    transform: scale(0.56);
+    transform: scale(0.55);
+  }
+
+  .city{
+      height: 50px;
+      left: -10px;
+      position: absolute;
+      top: -20%;
+      width: 260px;
+  }
+
+  .toggle-switcho-container {
+      align-items: flex-start;
+      display: flex;
+      gap: 111px;
+      height: 55px;
+      margin-right: -110px;
+      margin-top: 20px;
+      min-width: 100px;
+      position: relative;
   }
 
   .text-column2{
@@ -396,8 +416,8 @@ button {
   }
 
   .save-button-container{
-    margin-top: -80px; 
-    margin-left: -340px; 
+    margin-top: -130px;
+    margin-left: -550px;
     transform: scale(0.65); 
   }
 
