@@ -630,7 +630,16 @@ export default {
 
         // console.log("This is what savedOutfitAlready is in state: ")
         // console.log(this.$data.data.savedOutfitAlready)
-        alert(res.data.result) //Here
+        if (res.data.result == 1) {
+          this.data.errorTitle = 'Success';
+          this.data.errorMessage = 'Outfit saved successfully!';
+          this.data.showErrorModal = true;
+        } else {
+          this.data.errorTitle = 'Error';
+          this.data.errorMessage = res.data.result;
+          this.data.showErrorModal = true;
+        }
+        // alert(res.data.result) //Here
       })
     },
     temperatureMessage() {
