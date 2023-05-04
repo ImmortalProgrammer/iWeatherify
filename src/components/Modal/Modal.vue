@@ -94,7 +94,10 @@
         uploadImage(){
           const fd = new FormData()
           if(!this.selectedFile){
-            alert("Make sure you upload an image with a name before saving")
+            this.errorTitle = "Upload Error";
+            this.errorMessage = "Make sure you upload an image with a name before saving";
+            this.showErrorModal = true;
+            // alert("Make sure you upload an image with a name before saving")//Here
           } else {
             fd.append('image', this.selectedFile, this.selectedFile.name)
             fd.append('user_id', this.userid)
@@ -106,8 +109,11 @@
             axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/my_items.php", fd, {header: {'Content-Type':'multipart/form-data'}}).then(
               (res) => {
                 if(res.data.status === 1){
-                  console.log("This is the response from the server")
-                  console.log(res)
+                  // console.log("This is the response from the server")
+                  // console.log(res)
+                  this.errorTitle = "Success";
+                  this.errorMessage = "Your item has been saved successfully!";
+                  this.showErrorModal = true;
                   this.close()
                 } else{
                   console.log(res)
@@ -158,7 +164,7 @@
 
   .modal-header {
     position: relative;
-    border-bottom: 1px solid #eeeeee;
+    /* border-bottom: 1px solid #eeeeee; */
     color: #264653;
     justify-content: space-between;
   }

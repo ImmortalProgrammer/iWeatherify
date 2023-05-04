@@ -54,7 +54,7 @@ export default {
                 console.log(res)
                 if (res.data.status == 1) {
                     this.errorTitle = 'Success';
-                    this.errorMessage = 'My items deletion successfully!';
+                    this.errorMessage = 'Your item deletion successfully!';
                     this.showErrorModal = true;
                 }
                 // alert(res.data.message)//Here
