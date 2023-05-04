@@ -3,6 +3,15 @@
     <div class="container-center-horizontal1">
       <nav-bar class = "HomePageNavBar"></nav-bar>
 
+      <div v-if="showErrorModal" class="overlay">
+        <error-modal
+          :show-modal="data.showErrorModal"
+          :title="data.errorTitle"
+          :message="data.errorMessage"
+          @close-modal="data.showErrorModal = false"
+        ></error-modal>
+      </div>
+
       <div v-if="$data.weatherAlert.showWeatherAlert" class = "alertBox">
         <weather-popup
             :sender-name="$data.weatherAlert.senderName"
@@ -188,6 +197,7 @@ import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 import NavBar from "@/NavBar/NavBar.vue";
 import WeatherPopup from "@/components/WeatherAlert/WeatherPopup.vue";
 import moment from 'moment';
+import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
 
 export default {
   name: "WebsiteHomePageLoggedIn",
@@ -276,7 +286,10 @@ export default {
         eightDayForecastGrayOut: true,
         savedOutfitAlready: false,
         isThereRecommendedOutfit: false,
-        displayNewButton: false
+        displayNewButton: false,
+        errorTitle: "",
+        errorMessage: "",
+        showErrorModal: false,
       }
     }
   },
@@ -360,7 +373,10 @@ export default {
           this.currentWeatherData.locationAPI = '';
         }
       } catch (Exception) {
-        alert("City unrecognized!")
+        this.data.errorTitle = 'Error';
+        this.data.errorMessage = 'City unrecognized!';
+        this.data.showErrorModal = true;
+        // alert("City unrecognized!") //Here
         this.currentWeatherData.locationAPI = '';
         this.currentWeatherData.locationInput = '';
         await this.clearAlerts();
@@ -614,7 +630,7 @@ export default {
 
         // console.log("This is what savedOutfitAlready is in state: ")
         // console.log(this.$data.data.savedOutfitAlready)
-        alert(res.data.result)
+        alert(res.data.result) //Here
       })
     },
     temperatureMessage() {
@@ -752,7 +768,7 @@ export default {
             .join(' ');
         this.outfitSuggestions();
       } else {
-        alert("Error Status Request Failed!");
+        console.log("Error Status Request Failed!");
       }
     },
     async twentyFourForecast() {
@@ -949,7 +965,8 @@ export default {
     WeatherPopup,
     NavBar,
     MenuBarLoggedIn,
-    menuBar
+    menuBar,
+    ErrorModal,
   },
   props: [
     "homeLogo2",
@@ -964,6 +981,16 @@ export default {
   padding: 0;
   box-sizing: border-box;
 
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .hot {

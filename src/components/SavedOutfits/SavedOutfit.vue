@@ -116,7 +116,12 @@ export default {
       .then(res => {
         if(res != null){
           console.log(res)
-          alert(res.data.message)
+          if (res.data.status == 1) {
+            this.errorTitle = 'Success';
+            this.errorMessage = 'Saved outfit deletion successfully!';
+            this.showErrorModal = true;
+          }
+        //   alert(res.data.message)//Here
         } else {
           console.log("There was no data in the response")
         }

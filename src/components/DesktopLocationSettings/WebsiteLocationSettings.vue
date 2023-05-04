@@ -3,7 +3,15 @@
     <div class="website-location-settings screen">
       
       <nav-bar class = "locationNav"></nav-bar>
-      
+
+      <div v-if="showErrorModal" class="overlay">
+        <error-modal
+          :show-modal="data.showErrorModal"
+          :title="data.errorTitle"
+          :message="data.errorMessage"
+          @close-modal="data.showErrorModal = false"
+        ></error-modal>
+      </div>
       
       <div class="location-title">
         <h1 class="location-settings-title">{{ title }}</h1>
@@ -43,8 +51,8 @@
 <script>
 import axios from "axios"; 
 import NavBar from "@/NavBar/NavBar.vue";
-import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
-
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue";
+import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
 
 export default {
   name: "WebsiteLocationSettings",
@@ -53,8 +61,11 @@ export default {
       data: {
         cityName: "",
         userid: null, 
-        toggleValue: 0, 
-      }
+        toggleValue: 0,
+        errorTitle: "",
+        errorMessage: "",
+        showErrorModal: false,
+      },
     };
   },
   created() {
@@ -85,7 +96,10 @@ export default {
       })
       .then(response => {
         console.log(response.data);
-        alert("Location Settings saved successfully!");
+        this.data.errorTitle = 'Success';
+        this.data.errorMessage = 'Location settings saved successfully!';
+        this.data.showErrorModal = true;
+        // alert("Location Settings saved successfully!"); //Here
       })
       .catch(error => {
         console.error("Unsuccessful axios post in saveLocation().", error);
@@ -111,6 +125,7 @@ export default {
   components: {
     NavBar,
     SettingsComponent,
+    ErrorModal,
   },
  
   props: [
@@ -131,6 +146,16 @@ export default {
 
 .locationNav{
   top: -0.85%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .switch {
