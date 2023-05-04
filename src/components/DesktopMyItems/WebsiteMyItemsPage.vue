@@ -2,7 +2,7 @@
   <div>
       <!-- Nav bar -->
       <div class="nav-bar">
-          <nav-bar></nav-bar>
+          <nav-bar class="my-items-nav-bar"></nav-bar>
       </div>
 
       <!-- Actual content of the page -->
@@ -135,12 +135,19 @@ export default {
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
+
+.my-items-nav-bar{
+  z-index: 1;
+}
+
 .website-my-items-page {
   padding-top: 5%; /*TODO - Ideally want to look back at the navbar so that we dont need to hardcode applying padding of content of page*/
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%
+  height: 100%;
+  position: fixed;
+  z-index: -1; /* Have to make xindex negative because of navbar*/
 }
 
 .title-container{

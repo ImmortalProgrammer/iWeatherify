@@ -81,10 +81,10 @@ export default {
       this.grayOut();
  
       if (this.$data.disabled) {
-        document.getElementById("routes-container1_2").style.width = '20vw';
+        document.getElementById("routes-container1_2").style.height = '31.5vh';
         this.$data.disabled = false;
       } else {
-        document.getElementById("routes-container1_2").style.width = '0vw';
+        document.getElementById("routes-container1_2").style.height = '0vh';
         this.$data.disabled = true;
       }
     },
@@ -128,14 +128,14 @@ export default {
   border: none;
   border-radius: 20px;
   position: relative;
-  height: auto;
+  height: 0;
   left: -60%;
   top: -3vh;
   bottom: 0;
   border-top: 0;
   margin-top: 0.6vh;
   transform: translate(-50%, 0);
-  width: 0vw;
+  width: 20vw;
   scale: 0.7;
   color: rgb(255, 255, 255);
   font-weight: 500;
@@ -173,7 +173,7 @@ export default {
   #routes-container1_2 {
     border: none;
     position: relative;
-    height: auto;
+    height: 0;
     left: -40.5%;
     top: -3.5vh;
     bottom: 0;
@@ -204,7 +204,7 @@ export default {
   #routes-container1_2 {
     border: none;
     position: relative;
-    height: auto;
+    height: 0;
     left: -30.5%;
     top: -2.5vh;
     bottom: 0;
@@ -236,7 +236,7 @@ export default {
   #routes-container1_2 {
     border: none;
     position: relative;
-    height: auto;
+    height: 0;
     left: -1.5vh;
     top: -4.5vh;
     bottom: 0;
@@ -267,7 +267,7 @@ export default {
   #routes-container1_2 {
     border: none;
     position: relative;
-    height: auto;
+    height: 0;
     left: -2.5vh;
     top: -2.5vh;
     bottom: 0;
