@@ -630,7 +630,7 @@ export default {
 
         // console.log("This is what savedOutfitAlready is in state: ")
         // console.log(this.$data.data.savedOutfitAlready)
-        if (res.data.result == 1) {
+        if (res.data.status == 1) {
           this.data.errorTitle = 'Success';
           this.data.errorMessage = 'Outfit saved successfully!';
           this.data.showErrorModal = true;
