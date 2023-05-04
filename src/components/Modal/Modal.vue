@@ -75,6 +75,7 @@
     methods: {
         closeErrorModal(){
           this.showErrorModal = false;
+          this.close();
         },
         close(){
             this.$emit("close");
@@ -114,7 +115,7 @@
                   this.errorTitle = "Success";
                   this.errorMessage = "Your item has been saved successfully!";
                   this.showErrorModal = true;
-                  this.close()
+                  // this.close()
                 } else{
                   console.log(res)
                   this.errorTitle = "Upload Error";
