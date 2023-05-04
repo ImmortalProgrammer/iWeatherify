@@ -1,7 +1,7 @@
 <template>
     <div class="container-center-horizontal">
       <div class="accountSettings screen">
-        
+
         <nav-bar class = "accountSettingsNav"></nav-bar>
         
         
@@ -79,12 +79,12 @@
 }
 
 .account-settings-title {
-  color: var(--black);
-  font-weight: 500;
-  font-size: 1.8em;
-  font-family: 'Inter';
-  font-style: normal;
-  transform: scale(1.5); 
+    color: var(--black);
+    font-weight: 600;
+    margin-top: 55px;
+    font-size: 3em;
+    font-family: 'Inter';
+    font-style: normal;
 }
   
   .accountSettingsNav{

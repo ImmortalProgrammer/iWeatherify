@@ -1,4 +1,5 @@
 <template>
+
   <div class="website-units-page screen">
     <nav-bar class = "unitSettingsPageNav"></nav-bar>
 
@@ -14,6 +15,7 @@
           <option value="c">°C</option>
         </select>
       </div>
+
 
       <div class="row">
         <p class="unit-font">Wind</p>
@@ -31,11 +33,15 @@
         </select>
       </div>
 
+
       <div>
         <button @click="saveUnits()">Save</button>
       </div>
-        <SettingsComponent></SettingsComponent>
+
     </div>
+      <div class = "settings-comp">
+          <SettingsComponent></SettingsComponent>
+      </div>
   </div>
 </template>
 
@@ -126,6 +132,7 @@ export default {
   align-items: center;
   width: 45%;
 }
+
 
 .unit-title {
   color: var(--black);
@@ -241,7 +248,6 @@ button {
     width: auto;
     top: 120px;
   }
-
   .row {
     width: 90%;
   }

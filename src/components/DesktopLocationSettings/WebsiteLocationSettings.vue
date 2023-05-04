@@ -215,14 +215,13 @@ input:checked + .slider:before {
 }
 
 .location-settings-title{
- color: var(--black);
- font-weight: 600;
- font-size: 2.5em;
- font-family: 'Inter';
- font-style: normal;
-    margin-top: 150px;
-    margin-left: 110px;
-
+    color: var(--black);
+    font-weight: 600;
+    margin-top: 130px;
+    font-size: 3em;
+    font-family: 'Inter';
+    font-style: normal;
+    margin-left: 50px;
 }
 
 .location-text-container {
