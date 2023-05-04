@@ -3,7 +3,7 @@
     <div class="container-center-horizontal1">
       <nav-bar class = "HomePageNavBar"></nav-bar>
 
-      <div v-if="showErrorModal" class="overlay">
+      <div v-if="data.showErrorModal" class="overlay">
         <error-modal
           :show-modal="data.showErrorModal"
           :title="data.errorTitle"

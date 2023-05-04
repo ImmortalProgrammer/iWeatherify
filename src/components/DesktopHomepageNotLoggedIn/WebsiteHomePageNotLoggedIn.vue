@@ -5,7 +5,7 @@
           <menu-bar></menu-bar>
         </div>
 
-        <div v-if="showErrorModal" class="overlay">
+        <div v-if="data.showErrorModal" class="overlay">
           <error-modal
             :show-modal="data.showErrorModal"
             :title="data.errorTitle"
