@@ -1,7 +1,7 @@
 <template>
   <div class = "menu_2">
-    <div class="menu-container_2" @click="menuPress()">
-      <img src="../../../img/Vector.png" alt="Vector"/>
+    <div class="menu-container_2">
+      <img src="../../../img/Vector.png" alt="Vector" @click="menuPress()"/>
     </div>
     <div id = "routes-container1_2">
       <div class = "links_2">
@@ -81,10 +81,10 @@ export default {
       this.grayOut();
  
       if (this.$data.disabled) {
-        document.getElementById("routes-container1_2").style.visibility = 'visible';
+        document.getElementById("routes-container1_2").style.width = '20vw';
         this.$data.disabled = false;
       } else {
-        document.getElementById("routes-container1_2").style.visibility = 'hidden';
+        document.getElementById("routes-container1_2").style.width = '0vw';
         this.$data.disabled = true;
       }
     },
@@ -135,7 +135,7 @@ export default {
   border-top: 0;
   margin-top: 0.6vh;
   transform: translate(-50%, 0);
-  width: 20vw;
+  width: 0vw;
   scale: 0.7;
   color: rgb(255, 255, 255);
   font-weight: 500;
@@ -143,7 +143,8 @@ export default {
   background-color: #14565C;
   overflow-y: hidden;
   overflow-x: hidden;
-  visibility: hidden;
+  /* visibility: hidden; */
+  transition: 0.5s;
 }
  
  
@@ -187,7 +188,7 @@ export default {
     background-color: gray;
     overflow-y: scroll;
     overflow-x: hidden;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
   #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2, #link7_2 {
     font-size: 1.5em;
@@ -218,7 +219,7 @@ export default {
     background-color: gray;
     overflow-y: scroll;
     overflow-x: hidden;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
   #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2, #link7_2 {
     font-size: 1.2em;
@@ -249,7 +250,7 @@ export default {
     background-color: gray;
     overflow-y: scroll;
     overflow-x: hidden;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
   #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2, #link7_2{
     font-size: 1.7em;
@@ -280,7 +281,7 @@ export default {
     background-color: gray;
     overflow-y: scroll;
     overflow-x: hidden;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
   #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2,#link7_2{
     font-size: 1.2em;
