@@ -1,19 +1,8 @@
 <?php 
-
-    // $dbhost = "oceanus";
-    // $dbuser = "vwong27";
-    // $dbpass = "50342607";
-    // $dbname = "cse442_2023_spring_team_a_db";
-    require_once __DIR__ . '/vendor/autoload.php';
-
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
-
-    $dbhost = getenv('DB_HOST');
-    $dbuser = getenv('DB_USER');
-    $dbpass = getenv('DB_PASS');
-    $dbname = getenv('DB_NAME');
-
+    $dbhost = "oceanus";
+    $dbuser = "vwong27";
+    $dbpass = "50342607";
+    $dbname = "cse442_2023_spring_team_a_db";
     
     // Create connection
     $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
