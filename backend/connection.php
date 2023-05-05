@@ -1,9 +1,13 @@
 <?php 
 
-    $dbhost = "oceanus";
-    $dbuser = "vwong27";
-    $dbpass = "50342607";
-    $dbname = "cse442_2023_spring_team_a_db";
+    // $dbhost = "oceanus";
+    // $dbuser = "vwong27";
+    // $dbpass = "50342607";
+    // $dbname = "cse442_2023_spring_team_a_db";
+    $dbhost = $_SERVER['VUE_APP_DB_HOST'];
+    $dbuser = $_SERVER['VUE_APP_DB_USER'];
+    $dbpass = $_SERVER['VUE_APP_DB_PASS'];
+    $dbname = $_SERVER['VUE_APP_DB_NAME'];
 
     // Local stuff
     // $dbhost = "localhost";

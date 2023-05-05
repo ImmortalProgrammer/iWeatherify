@@ -281,7 +281,7 @@ export default {
       data: {
         userid: null,
         userIdLoaded: false,
-        APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
+        APIKEY: process.env.VUE_APP_API_KEY,
         optionsVisibility: false,
         eightDayForecastGrayOut: true,
         savedOutfitAlready: false,

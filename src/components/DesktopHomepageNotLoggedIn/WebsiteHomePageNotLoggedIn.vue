@@ -145,7 +145,7 @@ export default {
         description: '',
       },
       data: {
-        APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
+        APIKEY: process.env.VUE_APP_API_KEY,
         optionsVisibility: false,
         eightDayForecastGrayOut: true,
         errorTitle: "",
