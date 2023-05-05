@@ -174,7 +174,6 @@
 .LoginText {
     scale: 115%;
     margin-left: 29px;
-    margin-top: -10px;
 }
 .Header {
   font-size: xx-large;
