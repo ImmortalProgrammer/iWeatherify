@@ -26,7 +26,7 @@
                 </label>
           </div>
           <div class="city-container">
-            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="data.cityName"> 
+            <input style = "text-align: center; font-size: x-large" class="city" type="text" name="searching" placeholder="Insert City" v-model="data.cityName">
           </div>
 
         </div>
