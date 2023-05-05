@@ -54,7 +54,7 @@
       </form>
 
       <br/>
-      <p style = "scale: 115%; margin-left: 20px; margin-top: -10px"> <a class ="AccountCreate" href="#/register">Create an account</a></p>
+      <p class = "LoginText"> <a class ="AccountCreate" href="#/register">Create an account</a></p>
     </div>
   </div>
 </template>
@@ -170,6 +170,11 @@
   display: flex;
   flex-direction: column;
   margin: auto;
+}
+.LoginText {
+    scale: 115%;
+    margin-left: 29px;
+    margin-top: -10px;
 }
 .Header {
   font-size: xx-large;
