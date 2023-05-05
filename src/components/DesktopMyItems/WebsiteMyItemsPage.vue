@@ -154,6 +154,7 @@ export default {
   padding: 5% 0%;
 }
 
+
 .container-title{
   text-align: center;
   font-family: var(--font-family-inter);
@@ -163,6 +164,7 @@ export default {
   justify-content: center;
   align-items: center;
   display: flex;
+    padding-bottom: 75px;
   flex-direction: row;
 }
 
@@ -173,14 +175,27 @@ export default {
 .title {
   color: var(--black);
   font-family: var(--font-family-inter);
-  font-size: var(--font-size-l);
+  font-size: xxx-large;
   font-weight: 700;
   text-align: center;
+
 }
 
 /* For mobile screens */
 @media screen and (max-width: 615px) {
-  .top-row, .bottom-row{
+    .temp-container {
+        padding-bottom: 35px;
+    }
+    .title {
+        color: black;
+        margin-top: 60px;
+        font-family: var(--font-family-inter);
+        font-size: xx-large;
+        font-weight: 700;
+        text-align: center;
+    }
+    .top-row, .bottom-row{
+        margin-top: 40px;
     flex-direction: column;
   }
 }

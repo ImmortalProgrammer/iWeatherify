@@ -9,9 +9,9 @@
       ></error-modal>
     </div>
 
-    <div>
-      <menu-bar style = "margin-top: -25px; margin-left: -5px;"></menu-bar>
-    </div>
+
+      <menu-bar class = "menuBarLogin" ></menu-bar>
+
     
     <div class="Rectangle">
       <img src="../../../img/figure-with-umbrella.svg"/>
@@ -23,7 +23,7 @@
       <h1 class="Header">Login</h1>
       <br/>
 
-      <form action="" method="POST">
+      <form class = "Labels" action="" method="POST">
         <label for="username">Username:</label>
         <br/>
         <input 
@@ -54,7 +54,7 @@
       </form>
 
       <br/>
-      <p> <a href="#/register">Create an account</a></p>            
+      <p class = "LoginText"> <a class ="AccountCreate" href="#/register">Create an account</a></p>
     </div>
   </div>
 </template>
@@ -171,6 +171,15 @@
   flex-direction: column;
   margin: auto;
 }
+.LoginText {
+    scale: 115%;
+    margin-left: 29px;
+}
+.menuBarLogin {
+    margin-top: -5px;
+    margin-left: -100px;
+    max-width: 5%
+}
 .Header {
   font-size: xx-large;
 }
@@ -204,6 +213,42 @@ a {
 @media screen and (max-width: 800px) {
   .Rectangle {
     display: none;
+  }
+
+  .AccountCreate {
+    margin-left: 40px;
+    margin-top: -53px;
+  }
+  .menuBarLogin {
+      margin-top: -5px;
+      margin-left: -60px;
+      max-width: 5%
+  }
+  .LoginForm {
+      margin-top: 90px;
+      margin-left: -15px;
+      scale: 95%;
+  }
+
+  .Header {
+      margin-left: 140px;
+      font-size: 2.5em;
+      padding: 10px;
+  }
+
+  .Labels {
+      scale: 90%;
+  }
+  button {
+      font-size: large;
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 0.9em 10em;
+      color: white;
+      margin-left: -10px;
+      background-color: black;
+      cursor: pointer;
+      scale: 85%;
   }
 }
 </style>
