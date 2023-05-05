@@ -54,7 +54,7 @@
       </form>
 
       <br/>
-      <p> <a class ="AccountCreate" href="#/register">Create an account</a></p>
+      <p style = "scale: 115%; margin-left: 20px; margin-top: -10px"> <a class ="AccountCreate" href="#/register">Create an account</a></p>
     </div>
   </div>
 </template>
@@ -213,7 +213,8 @@ a {
   button {
       font-size: large;
       font-weight: bold;
-      padding: 0.7em 10em;
+      margin-top: 10px;
+      padding: 0.9em 10em;
       color: white;
       margin-left: -10px;
       background-color: black;
