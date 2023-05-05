@@ -975,7 +975,7 @@ export default {
 
   animation: fadeInAnimation ease .5s;
   animation-iteration-count: 1;
-  animation-fill-mode: forwards;
+  /* animation-fill-mode: forwards; */
 }
 
 .hot {
