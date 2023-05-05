@@ -4,19 +4,17 @@
     // $dbuser = "vwong27";
     // $dbpass = "50342607";
     // $dbname = "cse442_2023_spring_team_a_db";
-    $dbhost = $_SERVER['VUE_APP_DB_HOST'];
-    $dbuser = $_SERVER['VUE_APP_DB_USER'];
-    $dbpass = $_SERVER['VUE_APP_DB_PASS'];
-    $dbname = $_SERVER['VUE_APP_DB_NAME'];
+    require_once __DIR__ . '/vendor/autoload.php';
 
-    // Local stuff
-    // $dbhost = "localhost";
-    // $dbuser = "root";
-    // $dbpass = "";
-    // $dbname = "cse442";
-    // $dbname = "vue_php_cdn_db";
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
 
+    $dbhost = getenv('DB_HOST');
+    $dbuser = getenv('DB_USER');
+    $dbpass = getenv('DB_PASS');
+    $dbname = getenv('DB_NAME');
 
+    
     // Create connection
     $conn = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
