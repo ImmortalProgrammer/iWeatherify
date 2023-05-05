@@ -1,10 +1,8 @@
 <template>
     <div class="container-center-horizontal">
-      <div class="accountSettings screen">
-
         <nav-bar class = "accountSettingsNav"></nav-bar>
-        
-        
+      <div class="accountSettings_screen">
+
         <div class="accountSettings-title">
           <h1 class="account-settings-title">{{ title }}</h1>
         </div>
@@ -36,7 +34,7 @@
         </div>
   
           
-          
+
         </div>
        
         <settings-component></settings-component>
@@ -66,7 +64,7 @@
   };
   </script>
   
-  <style scoped>
+<style scoped>
 
 .accountSettings-title {
   position: relative;
@@ -177,19 +175,33 @@
   }
   
   @media screen and (min-width: 375px) and (max-width: 576px) {
-  
+  .accountSettings_screen {
+      max-width: 235%;
+
+  }
+  .accountSettings-title {
+      position: relative;
+      top: 60px;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 55%;
+
+  }
   .account-settings-title{
-    margin-top: 150px; 
-    transform: scale(0.8);
+    margin-top: 110px;
+    transform: scale(0.75);
   }
 
   .profile-image-container{
-    margin-top: -10px; 
+    margin-top: -15px;
   }
 
   .accountSettings-text-container{
-    margin-left: -130px; 
-    margin-top: -70px; 
+    margin-left: 50px;
+    width: 45%;
+    margin-top: -130px;
   }
   
   
