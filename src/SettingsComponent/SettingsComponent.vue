@@ -206,7 +206,7 @@ export default {
     padding: 0;
     position: absolute;
     height: 6vh;
-    font-size: 90%;
+    font-size: 85%;
     top: 10%;
     left: -15%;
     width: 130%;
