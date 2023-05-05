@@ -10,7 +10,7 @@
     </div>
 
 
-      <menu-bar style = " margin-top: -5px; margin-left: -60px; max-width: 5%"></menu-bar>
+      <menu-bar class = "menuBarLogin" ></menu-bar>
 
     
     <div class="Rectangle">
@@ -175,6 +175,11 @@
     scale: 115%;
     margin-left: 29px;
 }
+.menuBarLogin {
+    margin-top: -5px;
+    margin-left: -100px;
+    max-width: 5%
+}
 .Header {
   font-size: xx-large;
 }
@@ -213,6 +218,11 @@ a {
   .AccountCreate {
     margin-left: 40px;
     margin-top: -53px;
+  }
+  .menuBarLogin {
+      margin-top: -5px;
+      margin-left: -60px;
+      max-width: 5%
   }
   .LoginForm {
       margin-top: 90px;

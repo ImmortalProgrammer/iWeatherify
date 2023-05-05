@@ -10,7 +10,7 @@
     </div>
 
     <div>
-        <menu-bar style = " margin-top: -15px; margin-left: -60px; max-width: 5%"></menu-bar>
+        <menu-bar class = "menuBarRegister"></menu-bar>
     </div>
 
     <div class="Rectangle">
@@ -290,6 +290,12 @@
   margin: auto;
 }
 
+.menuBarRegister {
+    margin-top: -15px;
+    margin-left: -120px;
+    max-width: 5%;
+}
+
 .Header {
   font-size: xx-large;
 }
@@ -352,6 +358,12 @@ a {
       margin-left: 125px;
       font-size: 2.5em;
       padding: 10px;
+  }
+
+  .menuBarRegister {
+      margin-top: -15px;
+      margin-left: -60px;
+      max-width: 5%;
   }
 
   .Rectangle {
