@@ -81,7 +81,13 @@ export default {
       this.grayOut();
  
       if (this.$data.disabled) {
-        document.getElementById("routes-container1_2").style.height = '31.5vh';
+        if (navigator.userAgent.match(/iPhone/i)) {
+            document.getElementById("routes-container1_2").style.height = '28.5vh';
+        } else if (navigator.userAgent.indexOf('Chrome') !== -1 && navigator.userAgent.indexOf('Mobile') !== -1) {
+            document.getElementById("routes-container1_2").style.height = '28vh';
+        } else {
+            document.getElementById("routes-container1_2").style.height = '31.5vh';
+        }
         this.$data.disabled = false;
       } else {
         document.getElementById("routes-container1_2").style.height = '0vh';

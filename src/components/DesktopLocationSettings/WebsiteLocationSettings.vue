@@ -1,9 +1,9 @@
 <template>
   <div class="container-center-horizontal">
-    <div class="website-location-settings screen">
-      
       <nav-bar class = "locationNav"></nav-bar>
-      
+
+      <div class="website-location-settings screen">
+
       
       <div class="location-title">
         <h1 class="location-settings-title">{{ title }}</h1>
@@ -26,7 +26,7 @@
                 </label>
           </div>
           <div class="city-container">
-            <input class="city" type="text" name="searching" placeholder="Insert City" v-model="data.cityName"> 
+            <input style = "text-align: center; font-size: x-large" class="city" type="text" name="searching" placeholder="Insert City" v-model="data.cityName">
           </div>
 
         </div>
@@ -131,6 +131,7 @@ export default {
 
 .locationNav{
   top: -0.85%;
+    width: 95%;
 }
 
 .switch {
@@ -206,20 +207,21 @@ input:checked + .slider:before {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 75%;
   height: 10%; 
-  left: -10px;
+  left: 20px;
   top: 50px; 
   
 }
 
 .location-settings-title{
- color: var(--black);
- font-weight: 600;
- font-size: 2.5em;
- font-family: 'Inter';
- font-style: normal; 
-
+    color: var(--black);
+    font-weight: 600;
+    margin-top: 130px;
+    font-size: 3em;
+    font-family: 'Inter';
+    font-style: normal;
+    margin-left: 50px;
 }
 
 .location-text-container {
@@ -228,9 +230,9 @@ input:checked + .slider:before {
   display: flex;
   gap: 23px;
   height: 289px;
-  margin-left: 500px; /*changed */ 
+  margin-left: 500px; /*changed */
   margin-top: 200px;
-  width: 100%; 
+  width: 60%;
 }
 .text-column1 {
   align-items: flex-start;
@@ -238,7 +240,7 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   min-height: 250px;
-  margin-left: -100px; 
+  margin-left: -100px;
   width: 800px;
   
 }
@@ -264,9 +266,9 @@ input:checked + .slider:before {
   width: 706px;
 }
 .enable-location-to-g {
-  align-self: flex-end;
   color: #808080;
-  font-size: 20px; 
+  font-size: 20px;
+    margin-left: 150px;
   font-weight: 500;
   line-height: normal;
   min-height: 82px;
@@ -289,7 +291,7 @@ input:checked + .slider:before {
   font-size: 20px; 
   font-weight: 500;
   line-height: normal;
-  margin-left: 26px;
+  margin-left: 75px;
   min-height: 82px;
   text-align: center;
   width: 706px;
@@ -308,8 +310,8 @@ input:checked + .slider:before {
 .city-container {
   height: 107px;
   position: relative;
-  width: 400px;
-  left: 200px; 
+  width: 0;
+  margin-right: 150px;
 }
 .city{
   height: 50px;
@@ -335,7 +337,7 @@ button {
   cursor: pointer;
   margin-left: 828px; /* changed */ 
   transform: scale(1.2); 
-  margin-top: 80px; 
+  margin-top: 80px;
 }
 
 @media screen and (min-width: 992px) and (max-width: 1440px) { /* changed */ 
@@ -376,15 +378,36 @@ button {
 
 
   .location-title{
-    margin-left: 20px;
-    margin-top: 140px;
+    margin-left: -90px;
+    margin-top: 50px;
     transform: scale(0.7);
+    width: 130%;
+      font-size: 85%;
   }
 
   .location-text-container{
     margin-top: 40px; 
     margin-left: -100px; 
-    transform: scale(0.56);
+    transform: scale(0.55);
+  }
+
+  .city{
+      height: 50px;
+      left: -10px;
+      position: absolute;
+      top: -20%;
+      width: 260px;
+  }
+
+  .toggle-switcho-container {
+      align-items: flex-start;
+      display: flex;
+      gap: 111px;
+      height: 55px;
+      margin-right: -110px;
+      margin-top: 20px;
+      min-width: 100px;
+      position: relative;
   }
 
   .text-column2{
@@ -393,8 +416,8 @@ button {
   }
 
   .save-button-container{
-    margin-top: -80px; 
-    margin-left: -340px; 
+    margin-top: -130px;
+    margin-left: -550px;
     transform: scale(0.65); 
   }
 
