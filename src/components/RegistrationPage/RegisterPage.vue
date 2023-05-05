@@ -67,7 +67,7 @@
       </form>
 
       <br/>
-      <p style = "scale: 115%; margin-left: 30px; margin-top: -30px"> <a style = "margin-left: 40px" href="#/login">Login</a></p>
+      <p class = "LoginText"> <a style = "margin-left: 40px" href="#/login">Login</a></p>
     </div>
   </div>
 </template>
@@ -266,6 +266,12 @@
   align-items: center;
 }
 
+.LoginText {
+    scale: 115%;
+    margin-left: -15px;
+    margin-top: 0px;
+}
+
 .Rectangle {
   display: flex;
   flex-direction: column;
@@ -321,6 +327,11 @@ a {
 }
 
 @media screen and (max-width: 800px) {
+  .LoginText {
+      scale: 115%;
+      margin-left: 30px;
+      margin-top: -30px;
+  }
   .PostForm {
       scale: 80%;
       margin-top: -25px;
