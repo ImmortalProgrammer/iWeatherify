@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class = "SavedOutfitsPage">
     <nav-bar class="saved-outfits-nav-bar"></nav-bar>
     
     <!-- <div>
@@ -97,6 +97,22 @@ export default {
 </script>
 
 <style scoped>
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
+.SavedOutfitsPage{
+  animation: fadeInAnimation ease .5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
 .saved-outfits-nav-bar{
   top: -0.85%;
 }
