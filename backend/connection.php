@@ -1,10 +1,5 @@
 <?php 
-
-    // $dbhost = "oceanus";
-    // $dbuser = "vwong27";
-    // $dbpass = "50342607";
-    // $dbname = "cse442_2023_spring_team_a_db";
-    require_once 'loadenv.php';
+    require_once '../loadenv.php';
 
     $dbhost = getenv('DB_HOST');
     $dbuser = getenv('DB_USER');

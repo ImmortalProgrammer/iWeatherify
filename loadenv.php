@@ -1,5 +1,4 @@
 <?php
-
 function loadEnv()
 {
     $envFile = __DIR__ . '/.env';
