@@ -10,6 +10,8 @@
           @close-modal="data.showErrorModal = false"
         ></error-modal>
       </div>
+
+      <div class="website-location-settings">
       
       <div class="location-title">
         <h1 class="location-settings-title">{{ title }}</h1>
@@ -42,6 +44,7 @@
       </div>
       <settings-component></settings-component>
       </div>
+    </div>
   
 </template>
 
