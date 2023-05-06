@@ -136,7 +136,20 @@ components: {
 };
   </script>
   
-<style scoped>
+  <style scoped>
+  @keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+* {
+  animation: fadeInAnimation ease .5s;
+  animation-iteration-count: 1;
+  /* animation-fill-mode: forwards; */
+}
 
 .accountSettings-title {
   position: relative;
