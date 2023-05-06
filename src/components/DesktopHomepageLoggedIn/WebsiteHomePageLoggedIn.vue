@@ -28,9 +28,10 @@
         </div>
         <div id="menu-container_2">
           <div class = "diff_options">
-            <a id = "menu_option_1_0" @click="pressOptionsMenuItems('menu_option_1_0')" style = "text-decoration:none; color: inherit;">24-Hour Forecast</a>
-            <a id = "menu_option_1_1"  @click="pressOptionsMenuItems('menu_option_1_1')" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
-            <a id = "menu_option_1_2" @click="pressOptionsMenuItems('menu_option_1_2'); fetchRecommendedOutfit();" style = "text-decoration:none; color: inherit;">Outfit of the Day</a>
+              <a id = "menu_option_1_2" @click="pressOptionsMenuItems('menu_option_1_2'); fetchRecommendedOutfit();"
+                style = "text-decoration:none; color: inherit;">Outfit of the Day</a>
+              <a id = "menu_option_1_0" @click="pressOptionsMenuItems('menu_option_1_0')" style = "text-decoration:none; color: inherit;">24-Hour Forecast</a>
+              <a id = "menu_option_1_1"  @click="pressOptionsMenuItems('menu_option_1_1')" style = "text-decoration:none; color: inherit;">8-Day Forecast</a>
             </div>
         </div>
       </div>
@@ -406,7 +407,7 @@ export default {
         this.$data.currentWeatherData.locationAPI = response.data.city;
 
 
-        if (response.data.toggle == 1 && navigator.geolocation) {
+        if (response.data.toggle === 1 && navigator.geolocation) {
           const position = await new Promise((resolve, reject) => {
           navigator.geolocation.getCurrentPosition(resolve, reject);
           });
@@ -985,11 +986,23 @@ export default {
 
 <style scoped>
 
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 
+  animation: fadeInAnimation ease .5s;
+  animation-iteration-count: 1;
+  /* animation-fill-mode: forwards; */
 }
 
 .overlay {
@@ -1119,11 +1132,11 @@ export default {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
-#menu_option_1_0 {
+#menu_option_1_2 {
   opacity: 0.3;
 }
 
-#menu_option_1_2 {
+#menu_option_1_1 {
   border-bottom: none;
 }
 
@@ -1196,6 +1209,7 @@ export default {
 }
 
 #TwentyFourHour-weather_1 {
+  visibility: hidden;
   border: none;
   position: absolute;
   height: auto;
@@ -1264,7 +1278,7 @@ export default {
 
 
 #outfit-of-the-day_1 {
-  visibility: hidden;
+  visibility: visible;
   border: none;
   position: absolute;
   height: auto;

@@ -1,4 +1,5 @@
 <template>
+
   <div class="website-units-page screen">
     <nav-bar class = "unitSettingsPageNav"></nav-bar>
 
@@ -24,6 +25,7 @@
         </select>
       </div>
 
+
       <div class="row">
         <p class="unit-font">Wind</p>
         <select class="wind-container" id="dropdown-container-font" v-model="wind">
@@ -40,11 +42,15 @@
         </select>
       </div>
 
+
       <div>
         <button @click="saveUnits()">Save</button>
       </div>
-      <SettingsComponent></SettingsComponent>
+
     </div>
+      <div class = "settings-comp">
+          <SettingsComponent></SettingsComponent>
+      </div>
   </div>
 </template>
 
@@ -124,6 +130,21 @@ export default {
 </script>
 
 <style scoped>
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
+* {
+  animation: fadeInAnimation ease .5s;
+  animation-iteration-count: 1;
+  /* animation-fill-mode: forwards; */
+}
 .website-units-page {
   position: absolute;
   width: 100%;
@@ -155,9 +176,11 @@ export default {
   width: 45%;
 }
 
+
 .unit-title {
   color: var(--black);
   font-weight: 600;
+    margin-top: 55px;
   font-size: 3em;
   font-family: 'Inter';
   font-style: normal;
@@ -266,9 +289,8 @@ button {
   .title-container{
     transform: scale(0.7);
     width: auto;
-    top: 170px;
+    top: 120px;
   }
-
   .row {
     width: 90%;
   }
@@ -283,7 +305,6 @@ button {
     transform: scale(0.5);
     width: auto;
   }
-
   .row {
     width: 90%;
   }

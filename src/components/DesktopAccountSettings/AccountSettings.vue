@@ -1,203 +1,268 @@
 <template>
     <div class="container-center-horizontal">
-      <div class="accountSettings screen">
-        
         <nav-bar class = "accountSettingsNav"></nav-bar>
-        
-        
+      <div class="accountSettings_screen">
+
         <div class="accountSettings-title">
           <h1 class="account-settings-title">{{ title }}</h1>
-        </div>
-
-        <div class="profile-image-container">
-          <img src="../../../img/changeProfileImage.png" alt="ProfileImage"/>
-          <button class="change">Change</button>
-          <button class= "remove">Remove</button>
         </div>
   
         <div class="accountSettings-text-container">
         
-        <div class="new-username">
-            <h2 class="new-username-title">New Username</h2>
-            <input class="username" type="text" name="searching" placeholder=""> 
-            <button>Change</button>
-        </div>
-
-        <div class="old-password">
-            <h2 class="old-password-title">Old Password</h2>
-            <input class="oldPassword" type="text" name="searching" placeholder="">
-            
-        </div>
-
-        <div class="new-password">
-            <h2 class="new-password-title">New Password</h2>
-            <input class="newPassword" type="text" name="searching" placeholder=""> 
-            <button>Change</button>
-        </div>
-  
+        <form method="post" action="">
+      <div class="old-password">
+          <h2 class="old-password-title">Current Password:</h2>
+          <input type="password" id="oldPassword" v-model="oldPassword">
           
-          
-        </div>
-       
-        <settings-component></settings-component>
-        </div>
       </div>
+
+      <div class="new-password">
+          <h2 class="new-password-title">New Password:</h2>
+          <input type="password" id="newPassword" v-model="newPassword"> 
+          <ul class="password-list">
+            <li>Password must be at least 8 characters</li>
+            <li>Password must be a mix of letters and numbers</li>
+          </ul>
+          
+          <div class="reenter-password">
+          <h2 class="confirm-password-title">Re-Type New Password:</h2>
+          <input type="password" id="confirmPassword" v-model="confirmPassword" />
+          <button @click.prevent="changePassword">Change</button>
+        </div>
+
+      </div>
+    </form>
     
-  </template>
+      </div>
+     
+      <settings-component></settings-component>
+      </div>
+    </div>
+  
+</template>
   
   <script>
-  import axios from "axios"; 
-  import NavBar from "@/NavBar/NavBar.vue";
-  import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
+import axios from "axios"; 
+import NavBar from "@/NavBar/NavBar.vue";
+import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue";
+
+export default {
+  name: "AccountSettings",
   
+  data(){
+    return{
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
+      user_id: null,
+    };
+  },
   
-  export default {
-    name: "AccountSettings",
+  created() {
+    this.getUserId(); 
+  },
+  
+  methods: {
     
-    
-    components: {
-      NavBar,
-      SettingsComponent,
-    },
-   
-    props: [
-      "title",
-    ],
-  };
+    async getUserId() {
+      try {
+        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        this.user_id = response.data.userid;
+        console.log("User_id: "+response.data.userid);
+      } catch (error) {
+        console.error("Unsuccessful request in getUserId().", error);
+      }
+    }, 
+  
+    async changePassword() {
+      if(!this.oldPassword || !this.newPassword || !this.confirmPassword){
+        alert("Please fill in all the fields.");
+      }
+      
+      if (this.newPassword !== this.confirmPassword) {
+    alert("New password and confirmation do not match");
+  }
+
+  
+  if (this.newPassword.length < 8 || !/\d/.test(this.newPassword) || !/[a-zA-Z]/.test(this.newPassword)) {
+    alert("New password should be at least 8 characters and contain both letters and numbers");
+  }
+
+  if (this.oldPassword === this.newPassword) {
+    alert("New password should not be the same as the old password");
+  }
+
+    let formData = new FormData();
+  
+    formData.append("userid", this.user_id);
+    formData.append("old_password", this.oldPassword);
+    formData.append("new_password", this.newPassword);
+
+    axios
+      .post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/changePassword.php?action=changePassword", 
+        formData,
+        {
+          withCredentials: true,
+      })
+      .then((response) => {
+        console.log(response); 
+
+        if (response.data.status === 1) {
+          alert("Password updated successfully!");
+        }  else if (response.data.status === 0) {
+          alert(response.data.msg);
+          return;
+        }  else if (response.data.status === -1) {
+          alert("Old password is incorrect");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("Failed to update password");
+      });
+
+  }, 
+
+},
+
+components: {
+    NavBar,
+    SettingsComponent,
+  },
+ 
+  props: [
+    "title",
+  ],
+};
   </script>
   
   <style scoped>
+  @keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+* {
+  animation: fadeInAnimation ease .5s;
+  animation-iteration-count: 1;
+  /* animation-fill-mode: forwards; */
+}
 
 .accountSettings-title {
-  position: relative;
-  top: 60px;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 105%;
+position: relative;
+top: 60px;
+margin: auto;
+display: flex;
+justify-content: center;
+align-items: center;
+width: 105%;
 }
 
 .account-settings-title {
-  color: var(--black);
-  font-weight: 500;
-  font-size: 1.8em;
-  font-family: 'Inter';
-  font-style: normal;
-  transform: scale(1.5); 
+color: var(--black);
+font-weight: 600;
+font-size: 2em;
+font-family: 'Inter';
+font-style: normal;
 }
+
+.accountSettingsNav{
+  top: -0.85%;
+}
+
+
+.accountSettings-text-container{
   
-  .accountSettingsNav{
-    top: -0.85%;
-  }
+  font-size: 0.8em; 
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  transform: scale(1.8); 
+  margin-top: 100px; 
+  margin-left: -350px; 
+}
 
-  .profile-image-container{
-    transform: scale(0.4); 
-    margin-top: 200px; 
-  }
+ul{
+  list-style-type: disc; 
+  transform:scale(0.8);
+  margin-left: -50px; 
+}
 
-  .change{
-    transform: scale(3.3);
-  }
+button{
+font-family: 'Inter';
+font-style: normal;
+font-size: small;
+font-weight: bold;
+color: white;
+background-color: black;
+cursor: pointer;
+margin-left: 20px; 
 
-  .remove{
-    transform: scale(3.3); 
-    margin-left: 200px; 
-  }
+}
 
 
-  .accountSettings-text-container{
-    
-    font-size: 0.8em; 
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    top: 40%;
-    width: 100%;
-    height: 300px;
-    left: 20px; 
-    transform: scale(1.3); 
-  }
 
-  button{
-  font-family: 'Inter';
-  font-style: normal;
-  font-size: small;
-  font-weight: bold;
-  color: white;
-  background-color: black;
-  cursor: pointer;
-  margin-left: 40px; 
-  }
+.old-password{
+  margin-left: -400px; 
+  margin-top: 120px; 
+}
 
-  .username{
-      margin-top: 10px; 
+.new-password{
+  margin-top: 20px; 
+  margin-left: -400px;  
+}
 
-  }
+.reenter-password{
+  margin-top: 10px; 
+}
 
-  .oldPassword{
-    margin-top: 10px; 
-  }
 
-  .newPassword{
-    margin-top: 10px; 
-  }
-
-  .new-username{
-    margin-top: 100px; 
-
-  }
-
-  .old-password{
-    margin-left: -110px; 
-   
-  }
-
- 
-
- 
-  
-  
-  @media screen and (min-width: 992px) and (max-width: 2000px) {
-  
-  
-  .profile-image-container{
-    margin-top: 10px; 
-  }
-  
-  
-  }
-  
-  @media screen and (min-width: 576px) and (max-width: 992px) {
-  
-  
-   
-  }
-  
-  @media screen and (min-width: 375px) and (max-width: 576px) {
-  
-  .account-settings-title{
-    margin-top: 150px; 
-    transform: scale(0.8);
-  }
-
-  .profile-image-container{
-    margin-top: -10px; 
-  }
+@media screen and (min-width: 992px) and (max-width: 2000px) {
 
   .accountSettings-text-container{
-    margin-left: -130px; 
-    margin-top: -70px; 
+    margin-left: 100px; 
+    margin-top: -20px; 
   }
-  
-  
-  }
-  
-  @media screen and (max-width: 374px) {
-  
-  
-  }
-  
-  </style>
+
+
+
+}
+
+@media screen and (min-width: 576px) and (max-width: 992px) {
+
+
+ 
+}
+
+@media screen and (min-width: 375px) and (max-width: 576px) {
+
+.account-settings-title{
+  margin-top: 150px; 
+  transform: scale(0.8);
+}
+
+
+
+.accountSettings-text-container{
+  transform: scale(1.2);
+  margin-left: 250px; 
+
+}
+
+
+}
+
+@media screen and (max-width: 374px) {
+
+
+}
+
+</style>
+

@@ -1,7 +1,7 @@
 <template>
   <div class = "menu_2">
-    <div class="menu-container_2" @click="menuPress()">
-      <img src="../../../img/Vector.png" alt="Vector"/>
+    <div class="menu-container_2">
+      <img src="../../../img/Vector.png" alt="Vector" @click="menuPress()"/>
     </div>
     <div id = "routes-container1_2">
       <div class = "links_2">
@@ -81,10 +81,16 @@ export default {
       this.grayOut();
  
       if (this.$data.disabled) {
-        document.getElementById("routes-container1_2").style.visibility = 'visible';
+        if (navigator.userAgent.match(/iPhone/i)) {
+            document.getElementById("routes-container1_2").style.height = '28.5vh';
+        } else if (navigator.userAgent.indexOf('Chrome') !== -1 && navigator.userAgent.indexOf('Mobile') !== -1) {
+            document.getElementById("routes-container1_2").style.height = '28vh';
+        } else {
+            document.getElementById("routes-container1_2").style.height = '31.5vh';
+        }
         this.$data.disabled = false;
       } else {
-        document.getElementById("routes-container1_2").style.visibility = 'hidden';
+        document.getElementById("routes-container1_2").style.height = '0vh';
         this.$data.disabled = true;
       }
     },
@@ -128,7 +134,7 @@ export default {
   border: none;
   border-radius: 20px;
   position: relative;
-  height: auto;
+  height: 0;
   left: -60%;
   top: -3vh;
   bottom: 0;
@@ -143,7 +149,8 @@ export default {
   background-color: #14565C;
   overflow-y: hidden;
   overflow-x: hidden;
-  visibility: hidden;
+  /* visibility: hidden; */
+  transition: 0.5s;
 }
  
  
@@ -172,7 +179,7 @@ export default {
   #routes-container1_2 {
     border: none;
     position: relative;
-    height: auto;
+    height: 0;
     left: -40.5%;
     top: -3.5vh;
     bottom: 0;
@@ -187,7 +194,7 @@ export default {
     background-color: gray;
     overflow-y: scroll;
     overflow-x: hidden;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
   #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2, #link7_2 {
     font-size: 1.5em;
@@ -203,7 +210,7 @@ export default {
   #routes-container1_2 {
     border: none;
     position: relative;
-    height: auto;
+    height: 0;
     left: -30.5%;
     top: -2.5vh;
     bottom: 0;
@@ -218,7 +225,7 @@ export default {
     background-color: gray;
     overflow-y: scroll;
     overflow-x: hidden;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
   #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2, #link7_2 {
     font-size: 1.2em;
@@ -235,7 +242,7 @@ export default {
   #routes-container1_2 {
     border: none;
     position: relative;
-    height: auto;
+    height: 0;
     left: -1.5vh;
     top: -4.5vh;
     bottom: 0;
@@ -249,7 +256,7 @@ export default {
     background-color: gray;
     overflow-y: scroll;
     overflow-x: hidden;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
   #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2, #link7_2{
     font-size: 1.7em;
@@ -266,7 +273,7 @@ export default {
   #routes-container1_2 {
     border: none;
     position: relative;
-    height: auto;
+    height: 0;
     left: -2.5vh;
     top: -2.5vh;
     bottom: 0;
@@ -280,7 +287,7 @@ export default {
     background-color: gray;
     overflow-y: scroll;
     overflow-x: hidden;
-    visibility: hidden;
+    /* visibility: hidden; */
   }
   #link1_2, #link2_2, #link3_2, #link4_2, #link5_2, #link6_2,#link7_2{
     font-size: 1.2em;
