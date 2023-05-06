@@ -38,6 +38,7 @@
                 $stmt = $conn->prepare($query);
                 $stmt->bind_param("si", $hashed_new_password, $user_id);
                 $stmt->execute();
+                $response["status"] = 1;
                 $response["message"] = "Password updated successfully";
             }
         } else {
