@@ -300,7 +300,8 @@ margin-left: 20px;
 
 .accountSettings-text-container{
   transform: scale(1.2);
-  margin-left: 250px; 
+  margin-left: 330px; 
+  margin-top: -10px;
 
 }
 
