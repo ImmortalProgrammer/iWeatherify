@@ -3,6 +3,15 @@
         <nav-bar class = "accountSettingsNav"></nav-bar>
       <div class="accountSettings_screen">
 
+        <div v-if="showErrorModal" class="overlay">
+          <error-modal
+            :show-modal="showErrorModal"
+            :title="errorTitle"
+            :message="errorMessage"
+            @close-modal="showErrorModal = false"
+          ></error-modal>
+        </div>
+
         <div class="accountSettings-title">
           <h1 class="account-settings-title">{{ title }}</h1>
         </div>
@@ -45,6 +54,7 @@
 import axios from "axios"; 
 import NavBar from "@/NavBar/NavBar.vue";
 import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue";
+import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
 
 export default {
   name: "AccountSettings",
@@ -55,6 +65,9 @@ export default {
       newPassword: '',
       confirmPassword: '',
       user_id: null,
+      errorTitle: "",
+      errorMessage: "",
+      showErrorModal: false,
     };
   },
   
@@ -76,20 +89,32 @@ export default {
   
     async changePassword() {
       if(!this.oldPassword || !this.newPassword || !this.confirmPassword){
-        alert("Please fill in all the fields.");
+        this.errorTitle = 'Error';
+        this.errorMessage = 'Please fill in all the fields.';
+        this.showErrorModal = true;
+        // alert("Please fill in all the fields.");//Here
       }
       
       if (this.newPassword !== this.confirmPassword) {
-    alert("New password and confirmation do not match");
+        this.errorTitle = 'Error';
+        this.errorMessage = 'New password and confirmation do not match';
+        this.showErrorModal = true;
+    // alert("New password and confirmation do not match");//Here
   }
 
   
   if (this.newPassword.length < 8 || !/\d/.test(this.newPassword) || !/[a-zA-Z]/.test(this.newPassword)) {
-    alert("New password should be at least 8 characters and contain both letters and numbers");
+    this.errorTitle = 'Error';
+    this.errorMessage = 'New password should be at least 8 characters and contain both letters and numbers';
+    this.showErrorModal = true;
+    // alert("New password should be at least 8 characters and contain both letters and numbers");//Here
   }
 
   if (this.oldPassword === this.newPassword) {
-    alert("New password should not be the same as the old password");
+    this.errorTitle = 'Error';
+    this.errorMessage = 'New password should not be the same as the old password';
+    this.showErrorModal = true;
+    // alert("New password should not be the same as the old password");//Here
   }
 
     let formData = new FormData();
@@ -108,17 +133,29 @@ export default {
         console.log(response); 
 
         if (response.data.status === 1) {
-          alert("Password updated successfully!");
+          this.errorTitle = 'Success';
+          this.errorMessage = 'Password updated successfully!';
+          this.showErrorModal = true;
+          // alert("Password updated successfully!");//Here
         }  else if (response.data.status === 0) {
-          alert(response.data.msg);
+          this.errorTitle = 'Error';
+          this.errorMessage = response.data.msg;
+          this.showErrorModal = true;
+          // alert(response.data.msg);//Here
           return;
         }  else if (response.data.status === -1) {
-          alert("Old password is incorrect");
+          this.errorTitle = 'Error';
+          this.errorMessage = 'Old password is incorrect';
+          this.showErrorModal = true;
+          // alert("Old password is incorrect");//Here
         }
       })
       .catch((error) => {
         console.log(error);
-        alert("Failed to update password");
+        this.errorTitle = 'Error';
+        this.errorMessage = 'Failed to update password';
+        this.showErrorModal = true;
+        // alert("Failed to update password");//Here
       });
 
   }, 
@@ -128,6 +165,7 @@ export default {
 components: {
     NavBar,
     SettingsComponent,
+    ErrorModal,
   },
  
   props: [
@@ -149,6 +187,16 @@ components: {
   animation: fadeInAnimation ease .5s;
   animation-iteration-count: 1;
   /* animation-fill-mode: forwards; */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .accountSettings-title {

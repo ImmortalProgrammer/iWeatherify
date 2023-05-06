@@ -42,7 +42,6 @@
       </div>
       <settings-component></settings-component>
       </div>
-    </div>
   
 </template>
 
