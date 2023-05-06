@@ -21,11 +21,11 @@
           <input type="password" id="newPassword" v-model="newPassword"> 
           <ul class="password-list">
             <li>Password must be at least 8 characters</li>
-            <li>Password must be a mix of characters and numbers</li>
+            <li>Password must be a mix of letters and numbers</li>
           </ul>
           
           <div class="reenter-password">
-          <h2 class="confirm-password-title">Reenter New Password:</h2>
+          <h2 class="confirm-password-title">Re-Type New Password:</h2>
           <input type="password" id="confirmPassword" v-model="confirmPassword" />
           <button @click.prevent="changePassword">Change</button>
         </div>
@@ -152,40 +152,42 @@ components: {
 }
 
 .accountSettings-title {
-  position: relative;
-  top: 60px;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 105%;
+position: relative;
+top: 60px;
+margin: auto;
+display: flex;
+justify-content: center;
+align-items: center;
+width: 105%;
 }
 
 .account-settings-title {
-    color: var(--black);
-    font-weight: 600;
-    margin-top: 55px;
-    font-size: 2em;
-    font-family: 'Inter';
-    font-style: normal;
+color: var(--black);
+font-weight: 600;
+font-size: 2em;
+font-family: 'Inter';
+font-style: normal;
 }
-  
-  .accountSettingsNav{
-    top: -0.85%;
-  }
 
-  .accountSettings-text-container{
-    
-    font-size: 0.8em; 
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100px;
-    transform: scale(1.5); 
-  }
+.accountSettingsNav{
+  top: -0.85%;
+}
+
+
+.accountSettings-text-container{
+  
+  font-size: 0.8em; 
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  transform: scale(1.8); 
+  margin-top: 100px; 
+  margin-left: -350px; 
+}
 
 ul{
   list-style-type: disc; 
@@ -213,7 +215,7 @@ margin-left: 20px;
 }
 
 .new-password{
-  margin-top: 50px; 
+  margin-top: 20px; 
   margin-left: -400px;  
 }
 
@@ -224,10 +226,11 @@ margin-left: 20px;
 
 @media screen and (min-width: 992px) and (max-width: 2000px) {
 
+  .accountSettings-text-container{
+    margin-left: 100px; 
+    margin-top: -20px; 
+  }
 
-.profile-image-container{
-  margin-top: 10px; 
-}
 
 
 }
@@ -245,9 +248,7 @@ margin-left: 20px;
   transform: scale(0.8);
 }
 
-.profile-image-container{
-  margin-top: -10px; 
-}
+
 
 .accountSettings-text-container{
   transform: scale(1.2);
@@ -264,3 +265,4 @@ margin-left: 20px;
 }
 
 </style>
+
