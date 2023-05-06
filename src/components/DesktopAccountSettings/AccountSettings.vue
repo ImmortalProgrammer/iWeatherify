@@ -205,6 +205,8 @@ top: 60px;
 margin: auto;
 display: flex;
 justify-content: center;
+margin-left: 110px;
+font-size: large;
 align-items: center;
 width: 105%;
 }
@@ -212,6 +214,7 @@ width: 105%;
 .account-settings-title {
 color: var(--black);
 font-weight: 600;
+margin-top: 120px;
 font-size: 2em;
 font-family: 'Inter';
 font-style: normal;
@@ -232,9 +235,9 @@ font-style: normal;
   align-items: center;
   width: 100%;
   height: 100px;
-  transform: scale(1.8); 
-  margin-top: 100px; 
-  margin-left: -350px; 
+  transform: scale(1.8);
+  margin-top: 100px;
+  margin-left: -350px;
 }
 
 ul{
@@ -258,13 +261,13 @@ margin-left: 20px;
 
 
 .old-password{
-  margin-left: -400px; 
+  margin-left: -450px;
   margin-top: 120px; 
 }
 
 .new-password{
   margin-top: 20px; 
-  margin-left: -400px;  
+  margin-left: -450px;
 }
 
 .reenter-password{
@@ -292,7 +295,8 @@ margin-left: 20px;
 @media screen and (min-width: 375px) and (max-width: 576px) {
 
 .account-settings-title{
-  margin-top: 150px; 
+  margin-top: 120px;
+    margin-left: -250px;
   transform: scale(0.8);
 }
 
@@ -300,10 +304,29 @@ margin-left: 20px;
 
 .accountSettings-text-container{
   transform: scale(1.2);
-  margin-left: 330px; 
+  margin-left: 220px;
   margin-top: -10px;
 
 }
+
+    .old-password{
+        margin-left: -370px;
+        margin-top: 100px;
+    }
+
+    .new-password{
+        margin-top: 20px;
+        margin-left: -370px;
+    }
+
+    .reenter-password{
+        margin-top: 10px;
+    }
+
+
+
+
+
 
 
 }
