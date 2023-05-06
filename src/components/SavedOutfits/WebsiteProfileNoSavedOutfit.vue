@@ -110,7 +110,7 @@ export default {
 .SavedOutfitsPage{
   animation: fadeInAnimation ease .5s;
   animation-iteration-count: 1;
-  animation-fill-mode: forwards;
+  /* animation-fill-mode: forwards; */
 }
 
 .saved-outfits-nav-bar{
