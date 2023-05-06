@@ -1,6 +1,16 @@
 <template>
+
   <div class="website-units-page screen">
     <nav-bar class = "unitSettingsPageNav"></nav-bar>
+
+    <div v-if="showErrorModal" class="overlay">
+      <error-modal
+        :show-modal="showErrorModal"
+        :title="errorTitle"
+        :message="errorMessage"
+        @close-modal="showErrorModal = false"
+      ></error-modal>
+    </div>
 
     <div class="title-container">
       <h1 class="unit-title">Unit Settings</h1>
@@ -14,6 +24,7 @@
           <option value="c">°C</option>
         </select>
       </div>
+
 
       <div class="row">
         <p class="unit-font">Wind</p>
@@ -31,11 +42,15 @@
         </select>
       </div>
 
+
       <div>
         <button @click="saveUnits()">Save</button>
       </div>
-      <SettingsComponent></SettingsComponent>
+
     </div>
+      <div class = "settings-comp">
+          <SettingsComponent></SettingsComponent>
+      </div>
   </div>
 </template>
 
@@ -43,11 +58,14 @@
 import axios from "axios";
 import NavBar from "@/NavBar/NavBar.vue";
 import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
+import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
+
 export default {
   name: "WebsiteUnitsPage",
   components: {
     NavBar,
-    SettingsComponent
+    SettingsComponent,
+    ErrorModal,
   },
   data() {
     return {
@@ -55,6 +73,9 @@ export default {
       temperature: "f",
       wind: "mph",
       pressure: "mb",
+      errorTitle: "",
+      errorMessage: "",
+      showErrorModal: false,
     };
   },
   created() {
@@ -65,7 +86,6 @@ export default {
       try {
         const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
         this.userid = response.data.userid;
-        console.log("User_id: "+response.data.userid);
         this.loadUnits();
       } catch (error) {
         console.error("Unsuccessful request in getUserId().", error);
@@ -80,8 +100,10 @@ export default {
         pressure: this.pressure,
       })
       .then(response => {
-        console.log(response.data);
-        alert("Units saved successfully.");
+        this.errorTitle = 'Success';
+        this.errorMessage = 'Units saved successfully!';
+        this.showErrorModal = true;
+        // alert("Units saved successfully."); //Here
       })
       .catch(error => {
         console.error("Unsuccessful axios post in saveUnits().", error);
@@ -108,11 +130,36 @@ export default {
 </script>
 
 <style scoped>
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
+* {
+  animation: fadeInAnimation ease .5s;
+  animation-iteration-count: 1;
+  /* animation-fill-mode: forwards; */
+}
 .website-units-page {
   position: absolute;
   width: 100%;
   height: 100%;
   background: #FFFFFF;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .unitSettingsPageNav {
@@ -129,9 +176,11 @@ export default {
   width: 45%;
 }
 
+
 .unit-title {
   color: var(--black);
   font-weight: 600;
+    margin-top: 55px;
   font-size: 3em;
   font-family: 'Inter';
   font-style: normal;
@@ -240,9 +289,8 @@ button {
   .title-container{
     transform: scale(0.7);
     width: auto;
-    top: 170px;
+    top: 120px;
   }
-
   .row {
     width: 90%;
   }
@@ -257,7 +305,6 @@ button {
     transform: scale(0.5);
     width: auto;
   }
-
   .row {
     width: 90%;
   }

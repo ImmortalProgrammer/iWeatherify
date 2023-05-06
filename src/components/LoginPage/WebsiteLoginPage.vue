@@ -9,9 +9,9 @@
       ></error-modal>
     </div>
 
-    <div>
-      <menu-bar style = "margin-top: -25px; margin-left: -5px;"></menu-bar>
-    </div>
+
+      <menu-bar class = "menuBarLogin" ></menu-bar>
+
     
     <div class="Rectangle">
       <img src="../../../img/figure-with-umbrella.svg"/>
@@ -23,7 +23,7 @@
       <h1 class="Header">Login</h1>
       <br/>
 
-      <form action="" method="POST">
+      <form class = "Labels" action="" method="POST">
         <label for="username">Username:</label>
         <br/>
         <input 
@@ -54,7 +54,7 @@
       </form>
 
       <br/>
-      <p> <a href="#/register">Create an account</a></p>            
+      <p class = "LoginText"> <a class ="AccountCreate" href="#/register">Create an account</a></p>
     </div>
   </div>
 </template>
@@ -135,12 +135,26 @@
 </script>
 
 <style scoped>
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
+* {
+  animation: fadeInAnimation ease .5s;
+  animation-iteration-count: 1;
+  /* animation-fill-mode: forwards; */
+}
+
 .LoginPage {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-
 .Rectangle {
   display: flex;
   flex-direction: column;
@@ -152,21 +166,26 @@
   width: 40%;
   padding: 0em 2em;
 }
-
 .LoginForm{
   display: flex;
   flex-direction: column;
   margin: auto;
 }
-
+.LoginText {
+    scale: 115%;
+    margin-left: 29px;
+}
+.menuBarLogin {
+    margin-top: -5px;
+    margin-left: -100px;
+    max-width: 5%
+}
 .Header {
   font-size: xx-large;
 }
-
 .error {
   border: 2px solid red;
 }
-
 .overlay {
   position: fixed;
   top: 0;
@@ -176,12 +195,10 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
 }
-
 input {
   height: 3em;
   width: 30.5em;
 }
-
 button {
   font-size: large;
   font-weight: bold;
@@ -190,14 +207,48 @@ button {
   background-color: black;
   cursor: pointer;
 }
-
 a {
   color: #2a9d8f;
 }
-
 @media screen and (max-width: 800px) {
   .Rectangle {
     display: none;
+  }
+
+  .AccountCreate {
+    margin-left: 40px;
+    margin-top: -53px;
+  }
+  .menuBarLogin {
+      margin-top: -5px;
+      margin-left: -60px;
+      max-width: 5%
+  }
+  .LoginForm {
+      margin-top: 90px;
+      margin-left: -15px;
+      scale: 95%;
+  }
+
+  .Header {
+      margin-left: 140px;
+      font-size: 2.5em;
+      padding: 10px;
+  }
+
+  .Labels {
+      scale: 90%;
+  }
+  button {
+      font-size: large;
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 0.9em 10em;
+      color: white;
+      margin-left: -10px;
+      background-color: black;
+      cursor: pointer;
+      scale: 85%;
   }
 }
 </style>

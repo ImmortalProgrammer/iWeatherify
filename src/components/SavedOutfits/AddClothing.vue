@@ -3,6 +3,15 @@
 <template>
     <div class="add-clothing screen">
       <nav-bar class="navbar"></nav-bar>
+
+      <div v-if="showErrorModal" class="overlay">
+        <error-modal
+          :show-modal="showErrorModal"
+          :title="errorTitle"
+          :message="errorMessage"
+          @close-modal="showErrorModal = false"
+        ></error-modal>
+      </div>
   
       <div class="title-container">
         <h1 class="title">{{ title }}</h1>
@@ -124,9 +133,11 @@
   <script>
   import axios from "axios";
   import NavBar from "@/NavBar/NavBar.vue";
+  import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
+
   export default {
     name: "AddClothing",
-    components: {NavBar},
+    components: {NavBar, ErrorModal,},
     data() {
       return {
         outer_wear: "",
@@ -135,7 +146,10 @@
         pants: "",
         shoes: "",
         hats: "",
-        accessories: ""
+        accessories: "",
+        errorTitle: "",
+        errorMessage: "",
+        showErrorModal: false,
       };
     },
     methods: {
@@ -152,7 +166,10 @@
         })
         .then(response => {
           console.log(response.data);
-          alert("Saved outfit");
+          this.errorTitle = 'Success';
+          this.errorMessage = 'Saved outfit successfully!';
+          this.showErrorModal = true;
+          // alert("Saved outfit");//Here
         })
         .catch(error => {
           console.error("Unsuccessful axios post in saveUnits().", error);
@@ -173,6 +190,16 @@
     width: 100%;
     height: 100%;
     background: #FFFFFF;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
   }
   
   .navbar {

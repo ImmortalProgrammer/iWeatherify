@@ -11,6 +11,7 @@ import WebsiteLoginPage from "./components/LoginPage/WebsiteLoginPage";
 import WebsiteProfileNoSavedOutfit from "./components/SavedOutfits/WebsiteProfileNoSavedOutfit";
 import MakeOutfit from "./components/DesktopMyItems/MakeOutfit";
 import TempItem from "./components/DesktopMyItems/TempItem";
+import AccountSettings from "./components/DesktopAccountSettings/AccountSettings";
 
 import {
   websiteUnitsPageData,
@@ -20,6 +21,7 @@ import {
   websiteLocationSettingsData,
   websiteHomePageLoggedInData,
   websiteProfileNoSavedOutfitData,
+  accountSettingsData,
 } from "./data";
 
 Vue.use(Router);
@@ -418,6 +420,15 @@ const routes = [
     path: "/locationSettings",
     component: WebsiteLocationSettings,
     props: { ...websiteLocationSettingsData },
+    meta: {
+      needsAuth: true
+    },
+  },
+  {
+    name: "AccountSettings",
+    path: "/accountSettings",
+    component: AccountSettings,
+    props: { ...accountSettingsData },
     meta: {
       needsAuth: true
     },

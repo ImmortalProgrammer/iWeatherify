@@ -10,7 +10,7 @@
     </div>
 
     <div>
-      <menu-bar style = "margin-top: -25px; margin-left: -30px;"></menu-bar>
+        <menu-bar class = "menuBarRegister"></menu-bar>
     </div>
 
     <div class="Rectangle">
@@ -23,7 +23,7 @@
       <h1 class="Header">Register</h1>
       <br/>
 
-      <form action="" method="POST">
+      <form class = "PostForm" action="" method="POST">
         <label for="email">Email:</label>
         <br/>
         <input 
@@ -63,11 +63,11 @@
         <br/>
 
         <br/>
-        <button type="submit" @click.prevent="validateForm">Register</button>
+        <button class = "ButtonSubmit" type="submit" @click.prevent="validateForm">Register</button>
       </form>
 
       <br/>
-      <p> <a href="#/login">Login</a></p>        
+      <p class = "LoginText"> <a style = "margin-left: 40px" href="#/login">Login</a></p>
     </div>
   </div>
 </template>
@@ -246,10 +246,30 @@
 </script>
 
 <style scoped>
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
+* {
+  animation: fadeInAnimation ease .5s;
+  animation-iteration-count: 1;
+  /* animation-fill-mode: forwards; */
+}
 .RegistrationPage {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.LoginText {
+    scale: 115%;
+    margin-left: -15px;
+    margin-top: 0px;
 }
 
 .Rectangle {
@@ -268,6 +288,12 @@
   display: flex;
   flex-direction: column;
   margin: auto;
+}
+
+.menuBarRegister {
+    margin-top: -15px;
+    margin-left: -120px;
+    max-width: 5%;
 }
 
 .Header {
@@ -307,8 +333,46 @@ a {
 }
 
 @media screen and (max-width: 800px) {
+  .LoginText {
+      scale: 115%;
+      margin-left: 30px;
+      margin-top: -30px;
+  }
+  .PostForm {
+      scale: 80%;
+      margin-top: -25px;
+  }
+
+  .ButtonSubmit {
+      font-size: large;
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 0.9em 10em;
+      color: white;
+      margin-left: -10px;
+      background-color: black;
+      cursor: pointer;
+      scale: 85%;
+  }
+  .Header {
+      margin-left: 125px;
+      font-size: 2.5em;
+      padding: 10px;
+  }
+
+  .menuBarRegister {
+      margin-top: -15px;
+      margin-left: -60px;
+      max-width: 5%;
+  }
+
   .Rectangle {
     display: none;
+  }
+  .RegisterForm {
+      margin-top: 80px;
+      margin-left: -10px;
+      width: 90%;
   }
 }
 </style>
