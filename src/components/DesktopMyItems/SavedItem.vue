@@ -1,5 +1,15 @@
 <template>
     <div class="container">
+
+        <div v-if="showErrorModal" class="overlay">
+            <error-modal
+            :show-modal="showErrorModal"
+            :title="errorTitle"
+            :message="errorMessage"
+            @close-modal="showErrorModal = false"
+            ></error-modal>
+        </div>
+
         <div class="name-container">
             <h1>{{ clothing_name }}</h1>
         </div>
@@ -15,15 +25,21 @@
 </template>
 
 <script> 
-import axios from "axios"
+import axios from "axios";
+import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
+
 export default {
     name: "SavedItem",
     props: ["clothing_name", "upload_path", "image_name", "userid", "temp_category", "clothing_category"],
     components: {
-
+        ErrorModal,
     },
     data(){
-        return {}
+        return {
+            errorTitle: "",
+            errorMessage: "",
+            showErrorModal: false,
+        }
     },
     methods: {
         deleteAnItem(){
@@ -36,7 +52,12 @@ export default {
                 clothing_category: this.clothing_category
             }).then((res) => {
                 console.log(res)
-                alert(res.data.message)
+                if (res.data.status == 1) {
+                    this.errorTitle = 'Success';
+                    this.errorMessage = 'Your item deletion successfully!';
+                    this.showErrorModal = true;
+                }
+                // alert(res.data.message)//Here
             })
         }
     }
@@ -55,6 +76,16 @@ export default {
     flex-direction: column;
     height: 40vh;
 }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+  }
 
 .name-container{
     text-align: center;

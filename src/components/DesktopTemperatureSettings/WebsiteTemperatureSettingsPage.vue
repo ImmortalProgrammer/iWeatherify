@@ -2,6 +2,15 @@
   <div class="website-temperature-settings-page">
     <nav-bar class = "tempSettingsPageNav"></nav-bar>
 
+    <div v-if="showErrorModal" class="overlay">
+      <error-modal
+        :show-modal="showErrorModal"
+        :title="errorTitle"
+        :message="errorMessage"
+        @close-modal="showErrorModal = false"
+      ></error-modal>
+    </div>
+
     <div class = "pushDowTempDisplay">
       <div class="title-container">
         <h1 class="temp-setting-title">Temperature Settings</h1>
@@ -36,6 +45,8 @@ import menuBar from "@/components/menuBars/menuBarLoggedIn.vue";
 import MenuBarLoggedIn from "@/components/menuBars/menuBarLoggedIn.vue";
 import NavBar from "@/NavBar/NavBar.vue";
 import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
+import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
+
 export default {
   name: "WebsiteTemperatureSettingsPage",
   data() {
@@ -50,6 +61,9 @@ export default {
         cold: 0,
         freezing: 0
       },
+      errorTitle: "",
+      errorMessage: "",
+      showErrorModal: false,
     };
   },
   created() {
@@ -102,7 +116,10 @@ export default {
         freezing: this.tempValues.freezing
       })
       .then(response => {
-        alert("Temperatures Saved Successfully!");
+        this.errorTitle = 'Success';
+        this.errorMessage = 'Temperatures Saved Successfully!';
+        this.showErrorModal = true;
+        // alert("Temperatures Saved Successfully!");//Here
       })
       .catch(error => {
         console.error("Unsuccessful axios post in saveTempSettings().", error);
@@ -142,6 +159,7 @@ export default {
     MenuBarLoggedIn,
     menuBar,
     SettingsComponent,
+    ErrorModal,
   },
 };
 </script>
@@ -165,6 +183,16 @@ export default {
   width: 100%; 
   height: 100%;
   background: #FFFFFF;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .tempSettingsPageNav {

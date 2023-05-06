@@ -3,6 +3,15 @@
   <div class="website-units-page screen">
     <nav-bar class = "unitSettingsPageNav"></nav-bar>
 
+    <div v-if="showErrorModal" class="overlay">
+      <error-modal
+        :show-modal="showErrorModal"
+        :title="errorTitle"
+        :message="errorMessage"
+        @close-modal="showErrorModal = false"
+      ></error-modal>
+    </div>
+
     <div class="title-container">
       <h1 class="unit-title">Unit Settings</h1>
     </div>
@@ -49,11 +58,14 @@
 import axios from "axios";
 import NavBar from "@/NavBar/NavBar.vue";
 import SettingsComponent from "@/SettingsComponent/SettingsComponent.vue"
+import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
+
 export default {
   name: "WebsiteUnitsPage",
   components: {
     NavBar,
-    SettingsComponent
+    SettingsComponent,
+    ErrorModal,
   },
   data() {
     return {
@@ -61,6 +73,9 @@ export default {
       temperature: "f",
       wind: "mph",
       pressure: "mb",
+      errorTitle: "",
+      errorMessage: "",
+      showErrorModal: false,
     };
   },
   created() {
@@ -85,7 +100,10 @@ export default {
         pressure: this.pressure,
       })
       .then(response => {
-        alert("Units saved successfully.");
+        this.errorTitle = 'Success';
+        this.errorMessage = 'Units saved successfully!';
+        this.showErrorModal = true;
+        // alert("Units saved successfully."); //Here
       })
       .catch(error => {
         console.error("Unsuccessful axios post in saveUnits().", error);
@@ -132,6 +150,16 @@ export default {
   width: 100%;
   height: 100%;
   background: #FFFFFF;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .unitSettingsPageNav {

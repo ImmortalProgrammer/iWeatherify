@@ -33,12 +33,6 @@ export default {
       }
     }
   },
-  methods: {
-    //Execute on Profile Click
-    onProfileClick() {
-      alert("test");
-    }
-  }
 }
 </script>
 

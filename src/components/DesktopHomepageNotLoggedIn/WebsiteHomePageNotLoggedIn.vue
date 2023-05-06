@@ -5,6 +5,15 @@
           <menu-bar></menu-bar>
         </div>
 
+        <div v-if="data.showErrorModal" class="overlay">
+          <error-modal
+            :show-modal="data.showErrorModal"
+            :title="data.errorTitle"
+            :message="data.errorMessage"
+            @close-modal="data.showErrorModal = false"
+          ></error-modal>
+        </div>
+
       <div v-if="$data.weatherAlert.showWeatherAlert" class = "alertBox">
         <weather-popup
             :sender-name="$data.weatherAlert.senderName"
@@ -87,6 +96,8 @@ import axios from "axios";
 import menuBar from "@/components/menuBars/menuBarNonLoggedIn.vue";
 import WeatherPopup from "@/components/WeatherAlert/WeatherPopup.vue";
 import moment from 'moment';
+import ErrorModal from "@/components/ModalBox/ErrorModal.vue";
+
 export default {
   name: "WebsiteHomePageNotLoggedIn",
   data() {
@@ -134,9 +145,12 @@ export default {
         description: '',
       },
       data: {
-        APIKEY: 'c984db1322335af0a97e0dd951e5cb69',
+        APIKEY: process.env.VUE_APP_API_KEY,
         optionsVisibility: false,
         eightDayForecastGrayOut: true,
+        errorTitle: "",
+        errorMessage: "",
+        showErrorModal: false,
       }
     }
   },
@@ -178,7 +192,10 @@ export default {
           this.currentWeatherData.locationAPI = '';
         }
       } catch (Exception) {
-        alert("City unrecognized!")
+        this.data.errorTitle = 'Error';
+        this.data.errorMessage = 'City unrecognized!';
+        this.data.showErrorModal = true;
+        // alert("City unrecognized!") //Here
         this.currentWeatherData.locationAPI = '';
         this.currentWeatherData.locationInput = '';
         await this.clearAlerts();
@@ -265,7 +282,7 @@ export default {
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
       } else {
-        alert("Error Status Request Failed!");
+        console.log("Error Status Request Failed!");
       }
     },
     async twentyFourForecast() {
@@ -339,7 +356,8 @@ export default {
   },
   components: {
     WeatherPopup,
-    menuBar
+    menuBar,
+    ErrorModal,
   },
   props: [
     "homeLogo2",
@@ -378,7 +396,15 @@ export default {
   font-family: sans-serif;
 }
 
-
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
 
 .menu_homepage_logged_in_2 {
   z-index: 1;

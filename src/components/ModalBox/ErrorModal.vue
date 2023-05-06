@@ -78,5 +78,9 @@ button {
   border-radius: 5px;
   height: 1.75rem;
   width: 5rem;
+  color: white; 
+  background-color: #4AAE9B;
+  font-family: 'Inter';
+  font-style: normal;
 }
 </style>  
