@@ -305,6 +305,15 @@ margin-left: 20px;
 
 }
 
+.reenter-password{
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+}
+
+.change-password-btn{
+  margin:0;
+}
 
 }
 
