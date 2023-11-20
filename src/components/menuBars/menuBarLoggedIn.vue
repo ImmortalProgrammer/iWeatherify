@@ -60,7 +60,7 @@ export default {
       }
     },
     logOutAccount() {
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/logout.php?action=logout", null, { withCredentials: true })
+      axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/logout.php?action=logout", null, { withCredentials: true })
     .then((res) => {
       console.log(res);
       console.log(res.data);

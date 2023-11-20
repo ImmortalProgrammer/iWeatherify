@@ -69,7 +69,7 @@ export default {
   methods: {
     async getUserId() {
       try {
-        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        const response = await axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_userid.php", { withCredentials: true });
         this.userid = response.data.userid;
         console.log("The user id is: " + this.userid)
       } catch (error) {
@@ -77,7 +77,7 @@ export default {
       }
     },
     getAllItems(){
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_saved_outfits.php", 
+      axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_saved_outfits.php",
       {
         user_id: this.userid,
       })

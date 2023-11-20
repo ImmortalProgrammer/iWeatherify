@@ -2,9 +2,7 @@
     
     function access_control(){
         $allowed_origins = array(
-            'https://www-student.cse.buffalo.edu',
             'http://localhost:8080',
-            'http://localhost:3000'
         );
         if (isset($_SERVER["HTTP_ORIGIN"])) {
             // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is the one that you want to allow

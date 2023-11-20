@@ -79,7 +79,7 @@ export default {
     
     async getUserId() {
       try {
-        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        const response = await axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_userid.php", { withCredentials: true });
         this.user_id = response.data.userid;
         console.log("User_id: "+response.data.userid);
       } catch (error) {

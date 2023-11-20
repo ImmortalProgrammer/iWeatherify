@@ -85,7 +85,7 @@
         },
         async getUserId() {
           try {
-            const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+            const response = await axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_userid.php", { withCredentials: true });
             this.userid = response.data.userid;
             console.log("The user id is: " + this.userid)
           } catch (error) {
@@ -105,9 +105,7 @@
             fd.append("clothing_name", this.clothing_name)
             fd.append('temp_category', this.temp_category)
             fd.append('clothing_category', this.clothing_category)
-            // https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/my_items.php
-            // http://localhost/project_s23-iweatherify/backend/my_items.php
-            axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/my_items.php", fd, {header: {'Content-Type':'multipart/form-data'}}).then(
+            axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/my_items.php", fd, {header: {'Content-Type':'multipart/form-data'}}).then(
               (res) => {
                 if(res.data.status === 1){
                   // console.log("This is the response from the server")

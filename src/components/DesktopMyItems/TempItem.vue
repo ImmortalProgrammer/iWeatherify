@@ -8,7 +8,7 @@
             v-for="item in items"
             :key = "item.id"
             :clothing_name = "item.clothing_name"
-            :upload_path = '`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${item.upload_path}`'
+            :upload_path = '`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${item.upload_path}`'
             :image_name = "item.upload_path"
             :userid = userid
             :temp_category = temp_category
@@ -64,7 +64,7 @@ export default {
       },
       async getUserId() {
         try {
-          const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+          const response = await axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_userid.php", { withCredentials: true });
           this.userid = response.data.userid;
           console.log("The user id is: " + this.userid)
         } catch (error) {
@@ -72,7 +72,7 @@ export default {
         }
       },
       getAllItems(){
-        axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_my_items.php", 
+        axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_my_items.php",
         {
           user_id: this.userid,
           temp_category: this.temp_category,

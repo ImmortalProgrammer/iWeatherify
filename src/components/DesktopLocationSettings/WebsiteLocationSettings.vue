@@ -79,7 +79,7 @@ export default {
   methods: {
     async getUserId() {
       try {
-        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        const response = await axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_userid.php", { withCredentials: true });
         this.data.userid = response.data.userid;
         console.log("User_id: "+response.data.userid);
         this.loadLocation();
@@ -88,7 +88,7 @@ export default {
       }
     },
     saveLocation() {
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_location.php", 
+      axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/saved_location.php",
       {
         userid: this.data.userid,
         city: this.data.cityName,
@@ -106,7 +106,7 @@ export default {
       });
     },
     loadLocation() {
-      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php",
+      axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/load_location.php",
       {
         params: {
           userid: this.data.userid,

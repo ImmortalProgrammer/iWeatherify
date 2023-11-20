@@ -79,7 +79,7 @@ export default {
     },
     async getUserId() {
       try {
-        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        const response = await axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_userid.php", { withCredentials: true });
         this.userid = response.data.userid;
         this.loadTempSettings();
       } catch (error) {
@@ -87,7 +87,7 @@ export default {
       }
     },
     loadTempSettings() {
-      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_temperatures.php", 
+      axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/load_temperatures.php",
       {
         params: {
           userid: this.userid,
@@ -105,7 +105,7 @@ export default {
       });
     },
     saveTempSettings() {
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_temperatures.php", 
+      axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/saved_temperatures.php",
       {
         userid: this.userid,
         hot: this.tempValues.hot,

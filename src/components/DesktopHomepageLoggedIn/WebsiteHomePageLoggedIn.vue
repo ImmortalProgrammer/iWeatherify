@@ -51,37 +51,37 @@
 
           <div class="outfit-box" v-if="recommendedOutfit.outerwear">
             <h1>Outerwear</h1>
-            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.outerwear.image}`" alt="Outerwear" />
+            <img :src="`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${recommendedOutfit.outerwear.image}`" alt="Outerwear" />
             <p>{{ recommendedOutfit.outerwear.name }}</p>
           </div>
           
           <div class="outfit-box" v-if="recommendedOutfit.middlewear">
             <h1>Middlewear</h1>
-            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.middlewear.image}`" alt="Middlewear" />
+            <img :src="`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${recommendedOutfit.middlewear.image}`" alt="Middlewear" />
             <p>{{ recommendedOutfit.middlewear.name }}</p>
           </div>
 
           <div class="outfit-box" v-if="recommendedOutfit.innerwear">
             <h1>Innerwear</h1>
-            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.innerwear.image}`" alt="Innerwear" />
+            <img :src="`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${recommendedOutfit.innerwear.image}`" alt="Innerwear" />
             <p>{{ recommendedOutfit.innerwear.name }}</p>
           </div>
 
           <div class="outfit-box" v-if="recommendedOutfit.pants">
             <h1>Pants</h1>
-            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.pants.image}`" alt="Pants" />
+            <img :src="`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${recommendedOutfit.pants.image}`" alt="Pants" />
             <p>{{ recommendedOutfit.pants.name }}</p>
           </div>
 
           <div class="outfit-box" v-if="recommendedOutfit.headwear">
             <h1>Headwear</h1>
-            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.headwear.image}`" alt="Headwear" />
+            <img :src="`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${recommendedOutfit.headwear.image}`" alt="Headwear" />
             <p>{{ recommendedOutfit.headwear.name }}</p>
           </div>
 
           <div class="outfit-box" v-if="recommendedOutfit.shoes">
             <h1>Shoes</h1>
-            <img :src="`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${recommendedOutfit.shoes.image}`" alt="Shoes" />
+            <img :src="`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${recommendedOutfit.shoes.image}`" alt="Shoes" />
             <p>{{ recommendedOutfit.shoes.name }}</p>
           </div>
         </div>
@@ -319,7 +319,7 @@ export default {
       this.startTimer();
     },
     logoutUser(){
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/logout.php?action=logout" , null, { withCredentials: true })
+      axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/logout.php?action=logout" , null, { withCredentials: true })
     .then((res) => {
     if (res.data.status === 1 && this.$router && this.$router.currentRoute.path !== '/login') {
       document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/CSE442-542/2023-Spring/cse-442a;";
@@ -385,7 +385,7 @@ export default {
     },
     async getUserId() {
       try {
-        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        const response = await axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_userid.php", { withCredentials: true });
         this.$data.data.userid = response.data.userid;
         await this.loadLocation();
         await this.loadUnits();
@@ -398,7 +398,7 @@ export default {
     },
     async loadLocation() {
       try {
-        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_location.php", {
+        const response = await axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/load_location.php", {
           params: {
             userid: this.$data.data.userid,
           },
@@ -441,7 +441,7 @@ export default {
       }
     },
     async loadUnits() {
-      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_units.php",
+      axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/load_units.php",
           {
             params: {
               userid: this.$data.data.userid,
@@ -459,7 +459,7 @@ export default {
           });
     },
     async loadTempSettings() {
-      axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/load_temperatures.php", 
+      axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/load_temperatures.php",
       {
         params: {
           userid: this.$data.data.userid,
@@ -501,7 +501,7 @@ export default {
     async getAllItems(temp_category) {
       let items = {};
       try {
-        const response = await axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_my_items.php", {
+        const response = await axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_my_items.php", {
           user_id: this.$data.data.userid,
           temp_category: temp_category,
         });
@@ -589,7 +589,7 @@ export default {
       let savedOutfitAlready = false;
 
       try {
-        const response = await axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_items.php", {
+        const response = await axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/saved_items.php", {
           "outerwear": this.recommendedOutfit.outerwear,
           "middlewear": this.recommendedOutfit.middlewear,
           "innerwear": this.recommendedOutfit.innerwear,
@@ -611,7 +611,7 @@ export default {
       return savedOutfitAlready
     },
     saveToMyItems(){
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/saved_items.php", {
+      axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/saved_items.php", {
         "outerwear": this.recommendedOutfit.outerwear,
         "middlewear": this.recommendedOutfit.middlewear,
         "innerwear": this.recommendedOutfit.innerwear,

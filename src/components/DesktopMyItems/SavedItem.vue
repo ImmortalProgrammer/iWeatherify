@@ -44,7 +44,7 @@ export default {
     methods: {
         deleteAnItem(){
             console.log("Delete was called")
-            axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/delete_my_items.php", {
+            axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/delete_my_items.php", {
                 userid: this.userid,
                 clothing_name: this.clothing_name,
                 image_name: this.image_name,

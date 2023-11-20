@@ -2,22 +2,22 @@
     <div class="container" v-if="outerwear_img || middlewear_img || innerwear_img || pants_img || headwear_img || shoes_img">
         <div class="images">
             <div class="image-container" v-if="outerwear_img">
-                <img :src = '`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${outerwear_img}`' >
+                <img :src = '`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${outerwear_img}`' >
             </div>
             <div class="image-container" v-if="middlewear_img">
-                <img :src = '`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${middlewear_img}`' >
+                <img :src = '`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${middlewear_img}`' >
             </div>
             <div class="image-container" v-if="innerwear_img">
-                <img :src = '`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${innerwear_img}`' >
+                <img :src = '`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${innerwear_img}`' >
             </div>
             <div class="image-container" v-if="pants_img">
-                <img :src = '`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${pants_img}`' >
+                <img :src = '`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${pants_img}`' >
             </div>
             <div class="image-container" v-if="headwear_img">
-                <img :src = '`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${headwear_img}`' >
+                <img :src = '`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${headwear_img}`' >
             </div>
             <div class="image-container" v-if="shoes_img">
-                <img :src = '`https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/uploads/${shoes_img}`' >
+                <img :src = '`${process.env.VUE_APP_WEB_DOMAIN}/uploads/${shoes_img}`' >
             </div>
         </div>
 
@@ -102,7 +102,7 @@ export default {
     methods: {
     async getUserId() {
       try {
-        const response = await axios.get("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/get_userid.php", { withCredentials: true });
+        const response = await axios.get(process.env.VUE_APP_WEB_DOMAIN + "/backend/get_userid.php", { withCredentials: true });
         this.userid = response.data.userid;
         console.log("The user id is: " + this.userid)
       } catch (error) {
@@ -110,7 +110,7 @@ export default {
       }
     },
     deleteSavedOutfit(){
-      axios.post("https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a/backend/delete_saved_outfit.php", 
+      axios.post(process.env.VUE_APP_WEB_DOMAIN + "/backend/delete_saved_outfit.php",
       {
         user_id: this.userid,
         location: this.location,

@@ -1,21 +1,25 @@
 # Directory
 
-### Img Directory
+### backend Directory
+* It is very important that you have the database set up correctly (as mentioned in Instructions)
+* 
+* When you have the 'dist' folder created after using vue to compile the project, it's important to have the backend folder with all the .php files in the same directory.
+
+### img Directory
 
 * Holds all the static images related to the project
 
-### Public Directory
+### public Directory
 
 * This holds index.html, which is self-evident in its function (main html root)
 
-### Src Directory
+### src Directory
 
 * The src directory holds the bulk of the code for the project
 
 * The NavBar Folder holds navbar.vue, which is the main navigation for logged in users
 
-* The components folder in the src directory holds the various folders pertaining to webpages and inside those subfolders holds the vue files (html, css, javascript) for that particular page. 
-
+* The components folder in the src directory holds the various folders pertaining to webpages and inside those subfolders holds the vue files (html, css, javascript) for that particular page.
 
 * App.vue is the root of the program, think of it as a main method, but for vue
 
@@ -28,9 +32,13 @@
 
 * router.js represents every page on the site and how to reach that site, follow the general format of what's in the file and you should be all good!
 
+### uploads Directory
+* The uploads folder is a must have for the outfits recommendations system to work appropriately, ensure it is in the root folder where you upload the dist after compiling the project
+
+
 ### Rest of the files
 
-* Don't touch babel.config.js unless necessary
+* Don't touch babel.config.js unless necessary ||| Backwards Version Compatability
 
 * globals.css is a css file that applies to the entire website
 
@@ -46,9 +54,25 @@
 
 * vue.config.js is a config file that allows the website to run property
 
+* the .env file should be updated with the appropriate info. Example for: VUE_APP_WEB_DOMAIN=https://www-student.cse.buffalo.edu/CSE442-542/2023-Spring/cse-442a
+
 # Instructions
 
 * Ensure that your repository is on node version 12.22.12 and npm version 6.14.6 before building your project:
+
+* For the database, preferably use mySQL. Here's a link to a clone of the empty database with all the settings preconfigured: https://file.io/XNB4dc6vhqGP
+
+* For the backend/security.php file. In the "$allowed_origins" array data structure, make sure you add the website where you're hosting this project into the allowed origins
+
+* Ensure you have an empty uploads folder in the directory of which you put the deployed website 
+
+* Do the same as above, just for the backend directory. 
+
+* Make sure you fill in the environmental variables in .env. I left some comments as guidance
+
+* You will need an API key from openweathermap.org. You will need the PRO edition API key.
+
+
 
 ### To install npm version 6.14.6 for your repository:
 * npm i npm@6.14.6
@@ -68,10 +92,15 @@ npm start
 
 Open [http://localhost:8080](http://localhost:8080).
 
+
 ## Build for deploying
 
 Note: 
-* After building, you can the upload `dist` folder to cheshire using scp.
+* After building, you can the upload `dist` folder to the appropriate location
+
+* Make sure you have the backend folder with all the php files in the directory where you put the dist folder
+
+* Also, make sure you have an empty uploads folder with the appropriate permissions to allow for the website to put images into these folders
 
 * If you're trying this on cheshire, make sure you move the files out of the dist folder one directory up, so ../ otherwise it will not work!
 
