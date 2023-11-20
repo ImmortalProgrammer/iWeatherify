@@ -2,7 +2,7 @@
 
 ### backend Directory
 * It is very important that you have the database set up correctly (as mentioned in Instructions)
-* 
+
 * When you have the 'dist' folder created after using vue to compile the project, it's important to have the backend folder with all the .php files in the same directory.
 
 ### img Directory
@@ -35,7 +35,8 @@
 ### uploads Directory
 * The uploads folder is a must have for the outfits recommendations system to work appropriately, ensure it is in the root folder where you upload the dist after compiling the project
 
-
+* Ensure it's initally empty
+  
 ### Rest of the files
 
 * Don't touch babel.config.js unless necessary ||| Backwards Version Compatability
@@ -60,9 +61,9 @@
 
 * Ensure that your repository is on node version 12.22.12 and npm version 6.14.6 before building your project:
 
-* For the database, preferably use mySQL. Here's a link to a clone of the empty database with all the settings preconfigured: https://file.io/XNB4dc6vhqGP
+* For the database, preferably use mySQL. Here's a link to a clone of the empty database with everything you need for the website: https://file.io/XNB4dc6vhqGP
 
-* For the backend/security.php file. In the "$allowed_origins" array data structure, make sure you add the website where you're hosting this project into the allowed origins
+* For the backend/security.php file. In the "$allowed_origins" array data structure, make sure you add the website where you're hosting this project.
 
 * Ensure you have an empty uploads folder in the directory of which you put the deployed website 
 
@@ -70,7 +71,7 @@
 
 * Make sure you fill in the environmental variables in .env. I left some comments as guidance
 
-* You will need an API key from openweathermap.org. You will need the PRO edition API key.
+* You will need an API key from openweathermap.org to get the weather data. You will need the PRO edition API key.
 
 
 
@@ -102,7 +103,8 @@ Note:
 
 * Also, make sure you have an empty uploads folder with the appropriate permissions to allow for the website to put images into these folders
 
-* If you're trying this on cheshire, make sure you move the files out of the dist folder one directory up, so ../ otherwise it will not work!
+* Ensure you filled out the .env file correctly and put it in the right directory. Additionally, for the API key ensure you use openweathermap.org and get the PRO edition.
+
 
 ```
 cd dist
