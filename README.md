@@ -61,7 +61,7 @@
 
 * Ensure that your repository is on node version 12.22.12 and npm version 6.14.6 before building your project:
 
-* For the database, preferably use mySQL. Here's a link to a clone of the empty database with everything you need for the website: https://file.io/XNB4dc6vhqGP
+* For the database (SQL). Here's a link to a clone of the empty database with everything you need for the website: https://drive.google.com/file/d/17SO8eKrmAD5D6YyXK4h_EH30EcybxI1Z/view?usp=sharing
 
 * For the backend/security.php file. In the "$allowed_origins" array data structure, make sure you add the website where you're hosting this project.
 
